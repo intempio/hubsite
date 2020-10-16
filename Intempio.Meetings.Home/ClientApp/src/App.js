@@ -13,6 +13,8 @@ import './css/style.css'
 import { Logout } from './components/logout';
 import FileUpload from './components/FileUpload';
 import Settings from './components/Settings';
+import ViewSettings from './components/ViewSettings';
+
 
 
 export default class App extends Component {
@@ -36,6 +38,8 @@ export default class App extends Component {
                         <Route exact path='/file' component={RequireAuth(FileUpload)} />
                         <Route path='/counter' component={Counter} />
                         <Route path='/settings' component={Settings} />
+                        <Route path='/source' component={ViewSettings} />
+
                     </Layout>
                   
 

@@ -24,4 +24,8 @@ a {
   color: inherit;
   text-decoration: inherit; }
 
+.recent-info {
+    word-break: break-word;
+}
+
 /*# sourceMappingURL=base.css.map */

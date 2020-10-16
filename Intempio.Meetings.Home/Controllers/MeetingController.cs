@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Intempio.Meetings.Home.Util;
 
 namespace Intempio.Meetings.Home.Controllers
 {
@@ -81,7 +82,48 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
-        
+
+        [HttpGet("GetInfo")]
+        public async Task<IActionResult> GetList(string key)
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+            string url = string.Empty;
+            switch (key)
+            {
+                case "EventInfoURL":
+                    url = config.EventInfoURL.Split("items")[0];
+                    break;
+
+                case "EventMasterURL":
+                    url = config.EventMasterURL.Split("items")[0];
+                    break;
+                case "PosterSessionsURL":
+                    url = config.PosterSessionsURL.Split("items")[0];
+                    break;
+                case "MatchMakingURL":
+                    url = config.MatchMakingURL.Split("items")[0];
+                    break;
+                case "PresentersURL":
+                    url = config.PresentersURL.Split("items")[0];
+                    break;
+                case "UserEventsURL":
+                    url = config.UserEventsURL.Split("items")[0];
+                    break;
+                case "UsersURL":
+                    url = config.UsersURL.Split("items")[0];
+                    break;
+                case "SuperUsersURL":
+                    url = config.SuperUsersURL.Split("items")[0];
+                    break;
+                case "SiteID":
+                    url =string.Format("/sites/{0}", config.SiteID);
+                    break;
+            }
+            var response = await EventService.GraphApiGetInfo(url);
+
+            return Ok(response);
+        }
+
 
         [HttpGet("GetUserEventsByEmail")]
         public async Task<IActionResult> GetUserEventsByEmail(string email)
