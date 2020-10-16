@@ -1,0 +1,21 @@
+footer {
+  margin-left: 200px;
+  padding: 32px;
+  transition: margin-left 0.5s; }
+  footer .stream {
+    margin: 8px 0 36px;
+    width: 100%;
+    display: flex;
+    flex-direction: column; }
+    footer .stream h3 {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 47px;
+      color: #353535; }
+    footer .stream img {
+      margin-top: 20px;
+      width: inherit;
+      height: auto; }
+
+/*# sourceMappingURL=footer.css.map */

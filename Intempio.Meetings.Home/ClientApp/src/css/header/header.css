@@ -1,0 +1,79 @@
+header {
+  display: flex;
+  height: 100px;
+  justify-content: flex-end;
+  box-shadow: 0 0 10px #DFE0EB; }
+    header .buy-tickets {
+        width: 150px;
+        height: 36px;
+        background: var(--color-surface);
+        border-radius: 2px;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        padding: 10px 25px;
+        margin: 32px 0;
+        border: 1.5px solid var(--color-surface);
+        box-sizing: border-box;
+        color: #FFFFFF;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    header .buy-tickets:hover {
+      box-shadow: 0 9px 25px rgba(82, 154, 34, 0.3); }
+    header .login {
+        padding: 10px 25px;
+        margin: 32px 30px 30px 20px;
+        width: 150px;
+        height: 36px;
+        background: #FFFFFF;
+        border: 1.5px solid var(--color-surface);
+        box-sizing: border-box;
+        border-radius: 2px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        color: var(--color-surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    header .login:hover {
+      box-shadow: 0 9px 25px rgba(82, 154, 34, 0.3); }
+  header .notification {
+    cursor: pointer;
+    margin: 38px 0; }
+  header .vertical-line {
+    margin: 34px 40px 40px;
+    width: 1px;
+    height: 32px;
+    background: #DFE0EB; }
+  header .user-name {
+    margin: 39px 0 42px 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: right;
+    color: #A6A6A6;
+    cursor: default; }
+  header .user-avatar {
+    margin: 28px 30px 28px 23px;
+    cursor: pointer; }
+  header hr {
+    height: 2px; }
+
+/*# sourceMappingURL=header.css.map */
