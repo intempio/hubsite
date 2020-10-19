@@ -24,10 +24,12 @@ export default class SessionsSQL extends Component {
         }
 
         var url = 'Meeting/GetAllEventSQL';
-        if (!isSuperUser) {
+        if (!isSuperUser ) {
             url = 'Meeting/GetUserEventsByEmailSQL?email=' + email;
 
         }
+
+        
         //   url = 'Meeting/GetMeetings';
         const response = await fetch(url, {
             method: "GET",
