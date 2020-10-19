@@ -67,9 +67,11 @@ export default class Presenters extends Component {
                                     <img src={pic} alt="man-icon" />
                                 </div>
                                 <div class="position">{item.fields.Description}</div>
-                                <div class="name">{item.fields.Title}</div>
+                                <div class="name">      {item.fields.ProfileTitle} </div>
                                 <div class="socials">
-                                    {!item.fields.fb && !item.fields.twitter && !item.fields.linkedin && <div>{item.fields.ProfileTitle} </div>}
+                          
+                             
+                                    {!item.fields.fb && !item.fields.twitter && !item.fields.linkedin && < div > {item.fields.Title} </div>}
                                     {item.fields.fb && <a href={item.fields.fb}>
                                         <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path

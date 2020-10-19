@@ -112,7 +112,7 @@ export default class Settings extends Component {
             //Make sure you have created the index over title on the SuperUser list 
             "\"SuperUsersURL\": \"/sites/####/lists/##SuperUsersURL##/items?expand=fields&$filter=fields/Title eq '{0}'\"," +
             //  "SiteID": "{SiteID}",
-            "\"SiteID\": \"####";
+            "\"SiteID\": \"####\",";
 
 
  
