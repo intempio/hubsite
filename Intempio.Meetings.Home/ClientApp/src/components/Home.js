@@ -15,6 +15,8 @@ import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat'
 
 
+
+
 export class Home extends Component {
     static displayName = Home.name;
     constructor(props) {
@@ -95,6 +97,9 @@ export class Home extends Component {
                                 return <Poster cname={name} />
                             case "chat":
                                 return <ChatContent cname={name} />
+                            case "presenters":
+                                return <Presenters cname={Presenters} />
+                                
 
                         }
                        
@@ -108,6 +113,8 @@ export class Home extends Component {
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <MostRecent />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Poster />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <ChatContent />}
+                {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Presenters />}
+
                
                
  </>

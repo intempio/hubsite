@@ -7,6 +7,12 @@ export default class Presenters extends Component {
         this.state = { presenters: [], loading: true };
     }
 
+    openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+
+
     async getPresenters() {
         this.setState({ loading: true });
         const response = await fetch('Meeting/GetPresenters', {
@@ -46,6 +52,7 @@ export default class Presenters extends Component {
                 <div class="presenters-container">
 
                     {this.state.loading && <div class="sessions-item">loading...</div>}
+                    {this.state.presenters && this.state.presenters.length == 0 && !this.state.loading && <div class="sessions-item"> There are no presenter profiles available.</div>}
                     {
 
                         this.state.presenters && this.state.presenters.map((item, i) => {
@@ -54,9 +61,9 @@ export default class Presenters extends Component {
 
 
                             var pic = item.fields.Picture.Url;
-                           // pic = 'https://localhost:44399/static/media/recent_1.ef629f6a.jpg';
+                            // pic = 'https://localhost:44399/static/media/recent_1.ef629f6a.jpg';
                             return (<div class="presenter">
-                                <div class="presenter-image">
+                                <div class="presenter-image" onClick={() => this.openInNewTab(item.fields.Profile ? item.fields.Profile.Url : '#')}>
                                     <img src={pic} alt="man-icon" />
                                 </div>
                                 <div class="position">{item.fields.Description}</div>
@@ -91,9 +98,9 @@ export default class Presenters extends Component {
                             </div>);
 
                         })}
-     
+
                 </div>
-                <div class="presenters-container-swiper">
+                { this.state.aa && <div class="presenters-container-swiper">
                     <div class="swiper-wrapper">
                         <div class="presenter swiper-slide">
                             <div class="presenter-image">
@@ -233,7 +240,7 @@ export default class Presenters extends Component {
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
-                </div>
+                </div>}
             </div>
 
 
