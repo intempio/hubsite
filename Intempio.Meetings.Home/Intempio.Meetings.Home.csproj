@@ -45,7 +45,6 @@
     <Folder Include="ClientApp\src\css\media-queries\" />
     <Folder Include="ClientApp\src\css\navbar\" />
     <Folder Include="ClientApp\src\css\wrapper\" />
-    <Folder Include="Util\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

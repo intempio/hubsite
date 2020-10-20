@@ -63,13 +63,13 @@ export default class Presenters extends Component {
                             var pic = item.fields.Picture.Url;
                             // pic = 'https://localhost:44399/static/media/recent_1.ef629f6a.jpg';
                             return (<div class="presenter">
-                                <div class="presenter-image" onClick={() => this.openInNewTab(item.fields.Profile ? item.fields.Profile.Url : '#')}>
+                                <div class="presenter-image" >
                                     <img src={pic} alt="man-icon" />
                                 </div>
                                 <div class="position">{item.fields.Description}</div>
                                 <div class="name">{item.fields.Title}</div>
                                 <div class="socials">
-                                    {!item.fields.fb && !item.fields.twitter && !item.fields.linkedin && <div>{item.fields.ProfileTitle} </div>}
+                                    {!item.fields.fb && !item.fields.twitter && !item.fields.linkedin && <div class="profiletitle" onClick={() => this.openInNewTab(item.fields.Profile ? item.fields.Profile.Url : '#')}>{item.fields.ProfileTitle} </div>}
                                     {item.fields.fb && <a href={item.fields.fb}>
                                         <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
