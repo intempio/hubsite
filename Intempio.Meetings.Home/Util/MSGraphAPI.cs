@@ -138,7 +138,7 @@ namespace Intempio.Meetings.Home.Util
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.EventInfoURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.EventInfoURL}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
@@ -270,7 +270,7 @@ namespace Intempio.Meetings.Home.Util
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASyncV2($"{config.ApiUrl}v1.0/{config.EventInfoURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASyncV2($"{config.ApiUrl}v1.0/{config.intempioSettings.EventInfoURL}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }

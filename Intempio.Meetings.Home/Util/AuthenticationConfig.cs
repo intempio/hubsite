@@ -23,6 +23,7 @@ SOFTWARE.
  */
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Graph;
 using System;
 using System.Globalization;
 using System.IO;
@@ -35,6 +36,8 @@ namespace Intempio.Meetings.Home.Util
     /// </summary>
     public class AuthenticationConfig
     {
+
+       
         /// <summary>
         /// instance of Azure AD, for example public Azure or a Sovereign cloud (Azure China, Germany, US government, etc ...)
         /// </summary>
@@ -88,25 +91,38 @@ namespace Intempio.Meetings.Home.Util
         /// (and identified by this CertificateName property)
         /// <remarks> 
         public string CertificateName { get; set; }
-        public string EventMasterURL { get; set; }
 
-        public string PosterSessionsURL { get; set; }
+        public class IntempioSettings
+        {
+               public string EventMasterURL { get; set; }
+            public string EventInfoURL { get; set; }
+
+            public string PosterSessionsURL { get; set; }
+
+            public string PresentersURL { get; set; }
+            public string MatchMakingURL { get; set; }
+            public string UserEventsURL { get; set; }
+            public string UsersURL { get; set; }
+            public string SuperUsersURL { get; set; }
+
+            public string SiteID { get; set; }
 
 
-        public string PresentersURL { get; set; }
+        }
 
-        public string MatchMakingURL { get; set; }
+        public IntempioSettings intempioSettings { get; set; }
 
-        public string UserEventsURL { get; set; }
+        public string SiteURL { get; set; }
 
-        
-        public string EventInfoURL { get; set; }
+
+
+
+
+
 
         public string GroupsURL { get; set; }
 
-        public string UsersURL { get; set; }
 
-        public string SiteURL { get; set; }
 
         public string ListInfo { get; set; }
 
@@ -119,9 +135,7 @@ namespace Intempio.Meetings.Home.Util
         public string YammerGetGroupMessages { get; set; }
 
 
-        public string SuperUsersURL { get; set; }
 
-        public string SiteID { get; set; }
 
         public string SQLConnectionString { get; set; }
         public string BLOBConnectionString { get; set; }
@@ -136,7 +150,7 @@ namespace Intempio.Meetings.Home.Util
             IConfigurationRoot Configuration;
 
             var builder = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
+             .SetBasePath(System.IO.Directory.GetCurrentDirectory())
             .AddJsonFile(path);
 
             Configuration = builder.Build();

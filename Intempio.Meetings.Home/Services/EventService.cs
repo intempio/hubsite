@@ -73,7 +73,7 @@ namespace Intempio.Meetings.Home.Services
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.EventMasterURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.MatchMakingURL}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
@@ -138,7 +138,7 @@ namespace Intempio.Meetings.Home.Services
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
 
-                var endpointWithUser = string.Format(config.UserEventsURL, email);
+                var endpointWithUser = string.Format(config.intempioSettings.UserEventsURL, email);
 
                 var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{endpointWithUser}", result.AccessToken, Display);
                 var usereventsObj = JObject.Parse(response.Value.ToString());
@@ -233,7 +233,7 @@ namespace Intempio.Meetings.Home.Services
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
 
-                var endpointWithUser = string.Format(config.UsersURL, email);
+                var endpointWithUser = string.Format(config.intempioSettings.UsersURL, email);
 
                 var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{endpointWithUser}", result.AccessToken, Display);
                 return response;
@@ -500,7 +500,7 @@ namespace Intempio.Meetings.Home.Services
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.PresentersURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.PresentersURL}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
@@ -565,7 +565,7 @@ namespace Intempio.Meetings.Home.Services
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.EventMasterURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.EventMasterURL}", result.AccessToken, Display);
 
                 var eventsObj = JObject.Parse(response.Value.ToString());
                 // JArray userevents = (JArray)eventsObj["value"];
@@ -635,7 +635,7 @@ namespace Intempio.Meetings.Home.Services
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.PosterSessionsURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.PosterSessionsURL}", result.AccessToken, Display);
 
                 if (response == null)
                 {
@@ -708,7 +708,7 @@ namespace Intempio.Meetings.Home.Services
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.EventInfoURL}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{config.intempioSettings.EventInfoURL}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
@@ -858,7 +858,7 @@ namespace Intempio.Meetings.Home.Services
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
 
-                var endpointWithUser = string.Format(config.SuperUsersURL, email);
+                var endpointWithUser = string.Format(config.intempioSettings.SuperUsersURL, email);
 
                 var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{endpointWithUser}", result.AccessToken, Display);
                 return response;
@@ -878,7 +878,7 @@ namespace Intempio.Meetings.Home.Services
             {
 
                 //return await db.St2hMeetingViews.FromSqlInterpolated($"SELECT * FROM dbo.st2h_meeting_view").Where(b => b.Email == email && b.StartTime < dtDateTill).ToListAsync<Models.St2hMeetingView>();
-                return await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[all_meeting_view]").Where(o => o.SiteId == config.SiteID).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
+                return await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[all_meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
             }
         }
 
@@ -889,7 +889,7 @@ namespace Intempio.Meetings.Home.Services
             {
 
                 //return await db.St2hMeetingViews.FromSqlInterpolated($"SELECT * FROM dbo.st2h_meeting_view").Where(b => b.Email == email && b.StartTime < dtDateTill).ToListAsync<Models.St2hMeetingView>();
-                return await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.SiteID && o.Email == email).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
+                return await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID && o.Email == email).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
             }
         }
 

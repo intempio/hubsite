@@ -60,7 +60,12 @@ namespace Intempio.Meetings.Home.Services
                          string fineurl=   ((Microsoft.Azure.Storage.Blob.CloudBlob)file).SnapshotQualifiedUri.AbsoluteUri;
                             if (filenamepath.IndexOf(".") > 0)
                             {
-                                string listItem = string.Format("{0}#{1}#{2}", submenuName, filenamepath.Replace(rpath2, "").Replace("/", "").Split(".")[0], fineurl);
+                                //fixing the multiple '.'
+                                var tempextention = filenamepath.Replace(rpath2, "").Replace("/", "").Split(".");
+                                var fileExtention = string.Format(".{0}", tempextention[tempextention.Length - 1]);
+                                var fileName = filenamepath.Replace(rpath2, "").Replace("/", "").Replace(fileExtention, "");
+
+                                string listItem = string.Format("{0}#{1}#{2}", submenuName, fileName, fineurl);
                                 listfles.Add(listItem);
                             }
                         }

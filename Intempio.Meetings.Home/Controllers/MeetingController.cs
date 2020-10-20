@@ -19,11 +19,16 @@ namespace Intempio.Meetings.Home.Controllers
     {
         private readonly Services.BlobStorageService bs;
 
-        public MeetingController(IConfiguration configuration)
+        private readonly Services.OptionsService os;
+
+
+        public MeetingController(IConfiguration configuration , IWritableOptions<IntempioSettings> l)
         {
                 bs = new BlobStorageService(configuration);
-
+            os = new OptionsService(l);
         }
+
+    
 
         [HttpGet("GetMeetingInfo")]
         public async Task<IActionResult> GetMeetingInfo()
@@ -81,7 +86,12 @@ namespace Intempio.Meetings.Home.Controllers
 
             return Ok(response);
         }
-
+        [HttpPost("UpdateSiteConfig")]
+        public  IActionResult UpdateSiteConfig([FromForm(Name = "formFile")] string formFile)
+        {
+            os.ChangeALL(formFile);
+            return Ok("{}");
+        }
 
         [HttpGet("GetInfo")]
         public async Task<IActionResult> GetList(string key)
@@ -91,32 +101,32 @@ namespace Intempio.Meetings.Home.Controllers
             switch (key)
             {
                 case "EventInfoURL":
-                    url = config.EventInfoURL.Split("items")[0];
+                    url = config.intempioSettings.EventInfoURL.Split("items")[0];
                     break;
 
                 case "EventMasterURL":
-                    url = config.EventMasterURL.Split("items")[0];
+                    url = config.intempioSettings.EventMasterURL.Split("items")[0];
                     break;
                 case "PosterSessionsURL":
-                    url = config.PosterSessionsURL.Split("items")[0];
+                    url = config.intempioSettings.PosterSessionsURL.Split("items")[0];
                     break;
                 case "MatchMakingURL":
-                    url = config.MatchMakingURL.Split("items")[0];
+                    url = config.intempioSettings.MatchMakingURL.Split("items")[0];
                     break;
                 case "PresentersURL":
-                    url = config.PresentersURL.Split("items")[0];
+                    url = config.intempioSettings.PresentersURL.Split("items")[0];
                     break;
                 case "UserEventsURL":
-                    url = config.UserEventsURL.Split("items")[0];
+                    url = config.intempioSettings.UserEventsURL.Split("items")[0];
                     break;
                 case "UsersURL":
-                    url = config.UsersURL.Split("items")[0];
+                    url = config.intempioSettings.UsersURL.Split("items")[0];
                     break;
                 case "SuperUsersURL":
-                    url = config.SuperUsersURL.Split("items")[0];
+                    url = config.intempioSettings.SuperUsersURL.Split("items")[0];
                     break;
                 case "SiteID":
-                    url =string.Format("/sites/{0}", config.SiteID);
+                    url =string.Format("/sites/{0}", config.intempioSettings.SiteID);
                     break;
             }
             var response = await EventService.GraphApiGetInfo(url);
@@ -138,6 +148,8 @@ namespace Intempio.Meetings.Home.Controllers
         [HttpGet("GetPresenters")]
         public async Task<IActionResult> GetPresenters()
         {
+
+    
             var response = await EventService.GraphApiGetPresentersSharePointList();
 
             return Ok(response);

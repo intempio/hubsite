@@ -4,7 +4,50 @@ export default class Settings extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { lists: [], loading: true , sitename:'#' , siteID:'N/A', configtext:'N/A'};
+        this.state = { lists: [], loading: true , sitename:'#' , siteID:'N/A', configtext:'N/A' ,configitemslist:null};
+    }
+
+
+    async updateSite(e) {
+        e.preventDefault();
+        this.updatesiteConfig();
+    }
+
+
+    async updatesiteConfig() {
+
+
+
+
+        this.setState({ loading: true });
+        let formData = new FormData();
+        formData.append("formFile", this.state.configitemslist);
+        const response = await fetch('Meeting/UpdateSiteConfig', {
+            method: "POST",
+            body: formData
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var items = JSON.parse(resonse.value);
+            this.setState({ loading: false });
+            if (items) {
+                this.setState({ lists: items.value });
+
+                this.buildconfig(items.value);
+                return true;
+
+            } else {
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
     }
 
     async getGetSite(e) {
@@ -114,7 +157,7 @@ export default class Settings extends Component {
             //  "SiteID": "{SiteID}",
             "\"SiteID\": \"####\",";
 
-
+        var configitems = null;
  
 
 
@@ -124,45 +167,57 @@ export default class Settings extends Component {
             switch (item.displayName) {
                 case "BreakoutRooms":
                     config = config.replace("##MatchMakingURL##", item.id);
+
+                    configitems == null ? configitems = "MatchMakingURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|MatchMakingURL#" + "/sites/" + this.state.siteID+"/lists/" + item.id + "/items?$expand=fields"
+                 
                     break;
 
                 case "EventMaster":
                     config = config.replace("##EventMasterURL##", item.id);
 
-
+                    configitems == null ? configitems = "EventMasterURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|EventMasterURL#" + "/sites/" + this.state.siteID +"/lists/" + item.id + "/items?$expand=fields"
                     break;
                 case "EventInfo":
                     config = config.replace("##EventInfoURL##", item.id);
+                    configitems == null ? configitems = "EventInfoURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|EventInfoURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
 
                     break;
                 case "MeetingUserList":
                     config = config.replace("##UserEventsURL##", item.id);
+                    configitems == null ? configitems = "MeetingUserList#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'" : configitems = configitems + "|UserEventsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'"
 
 
                     break;
                 case "Panels":
                     config = config.replace("##PresentersURL##", item.id);
 
+                    configitems == null ? configitems = "PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=3" : configitems = configitems + "|PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=3"
 
                     break;
                 case "Poster sessions":
                     config = config.replace("##PosterSessionsURL##", item.id);
+                    configitems == null ? configitems = "PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
 
 
                     break;
                 case "SuperUser":
                     config = config.replace("##SuperUsersURL##", item.id);
 
+                    configitems == null ? configitems = "SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'" : configitems = configitems + "|SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'"
 
                     break;
                 case "UserList":
                     config = config.replace("##UsersURL##", item.id);
+                    configitems == null ? configitems = "UsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'" : configitems = configitems + "|UsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'"
 
                     break;
                
             }
 
         });
+
+
+        configitems = configitems + "|" + "SiteID#" + this.state.siteID;
 
         var id = this.state.siteID;
         config = config.replace("####", id);
@@ -180,6 +235,8 @@ export default class Settings extends Component {
 
 
         this.setState({ configtext: config });
+        this.setState({ configitemslist: configitems });
+
       
     }
 
@@ -200,6 +257,8 @@ export default class Settings extends Component {
                         <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.sitename} onChange={this.onchangeSiteID.bind(this)} 
                         />
                         <button class="button" onClick={this.getGetSite.bind(this)}  >Get configurations</button>
+                        {this.state.configitemslist && < button class="button" onClick={this.updateSite.bind(this)}  >Update</button>}
+
 
                     </div>
 

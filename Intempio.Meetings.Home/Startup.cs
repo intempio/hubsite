@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.FileProviders;
+using Intempio.Meetings.Home.Util;
 
 namespace Intempio.Meetings.Home
 {
@@ -23,7 +24,7 @@ namespace Intempio.Meetings.Home
         {
 
             services.AddControllersWithViews();
-
+            services.ConfigureWritable<IntempioSettings>(Configuration.GetSection("IntempioSettings"));
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
