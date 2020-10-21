@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph;
+using System.Data;
+
 namespace Intempio.Meetings.Home.Services
 {
     public class EventService
@@ -899,6 +902,117 @@ namespace Intempio.Meetings.Home.Services
             {
                 Console.WriteLine($"{child.Name} = {child.Value}");
             }
+        }
+
+        public static async Task<JsonResult> GraphApiReadExcel (string path)
+
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+
+            // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
+            bool isUsingClientSecret = AppUsesClientSecret(config);
+
+            // Even if this is a console application here, a daemon application is a confidential client application
+            IConfidentialClientApplication app;
+
+            if (isUsingClientSecret)
+            {
+                app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
+                    .WithClientSecret(config.ClientSecret)
+                    .WithAuthority(new Uri(config.Authority))
+                    .Build();
+            }
+
+            else
+            {
+                X509Certificate2 certificate = ReadCertificate(config.CertificateName);
+                app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
+                    .WithCertificate(certificate)
+                    .WithAuthority(new Uri(config.Authority))
+                    .Build();
+            }
+
+            // With client credentials flows the scopes is ALWAYS of the shape "resource/.default", as the 
+            // application permissions need to be set statically (in the portal or by PowerShell), and then granted by
+            // a tenant administrator. 
+            string[] scopes = new string[] { $"{config.ApiUrl}.default" };
+
+            AuthenticationResult result = null;
+            try
+            {
+                result = await app.AcquireTokenForClient(scopes)
+                    .ExecuteAsync();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Token acquired");
+                Console.ResetColor();
+            }
+            catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
+            {
+                // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
+                // Mitigation: change the scope to be as expected
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Scope provided is not supported");
+                Console.ResetColor();
+            }
+
+            if (result != null)
+            {
+                //ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
+                //GraphServiceClient graphClient = new GraphServiceClient(authProvider);
+                //return response;
+                // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
+            }
+
+            return null;
+
+        }
+
+        public async static Task<DataTable> LoadUserMeeting(GraphServiceClient graphClient, Site result, string fileName)
+        {
+            var MeetingUserList = await graphClient.Sites[result.Id].Drive.Root.ItemWithPath(fileName).Workbook.Worksheets.Request().GetAsync();
+            var table = await graphClient.Sites[result.Id].Drive.Root.ItemWithPath(fileName).Workbook.Worksheets[MeetingUserList.CurrentPage[0].Id].Tables.Request().GetAsync();
+            var rows = await graphClient.Sites[result.Id].Drive.Root.ItemWithPath(fileName).Workbook.Worksheets[MeetingUserList.CurrentPage[0].Id].Tables[table.CurrentPage[0].Id].Rows.Request().GetAsync();
+            var columns = await graphClient.Sites[result.Id].Drive.Root.ItemWithPath(fileName).Workbook.Worksheets[MeetingUserList.CurrentPage[0].Id].Tables[table.CurrentPage[0].Id].Columns.Request().GetAsync();
+
+            string returnString = "";
+
+            System.Data.DataTable dataTable = new System.Data.DataTable();
+            //DataColumn[] dataColumns = new DataColumn[2];
+            //dataColumns[0] = new DataColumn("RowId");
+            //dataColumns[1] = new DataColumn("InsertStatement");
+
+            DataColumn[] dataColumns = new DataColumn[3];
+            dataColumns[0] = new DataColumn("Email");
+            dataColumns[1] = new DataColumn("MeetingCode");
+            dataColumns[2] = new DataColumn("SiteId");
+
+            dataTable.Columns.AddRange(dataColumns);
+
+            string insertQuery =
+                  @"INSERT INTO [" + "" + @"]
+	                (Email,MeetingCode,SiteId)
+	                 VALUES ('{0}', '{1}','{2}')";
+            for (int count = 0; count < rows.CurrentPage.Count; count++)
+            {
+                var test = rows.CurrentPage[count].Values;
+                var temp = JsonConvert.DeserializeObject<List<List<string>>>(test.ToString());
+                for (int internalCount = 1; internalCount < temp[0].Count; internalCount++)
+                {
+                    if (!string.IsNullOrEmpty(temp[0][internalCount]))
+                    {
+                        DataRow dr = dataTable.NewRow();
+                        //dr["RowId"] = count.ToString() + internalCount.ToString();
+                        //dr["InsertStatement"] = string.Format(insertQuery, Convert.ToString(temp[0][0]), columns.CurrentPage[internalCount].Name, result.Id);
+                        dr["Email"] = Convert.ToString(temp[0][0]);
+                        dr["MeetingCode"] = columns.CurrentPage[internalCount].Name;
+                        dr["SiteId"] = result.Id;
+                        dataTable.Rows.Add(dr);
+                        returnString += temp[0][0] + " " + columns.CurrentPage[internalCount].Name + "; ";
+                    }
+                }
+            }
+            return dataTable;
+            //return returnString;
         }
     }
 }

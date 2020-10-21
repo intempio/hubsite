@@ -123,3 +123,14 @@ main .presenters-container .presenter .position {
 
     cursor:pointer;
 }
+
+main .presenters-container {
+    width: 1660px !important;
+    display: block !important;
+   
+}
+
+    main .presenters-container .presenter {
+        margin-bottom: 50px !important;
+        display: inline-flex !important;
+    }
