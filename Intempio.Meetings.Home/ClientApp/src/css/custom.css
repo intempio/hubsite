@@ -134,3 +134,18 @@ main .presenters-container {
         margin-bottom: 50px !important;
         display: inline-flex !important;
     }
+
+
+@media screen and (max-width: 1024px) {
+
+    main .presenters-container {
+        width: 900px !important;
+    }
+}
+
+    @media screen and (max-width: 360px) {
+
+        main .presenters-container {
+            width: 450px !important;
+        }
+    }
