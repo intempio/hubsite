@@ -6,7 +6,7 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF'};
+        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false };
     }
 
     async getSettings() {
@@ -20,7 +20,7 @@ export class Login extends Component {
         const finalresult = await response.json().then(async (resonse) => {
             this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
-            this.setState({ loading: false });
+            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin});
             if (item && item.value[0].fields.Colour) {
                 document
                     .documentElement.style.setProperty("--color-surface", item.value[0].fields.Colour);
@@ -52,7 +52,7 @@ export class Login extends Component {
 
             var items = JSON.parse(resonse.value).value;
             if (items.length > 0) {
-                var userObj = { firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days')};
+                var userObj = { firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
                 this.setState({ firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email });
 
               
@@ -75,7 +75,16 @@ export class Login extends Component {
 
     doLogin = () => {
         if (this.validateInput()) {
-            this.getUserInfo();
+            if (this.state.unrecognizedLogin == true) {
+                var userObj = { firstName: null, lastName: null, email: this.state.emailinput, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: true };
+                if (this.state.emailinput && this.state.emailinput != '') {
+                    localStorage.setItem("userToken", JSON.stringify(userObj));
+                    history.push('/');
+                }
+
+            } else {
+                this.getUserInfo();
+            }
         }
 
     }

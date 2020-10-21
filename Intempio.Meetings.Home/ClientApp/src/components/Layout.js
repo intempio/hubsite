@@ -8,7 +8,7 @@ export class Layout extends Component {
     constructor(props) {
 
         super(props);
-        this.state = { firstName: '', lastName: '', email: 'aa', loading: false };
+        this.state = { firstName: '', lastName: '', email: 'aa', loading: false, unrecognizedLogin: false };
       
       
     }
@@ -20,6 +20,8 @@ export class Layout extends Component {
         if (token) {
             var fname = token.inputFirstName;
             var lname = token.inputLastName;
+            var unrecognizedLogin = token.unrecognizedLogin;
+
             if (token.firstName) {
                 fname = token.firstName;
 
@@ -27,7 +29,7 @@ export class Layout extends Component {
             if (token.lastName) {
                 lname = token.lastName;
             }
-            this.setState({ firstName: fname, lastName: lname });
+            this.setState({ firstName: fname, lastName: lname, unrecognizedLogin: unrecognizedLogin});
         }
     }
 
@@ -65,9 +67,10 @@ export class Layout extends Component {
                     <div class="user-name">{this.state.firstName} {this.state.lastName}</div>
                     <div class="user-avatar">
                         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
                             <path
                                 d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
-                                fill="#D7D7D7" />
+                                fill={this.state.unrecognizedLogin ? "#ffe5e5" : "#D7D7D7"  }/>
                         </svg>
                     </div>
                     <NavMenu />

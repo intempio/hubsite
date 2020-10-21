@@ -79,7 +79,9 @@ namespace Intempio.Meetings.Home.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                //throw new Exception();
+                return new List<string>();
+
             }
         }
 
@@ -121,7 +123,8 @@ namespace Intempio.Meetings.Home.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                //throw new Exception();
+             return  new List<string>();
             }
         }
         public List<string> ListFilesInBlobAsync(string container)
@@ -144,7 +147,9 @@ namespace Intempio.Meetings.Home.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                //throw new Exception();
+                return new List<string>();
+
             }
         }
         public async Task<string> UploadFileToBlobAsync(string strFileName, string email, byte[] fileData, string fileMimeType, string container)
@@ -178,7 +183,8 @@ namespace Intempio.Meetings.Home.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                //throw new Exception();
+                return "error";
             }
         }
 
