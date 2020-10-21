@@ -24,7 +24,7 @@ export default class SessionsSQL extends Component {
         }
 
         var url = 'Meeting/GetAllEventSQL';
-        if (!isSuperUser ) {
+        if (!isSuperUser && !this.props.allEvents == true) {
             url = 'Meeting/GetUserEventsByEmailSQL?email=' + email;
 
         }
