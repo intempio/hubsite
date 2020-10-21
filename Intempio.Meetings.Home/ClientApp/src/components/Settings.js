@@ -144,7 +144,7 @@ export default class Settings extends Component {
             //"MatchMakingURL": "sites/{siteID}/lists/{BreakoutRooms list id}/items?$expand=fields",
             "\"MatchMakingURL\": \"/sites/####/lists/##MatchMakingURL##/items?$expand=fields\"," +
             //"PresentersURL": "sites/{siteID}/lists/{Panels list id}/items?$expand=fields&$top={number of presenters}",
-            "\"PresentersURL\": \"/sites/####/lists/##PresentersURL##/items?$expand=fields&$top=3\"," +
+            "\"PresentersURL\": \"/sites/####/lists/##PresentersURL##/items?$expand=fields&$top=500\"," +
             //"UserEventsURL": "/sites/{siteID}/lists/{MeetingUserList list id}/items?expand=fields&$filter=fields/Email eq '{0}'",
             //Make sure you have created the index over email on the UserEvents list
             "\"UserEventsURL\": \"/sites/####/lists/##UserEventsURL##/items?expand=fields&$filter=fields/Email eq '{0}'\"," +
@@ -191,7 +191,7 @@ export default class Settings extends Component {
                 case "Panels":
                     config = config.replace("##PresentersURL##", item.id);
 
-                    configitems == null ? configitems = "PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=3" : configitems = configitems + "|PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=3"
+                    configitems == null ? configitems = "PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=500" : configitems = configitems + "|PresentersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields&$top=500"
 
                     break;
                 case "Poster sessions":

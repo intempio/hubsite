@@ -60,7 +60,7 @@ export default class Presenters extends Component {
                             //    var item = JSON.parse(item.fields);
 
 
-                            var pic = item.fields.Picture.Url;
+                            var pic = item.fields.Picture ? item.fields.Picture.Url :  require("../assets/img/presenters-icons/man-icon.png") ;
                             // pic = 'https://localhost:44399/static/media/recent_1.ef629f6a.jpg';
                             return (<div class="presenter">
                                 <div class="presenter-image" >
