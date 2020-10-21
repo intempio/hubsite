@@ -55,7 +55,11 @@ export default class Presenters extends Component {
                     {this.state.presenters && this.state.presenters.length == 0 && !this.state.loading && <div class="sessions-item"> There are no presenter profiles available.</div>}
                     {
 
-                        this.state.presenters && this.state.presenters.map((item, i) => {
+                        this.state.presenters && this.state.presenters.sort(function (a, b) {
+                            if (a.fields.Title < b.fields.Title) { return -1; }
+                            if (a.fields.Title > b.fields.Title) { return 1; }
+                            return 0;
+                        }).map((item, i) => {
 
                             //    var item = JSON.parse(item.fields);
 
