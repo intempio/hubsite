@@ -133,6 +133,8 @@ main .presenters-container {
     main .presenters-container .presenter {
         margin-bottom: 50px !important;
         display: inline-flex !important;
+        margin-left: 0px !important;
+        margin-right: 20px !important;
     }
 
 
