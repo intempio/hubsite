@@ -20,7 +20,7 @@ export class Login extends Component {
         const finalresult = await response.json().then(async (resonse) => {
             this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
-            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin, excellogin: item.value[0].fields.Excellogin });
+            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin, excelLogin: item.value[0].fields.Excellogin });
             if (item && item.value[0].fields.Colour) {
                 document
                     .documentElement.style.setProperty("--color-surface", item.value[0].fields.Colour);
@@ -120,10 +120,11 @@ export class Login extends Component {
 
             } else {
                 if (this.state.excelLogin == true) {
-                    this.getUserInfo();
-                } else {
-
                     this.getExcelUserUserInfo();
+
+                } else {
+                    this.getUserInfo();
+
                 }
             }
         }

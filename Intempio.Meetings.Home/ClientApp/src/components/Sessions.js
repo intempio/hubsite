@@ -148,7 +148,23 @@ export default class Session extends Component {
 
                     //    var item = JSON.parse(item.fields);
                         
+                        let token = localStorage.getItem('userToken')
+                        token = JSON.parse(token);
+                        if (token) {
+                            var fname = token.firstName;
+                            var lname = token.lastName;
+                            if (!token.firstName) {
+                                fname = token.inputFirstName;
+                            }
+                            if (!token.lastName) {
+                                lname = token.inputLastName;
+                            }
+                        }
 
+                        var eventurl = item.eventUrl;
+                        if (item.eventUrl && item.eventUrl.indexOf('adobeconnect') > 0) {
+                            eventurl = eventurl + '?guestName=' + fname + '  ' + lname + '&proto=true'
+                        }
                         var a = item;
                        // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
                       var  momentObj = moment.utc(item.fields.StartTime);
@@ -174,7 +190,7 @@ export default class Session extends Component {
                                 <p>{item.fields.Description}</p>
                             </div>
                             <div className="sessions-item-button">
-                                <button onClick={() => this.openInNewTab(item.fields.EventURL)}>Join Session</button></div>
+                                <button onClick={() => this.openInNewTab(eventurl)}>Join Session</button></div>
                         </div>);
    
                     })}
