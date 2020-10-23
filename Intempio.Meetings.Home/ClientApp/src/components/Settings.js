@@ -252,7 +252,7 @@ export default class Settings extends Component {
 
 
         configitems = configitems + "|" + "SiteID#" + this.state.siteID + "|" + 
-            "\"MeetingUserExcel\": \"/sites/" + this.state.siteID + "/drive/items/" + this.state.usermeetingexcelID + "workbook/worksheets('Sheet1')/usedRange,";
+            "MeetingUserExcel#/sites/" + this.state.siteID + "/drive/items/" + this.state.usermeetingexcelID + "/workbook/worksheets('Sheet1')/usedRange";
 
         var id = this.state.siteID;
         config = config.replace("####", id);

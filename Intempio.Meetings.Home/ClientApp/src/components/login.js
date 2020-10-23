@@ -6,7 +6,7 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false };
+        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false };
     }
 
     async getSettings() {
@@ -20,7 +20,7 @@ export class Login extends Component {
         const finalresult = await response.json().then(async (resonse) => {
             this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
-            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin});
+            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin, excellogin: item.value[0].fields.Excellogin });
             if (item && item.value[0].fields.Colour) {
                 document
                     .documentElement.style.setProperty("--color-surface", item.value[0].fields.Colour);
@@ -73,6 +73,42 @@ export class Login extends Component {
         });
     }
 
+    async getExcelUserUserInfo() {
+        this.setState({ loading: true });
+        const query = new URLSearchParams(this.props.location.search);
+        const eventID = query.get('eventid')
+        const response = await fetch('Meeting/GetExcelUserByEmail?email=' + this.state.emailinput, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+       
+        await response.json().then((resonse) => {
+            this.setState({ loading: false });
+            var items = JSON.parse(resonse.value).values;
+
+            let userobj = items.find(o => o[0] === this.state.emailinput);
+            if (userobj != null) {
+                var userObj = { firstName: null, lastName: null, email: userobj[0], inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
+                this.setState({ firstName: null, lastName: null, email: userobj[0] });
+
+
+
+                if (this.state.email && this.state.email != '') {
+                    localStorage.setItem("userToken", JSON.stringify(userObj));
+                    history.push('/');
+                }
+            }
+            else {
+                if (eventID) { this.setState({ status: 3 }) } else {
+                    this.setState({ status: 2 });
+                }
+            }
+        }).catch((error) => {
+            this.setState({ status: 2 });
+            this.setState({ loading: false });
+        });
+    }
     doLogin = () => {
         if (this.validateInput()) {
             if (this.state.unrecognizedLogin == true) {
@@ -83,7 +119,12 @@ export class Login extends Component {
                 }
 
             } else {
-                this.getUserInfo();
+                if (this.state.excelLogin == true) {
+                    this.getUserInfo();
+                } else {
+
+                    this.getExcelUserUserInfo();
+                }
             }
         }
 

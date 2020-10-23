@@ -246,7 +246,72 @@ namespace Intempio.Meetings.Home.Services
             return null;
 
         }
+        public static async Task<JsonResult> GraphApiGetUserFromExcel(string email)
 
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+
+            // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
+            bool isUsingClientSecret = AppUsesClientSecret(config);
+
+            // Even if this is a console application here, a daemon application is a confidential client application
+            IConfidentialClientApplication app;
+
+            if (isUsingClientSecret)
+            {
+                app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
+                    .WithClientSecret(config.ClientSecret)
+                    .WithAuthority(new Uri(config.Authority))
+                    .Build();
+            }
+
+            else
+            {
+                X509Certificate2 certificate = ReadCertificate(config.CertificateName);
+                app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
+                    .WithCertificate(certificate)
+                    .WithAuthority(new Uri(config.Authority))
+                    .Build();
+            }
+
+            // With client credentials flows the scopes is ALWAYS of the shape "resource/.default", as the 
+            // application permissions need to be set statically (in the portal or by PowerShell), and then granted by
+            // a tenant administrator. 
+            string[] scopes = new string[] { $"{config.ApiUrl}.default" };
+
+            AuthenticationResult result = null;
+            try
+            {
+                result = await app.AcquireTokenForClient(scopes)
+                    .ExecuteAsync();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Token acquired");
+                Console.ResetColor();
+            }
+            catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
+            {
+                // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
+                // Mitigation: change the scope to be as expected
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Scope provided is not supported");
+                Console.ResetColor();
+            }
+
+            if (result != null)
+            {
+                var httpClient = new HttpClient();
+                var apiCaller = new APIHelper(httpClient);
+
+                var endpointWithUser = config.intempioSettings.MeetingUserExcel;
+
+                var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{endpointWithUser}", result.AccessToken, Display);
+                return response;
+                // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
+            }
+
+            return null;
+
+        }
         public static async Task<JsonResult> GraphApiGetSiteID(string path)
 
         {

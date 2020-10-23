@@ -72,6 +72,14 @@ namespace Intempio.Meetings.Home.Controllers
         }
 
 
+        [HttpGet("GetExcelUserByEmail")]
+        public async Task<IActionResult> GetExcelUserByEmail(string email)
+        {
+            var response = await EventService.GraphApiGetUserFromExcel(email);
+
+            return Ok(response);
+        }
+
         [HttpGet("GetSiteInfo")]
         public async Task<IActionResult> GetSiteInfo(string sitename)
         {
