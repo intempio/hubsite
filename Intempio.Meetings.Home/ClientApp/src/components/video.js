@@ -158,9 +158,18 @@ export default class Video extends Component {
 
 
                         this.state.videourl != '#' && <div class="video-content">
-                            <video width="1200" height="600" controls  >
-                                <source src={this.state.videourl} type="video/mp4" />
-                            </video>
+                        
+
+                            <iframe
+                                src={`//aka.ms/ampembed?url=${this.state.videourl}`}
+                                name="azuremediaplayer"
+                                scrolling="no"
+                                frameborder="no"
+                                align="center"
+                                height="600px"
+                                width="1200px"
+                                allowfullscreen
+                            ></iframe>
 
                         </div>
 

@@ -83,6 +83,11 @@ namespace Intempio.Meetings.Home.Services
                         opt.SiteID = value;
                     });
                     break;
+                case "MeetingUserExcel":
+                    _writableLocations.Update(opt => {
+                        opt.MeetingUserExcel = value;
+                    });
+                    break;
             }
            
         }

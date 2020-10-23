@@ -106,9 +106,15 @@ namespace Intempio.Meetings.Home.Util
             public string SuperUsersURL { get; set; }
 
             public string SiteID { get; set; }
+            public string MeetingUserExcel { get; set; }
+
+
+
+
 
 
         }
+        public string SharedDocumentLibItems { get; set; }
 
         public IntempioSettings intempioSettings { get; set; }
 

@@ -159,7 +159,7 @@ export default class ViewSettings extends Component {
                             <h4>{this.state.SuperUsersURL}</h4>
                         </div>
                     </div>
-                   
+                    {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
                     
                 </div>
              

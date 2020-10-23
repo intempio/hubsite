@@ -31,7 +31,7 @@ namespace Intempio.Meetings.Home.Util
             UsersURL = "sys";
             SuperUsersURL = "sys";
             SiteID = "sys";
-
+            MeetingUserExcel = "sys";
 
         }
         public string EventMasterURL { get; set; }
@@ -46,6 +46,10 @@ namespace Intempio.Meetings.Home.Util
         public string SuperUsersURL { get; set; }
 
         public string SiteID { get; set; }
+        public string MeetingUserExcel { get; set; }
+
+        
+
 
 
     }

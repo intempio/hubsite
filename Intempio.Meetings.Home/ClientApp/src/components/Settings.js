@@ -4,7 +4,7 @@ export default class Settings extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { lists: [], loading: true , sitename:'#' , siteID:'N/A', configtext:'N/A' ,configitemslist:null};
+        this.state = { lists: [], loading: false , sitename:'#' , siteID:'N/A', configtext:'N/A' ,configitemslist:null,usermeetingexcelID:'1111'};
     }
 
 
@@ -88,7 +88,39 @@ export default class Settings extends Component {
         });
         return finalresult;
     }
+    async getGetShareddocumentItem() {
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetSharedDocumentItem?filename=MeetingUsers.xlsx&siteID=' + this.state.siteID, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
 
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = JSON.parse(resonse.value);
+            this.setState({ loading: false });
+            if (item.value.length>0) {
+                this.setState({ usermeetingexcelID: item.value[0].id });
+
+                this.getGetListInfo();
+                return true;
+
+            } else {
+
+                this.setState({ usermeetingexcelID: "1111" });
+
+                this.getGetListInfo();
+                return true;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
     async getGetSiteInfo() {
         this.setState({ loading: true });
         const response = await fetch('Meeting/GetSiteInfo?sitename=' + this.state.sitename, {
@@ -106,7 +138,7 @@ export default class Settings extends Component {
             if (items) {
                 this.setState({ siteID: items.id });
 
-              this.getGetListInfo();
+                this.getGetShareddocumentItem();
                 return true;
 
             } else {
@@ -155,7 +187,9 @@ export default class Settings extends Component {
             //Make sure you have created the index over title on the SuperUser list 
             "\"SuperUsersURL\": \"/sites/####/lists/##SuperUsersURL##/items?expand=fields&$filter=fields/Title eq '{0}'\"," +
             //  "SiteID": "{SiteID}",
-            "\"SiteID\": \"####\",";
+            "\"SiteID\": \"####\"," +
+             "\"MeetingUserExcel\": \"/sites/####/drive/items/##ExcelSheetID##/workbook/worksheets('Sheet1')/usedRange\","+
+            "\"SharedDocumentLib\": \"/sites/####/drive/root/children?$filter=name eq '{0}'\","
 
         var configitems = null;
  
@@ -217,7 +251,8 @@ export default class Settings extends Component {
         });
 
 
-        configitems = configitems + "|" + "SiteID#" + this.state.siteID;
+        configitems = configitems + "|" + "SiteID#" + this.state.siteID + "|" + 
+            "\"MeetingUserExcel\": \"/sites/" + this.state.siteID + "/drive/items/" + this.state.usermeetingexcelID + "workbook/worksheets('Sheet1')/usedRange,";
 
         var id = this.state.siteID;
         config = config.replace("####", id);
@@ -233,7 +268,9 @@ export default class Settings extends Component {
         config = config.replace("####", id);
         config = config.replace("####", id);
 
-
+        config = config.replace("####", id);
+        config = config.replace("####", id);
+        config = config.replace("##ExcelSheetID##", this.state.usermeetingexcelID);
         this.setState({ configtext: config });
         this.setState({ configitemslist: configitems });
 
@@ -258,7 +295,7 @@ export default class Settings extends Component {
                         />
                         <button class="button" onClick={this.getGetSite.bind(this)}  >Get configurations</button>
                         {this.state.configitemslist && < button class="button" onClick={this.updateSite.bind(this)}  >Update</button>}
-
+                        {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
 
                     </div>
 
@@ -277,7 +314,13 @@ export default class Settings extends Component {
                             <h4>{this.state.siteID}</h4>
                         </div>
                     </div>
+                    <div class="settings-item">
 
+                        <div class="recent-info">
+                            <p>MeetingUser.xlsx ID</p>
+                            <h4>{this.state.usermeetingexcelID}</h4>
+                        </div>
+                    </div>
                     {this, this.state.lists.map(item => {
 
                         return <div class="settings-item">

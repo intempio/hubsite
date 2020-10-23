@@ -86,6 +86,14 @@ namespace Intempio.Meetings.Home.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("GetSharedDocumentItem")]
+        public async Task<IActionResult> GetSharedDocumentItem(string filename, string siteID)
+        {
+            var response = await EventService.GraphApiGetSharedDocumentItem(filename,  siteID);
+
+            return Ok(response);
+        }
         [HttpPost("UpdateSiteConfig")]
         public  IActionResult UpdateSiteConfig([FromForm(Name = "formFile")] string formFile)
         {
