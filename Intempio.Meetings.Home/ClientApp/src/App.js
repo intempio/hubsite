@@ -14,6 +14,8 @@ import { Logout } from './components/logout';
 import FileUpload from './components/FileUpload';
 import Settings from './components/Settings';
 import ViewSettings from './components/ViewSettings';
+import PlayVideo from './components/PlayVideo';
+
 
 
 
@@ -39,7 +41,7 @@ export default class App extends Component {
                         <Route path='/counter' component={Counter} />
                         <Route path='/settings' component={Settings} />
                         <Route path='/source' component={ViewSettings} />
-
+                        <Route path='/video' component={PlayVideo} />
                     </Layout>
                   
 

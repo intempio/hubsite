@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 //import moment from 'moment';
 import moment from 'moment-timezone';
+import history from './history';
 export default class Session extends Component {
 
     constructor(props) {
@@ -10,9 +11,15 @@ export default class Session extends Component {
      
     }
 
-     openInNewTab = (url)=> {
-         const newWindow = window.open(url.Url, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
+    openInNewTab = (url, description) => {
+
+        if (url.includes("streaming")) {
+
+            history.push('/video?vurl=' + url + '&name=' + description);
+        } else {
+            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+            if (newWindow) newWindow.opener = null
+        }
     }
 
     async getEvents() {
@@ -190,7 +197,7 @@ export default class Session extends Component {
                                 <p>{item.fields.Description}</p>
                             </div>
                             <div className="sessions-item-button">
-                                <button onClick={() => this.openInNewTab(eventurl)}>Join Session</button></div>
+                                <button onClick={() => this.openInNewTab(eventurl, item.channel)}>Join Session</button></div>
                         </div>);
    
                     })}
