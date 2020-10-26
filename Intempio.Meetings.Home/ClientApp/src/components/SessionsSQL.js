@@ -2,11 +2,12 @@
 //import moment from 'moment';
 import moment from 'moment-timezone';
 import history from './history';
+import Modal from 'react-modal';
 export default class SessionsSQL extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false };
+        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false , videourl: '#', videoTitle: '' };
 
 
     }
@@ -15,7 +16,8 @@ export default class SessionsSQL extends Component {
 
         if (url.includes("streaming")) {
 
-            history.push('/video?vurl=' + url + '&name=' + description);
+            this.setState({ modalIsOpen: true, videourl: url, videoTitle: description });
+            //   history.push('/video?vurl=' + url + '&name=' + description);
         } else {
             const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
             if (newWindow) newWindow.opener = null
@@ -161,10 +163,26 @@ export default class SessionsSQL extends Component {
         });
 
     }
+
+
+    afterOpenModal() {
+
+    }
+
+    closeModal(e) {
+        e.preventDefault();
+        this.setState({ modalIsOpen: false });
+
+    }
+    openModal(e) {
+        e.preventDefault();
+        this.setState({ modalIsOpen: true });
+
+    }
     render() {
 
         return (
-
+            <>
             <div class="sessions">
                 <div class="sessions-header">
                     <h3>{this.props.cname}</h3>
@@ -259,7 +277,35 @@ export default class SessionsSQL extends Component {
 
 
             </div>
+            <Modal class="modal-video"
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal.bind(this)}
+                onRequestClose={this.closeModal.bind(this)}
+                contentLabel={this.state.videoTitle}
+            >
 
+
+                <div class="video">
+                    <h3>{this.state.videoTitle} <div onClick={this.closeModal.bind(this)} class="popup-close">X</div></h3>
+                    {this.state.videourl == '#' ? < img src={require("../assets/img/video-icons/video-icon.jpg")} alt="video-last" class="video-last" /> :
+                        this.state.videourl != '#' && <div class="video-content">
+                            <iframe
+                                src={`//aka.ms/ampembed?url=${this.state.videourl}`}
+                                name="azuremediaplayer"
+                                scrolling="no"
+                                frameborder="no"
+                                align="center"
+                                height="600px"
+                                width="1200px"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    }
+
+                </div>
+
+            </Modal>
+            </>
         )
     }
 }

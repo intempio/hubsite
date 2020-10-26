@@ -237,7 +237,7 @@ export default class Settings extends Component {
                 case "SuperUser":
                     config = config.replace("##SuperUsersURL##", item.id);
 
-                    configitems == null ? configitems = "SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'" : configitems = configitems + "|SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'"
+                    configitems == null ? configitems = "SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Title eq '{0}'" : configitems = configitems + "|SuperUsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Title eq '{0}'"
 
                     break;
                 case "UserList":

@@ -21,7 +21,7 @@ export class Home extends Component {
     static displayName = Home.name;
     constructor(props) {
         super(props);
-        this.state = { sections: [], allEvents: false, loading: false, isSQL: false };
+        this.state = { sections: [], allEvents: false, loading: false, isSQL: false, loadfrequency:0 };
 
     }
     async getSettings() {
@@ -38,7 +38,7 @@ export class Home extends Component {
             this.setState({ loading: false });
             if (item && item.value[0].fields.Sections) {
 
-                this.setState({ sections: item.value[0].fields.Sections.split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql});
+                this.setState({ sections: item.value[0].fields.Sections.split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql, loadfrequency: item.value[0].fields.LoadingFrequency});
                 return true;
 
             } else {
@@ -84,10 +84,10 @@ export class Home extends Component {
                             case "session":
 
                                 if (this.state.isSQL === true) {
-                                    return <SessionsSQL allEvents={this.state.allEvents} cname={name} />
+                                    return <SessionsSQL allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} />
                                 }
                                 else {
-                                    return <Session allEvents={this.state.allEvents} cname={name} />
+                                    return <Session allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} />
                                 }
                             case "video":
                                 return <Video cname={name} />

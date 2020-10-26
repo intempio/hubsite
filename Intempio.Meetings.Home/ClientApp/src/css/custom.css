@@ -151,3 +151,13 @@ main .presenters-container {
             width: 450px !important;
         }
     }
+
+
+* {
+    z-index: 1;
+}
+
+.popup-close {
+  float:right;
+  cursor:pointer;
+}
