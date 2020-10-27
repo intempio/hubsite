@@ -951,7 +951,7 @@ export class NavMenu extends Component {
           <svg width="248" height="1" viewBox="0 0 248 1" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect opacity="0.25" width="248" height="1" fill="#F4FFED"/>
           </svg>
-          <button class="buy-tickets">Buy Tickets</button>
+                              <button class="buy-tickets" style={{ display: "none" }}>Buy Tickets</button>
                               <button class="log-in" style={{ display: "none" }}>Log in</button>
         </div>
                       </div>

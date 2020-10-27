@@ -137,6 +137,31 @@ main .presenters-container {
         margin-right: 20px !important;
     }
 
+@media screen and (max-width: 3000px) {
+
+
+
+
+    .video-frame {
+        width: 1200px !important;
+        height: 600px !important;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    main .presenters-container .presenter {
+        max-width: 215px !important;
+    }
+
+        main .presenters-container .presenter .socials {
+            max-width: 190px !important;
+        }
+
+    .video-frame {
+        width: 900px !important;
+        height: 500px !important;
+    }
+}
 
 @media screen and (max-width: 1024px) {
 
@@ -145,19 +170,40 @@ main .presenters-container {
     }
 }
 
-    @media screen and (max-width: 360px) {
+@media screen and (max-width: 600px) {
 
-        main .presenters-container {
-            width: 450px !important;
-        }
+    main .presenters-container {
+        width: 450px !important;
     }
 
-
-* {
-    z-index: 1;
+    .video-frame {
+        width: 400px !important;
+        height: 300px !important;
+    }
 }
 
-.popup-close {
-  float:right;
-  cursor:pointer;
+    * {
+        z-index: 1;
+    }
+
+    .popup-close {
+        float: right;
+        cursor: pointer;
+    }
+
+.wrapper main .recent-container {
+    display: flex !important;
+}
+
+.buttonposter {
+
+    margin: 46px 40px 44px 0;
+    width: 210px;
+    height: 56px;
+    color: #025581;
+    background: #fff;
+    border: 1px solid #025581;
+    box-sizing: border-box;
+    border-radius: 2px;
+    align-self: center;
 }

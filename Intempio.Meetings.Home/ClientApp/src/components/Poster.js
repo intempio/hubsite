@@ -74,11 +74,12 @@ export default class Poster extends Component {
                                 <div class="image-wrapper">
                                     <img src={item.fields.Image_x0020_Url?item.fields.Image_x0020_Url.Url:'#'} alt="recent_1" class="recent-image" />
                                 </div>
-                                <div class="recent-info">
-                                    <p>{item.fields.Title}</p>
-                                    <div className="poster-item button">
-                                        <button onClick={() => this.openInNewTab(item.fields.Event_x0020_URL?item.fields.Event_x0020_URL.Url:'#')}>Join Session</button></div>
-                                </div>
+                                {
+                                    item.fields.RemoveButton == false ? <div class="recent-info">
+                                        <p>{item.fields.ButtonTitle != item.fields.Title ?  item.fields.Title:''}</p>
+                                        <div className="poster-item">
+                                            <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
+                                    </div> : <div> </div>}
                             </div>);
 
                         })
@@ -100,11 +101,15 @@ export default class Poster extends Component {
                                     <div class="image-wrapper">
                                         <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                     </div>
-                                    <div class="recent-info">
-                                        <p>{item.fields.Title}</p>
-                                        <div className="poster-item button">
-                                            <button onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>Join Session</button></div>
-                                    </div>
+                                    {
+                                        item.fields.RemoveButton == false ? < div class="recent-info">
+                                            <p>{item.fields.ButtonTitle != item.fields.Title ? item.fields.Title : ''}</p>
+                                            <div className="poster-item" >
+                                                <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle == item.fields.Title ? item.fields.Title : ''}</button> </div>
+                                        </div> : <div> </div>}
+
+
+
                                 </div>);
 
                             })
