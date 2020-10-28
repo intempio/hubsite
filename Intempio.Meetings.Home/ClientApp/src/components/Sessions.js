@@ -222,7 +222,7 @@ export default class Session extends Component {
 
 
                 </div>
-                <Modal class="modal-video"
+                <Modal className="modal-video" overlayClassName="myOverlayClass"
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal.bind(this)}
                     onRequestClose={this.closeModal.bind(this)}

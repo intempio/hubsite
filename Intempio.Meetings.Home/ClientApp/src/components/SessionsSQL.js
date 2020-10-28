@@ -246,12 +246,12 @@ export default class SessionsSQL extends Component {
 
                         var a = item;
                         // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
-                        var momentObj = moment.utc(item.startTime);
+                        var momentObj = moment(item.startTime);
                         ////Apply Moment.Js Formatter to your desire date format
                         var formattedStartTime = momentObj.local().format('hh:mm A');
                         var formattedDate = momentObj.local().format('DD MMM');
                         //  var momentObj = moment.tz(item.fields.FinishTime, 'America/New_York');
-                        momentObj = moment.utc(item.endTime);
+                        momentObj = moment(item.endTime);
                         var formattedEndTime = momentObj.local().format('hh:mm A');
 
                         return (<div class="sessions-item">
@@ -277,7 +277,7 @@ export default class SessionsSQL extends Component {
 
 
             </div>
-            <Modal class="modal-video"
+                <Modal className="modal-video" overlayClassName="myOverlayClass"
                 isOpen={this.state.modalIsOpen}
                 onAfterOpen={this.afterOpenModal.bind(this)}
                 onRequestClose={this.closeModal.bind(this)}

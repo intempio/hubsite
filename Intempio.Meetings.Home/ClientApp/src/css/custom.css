@@ -207,3 +207,18 @@ main .presenters-container {
     border-radius: 2px;
     align-self: center;
 }
+
+
+.modal-video {
+    position: absolute;
+    top: 40px;
+    left: 225px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+}
