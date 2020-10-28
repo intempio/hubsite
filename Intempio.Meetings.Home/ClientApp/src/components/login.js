@@ -6,7 +6,7 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false };
+        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false ,sqllogin:false };
     }
 
     async getSettings() {
@@ -20,7 +20,7 @@ export class Login extends Component {
         const finalresult = await response.json().then(async (resonse) => {
             this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
-            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin, excelLogin: item.value[0].fields.Excellogin });
+            this.setState({ loading: false, unrecognizedLogin: item.value[0].fields.UnrecognizedLogin, excelLogin: item.value[0].fields.Excellogin, sqllogin: item.value[0].fields.SQLlogin});
             if (item && item.value[0].fields.Colour) {
                 document
                     .documentElement.style.setProperty("--color-surface", item.value[0].fields.Colour);
@@ -109,6 +109,42 @@ export class Login extends Component {
             this.setState({ loading: false });
         });
     }
+
+
+    async getSQLUserUserInfo() {
+        this.setState({ loading: true });
+        //const query = new URLSearchParams(this.props.location.search);
+        //const eventID = query.get('eventid')
+        const response = await fetch('Meeting/GetSQLUserByEmail?email=' + this.state.emailinput, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+        await response.json().then((resonse) => {
+            this.setState({ loading: false });
+            var items = resonse;
+
+
+            if (items.length>0) {
+                var userObj = { firstName: null, lastName: null, email: this.state.emailinput, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
+                this.setState({ firstName: null, lastName: null, email: this.state.emailinput });
+
+
+                if (this.state.email && this.state.email != '') {
+                    localStorage.setItem("userToken", JSON.stringify(userObj));
+                    history.push('/');
+                }
+            }
+            else {
+                    this.setState({ status: 2 });
+                
+            }
+        }).catch((error) => {
+            this.setState({ status: 2 });
+            this.setState({ loading: false });
+        });
+    }
     doLogin = () => {
         if (this.validateInput()) {
             if (this.state.unrecognizedLogin == true) {
@@ -122,7 +158,12 @@ export class Login extends Component {
                 if (this.state.excelLogin == true) {
                     this.getExcelUserUserInfo();
 
-                } else {
+                } else if (this.state.sqllogin == true) {
+
+                    this.getSQLUserUserInfo();
+                }
+
+                else {
                     this.getUserInfo();
 
                 }
