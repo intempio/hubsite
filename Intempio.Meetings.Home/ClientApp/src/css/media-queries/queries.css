@@ -1203,7 +1203,6 @@
             padding: 0 16px;
             flex-direction: column;
             align-items: center;
-            pointer-events: none;
         }
 
             .wrapper main .sessions-item button {

@@ -240,8 +240,7 @@ export default class Session extends Component {
                                     scrolling="no"
                                     frameborder="no"
                                     align="center"
-                                    height="600px"
-                                    width="1200px"
+                                    class="video-frame"
                                     allowfullscreen
                                 ></iframe>
                             </div>

@@ -130,73 +130,16 @@ main .presenters-container {
    
 }
 
-    main .presenters-container .presenter {
-        margin-bottom: 50px !important;
-        display: inline-flex !important;
-        margin-left: 0px !important;
-        margin-right: 20px !important;
-    }
-
-@media screen and (max-width: 3000px) {
-
-
-
-
-    .video-frame {
-        width: 1200px !important;
-        height: 600px !important;
-    }
+.popup-close {
+    float: right;
+    cursor: pointer;
 }
-
-@media screen and (max-width: 1280px) {
-    main .presenters-container .presenter {
-        max-width: 215px !important;
-    }
-
-        main .presenters-container .presenter .socials {
-            max-width: 190px !important;
-        }
-
-    .video-frame {
-        width: 900px !important;
-        height: 500px !important;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-
-    main .presenters-container {
-        width: 900px !important;
-    }
-}
-
-@media screen and (max-width: 600px) {
-
-    main .presenters-container {
-        width: 450px !important;
-    }
-
-    .video-frame {
-        width: 400px !important;
-        height: 300px !important;
-    }
-}
-
-    * {
-        z-index: 1;
-    }
-
-    .popup-close {
-        float: right;
-        cursor: pointer;
-    }
 
 .wrapper main .recent-container {
     display: flex !important;
 }
 
 .buttonposter {
-
     margin: 46px 40px 44px 0;
     width: 210px;
     height: 56px;
@@ -222,3 +165,110 @@ main .presenters-container {
     outline: none;
     padding: 20px;
 }
+
+.video-frame {
+    width: 400px;
+    height: 300px;
+}
+
+.ReactModal__Overlay ReactModal__Overlay--after-open {
+    left: 220px !important;
+}
+
+
+.modal-video {
+    position: absolute;
+    top: 40px;
+    left: 225px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+}
+
+
+    main .presenters-container .presenter {
+        margin-bottom: 50px !important;
+        display: inline-flex !important;
+        margin-left: 0px !important;
+        margin-right: 20px !important;
+    }
+.azuremediaplayer {
+    width: 400px;
+    height: 300px;
+}
+@media screen and (max-width: 3000px) {
+
+
+
+
+    .video-frame {
+        width: 1200px !important;
+        height: 600px !important;
+    }
+    .azuremediaplayer {
+        width: 1200px !important;
+        height: 600px !important;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    main .presenters-container .presenter {
+        max-width: 440px !important
+    }
+
+        main .presenters-container .presenter .socials {
+            max-width: 190px !important;
+        }
+
+    .video-frame {
+        width: 900px !important;
+        height: 500px !important;
+    }
+    .azuremediaplayer {
+        width: 900px !important;
+        height: 500px !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    main .presenters-container {
+        width: 900px !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .azuremediaplayer {
+        width: 400px !important;
+        height: 300px !important;
+    }
+    main .presenters-container {
+        width: 450px !important;
+    }
+
+    .video-frame {
+        width: 400px !important;
+        height: 300px !important;
+    }
+
+    h3, .h3 {
+        font-size: -14.25rem;
+        font-size: 10px;
+    }
+
+    .modal-video {
+        position: absolute;
+        top: 120px;
+        left: 5px;
+        right: 5px;
+        height: 515px;
+    }
+}
+
+

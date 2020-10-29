@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import ChatContent from './Chat'
+import Player from './Player';
 export default class Video extends Component {
 
 
@@ -159,16 +160,11 @@ export default class Video extends Component {
 
                         this.state.videourl != '#' && <div class="video-content">
                         
+                            <Player
+                                sourceVideo={{ "src": this.state.videourl, "type": "application/vnd.ms-sstr+xml" }}
+                            />
 
-                            <iframe
-                                src={`//aka.ms/ampembed?url=${this.state.videourl}`}
-                                name="azuremediaplayer"
-                                scrolling="no"
-                                frameborder="no"
-                                align="center"
-                                class="video-frame"
-                                allowfullscreen
-                            ></iframe>
+                            
 
                         </div>
 
