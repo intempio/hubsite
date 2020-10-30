@@ -47,9 +47,9 @@ namespace Intempio.Meetings.Home.Controllers
         }
 
         [HttpGet("GetPosterSessions")]
-        public async Task<IActionResult> GetPosterSessions()
+        public async Task<IActionResult> GetPosterSessions(string cetegory)
         {
-            var response = await EventService.GetPosterSessions();
+            var response = await EventService.GetPosterSessions(cetegory);
 
             return Ok(response);
         }

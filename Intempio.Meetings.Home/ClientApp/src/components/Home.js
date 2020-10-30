@@ -54,6 +54,19 @@ export class Home extends Component {
 
     componentDidMount() {
         this.getSettings();
+
+        //window.location.hash = window.decodeURIComponent(window.location.hash);
+        //const scrollToAnchor = () => {
+        //    const hashParts = window.location.hash.split('#');
+        //    if (hashParts.length > 2) {
+        //        const hash = hashParts.slice(-1)[0];
+        //        document.querySelector(`#${hash}`).scrollIntoView();
+        //    }
+        //};
+        //scrollToAnchor();
+        //window.onhashchange = scrollToAnchor;
+
+      
     }
 
 
@@ -69,11 +82,16 @@ export class Home extends Component {
 
                         var itemvalue = item;
                         var name = item;
-                        if (itemvalue.indexOf('>')>0) {
+                        var anchor = 'default';
+                     
+                        if (itemvalue.indexOf('>') > 0) {
+                            if (itemvalue.split('>').length === 3) {
+                                anchor = itemvalue.split('>')[2]
+                            }
                             name = itemvalue.split('>')[1]
                             itemvalue= itemvalue.split('>')[0]
                         }
-
+                        
                         itemvalue = itemvalue.toLowerCase();
 
                         switch (itemvalue) {
@@ -94,7 +112,7 @@ export class Home extends Component {
                             case "mostrecent":
                                 return <MostRecent cname={name} />
                             case "poster":
-                                return <Poster cname={name} />
+                                return <Poster cname={name} category={anchor }/>
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":

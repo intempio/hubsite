@@ -6,7 +6,7 @@ export default class Poster extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { posterSessions: [], loading: false, showModal: false };
+        this.state = { posterSessions: [], loading: false, showModal: false};
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -18,7 +18,7 @@ export default class Poster extends Component {
 
     async getGetPosterSessions() {
         this.setState({ loading: true });
-        const response = await fetch('Meeting/GetPosterSessions', {
+        const response = await fetch('Meeting/GetPosterSessions?cetegory=' + this.props.category, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
 
@@ -30,7 +30,8 @@ export default class Poster extends Component {
             this.setState({ loading: false });
             var items = JSON.parse(resonse.value);
             this.setState({ loading: false });
-            if ( items) {
+            if (items) {
+
                 this.setState({ posterSessions: items });
                 return true;
 
@@ -60,7 +61,7 @@ export default class Poster extends Component {
     render() {
 
         return (
-            <div class="recent">
+            <div id={this.props.category} class="recent">
                 <h3>{this.props.cname}</h3>
                 <div class="recent-container">
                     {this.state.loading && <div class="sessions-item">loading...</div>}

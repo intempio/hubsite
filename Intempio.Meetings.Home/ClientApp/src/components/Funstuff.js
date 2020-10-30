@@ -15,7 +15,7 @@ export default class FunStuff extends Component {
     render() {
 
         return (
-            <div class="fun-stuff">
+            <div id="rec02" class="fun-stuff">
                 <h3>Fun Stuff</h3>
                 <div class="fun-stuff-container">
                     <div class="stuff" style={{ backgroundImage: "url(" + require("./../assets/img/fun-stuff-icons/fun-stuff-icon-1.jpg") + ")" }}>

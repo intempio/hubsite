@@ -6,7 +6,7 @@ export default class Event extends Component {
         super(props);
         this.state = { sdate: '', location: '', title: '', loading: false, dCount: 0, hCount: 0, mCount: 0, sCount: 0, buttonStatus: false, Banner:null};
        
-        
+       
     }
 
 
@@ -68,6 +68,7 @@ export default class Event extends Component {
         return (
 
             <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px" }} >
+              
                 {this.state.Banner && <img src={this.state.Banner} class="banner-img" />}
                 <h3>{this.state.sdate} {this.state.location}  </h3>
                 {this.state.loading && <div class="sessions-item">loading...</div>}

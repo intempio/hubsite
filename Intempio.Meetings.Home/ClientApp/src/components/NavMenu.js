@@ -563,7 +563,21 @@ export class NavMenu extends Component {
                                               <span class="menu-button">{menuText}</span>
                                           </div>
                                       </a>
-                                
+                                  case "anchor":
+                                      return <a onClick={() => {
+                                          var tag = '#' + url;
+                                          const section = document.querySelector(tag);
+                                          section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                      }}class="menu-item">
+                                          <div class="menu-item-wrapper">
+                                              <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                  <path
+                                                      d="M18.4526 1.48943C20.3489 3.55237 19.7112 7.71515 17.5618 10.0534C16.2077 11.5265 16.2077 11.5265 14.2835 13.6197L10.4351 17.8063C10.1977 18.0646 9.79014 18.0646 9.55273 17.8063L5.70431 13.6197L2.42603 10.0534C0.276637 7.71515 -0.361124 3.55237 1.53519 1.48943C3.67625 -0.839754 7.90629 -0.418343 9.9939 2.62162C12.0815 -0.418343 16.3116 -0.839754 18.4526 1.48943Z"
+                                                      fill="#F4FFED" />
+                                              </svg>
+                                              <span class="menu-button">{menuText}</span>
+                                          </div>
+                                      </a>
                                   case "help":
                                       return <a href="https://support.intemp.io" target="_blank" class="menu-item">
                                           <div class="menu-item-wrapper">
@@ -628,8 +642,7 @@ export class NavMenu extends Component {
 
                           })}
 
-
-
+                      
 
     </div>
     <div id="nav-arrow" class="nav-arrow">

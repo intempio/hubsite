@@ -16,7 +16,7 @@ export default class MostRecent extends Component {
 
         return (
 
-            <div class="recent">
+            <div id="rec02" class="recent">
                 <h3>{this.props.cname}</h3>
                 <div class="recent-container">
                     <div class="recent-item">

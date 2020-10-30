@@ -240,9 +240,24 @@ main .presenters-container {
     main .presenters-container {
         width: 900px !important;
     }
+
+    .wrapper main .recent-container {
+        display: none !important;
+    }
+
+    .wrapper main .recent-container-swiper > .swiper-wrapper {
+        display: inline-block !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .wrapper main .recent-container {
+        display: none !important;
+    }
+
+    .wrapper main .recent-container-swiper > .swiper-wrapper {
+        display: inline-block !important;
+    }
 
     .azuremediaplayer {
         width: 400px !important;

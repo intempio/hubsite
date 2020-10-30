@@ -47,7 +47,7 @@ export default class Presenters extends Component {
 
         return (
 
-            <div class="presenters">
+            <div  class="presenters">
                 <h3>{this.props.cname}</h3>
                 <div class="presenters-container">
 

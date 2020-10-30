@@ -67,6 +67,7 @@ class Player extends Component {
                     className="azuremediaplayer amp-default-skin amp-big-play-centered"
                     ref={(input) => { this.videoRef = input; }}
                     style={{ width: '90%' }} tabIndex="0"
+                    data-setup='{ "controls": true, "autoplay": false }'
                 >
                 </video>
             </div>

@@ -172,7 +172,7 @@ export default class Settings extends Component {
             //EventMasterURL: /sites/{siteID}/lists/{EventInfo list ID}/items?$expand=fields
             "\"EventMasterURL\": \"sites/####/lists/##EventMasterURL##/items?$expand=fields\"," +
             //PosterSessionsURL: /sites/{siteID}/lists/{PosterSessions list ID}/items?$expand=fields
-            "\"PosterSessionsURL\": \"sites/####/lists/##PosterSessionsURL##/items?$expand=fields\"," +
+            "\"PosterSessionsURL\": \"sites/####/lists/##PosterSessionsURL##/items?expand=fields&$filter=fields/Category eq '{0}'\"," +
             //"MatchMakingURL": "sites/{siteID}/lists/{BreakoutRooms list id}/items?$expand=fields",
             "\"MatchMakingURL\": \"/sites/####/lists/##MatchMakingURL##/items?$expand=fields\"," +
             //"PresentersURL": "sites/{siteID}/lists/{Panels list id}/items?$expand=fields&$top={number of presenters}",
@@ -230,7 +230,7 @@ export default class Settings extends Component {
                     break;
                 case "Poster sessions":
                     config = config.replace("##PosterSessionsURL##", item.id);
-                    configitems == null ? configitems = "PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
+                    configitems == null ? configitems = "PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Category eq '{0}'" : configitems = configitems + "|PosterSessionsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Category eq '{0}'"
 
 
                     break;
