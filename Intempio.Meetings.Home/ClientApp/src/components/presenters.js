@@ -42,7 +42,52 @@ export default class Presenters extends Component {
     componentDidMount() {
 
         this.getPresenters();
+
+        //this.waitForSwiper().then((swiper) => {
+        //    var a = "";
+        //    const swiperPresenters = new swiper('.recent-container-swiper', {
+        //        direction: 'horizontal',
+        //        slidesPerView: 'auto',
+        //        spaceBetween: 16,
+        //        centeredSlides: true,
+        //        loop: true,
+
+        //        pagination: {
+        //            el: '.swiper-pagination',
+        //            clickable: true,
+        //        },
+        //    });
+
+        //    swiperPresenters.slideTo(2, false, false);
+        //}).catch(e => console.error('Could not found Azure Media Player plugin', e));
+
+
+
     }
+
+
+    //waitForSwiper = () => {
+    //    return new Promise((resolve, reject) => {
+    //        let waited = 0;
+    //        const wait = (interval) => {
+    //            setTimeout(() => {
+    //                waited += interval;
+    //                const swiper = window['Swiper'];
+    //                if (swiper !== undefined) {
+    //                    return resolve(swiper);
+    //                }
+    //                if (waited >= this.props.ampLoadTimeout * 100) {
+    //                    return reject();
+    //                }
+    //                wait(interval * 2);
+    //                return null;
+    //            }, interval);
+    //        };
+    //        wait(30);
+    //    });
+    //}
+
+
     render() {
 
         return (
@@ -67,9 +112,9 @@ export default class Presenters extends Component {
                             var pic = item.fields.Picture ? item.fields.Picture.Url :  require("../assets/img/presenters-icons/man-icon.png") ;
                             // pic = 'https://localhost:44399/static/media/recent_1.ef629f6a.jpg';
                             return (<div class="presenter" onClick={item.fields.ProfileTitle ? () => { } : () => this.openInNewTab(item.fields.Profile ? item.fields.Profile.Url : '#')} >
-                                <div class="presenter-image" >
+                                {item.fields.Picture  && <div class="presenter-image" >
                                     <img src={pic} alt="man-icon" />
-                                </div>
+                                </div>}
                                 <div class="position">{item.fields.Description}</div>
                                 <div class="name">{item.fields.Title}</div>
                                 {item.fields.ProfileTitle && <div class="socials">

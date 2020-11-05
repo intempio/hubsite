@@ -87,7 +87,7 @@ export class Login extends Component {
             this.setState({ loading: false });
             var items = JSON.parse(resonse.value).values;
 
-            let userobj = items.find(o => o[0] === this.state.emailinput);
+            let userobj = items.find(o => o[0].toLowerCase() === this.state.emailinput.toLowerCase());
             if (userobj != null) {
                 var userObj = { firstName: null, lastName: null, email: userobj[0], inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
                 this.setState({ firstName: null, lastName: null, email: userobj[0] });

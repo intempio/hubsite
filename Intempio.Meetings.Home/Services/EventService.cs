@@ -1099,7 +1099,7 @@ namespace Intempio.Meetings.Home.Services
                 //return await db.St2hMeetingViews.FromSqlInterpolated($"SELECT * FROM dbo.st2h_meeting_view").Where(b => b.Email == email && b.StartTime < dtDateTill).ToListAsync<Models.St2hMeetingView>();
 
 
-                var result=  await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID && o.Email == email).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
+                var result=  await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID && o.Email.ToLower() == email.ToLower()).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
 
                 return result;
 

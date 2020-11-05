@@ -23,6 +23,7 @@ code {
 }
 
 
+
 .loginButton {
     width: 136px;
     height: 46px;
@@ -117,6 +118,8 @@ main .presenters-container .presenter .name {
 
 main .presenters-container .presenter .position {
     height: 32px;
+    display:block!important;
+    min-height:100px;
 }
 
 .profiletitle{

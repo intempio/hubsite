@@ -9,7 +9,7 @@ const pubnub = new PubNub({
 
 });
 
-const channels = ['awesomeChannel'];
+const channels = ['intemp'];
 
 
 
@@ -32,6 +32,7 @@ export const Chat = () => {
     }
     const pubnub = usePubNub();
     const [messages, setMessages] = useState([]);
+    const [msgHistory, setMgsHistory] = useState(null);
     const [input, setInput] = useState('');
 
     useEffect(() => {
@@ -43,6 +44,21 @@ export const Chat = () => {
 
         pubnub.subscribe({ channels });
     }, [messages]);
+
+
+    useEffect(() => {
+        pubnub.history(
+            {
+                channel: 'intemp',
+                count: 100, // 100 is the default
+                stringifiedTimeToken: true // false is the default
+            },
+            (status, response) => {
+                console.log(response);
+                setMgsHistory(response);
+            }
+        );
+    }, []);
 
     const sendMessage = useCallback(
         async message => {
@@ -80,6 +96,15 @@ export const Chat = () => {
                     </form>
                     <div class="posts-item">
 
+                        {msgHistory && msgHistory.messages && msgHistory.messages.map((message, messageIndex) => {
+                            return (
+
+
+                                <p class="information" key={`message-${messageIndex}`}>
+                                    {message.entry}
+                                </p>
+                            );
+                        })}
 
                         {messages.map((message, messageIndex) => {
                             return (
