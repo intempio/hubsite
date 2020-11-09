@@ -52,7 +52,7 @@ export default class SessionsSQL extends Component {
 
             this.setState({ loading: false });
             if (resonse) {
-                this.setState({ events: resonse });
+                this.setState({ events: resonse, filteredevents: resonse });
                 return true;
 
             } else {
@@ -133,8 +133,8 @@ export default class SessionsSQL extends Component {
 
         this.setState({
             filteredevents: this.state.events ? this.state.events.filter((item) => {
-                return moment(item.fields.StartTime).toDate() > moment().startOf('day') &&
-                    moment(item.fields.StartTime).toDate() < moment().add(1, 'days').startOf('day');
+                return moment(item.startTime).toDate() > moment().startOf('day') &&
+                    moment(item.startTime).toDate() < moment().add(1, 'days').startOf('day');
             }) : []
         });
         const currentfilter = document.getElementById('currentFilter');
@@ -215,11 +215,11 @@ export default class SessionsSQL extends Component {
                 </div>
                 {this.state.loading && <div class="sessions-item">loading...</div>}
 
-                {this.state.events && this.state.events.length == 0 && <div class="sessions-item"> There are no events to display.</div>}
+                    {this.state.filteredevents && this.state.filteredevents.length == 0 && <div class="sessions-item"> There are no events to display.</div>}
                 {
 
 
-                    this.state.events && this.state.events.map((item, i) => {
+                        this.state.filteredevents && this.state.filteredevents.map((item, i) => {
 
                         //    var item = JSON.parse(item.fields);
 
