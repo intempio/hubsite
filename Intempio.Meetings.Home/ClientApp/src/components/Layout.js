@@ -1,19 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback, useEffect, useState} from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
+import PubNub from 'pubnub';
+import { PubNubProvider, usePubNub } from 'pubnub-react';
 
 export class Layout extends Component {
     static displayName = Layout.name;
 
+
+
+
+
+
     constructor(props) {
 
         super(props);
-        this.state = { firstName: '', lastName: '', email: 'aa', loading: false, unrecognizedLogin: false };
+        this.state = { firstName: '', lastName: '', email: 'aa', loading: false, unrecognizedLogin: false, messages:[]};
+
+
       
       
     }
 
     componentDidMount() {
+
+        const pubnub = new PubNub({
+            publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
+            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464',
+
+        });
+
+        const  channels = ['intemp'];
+
+        pubnub.addListener({
+            message: messageEvent => {
+                this.setState({ messages: messageEvent.message });
+            },
+        });
+
+        pubnub.subscribe({ channels });
 
         let token = localStorage.getItem('userToken')
         token = JSON.parse(token);
@@ -64,7 +89,7 @@ export class Layout extends Component {
                         </svg>
                     </div>
                     <div class="vertical-line" style={{ display: "none" }}></div>
-                    <div class="user-name">{this.state.firstName} {this.state.lastName}</div>
+                    <div class="user-name">{this.state.firstName} {this.state.lastName} |{this.state.messages.length}</div>
                     <div class="user-avatar">
                         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
 
