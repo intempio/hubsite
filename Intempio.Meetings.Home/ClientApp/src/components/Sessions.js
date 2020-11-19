@@ -7,7 +7,7 @@ export default class Session extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', modalIsOpen: false, videourl: '#' , videoTitle:'' };
+        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', modalIsOpen: false, videourl: '#', videoTitle: '' };
 
 
     }

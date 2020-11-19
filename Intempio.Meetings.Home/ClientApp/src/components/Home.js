@@ -116,7 +116,7 @@ export class Home extends Component {
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":
-                                return <Presenters cname={name} />
+                                return <Presenters cname={name} category={anchor}/>
                                 
 
                         }
