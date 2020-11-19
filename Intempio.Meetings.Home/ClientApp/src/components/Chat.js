@@ -4,14 +4,16 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 
 
 var  pubnub = new PubNub({
-    publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
-    subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464',
+    publishKey: 'a',
+    subscribeKey: 'v',
 
 });
 
 var channels = ['help2'];
 
+var userMe = false;
 
+var currentUser = '';
 
 export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) => {
 
@@ -37,7 +39,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
     const pubnub = usePubNub();
     const [messages, setMessages] = useState([]);
     const [msgHistory, setMgsHistory] = useState(null);
-    const [input, setInput] = useState({ msg: '', date: Date.now() , user: fname + ' ' + lname });
+    const [input, setInput] = useState({ });
     const [nextMsg, setnextMsg] = useState(false);
 
 
@@ -52,33 +54,34 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
     useEffect(() => {
 
-   
-        pubnub.addListener({
-            message: messageEvent => {
-                setMessages([...messages, messageEvent.message]);
-            },
-        });
+        if(chatKey != undefined) {
+            pubnub.addListener({
+                message: messageEvent => {
+                    setMessages(messages=>[...messages, messageEvent.message]);
+                },
+            });
 
-        pubnub.subscribe({ channels });
-
-        scrollToBottom();
+            scrollToBottom();
+        }
     }, [messages]);
 
 
     useEffect(() => {
-        pubnub.history(
-            {
-                channel: chatKey,
-                count: 100, // 100 is the default
-                stringifiedTimeToken: true // false is the default
-            },
-            (status, response) => {
-                console.log(response);
-                setMgsHistory(response);
-            }
-        );
 
-       
+        if (chatKey != undefined) {
+            pubnub.history(
+                {
+                    channel: chatKey,
+                    count: 100, // 100 is the default
+                    stringifiedTimeToken: true // false is the default
+                },
+                (status, response) => {
+                    console.log(response);
+                    setMgsHistory(response);
+                }
+            );
+            pubnub.subscribe({ channels });
+        }
     }, []);
 
     useEffect(() => {
@@ -90,8 +93,10 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
     const sendMessage = useCallback(
         async message => {
+
+            var msgid = fname + Date.now();
             await pubnub.publish({
-                message_id: 10001,
+                message_id: msgid,
                 channel: channels[0],
                 message, original_timetoken: Date.now() / 1000,
                 user: "jasdeep",
@@ -100,7 +105,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
                 is_update: false
             });
 
-            setInput({ msg: '', date: Date.now(), user: fname + ' ' + lname });
+            setInput({ msg: '', date: Date.now(), user: fname + ' ' + lname  });
 
             scrollToBottom();
         },
@@ -109,11 +114,11 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
     var newmsg = false;
 
-    React.useEffect(() => {
-        if (messagesRef.current) {
-            scrollToBottom();
-        }
-    }, [messagesRef]);
+    //React.useEffect(() => {
+    //    if (messagesRef.current) {
+    //        scrollToBottom();
+    //    }
+    //}, [messagesRef]);
 
     return (
 
@@ -158,15 +163,16 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
                 {msgHistory && msgHistory.messages && msgHistory.messages.map((hmsg, messageIndex) => {
 
                     var i = messageIndex % 2;
-
-                    newmsg = !i;
+                     userMe=(fname + ' ' + lname == hmsg.entry.user) 
+                 
+            
 
                     return (
-
+                       
                         <>
                             {
 
-                                i == 0 ? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
+                               !userMe? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
                                     <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
@@ -178,9 +184,9 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
                                             fill="#FBFBFB" />
                                     </svg>
                                     <div class="message-wrapper">
-                                        <span class="name">sujeewa ediriweera </span>
+                                        <span class="name">{ hmsg.entry.user } </span>
                                         <div class="message">
-                                            <span >  {hmsg.entry.msg}</span>
+                                            <span >  {hmsg.entry.msg} </span>
 
                                         </div>
                                     </div>
@@ -204,7 +210,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
                                     <div class="chat-message-owner" key={`message-old-${messageIndex}`}>
                                         <div class="message-wrapper">
-                                            <span class="name">Tom Sanderson</span>
+                                            <span class="name">{hmsg.entry.user} </span>
                                             <div class="message">
                                                 <span>{hmsg.entry.msg}</span>
 
@@ -233,16 +239,14 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
                     messages.map((message, messageIndex) => {
 
-                        scrollToBottom();
-                        if (message.user != fname + ' ' + lname) {
-                            newmsg = !newmsg;
-                        }
+
+                        userMe = (fname + ' ' + lname == message.user) 
 
                         return (
                             <>
                                 {
 
-                                    !newmsg  ? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
+                                    !userMe  ? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
                                         <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
@@ -254,7 +258,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
                                                 fill="#FBFBFB" />
                                         </svg>
                                         <div class="message-wrapper">
-                                            <span class="name">sujeewa ediriweera </span>
+                                            <span class="name">{message.user} </span>
                                             <div class="message">
                                                 <span >  {message.msg}</span>
 
@@ -280,9 +284,9 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
 
                                         <div class="chat-message-owner" key={`message-old-${messageIndex}`}>
                                             <div class="message-wrapper">
-                                                <span class="name">Tom Sanderson</span>
+                                                <span class="name">{message.user} </span>
                                                 <div class="message">
-                                                    <span>{message.msg}</span>
+                                                    <span>{message.msg} </span>
 
                                                 </div>
                                             </div>
@@ -325,7 +329,9 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName}) =
                         <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: e.target.value, date: Date.now() , user: fname + ' ' + lname })} value={input.msg} /></label>
                         <button class="chatButton" id="chatButton" onClick={e => {
                             e.preventDefault();
-                            sendMessage(input);
+                            if (input.msg != '') {
+                                sendMessage(input);
+                            }
 
                         }}>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

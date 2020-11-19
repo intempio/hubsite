@@ -8,7 +8,7 @@ header {
     header .buy-tickets {
         width: 150px;
         height: 36px;
-        background: #74BD43;
+        background: var(--color-surface);
         border-radius: 2px;
         font-family: Roboto, sans-serif;
         font-style: normal;
@@ -20,7 +20,7 @@ header {
         text-transform: uppercase;
         padding: 10px 25px;
         margin: 32px 0;
-        border: 1.5px solid #74BD43;
+        border: 1.5px solid var(--color-surface);
         box-sizing: border-box;
         color: #FFFFFF;
         white-space: nowrap;
@@ -40,7 +40,7 @@ header {
         width: 150px;
         height: 36px;
         background: #FFFFFF;
-        border: 1.5px solid #74BD43;
+        border: 1.5px solid var(--color-surface);
         box-sizing: border-box;
         border-radius: 2px;
         font-style: normal;
@@ -50,7 +50,7 @@ header {
         text-align: center;
         letter-spacing: 1.25px;
         text-transform: uppercase;
-        color: #74BD43;
+        color: var(--color-surface);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -241,7 +241,7 @@ header {
 
             header .msgs-wrapper .conversation:hover .conversation-number, header .msgs-wrapper .conversation:active .conversation-number {
                 color: #FFFFFF;
-                background: #74BD43;
+                background: var(--color-surface);
             }
 
         header .msgs-wrapper .line {
@@ -299,7 +299,7 @@ header {
         padding: 0 17px 0 28px;
         width: 100%;
         height: 48px;
-        background: #74BD43;
+        background: var(--color-surface);
         border-radius: 2px;
         display: flex;
         justify-content: space-between;
@@ -530,7 +530,7 @@ header {
 
                 header .chat-message-owner > .message-wrapper > .message .buttons .likes-number {
                     padding: 14px;
-                    background: #74BD43;
+                    background: var(--color-surface);
                     box-shadow: 0 11px 20px rgba(0, 0, 0, 0.2);
                     border-radius: 4px;
                     display: flex;
@@ -552,7 +552,7 @@ header {
                 }
 
                     header .chat-message-owner > .message-wrapper > .message .buttons .likes .appendix path {
-                        fill: #74BD43;
+                        fill: var(--color-surface);
                     }
 
                 header .chat-message-owner > .message-wrapper > .message .buttons .wholikes {
@@ -648,7 +648,7 @@ header {
                             position: relative;
                             top: -11px;
                             left: 24px;
-                            background: #74BD43;
+                            background: var(--color-surface);
                             border: 1px solid #FFFFFF;
                             border-radius: 50%;
                         }
@@ -812,7 +812,7 @@ header {
             }
 
                 header .chat-message-guest > .message-wrapper .message .buttons-item:hover svg path {
-                    fill: #74BD43;
+                    fill: var(--color-surface);
                 }
 
                 header .chat-message-guest > .message-wrapper .message .buttons-item:hover span {
@@ -852,7 +852,7 @@ header {
                 }
 
                 header .chat-message-guest > .acts svg:last-child:hover path {
-                    fill: #74BD43;
+                    fill: var(--color-surface);
                 }
 
     header .chat-footer {
