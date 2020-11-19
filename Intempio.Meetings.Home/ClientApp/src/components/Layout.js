@@ -17,7 +17,7 @@ export class Layout extends Component {
 
         super(props);
         this.state = {
-            generalMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
+            generalMsgKey: '', helpMsgKey:'', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
             subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName:'General'
         };
 
@@ -38,8 +38,13 @@ export class Layout extends Component {
             this.setState({ loading: false });
             if (item && item.value[0].fields.GeneralChatName) {
 
-                this.setState({ generalMsgKey: item.value[0].fields.GeneralChatName });
-                this.initiateChat(item.value[0].fields.GeneralChatName);
+                this.setState({ generalMsgKey: item.value[0].fields.GeneralChatName, helpMsgKey: item.value[0].fields.HelpChatName });
+
+                var cnames = [];
+                cnames.push(item.value[0].fields.GeneralChatName);
+                cnames.push(item.value[0].fields.GeneralChatName);
+
+                this.initiateChat(cnames);
 
             } else {
 
@@ -76,7 +81,7 @@ export class Layout extends Component {
     }
 
 
-    initiateChat(channelName) {
+    initiateChat(channelNames) {
         const messagesContainer = document.getElementById('messages-container');
         const messagesIcon = document.getElementById('messages-icon');
 
@@ -107,7 +112,7 @@ export class Layout extends Component {
 
         });
 
-        const channels = [channelName];
+        const channels = channelNames;
 
         pubnub.addListener({
             message: messageEvent => {
