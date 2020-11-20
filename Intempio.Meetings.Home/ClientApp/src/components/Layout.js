@@ -17,8 +17,8 @@ export class Layout extends Component {
 
         super(props);
         this.state = {
-            generalMsgKey: '', helpMsgKey:'', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
-            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName:'General'
+            generalMsgKey: '', helpMsgKey:'', messages: [],chatUsers:[],channels:[], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
+            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', email: '', currentChatKey: ''
         };
 
 
@@ -38,12 +38,10 @@ export class Layout extends Component {
             this.setState({ loading: false });
             if (item && item.value[0].fields.GeneralChatName) {
 
-                this.setState({ generalMsgKey: item.value[0].fields.GeneralChatName, helpMsgKey: item.value[0].fields.HelpChatName });
-
                 var cnames = [];
                 cnames.push(item.value[0].fields.GeneralChatName);
-                cnames.push(item.value[0].fields.GeneralChatName);
-
+                cnames.push(item.value[0].fields.HelpChatName);
+                this.setState({ generalMsgKey: item.value[0].fields.GeneralChatName, helpMsgKey: item.value[0].fields.HelpChatName, channels: cnames, currentChatKey: item.value[0].fields.GeneralChatName});
                 this.initiateChat(cnames);
 
             } else {
@@ -67,6 +65,7 @@ export class Layout extends Component {
         if (token) {
             var fname = token.inputFirstName;
             var lname = token.inputLastName;
+            var email = token.email;
             var unrecognizedLogin = token.unrecognizedLogin;
 
             if (token.firstName) {
@@ -76,26 +75,62 @@ export class Layout extends Component {
             if (token.lastName) {
                 lname = token.lastName;
             }
-            this.setState({ firstName: fname, lastName: lname, unrecognizedLogin: unrecognizedLogin });
+            this.setState({ firstName: fname, lastName: lname, unrecognizedLogin: unrecognizedLogin, email: email});
         }
     }
 
+
+    sendHelpMsg() {
+        const pubnub = new PubNub({
+            publishKey: this.state.publishKey,
+            subscribeKey: this.state.subscribeKey,
+
+        });
+        var msgid = this.state.email + Date.now(); 
+        var tmsg = this.state.email ;
+         pubnub.publish({
+            message_id: msgid,
+             channel: this.state.channels[1],
+             message: { msg: tmsg, name: this.state.firstName + ' ' + this.state.lastName }
+            , original_timetoken: Date.now() / 1000,
+             user: this.state.fname + ' ' + this.state.lname ,
+            status: "help",
+            deleted: false,
+            is_update: false
+         });
+
+
+
+        this.pubnubInitiate([tmsg]);
+
+        this.setState({ currentChatKey: tmsg, chatName: "Help", openchat: true });
+        const messagesContainer = document.getElementById('messages-container');
+        const messagesIcon = document.getElementById('messages-icon');
+
+
+        const chat = document.getElementById('chat');
+        messagesContainer.classList.add('hide');
+        messagesIcon.style.fill = '#D7D7D7';
+        chat.classList.remove('hide');
+    }
 
     initiateChat(channelNames) {
         const messagesContainer = document.getElementById('messages-container');
         const messagesIcon = document.getElementById('messages-icon');
 
         const generalSession = document.getElementById('general-session');
+
+        const helpSession = document.getElementById('help-session');
+
         const chat = document.getElementById('chat');
 
         generalSession.addEventListener('click', () => {
 
-            this.setState({ openchat: true })
+            this.setState({ openchat: true, currentChatKey: this.state.generalMsgKey, chatName: "General", unseenmsgCount: 0})
             messagesContainer.classList.add('hide');
             messagesIcon.style.fill = '#D7D7D7';
             chat.classList.remove('hide');
 
-            this.setState({ unseenmsgCount: 0 });
 
 
         })
@@ -106,6 +141,18 @@ export class Layout extends Component {
             chat.classList.add('hide');
         })
 
+
+        helpSession.addEventListener('click', () => {
+
+            this.sendHelpMsg();
+
+
+        })
+        this.pubnubInitiate(channelNames);
+    }
+
+    pubnubInitiate(channelNames) {
+
         const pubnub = new PubNub({
             publishKey: this.state.publishKey,
             subscribeKey: this.state.subscribeKey,
@@ -113,13 +160,13 @@ export class Layout extends Component {
         });
 
         const channels = channelNames;
-
+        const chat = document.getElementById('chat');
         pubnub.addListener({
             message: messageEvent => {
 
                 if (window.getComputedStyle(chat).display === "none") {
 
-                    this.setState({ unseenmsgCount: this.state.unseenmsgCount +1});
+                    this.setState({ unseenmsgCount: this.state.unseenmsgCount + 1 });
                 }
                 else {
                     this.setState({ unseenmsgCount: 0 });
@@ -128,6 +175,26 @@ export class Layout extends Component {
         });
 
         pubnub.subscribe({ channels });
+
+        pubnub.history(
+            {
+                channel: channels[0],
+                count: 100, // 100 is the default
+                stringifiedTimeToken: true // false is the default
+            },
+            (status, response) => {
+
+                this.setState({ messages: response });
+
+                var uniqueUsers = [];
+                response.messages && response.messages.forEach(x => {
+                    if (uniqueUsers.indexOf(x.entry.user) == -1) {
+                        uniqueUsers.push(x.entry.user);
+                    }
+                });
+                this.setState({ chatUsers: uniqueUsers });
+            }
+        );
     }
     render() {
         return (
@@ -159,13 +226,13 @@ export class Layout extends Component {
                                     </div>
                                     <div class="conversation-name">
                                         <span class="name">General</span>
-                                        <span class="users-number">102 users</span>
+                                        <span class="users-number">{this.state.chatUsers.length} users</span>
                                     </div>
                                 </div>
-                                <div class="conversation-number">2</div>
+                                <div class="conversation-number"> {this.state.unseenmsgCount}</div>
                             </div>
                             <div class="line"></div>
-                            <div class="conversation">
+                            <div id="help-session" class="conversation">
                                 <div class="conversation-wrapper">
                                     <div class="images">
                                         <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
@@ -193,9 +260,9 @@ export class Layout extends Component {
 
 
 
-                    <NavMenu />
+                    <NavMenu msgCount={this.state.unseenmsgCount} user={this.state.firstName } />
 
-                    {this.state.generalMsgKey != '' && this.state.generalMsgKey != undefined && <ChatContent openChat={this.state.openchat} chatKey={this.state.generalMsgKey} publishKey={this.state.publishKey} subscribeKey={this.state.subscribeKey} chatName={this.state.chatName} />}
+                    {this.state.generalMsgKey != '' && this.state.generalMsgKey != undefined && <ChatContent openChat={this.state.openchat} chatKeys={[this.state.currentChatKey]} publishKey={this.state.publishKey} subscribeKey={this.state.subscribeKey} chatName={this.state.chatName} />}
 
                 </header>
                 <div id="wrapper" class="wrapper">
