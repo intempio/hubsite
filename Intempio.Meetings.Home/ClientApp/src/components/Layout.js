@@ -189,10 +189,16 @@ export class Layout extends Component {
         });
 
 
+        this.openChatWindw([tmsg]);
 
-        this.pubnubInitiate([tmsg]);
+    }
 
-        this.setState({ currentChatKey: tmsg, chatName: "Help", openchat: true });
+
+    openChatWindw(channelNames) {
+
+        this.pubnubInitiate(channelNames);
+
+        this.setState({ currentChatKey: channelNames[0], chatName: "Help", openchat: true });
         const messagesContainer = document.getElementById('messages-container');
         const messagesIcon = document.getElementById('messages-icon');
 
@@ -202,6 +208,7 @@ export class Layout extends Component {
         messagesIcon.style.fill = '#D7D7D7';
         chat.classList.remove('hide');
     }
+
 
     pubnubHelpInitiate(channelNames) {
 
@@ -299,9 +306,9 @@ export class Layout extends Component {
                                                     <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
                                                     <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
                                                 </div>
-                                                <div class="conversation-name">
-                                                    <span class="name">m.user</span>
-                                                    <span class="users-number">m.msg</span>
+                                                <div class="conversation-name" onClick={() => this.openChatWindw([m.msg])}>
+                                                    <span class="name">{m.user}</span>
+                                                    <span class="users-number">{m.msg}</span>
                                                 </div>
                                             </div>
                                         </div>
