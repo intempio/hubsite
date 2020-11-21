@@ -18,7 +18,7 @@ export class Layout extends Component {
         super(props);
         this.state = {
             generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
-            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', chatUsers: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: ''
+            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false
         };
 
 
@@ -68,6 +68,8 @@ export class Layout extends Component {
             var fname = token.inputFirstName;
             var lname = token.inputLastName;
             var email = token.email;
+            this.setState({ isSupport: email.toLowerCase().indexOf('support') > -1 });
+            
             var unrecognizedLogin = token.unrecognizedLogin;
 
             if (token.firstName) {
@@ -110,7 +112,7 @@ export class Layout extends Component {
         const helpSession = document.getElementById('help-session');
              helpSession.addEventListener('click', () => {
 
-            this.sendHelpMsg();
+            this.sendHelpMsg("msg");
 
 
         })
@@ -169,18 +171,18 @@ export class Layout extends Component {
 
 
 
-    sendHelpMsg() {
+    sendHelpMsg( category) {
         const pubnub2 = new PubNub({
             publishKey: this.state.publishKey,
             subscribeKey: this.state.subscribeKey,
 
         });
         var msgid = this.state.email + Date.now();
-        var tmsg = this.state.email;
+        var tmsg = this.state.email + '_' + this.state.helpMsgKey;
         pubnub2.publish({
             message_id: msgid,
             channel: [this.state.helpMsgKey],
-            message: { msg: tmsg, user: this.state.firstName + ' ' + this.state.lastName }
+            message: { msg: tmsg, user: this.state.firstName + ' ' + this.state.lastName, category: category,id: msgid}
             , original_timetoken: Date.now() / 1000,
             user: this.state.fname + ' ' + this.state.lname,
             status: "help",
@@ -225,7 +227,7 @@ export class Layout extends Component {
                 var m = messageEvent.message;
                 var msgs = this.state.messagesHelpNew;
                 msgs.push(m);
-                this.setState({ messagesHelpNew: msgs });
+                this.setState({ messagesHelpNew: msgs, helpRequestsFiltered: msgs});
             },
         });
 
@@ -240,6 +242,14 @@ export class Layout extends Component {
             (status, response) => {
 
                 this.setState({ messagesHelp: response.messages });
+
+                var uniqueUsers = [];
+                response && response.messages && response.messages.forEach(x => {
+                    if (uniqueUsers.indexOf(x.entry.user) == -1) {
+                        uniqueUsers.push(x.entry.user);
+                    }
+                });
+                this.setState({ helpRequests: uniqueUsers });
             }
         );
     }
@@ -262,7 +272,10 @@ export class Layout extends Component {
                     <div id="messages-container" class="msgs-container hide">
                         <h2 class="header">conversation</h2>
                         <label for="searchBar">
-                            <input type="text" id="searchBar" class="search-bar" placeholder="Search contact or group" />
+                            <input type="text" id="searchBar" class="search-bar" placeholder="Search contact or group" onChange={(e) => this.setState({
+                                helpRequestsFiltered: this.state.messagesHelpNew.filter(function (item) {
+                                    return item.user.indexOf(e.target.value) > -1;
+                                })})} />
                         </label>
                         <div class="msgs-wrapper">
 
@@ -277,7 +290,7 @@ export class Layout extends Component {
                                         <span class="users-number">{this.state.chatUsers.length} users</span>
                                     </div>
                                 </div>
-                                <div class="conversation-number">2</div>
+                                <div class="conversation-number">{ this.state.unseenmsgCount }</div>
                             </div>
                             <div class="line"></div>
                             <div id="help-session" class="conversation">
@@ -288,13 +301,13 @@ export class Layout extends Component {
                                     </div>
                                     <div class="conversation-name">
                                         <span class="name">Help</span>
-                                        <span class="users-number">28 users</span>
+                                        <span class="users-number">{this.state.helpRequests.length} users</span>
                                     </div>
                                 </div>
                             </div>
 
 
-                            {this.state.messagesHelpNew && this.state.messagesHelpNew.map((m, messageIndex) => {
+                            {this.state.isSupport && this.state.helpRequestsFiltered && this.state.helpRequestsFiltered.slice(0).reverse().map((m, messageIndex) => {
 
                                 return (
 
@@ -306,11 +319,13 @@ export class Layout extends Component {
                                                     <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
                                                     <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
                                                 </div>
-                                                <div class="conversation-name" onClick={() => this.openChatWindw([m.msg])}>
+                                                <div class="conversation-name" onClick={() => this.openChatWindw([m.msg])} id={m.id }>
                                                     <span class="name">{m.user}</span>
                                                     <span class="users-number">{m.msg}</span>
                                                 </div>
                                             </div>
+
+                                            <div class="conversation-number"></div>
                                         </div>
 
 

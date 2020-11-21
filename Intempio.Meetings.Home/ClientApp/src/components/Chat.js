@@ -1,7 +1,7 @@
 ﻿import React, { Component, useCallback, useEffect, useState } from 'react';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
-
+import moment from 'moment-timezone';
 
 var pubnub = new PubNub({
     publishKey: 'a',
@@ -19,6 +19,17 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
     channels = [chatKey];
 
+    moment.updateLocale('en', {
+        longDateFormat: {
+            LTY: 'MM/DD HH:mm',  // new format for token here
+            LT: "h:mm A",
+            LTS: "h:mm:ss A",
+            L: "MM/DD/YYYY",
+            LL: "MMMM Do YYYY",
+            LLL: "MMMM Do YYYY LT",
+            LLLL: "dddd, MMMM Do YYYY LT"
+        }
+    });
 
     let token = localStorage.getItem('userToken')
     let fname = '';
@@ -180,7 +191,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                 d="M10.6667 1.75H10.0834V0.583336H8.91675V1.75H3.08342V0.583336H1.91675V1.75H1.33341C0.691748 1.75 0.166748 2.275 0.166748 2.91667V12.25C0.166748 12.8917 0.691748 13.4167 1.33341 13.4167H10.6667C11.3084 13.4167 11.8334 12.8917 11.8334 12.25V2.91667C11.8334 2.275 11.3084 1.75 10.6667 1.75ZM10.6667 12.25H1.33341V4.66667H10.6667V12.25Z"
                                 fill="#D1D0D0" />
                         </svg>
-                        <p class="date-text">Nov 19th, 2020, at 14:00</p>
+                        <p class="date-text">{moment().format('LLLL')}</p>
                     </div>
                 </div>
 
