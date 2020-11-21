@@ -13,10 +13,11 @@ var channels = ['help2'];
 
 var userMe = false;
 
+var currentUser = '';
 
-export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName }) => {
+export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) => {
 
-    channels = chatKeys;
+    channels = [chatKey];
 
 
     let token = localStorage.getItem('userToken')
@@ -40,8 +41,7 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
     const [msgHistory, setMgsHistory] = useState(null);
     const [input, setInput] = useState({});
     const [users, setUsers] = useState([]);
-
-
+    const [oldChatKey, setoldChatKey] = useState('');
 
     const messagesRef = React.useRef(null);
     const scrollToBottom = () => {
@@ -51,6 +51,54 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
             inline: "start"
         });
     };
+
+
+
+
+
+    useEffect(() => {
+
+        scrollToBottom();
+
+    }, [openChat]);
+
+
+    useEffect(() => {
+
+        if (chatKey != undefined && chatKey != '') {
+            setMgsHistory(null);
+            setMessages([]);
+            pubnub.history(
+                {
+                    channel: chatKey,
+                    count: 100, // 100 is the default
+                    stringifiedTimeToken: true // false is the default
+                },
+                (status, response) => {
+                    console.log(response);
+                    setMgsHistory(response);
+                    scrollToBottom();
+                }
+            );
+
+            if (oldChatKey != chatKey) {
+                pubnub.addListener({
+                    message: messageEvent => {
+                        setMessages(messages => [...messages, messageEvent.message]);
+                         scrollToBottom();
+                    },
+                });
+
+                pubnub.subscribe({ channels });
+                if (oldChatKey != undefined && oldChatKey != '') {
+                    pubnub.unsubscribe({ channel: oldChatKey });
+                }
+                setoldChatKey(chatKey);
+            }
+
+        }
+    }, [chatKey]);
+
 
     useEffect(() => {
         if (msgHistory && msgHistory.messages && msgHistory.messages.length > 0) {
@@ -66,57 +114,10 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
 
     }, [msgHistory && msgHistory.messages]);
 
-
-
-
-
     useEffect(() => {
 
-        if (chatKeys != undefined) {
-            pubnub.addListener({
-                message: messageEvent => {
-                    setMessages(messages => [...messages, messageEvent.message]);
 
-                    var tempArray = users;
-
-                    if (tempArray.indexOf(messageEvent.message.user) == -1) {
-                        tempArray.push(messageEvent.message.user);
-                        setUsers(tempArray);
-                    }
-
-                },
-            });
-
-
-            scrollToBottom();
-        }
-    }, [messages]);
-
-
-    useEffect(() => {
-
-        if (chatKeys != undefined) {
-            pubnub.history(
-                {
-                    channel: channels[0],
-                    count: 100, // 100 is the default
-                    stringifiedTimeToken: true // false is the default
-                },
-                (status, response) => {
-                    console.log(response);
-                    setMgsHistory(response);
-                }
-            );
-            pubnub.subscribe({ channels });
-        }
-    }, [chatKeys]);
-
-    useEffect(() => {
-
-        scrollToBottom();
-
-    }, [openChat]);
-
+    }, []);
 
     const sendMessage = useCallback(
         async message => {
@@ -139,6 +140,9 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
         [pubnub, setInput]
     );
 
+    var newmsg = false;
+
+
 
     return (
 
@@ -156,7 +160,7 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
                             d="M15.0087 13.4607H8.64392C8.26472 13.8831 7.81112 14.3703 7.38872 14.8479C6.43112 15.9303 4.18712 16.8207 3.86072 16.9071C3.53432 16.9935 2.66312 16.9503 3.18632 16.3431C3.70952 15.7359 4.23032 14.1759 4.23032 13.4607H2.72792C1.34072 13.4607 0.203125 12.3303 0.203125 10.9455V2.88389C0.203125 1.50149 1.34072 0.371094 2.72792 0.371094H15.0087C16.3983 0.371094 17.5359 1.50149 17.5359 2.88389V10.9455C17.5359 12.3303 16.3983 13.4607 15.0087 13.4607ZM13.1367 5.57189C12.4647 5.57189 11.9175 6.11429 11.9175 6.78629C11.9175 7.45589 12.4647 7.99829 13.1367 7.99829C13.8111 7.99829 14.3559 7.45589 14.3559 6.78629C14.3559 6.11429 13.8111 5.57189 13.1367 5.57189ZM8.95592 5.70149C8.28392 5.70149 7.73672 6.24629 7.73672 6.91589C7.73672 7.58549 8.28392 8.13029 8.95592 8.13029C9.63032 8.13029 10.1751 7.58549 10.1751 6.91589C10.1751 6.24629 9.63032 5.70149 8.95592 5.70149ZM4.77512 5.83109C4.10312 5.83109 3.55592 6.37589 3.55592 7.04549C3.55592 7.71509 4.10312 8.25989 4.77512 8.25989C5.44952 8.25989 5.99432 7.71509 5.99432 7.04549C5.99432 6.37589 5.44952 5.83109 4.77512 5.83109ZM19.4511 4.57589H19.0935C19.1079 4.67429 19.1151 4.77509 19.1151 4.87829V12.5511C19.1151 13.8375 18.0567 14.8911 16.7631 14.8911H9.34712C8.86472 15.4143 8.05592 16.2903 8.05592 16.2903C8.05592 16.2903 8.31512 16.9287 9.13112 16.9287H15.6399C15.8871 17.7159 16.5495 18.3759 16.9911 18.7167C17.4711 19.0839 18.3087 19.5927 19.0047 19.6263C19.7007 19.6575 19.7775 19.4319 19.6575 19.2783C19.5375 19.1271 19.1895 18.3039 19.0479 17.9343C18.9567 17.6967 18.9663 17.2287 18.9831 16.9287H19.4511C20.7447 16.9287 21.8031 15.8751 21.8031 14.5863V6.91589C21.8031 5.62709 20.7447 4.57589 19.4511 4.57589Z"
                             fill="#F4FFED" />
                     </svg>
-                    <span class="chat-name">{chatName}</span>
+                    <span class="chat-name">{chatName} - {chatKey}</span>
                 </div>
                 <div id="chat-general-close" class="chat-close">
                     <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,6 +188,7 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
 
                     var i = messageIndex % 2;
                     userMe = (fname + ' ' + lname == hmsg.entry.user)
+
 
 
                     return (
@@ -370,7 +375,7 @@ export const Chat = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
 };
 
 
-const ChatContent = ({ openChat, chatKeys, publishKey, subscribeKey, chatName }) => {
+const ChatContent = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) => {
 
 
     pubnub = new PubNub({
@@ -381,7 +386,7 @@ const ChatContent = ({ openChat, chatKeys, publishKey, subscribeKey, chatName })
 
     return (
         <PubNubProvider client={pubnub}>
-            <Chat openChat={openChat} chatKeys={chatKeys} publishKey={publishKey} subscribeKey={subscribeKey} chatName={chatName} />
+            <Chat openChat={openChat} chatKey={chatKey} publishKey={publishKey} subscribeKey={subscribeKey} chatName={chatName} />
         </PubNubProvider>
     );
 };
