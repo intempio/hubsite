@@ -5,6 +5,8 @@ import ChatContent from './Chat'
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 
+import _, { forEach } from 'lodash';
+
 export class Layout extends Component {
     static displayName = Layout.name;
 
@@ -18,7 +20,7 @@ export class Layout extends Component {
         super(props);
         this.state = {
             generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
-            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false
+            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false, subscribeList: [], subscribeList2:[]
         };
 
 
@@ -145,7 +147,22 @@ export class Layout extends Component {
             },
         });
 
-        pubnub.subscribe({ channels });
+        pubnub.unsubscribe({ channel: channels[0] });
+
+        var s = [];
+        var t = this.state.subscribeList;
+        channels.forEach(i => {
+
+            if (!_.includes(this.state.subscribeList, i)) {
+                s.push(i);
+                t.push(i);
+            }
+        });
+
+        this.setState({ subscribeList: t });
+        if (s.length >0) {
+            pubnub.subscribe({ channels:s });
+        }
 
         pubnub.history(
             {
@@ -195,6 +212,15 @@ export class Layout extends Component {
 
     }
 
+    openChatChatandFixUI(channelNames,id) {
+
+        this.openChatWindw(channelNames);
+        const messagesIndicator = document.getElementById('c' + id);
+
+        messagesIndicator.classList.remove('conversation-number-help');
+
+        messagesIndicator.classList.add('conversation-number-help-done');
+    }
 
     openChatWindw(channelNames) {
 
@@ -227,11 +253,28 @@ export class Layout extends Component {
                 var m = messageEvent.message;
                 var msgs = this.state.messagesHelpNew;
                 msgs.push(m);
-                this.setState({ messagesHelpNew: msgs, helpRequestsFiltered: msgs});
+                var uniqs = _.uniqBy(msgs, 'user');
+                this.setState({ messagesHelpNew: msgs, helpRequestsFiltered: uniqs});
             },
         });
+       // pubnub2.unsubscribe({ channel: channels[0] });
+  
 
-        pubnub2.subscribe({ channels });
+
+        var s = [];
+        var t = this.state.subscribeList2;
+        channels.forEach(i => {
+
+            if (!_.includes(this.state.subscribeList2, i)) {
+                s.push(i);
+                t.push(i);
+            }
+        });
+
+        this.setState({ subscribeList2: t });
+        if (s.length > 0) {
+            pubnub2.subscribe({ channels:s });
+        }
 
         pubnub2.history(
             {
@@ -243,15 +286,16 @@ export class Layout extends Component {
 
                 this.setState({ messagesHelp: response.messages });
 
-                var uniqueUsers = [];
-                response && response.messages && response.messages.forEach(x => {
-                    if (uniqueUsers.indexOf(x.entry.user) == -1) {
-                        uniqueUsers.push(x.entry.user);
-                    }
-                });
+                var uniqueUsers = _.uniqBy(response.messages, 'user');
+         
                 this.setState({ helpRequests: uniqueUsers });
             }
         );
+    }
+
+    changMenuColour(control) {
+       
+
     }
 
     render() {
@@ -273,8 +317,8 @@ export class Layout extends Component {
                         <h2 class="header">conversation</h2>
                         <label for="searchBar">
                             <input type="text" id="searchBar" class="search-bar" placeholder="Search contact or group" onChange={(e) => this.setState({
-                                helpRequestsFiltered: this.state.messagesHelpNew.filter(function (item) {
-                                    return item.user.indexOf(e.target.value) > -1;
+                                helpRequestsFiltered: _.uniqBy(this.state.messagesHelpNew, 'user').filter(function (item) {
+                                    return item.user.indexOf(e.target.value) > -1 && item.category=="msg";
                                 })})} />
                         </label>
                         <div class="msgs-wrapper">
@@ -319,13 +363,13 @@ export class Layout extends Component {
                                                     <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
                                                     <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
                                                 </div>
-                                                <div class="conversation-name" onClick={() => this.openChatWindw([m.msg])} id={m.id }>
+                                                <div class="conversation-name" onClick={() => this.openChatChatandFixUI([m.msg], m.id )} id={m.id }>
                                                     <span class="name">{m.user}</span>
                                                     <span class="users-number">{m.msg}</span>
                                                 </div>
                                             </div>
 
-                                            <div class="conversation-number"></div>
+                                            <div class="conversation-number-help"  id={'c'+m.id}></div>
                                         </div>
 
 

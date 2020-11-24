@@ -4,7 +4,6 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 import moment from 'moment-timezone';
 import { Alert } from 'reactstrap';
 
-import _, { forEach } from 'lodash';
 var pubnub = new PubNub({
     publishKey: 'a',
     subscribeKey: 'v',
@@ -55,8 +54,6 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
     const [input, setInput] = useState({});
     const [users, setUsers] = useState([]);
     const [oldChatKey, setoldChatKey] = useState('');
-    const [subscribeList, setSubscribeList] = useState([]);
-
 
     const messagesRef = React.useRef(null);
     const scrollToBottom = () => {
@@ -79,14 +76,14 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
 
     useEffect(() => {
-        console.log(channels[0]);
-        if (channels[0] != undefined && channels[0] != '') {
+
+        if (chatKey != undefined && chatKey != '') {
 
             setMgsHistory(null);
             setMessages([]);
             pubnub.history(
                 {
-                    channel: channels[0],
+                    channel: chatKey,
                     count: 100, // 100 is the default
                     stringifiedTimeToken: true // false is the default
                 },
@@ -97,48 +94,32 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                 }
             );
 
-            if (oldChatKey != channels[0]) {
+            if (oldChatKey != chatKey) {
 
                 pubnub.addListener({
                     message: messageEvent => {
-                       
-                        if (messageEvent.channel === channels[0]) {
+                        debugger;
+                        if (messageEvent.channel === chatKey) {
                             setMessages(messages => [...messages, messageEvent.message]);
                             scrollToBottom();
                         }
 
-                        setoldChatKey(channels[0]);
+                        setoldChatKey(chatKey);
                     },
                 });
 
-                //pubnub.unsubscribeAll();
-                //pubnub.unsubscribe({ channel: channels[0] });
-                //pubnub.subscribe({ channels });
-              
-                    var s = [];
-                    var t = subscribeList  ;
-                    channels.forEach(i => {
-
-                        if (!_.includes(t, i)) {
-                            s.push(i);
-                            t.push(i);
-                        }
-                    });
-
-                setSubscribeList([...t]);
-                    if (s.length > 0) {
-                        pubnub.subscribe({ channels: s });
-                    }
-                }
+                pubnub.subscribe({ channels });
                 if (oldChatKey != undefined && oldChatKey != '') {
-               
+                    pubnub.unsubscribe({ channel: oldChatKey });
 
                 }
 
-            
+            } else {
+              
+            }
           
         }
-    }, [channels[0]]);
+    }, [chatKey]);
 
 
     useEffect(() => {
@@ -158,7 +139,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
     useEffect(() => {
     
 
-        window.addEventListener("beforeunload", pubnub.unsubscribeAll);
+     
 
     }, []);
 

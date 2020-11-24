@@ -290,3 +290,37 @@ main .presenters-container {
 }
 
 
+.conversation-number-help-done {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #EEEEEE;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #C2C2C2;
+}
+
+.conversation-number-help {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3D998A;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #C2C2C2;
+}
+
