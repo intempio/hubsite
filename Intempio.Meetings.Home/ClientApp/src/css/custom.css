@@ -100,7 +100,7 @@ code {
 
 .settings-item {
     padding: 30px;
-    max-width: 540px;
+    max-width: 824px;
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #CFCFCF;
@@ -111,10 +111,12 @@ code {
     align-items: center;
     cursor: pointer;
 }
-
-main .presenters-container .presenter .name {
-    height: 50px;
-}
+    .settings-item .recent-info {
+        width: 100%;
+    }
+    main .presenters-container .presenter .name {
+        height: 50px;
+    }
 
 main .presenters-container .presenter .position {
     height: 32px;

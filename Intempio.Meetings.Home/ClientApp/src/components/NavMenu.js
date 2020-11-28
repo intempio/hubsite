@@ -492,7 +492,7 @@ export class NavMenu extends Component {
                         {
 
                             this.state.menus && this.state.menus.map((item, i) => {
-
+                                var x = i % 2;
                                 let menuText = item;
                                 let menuKey = menuText;
                                 let url = '#';
@@ -613,14 +613,23 @@ export class NavMenu extends Component {
                                             const section = document.querySelector(tag);
                                             section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                         }} class="menu-item">
-                                            <div class="menu-item-wrapper">
+                                            <div class="menu-item-wrapper">  {x == 0 ?
                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M18.4526 1.48943C20.3489 3.55237 19.7112 7.71515 17.5618 10.0534C16.2077 11.5265 16.2077 11.5265 14.2835 13.6197L10.4351 17.8063C10.1977 18.0646 9.79014 18.0646 9.55273 17.8063L5.70431 13.6197L2.42603 10.0534C0.276637 7.71515 -0.361124 3.55237 1.53519 1.48943C3.67625 -0.839754 7.90629 -0.418343 9.9939 2.62162C12.0815 -0.418343 16.3116 -0.839754 18.4526 1.48943Z"
                                                         fill="#F4FFED" />
                                                 </svg>
-                                                <span class="menu-button">{menuText}</span>
-                                            </div>
+
+                                                :
+
+                                                <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M17.0857 8.65714C18.8206 8.65714 20.216 7.24914 20.216 5.51429C20.216 3.77943 18.8206 2.37143 17.0857 2.37143C15.3509 2.37143 13.9429 3.77943 13.9429 5.51429C13.9429 7.24914 15.3509 8.65714 17.0857 8.65714ZM8.8 7.54286C10.8869 7.54286 12.5589 5.85829 12.5589 3.77143C12.5589 1.68457 10.8869 0 8.8 0C6.71314 0 5.02857 1.68457 5.02857 3.77143C5.02857 5.85829 6.71314 7.54286 8.8 7.54286ZM17.0857 10.1714C14.7851 10.1714 10.1714 11.328 10.1714 13.6286V17.6H24V13.6286C24 11.328 19.3863 10.1714 17.0857 10.1714ZM8.8 10.0571C5.87086 10.0571 0 11.528 0 14.4571V17.6H8.8V14.7714C8.8 13.7029 8.57143 12 11.7794 10.4091C10.6857 10.1829 9.62972 10.0571 8.8 10.0571Z"
+                                                        fill="#F4FFED" />
+                                                </svg>
+
+                                            }
+                                                <span class="menu-button">{menuText}</span>  </div>
                                         </a>
                                     case "help":
                                         return <a href="https://support.intemp.io" target="_blank" class="menu-item">
@@ -812,7 +821,7 @@ export class NavMenu extends Component {
                                     {
                                         //mobile
                                         this.state.menus && this.state.menus.map((item, i) => {
-
+                                            var x = i % 2;
                                             let menuText = item;
                                             let menuKey = menuText;
                                             let url = '#';
@@ -983,7 +992,30 @@ export class NavMenu extends Component {
                                                         </svg>
                                                         <span>{menuText} </span>
                                                     </a>
+                                                case "anchor":
+                                                    return <a onClick={() => {
+                                                        var tag = '#' + url;
+                                                        const section = document.querySelector(tag);
+                                                        section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                    }} class="menu-item">
+                                                        <div class="menu-item-wrapper">  {x == 0 ?
+                                                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M18.4526 1.48943C20.3489 3.55237 19.7112 7.71515 17.5618 10.0534C16.2077 11.5265 16.2077 11.5265 14.2835 13.6197L10.4351 17.8063C10.1977 18.0646 9.79014 18.0646 9.55273 17.8063L5.70431 13.6197L2.42603 10.0534C0.276637 7.71515 -0.361124 3.55237 1.53519 1.48943C3.67625 -0.839754 7.90629 -0.418343 9.9939 2.62162C12.0815 -0.418343 16.3116 -0.839754 18.4526 1.48943Z"
+                                                                    fill="#F4FFED" />
+                                                            </svg>
 
+                                                            :
+
+                                                            <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M17.0857 8.65714C18.8206 8.65714 20.216 7.24914 20.216 5.51429C20.216 3.77943 18.8206 2.37143 17.0857 2.37143C15.3509 2.37143 13.9429 3.77943 13.9429 5.51429C13.9429 7.24914 15.3509 8.65714 17.0857 8.65714ZM8.8 7.54286C10.8869 7.54286 12.5589 5.85829 12.5589 3.77143C12.5589 1.68457 10.8869 0 8.8 0C6.71314 0 5.02857 1.68457 5.02857 3.77143C5.02857 5.85829 6.71314 7.54286 8.8 7.54286ZM17.0857 10.1714C14.7851 10.1714 10.1714 11.328 10.1714 13.6286V17.6H24V13.6286C24 11.328 19.3863 10.1714 17.0857 10.1714ZM8.8 10.0571C5.87086 10.0571 0 11.528 0 14.4571V17.6H8.8V14.7714C8.8 13.7029 8.57143 12 11.7794 10.4091C10.6857 10.1829 9.62972 10.0571 8.8 10.0571Z"
+                                                                    fill="#F4FFED" />
+                                                            </svg>
+
+                                                        }
+                                                            <span class="menu-button">{menuText}</span>  </div>
+                                                    </a>
                                                 case "help":
                                                     return <a href="https://support.intemp.io" class="popover-window-menu-item">
                                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">

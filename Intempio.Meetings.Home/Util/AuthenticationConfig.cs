@@ -37,12 +37,12 @@ namespace Intempio.Meetings.Home.Util
     public class AuthenticationConfig
     {
 
-       
+
         /// <summary>
         /// instance of Azure AD, for example public Azure or a Sovereign cloud (Azure China, Germany, US government, etc ...)
         /// </summary>
         public string Instance { get; set; } = "https://login.microsoftonline.com/{0}";
-       
+
         /// <summary>
         /// Graph API endpoint, could be public Azure (default) or a Sovereign cloud (US government, etc ...)
         /// </summary>
@@ -61,6 +61,8 @@ namespace Intempio.Meetings.Home.Util
         /// </summary>
         public string ClientId { get; set; }
 
+
+        public string Security { get; set; }
         /// <summary>
         /// URL of the authority
         /// </summary>
@@ -94,7 +96,7 @@ namespace Intempio.Meetings.Home.Util
 
         public class IntempioSettings
         {
-               public string EventMasterURL { get; set; }
+            public string EventMasterURL { get; set; }
             public string EventInfoURL { get; set; }
 
             public string PosterSessionsURL { get; set; }
@@ -109,7 +111,28 @@ namespace Intempio.Meetings.Home.Util
             public string MeetingUserExcel { get; set; }
 
 
-
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public string StartDate { get; set; }
+            public string EndDate { get; set; }
+            public string Location { get; set; }
+            public string Active { get; set; }
+            public string Menus { get; set; }
+            public string Sections { get; set; }
+            public string Banner { get; set; }
+            public string AllEvents { get; set; }
+            public string SQL { get; set; }
+            public string Colour { get; set; }
+            public string MenuFolder { get; set; }
+            public string UploadFolder { get; set; }
+            public string Video { get; set; }
+            public string Yammer { get; set; }
+            public string UnrecognizedLogin { get; set; }
+            public string Excellogin { get; set; }
+            public string LoadingFrequency { get; set; }
+            public string SQLLogin { get; set; }
+            public string GeneralChatName { get; set; }
+            public string HelpChatName { get; set; }
 
 
 

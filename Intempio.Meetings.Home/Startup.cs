@@ -47,19 +47,19 @@ namespace Intempio.Meetings.Home
             }
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
-            try
-            {
-                app.UseStaticFiles(new StaticFileOptions
-                {
-                    FileProvider = new PhysicalFileProvider(@"D:\\home\\site\\wwwroot\staticfiles\"),
-                    RequestPath = "/StaticFiles"
-                });
-            }
-            catch (System.Exception e)
-            {
-                app.UseStaticFiles();
-            }
+            app.UseStaticFiles();
+            //try
+            //{
+            //    app.UseStaticFiles(new StaticFileOptions
+            //    {
+            //        FileProvider = new PhysicalFileProvider(@"D:\\home\\site\\wwwroot\staticfiles\"),
+            //        RequestPath = "/StaticFiles"
+            //    });
+            //}
+            //catch (System.Exception e)
+            //{
+            //    app.UseStaticFiles();
+        //}
 
             app.UseSpaStaticFiles();
 

@@ -28,7 +28,14 @@ namespace Intempio.Meetings.Home.Controllers
             os = new OptionsService(l);
         }
 
-    
+
+        [HttpGet("GetConfigInfo")]
+        public  IActionResult GetConfigInfo(string key)
+        {
+            var response =  EventService.GetConfigInfo( key);
+
+            return Ok(response);
+        }
 
         [HttpGet("GetMeetingInfo")]
         public async Task<IActionResult> GetMeetingInfo()

@@ -829,7 +829,7 @@ main {
 
     main .presenters-container {
         padding-top: 30px;
-        display: flex;
+        display: flex !important;
         justify-content: center;
         align-items: center;
     }

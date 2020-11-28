@@ -974,6 +974,32 @@ namespace Intempio.Meetings.Home.Services
         }
 
 
+        public static  JsonResult GetConfigInfo(string key)
+
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+            if (key == config.Security)
+            {
+                config.SQLConnectionString = "######";
+                config.ClientId = "#####";
+                config.ClientSecret = "#####";
+                config.YammerUploadGroupID = "#####";
+                config.YammerTocken = "#####";
+                config.BLOBConnectionString = "#####";
+                config.Security = "#####";
+
+                return new JsonResult(config);
+            }
+            else {
+                return new JsonResult(null);
+            }
+
+            // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
+
+
+        }
+
+
 
         public static async Task<JsonResult> GetAllYammer()
 
