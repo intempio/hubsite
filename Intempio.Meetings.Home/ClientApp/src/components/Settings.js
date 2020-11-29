@@ -26,7 +26,9 @@ export default class Settings extends Component {
             LoadingFrequency: 300000,
             SQLLogin: false,
             GeneralChatName: "",
-            HelpChatName: ""
+            HelpChatName: "",
+            invalidKey: false,
+            load: true
         };
     }
 
@@ -44,7 +46,7 @@ export default class Settings extends Component {
 
         this.setState({ loading: true });
         let formData = new FormData();
-        formData.append("formFile", this.state.configitemslist);
+        formData.append("formFile", this.updateConfigEntry(this.state.configitemslist));
         const response = await fetch('Meeting/UpdateSiteConfig', {
             method: "POST",
             body: formData
@@ -68,14 +70,16 @@ export default class Settings extends Component {
             }
 
         }).catch((error) => {
-            return false;
+            return true;
         });
         return finalresult;
     }
 
     async getGetSite(e) {
         e.preventDefault();
-        this.getGetSiteInfo();
+     
+
+        this.getGetConfigInfo();
     }
 
 
@@ -97,6 +101,8 @@ export default class Settings extends Component {
             this.setState({ loading: false });
             var item = resonse.value;
             this.setState({ loading: false });
+
+        
             if (item) {
 
                 this.setState({
@@ -121,11 +127,14 @@ export default class Settings extends Component {
                     SQLLogin: item.intempioSettings.sqlLogin,
                     GeneralChatName: item.intempioSettings.generalChatName,
                     HelpChatName: item.intempioSettings.helpChatName });
-
-             
+                this.getGetSiteInfo();
+                this.setState({ invalidKey: false, load :false });
                 return true;
 
             } else {
+
+                this.setState({ invalidKey: true, load: true });
+
                 return false;
             }
 
@@ -221,7 +230,7 @@ export default class Settings extends Component {
 
                 this.getGetShareddocumentItem();
 
-                this.getGetConfigInfo();
+               
                 return true;
 
             } else {
@@ -334,7 +343,9 @@ export default class Settings extends Component {
         });
 
 
-        configitems = configitems + "|" + "SiteID#" + this.state.siteID + "|" + 
+        configitems = configitems + "|" + "SiteID#" + this.state.siteID + "|" +
+       
+
             "MeetingUserExcel#/sites/" + this.state.siteID + "/drive/items/" + this.state.usermeetingexcelID + "/workbook/worksheets('Sheet1')/usedRange";
 
         var id = this.state.siteID;
@@ -361,6 +372,34 @@ export default class Settings extends Component {
     }
 
 
+    updateConfigEntry(configitems) {
+        var newconfig = configitems + "|"
+            + "Title#" + this.state.Title + "|"
+            + "Description#" + this.state.Description + "|"
+            + "StartDate#" + this.state.StartDate + "|"
+            + "EndDate#" + this.state.EndDate + "|"
+            + "Location#" + this.state.Location + "|"
+            + "Active#" + this.state.Active + "|"
+            + "Menus#" + this.state.Menus + "|"
+            + "Sections#" + this.state.Sections + "|"
+            + "Banner#" + this.state.Banner + "|"
+            + "AllEvents#" + this.state.AllEvents + "|"
+            + "SQL#" + this.state.SQL + "|"
+            + "Colour#" + this.state.Colour + "|"
+            + "MenuFolder#" + this.state.MenuFolder + "|"
+            + "UploadFolder#" + this.state.UploadFolder + "|"
+            + "Video#" + this.state.Video + "|"
+            + "Yammer#" + this.state.Yammer + "|"
+            + "UnrecognizedLogin#" + this.state.UnrecognizedLogin + "|"
+            + "Excellogin#" + this.state.Excellogin + "|"
+            + "LoadingFrequency#" + this.state.LoadingFrequency + "|"
+            + "SQLLogin#" + this.state.SQLLogin + "|"
+            + "GeneralChatName#" + this.state.GeneralChatName + "|"
+            + "HelpChatName#" + this.state.HelpChatName;
+        return newconfig;
+
+    }
+
 
 
     render() {
@@ -382,9 +421,9 @@ export default class Settings extends Component {
                         <button class="button" onClick={this.getGetSite.bind(this)}  >Get configurations</button>
                         {this.state.configitemslist && < button class="button" onClick={this.updateSite.bind(this)}  >Update</button>}
                         {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
-
+                        {(this.state.invalidKey) && < div className="info-message">Invalid security key...   </div>}
                     </div>
-
+                    {!this.state.load && <>
                     <div class="settings-item">
 
                         <div class="recent-info">
@@ -396,149 +435,157 @@ export default class Settings extends Component {
 
                         <div class="recent-info">
                             <h4>Title</h4>
-                            <p>{this.state.Title} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Title} onChange={e => this.setState({ Title: e.target.value })} /></p>
+                            <p> <input id='comment' type="text" placeholder="Event name" class="textbox" value={this.state.Title} onChange={e => this.setState({ Title: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Description</h4>
-                            <p>{this.state.Description} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Description} onChange={e => this.setState({ Description: e.target.Description })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Description" class="textbox" value={this.state.Description} onChange={e => this.setState({ Description: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Start Date (UTC)</h4>
-                            <p>{this.state.StartDate} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.StartDate} onChange={e => this.setState({ StartDate: e.target.StartDate })} /></p>
+                                <p> <input id='comment' type="text" placeholder="MM/DD/YYYY" class="textbox" value={this.state.StartDate} onChange={e => this.setState({ StartDate: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>End Date (UTC)</h4>
-                            <p>{this.state.EndDate} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.EndDate} onChange={e => this.setState({ EndDate: e.target.EndDate })} /></p>
+                                <p> <input id='comment' type="text" placeholder="MM/DD/YYYY" class="textbox" value={this.state.EndDate} onChange={e => this.setState({ EndDate: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Active</h4>
-                            <p>{this.state.Active} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Active} onChange={e => this.setState({ Active: e.target.Active })} /></p>
+                                <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Active} onChange={e => this.setState({ Active: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
-                            <h4>Active</h4>
-                            <p>{this.state.Menus} <textarea rows="5" id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Menus} onChange={e => this.setState({ Menus: e.target.Menus })} /></p>
+                                <h4>Menus</h4>
+                                <p><textarea rows="5" id='comment' type="text" placeholder="events,session>Intempio Experience 2020,video>Watch Now" class="textbox" value={this.state.Menus} onChange={e => this.setState({ Menus: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Sections</h4>
-                            <p>{this.state.Sections} <textarea rows="5" id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Sections} onChange={e => this.setState({ Sections: e.target.Sections })} /></p>
+                                <p><textarea rows="5" id='comment' type="text" placeholder="home>Home,anchor>News>cat01,resources,custom>Agenda>https://intempioevetns." class="textbox" value={this.state.Sections} onChange={e => this.setState({ Sections: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>All Events</h4>
-                            <p>{this.state.AllEvents} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.AllEvents} onChange={e => this.setState({ AllEvents: e.target.AllEvents })} /></p>
+                                <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.AllEvents} onChange={e => this.setState({ AllEvents: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>SQL Events</h4>
-                            <p>{this.state.SQL} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.SQL} onChange={e => this.setState({ SQL: e.target.SQL })} /></p>
+                                <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.SQL} onChange={e => this.setState({ SQL: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Yammer</h4>
-                            <p>{this.state.Yammer} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Yammer} onChange={e => this.setState({ Yammer: e.target.Yammer })} /></p>
+                                <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Yammer} onChange={e => this.setState({ Yammer: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Excel Login</h4>
-                            <p>{this.state.Excellogin} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Excellogin} onChange={e => this.setState({ Excellogin: e.target.Excellogin })} /></p>
+                                <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Excellogin} onChange={e => this.setState({ Excellogin: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>SQL Login</h4>
-                            <p>{this.state.SQLLogin} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.SQLLogin} onChange={e => this.setState({ Excellogin: e.target.SQLLogin })} /></p>
+                                <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.SQLLogin} onChange={e => this.setState({ SQLLogin: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>General Chat Name</h4>
-                            <p>{this.state.GeneralChatName} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.GeneralChatName} onChange={e => this.setState({ GeneralChatName: e.target.GeneralChatName })} /></p>
+                                <p><input id='comment' type="text" placeholder="Unique name for general chat" class="textbox" value={this.state.GeneralChatName} onChange={e => this.setState({ GeneralChatName: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Help Chat Name</h4>
-                            <p>{this.state.HelpChatName} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.HelpChatName} onChange={e => this.setState({ HelpChatName: e.target.HelpChatName })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Unique name for help chat" class="textbox" value={this.state.HelpChatName} onChange={e => this.setState({ HelpChatName: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Unrecognized Login</h4>
-                            <p>{this.state.UnrecognizedLogin} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.UnrecognizedLogin} onChange={e => this.setState({ UnrecognizedLogin: e.target.UnrecognizedLogin })} /></p>
+                                <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.UnrecognizedLogin} onChange={e => this.setState({ UnrecognizedLogin: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Colour</h4>
-                            <p>{this.state.Colour} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Colour} onChange={e => this.setState({ Colour: e.target.Colour })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Hex value" class="textbox" value={this.state.Colour} onChange={e => this.setState({ Colour: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Menu Folder</h4>
-                            <p>{this.state.MenuFolder} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.MenuFolder} onChange={e => this.setState({ MenuFolder: e.target.MenuFolder })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Blob container url" class="textbox" value={this.state.MenuFolder} onChange={e => this.setState({ MenuFolder: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Upload Folder</h4>
-                            <p>{this.state.UploadFolder} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.UploadFolder} onChange={e => this.setState({ UploadFolder: e.target.UploadFolder })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.UploadFolder} onChange={e => this.setState({ UploadFolder: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Video URL</h4>
-                            <p>{this.state.Video} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Video} onChange={e => this.setState({ Video: e.target.Video })} /></p>
+                                <p><input id='comment' type="text" placeholder="Azure media services url" class="textbox" value={this.state.Video} onChange={e => this.setState({ Video: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Banner URL</h4>
-                            <p>{this.state.Banner} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Banner} onChange={e => this.setState({ Banner: e.target.Banner })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Blob container url" class="textbox" value={this.state.Banner} onChange={e => this.setState({ Banner: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
 
                         <div class="recent-info">
                             <h4>Location</h4>
-                            <p>{this.state.Location} <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.Location} onChange={e => this.setState({ Location: e.target.Location })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Boston" class="textbox" value={this.state.Location} onChange={e => this.setState({ Location: e.target.value })} /></p>
                         </div>
-                    </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Loading Frequency</h4>
+                                <p> <input id='comment' type="text" placeholder="300000" class="textbox" value={this.state.LoadingFrequency} onChange={e => this.setState({ LoadingFrequency: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        
                     <div class="settings-item">
 
                         <div class="recent-info">
@@ -553,6 +600,8 @@ export default class Settings extends Component {
                             <h4>{this.state.usermeetingexcelID}</h4>
                         </div>
                     </div>
+
+
                     {this, this.state.lists.map(item => {
 
                         return <div class="settings-item">
@@ -564,7 +613,8 @@ export default class Settings extends Component {
                     })
                         
                     }
-                    
+                    </>
+                    }
                 </div>
              
             </div>
