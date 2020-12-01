@@ -43,7 +43,49 @@ export default class Event extends Component {
         return finalresult;
     }
 
+    async getSettingsv2() {
 
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+            this.setState({ loading: false });
+
+
+            if (item) {
+
+
+                var momentObj = moment.utc(item.intempioSettings.startDate);
+                //Apply Moment.Js Formatter to your desire date format
+                var formattedStartDate = momentObj.local().format('DD MMM YYYY');
+                this.countdown(item.intempioSettings.startDate);
+
+                this.setState({ title: item.intempioSettings.title, sdate: formattedStartDate, loading: false, location: item.intempioSettings.location, Banner: item.intempioSettings.banner});
+
+
+            } else {
+
+                this.setState({ invalidKey: true, load: true });
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
     countdown = (startDate) => {
 
         var interval = 1000;
@@ -61,7 +103,7 @@ export default class Event extends Component {
     }
     componentDidMount() {
         this.setState({ buttonStatus: this.props.buttonStatus == "false" });
-        this.getEvents();
+        this.getSettingsv2();
     }
     render() {
     
