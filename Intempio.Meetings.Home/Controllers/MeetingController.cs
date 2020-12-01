@@ -30,9 +30,9 @@ namespace Intempio.Meetings.Home.Controllers
 
 
         [HttpGet("GetConfigInfo")]
-        public  IActionResult GetConfigInfo(string key)
+        public  IActionResult GetConfigInfo(string key ,string validate)
         {
-            var response =  EventService.GetConfigInfo( key);
+            var response =  EventService.GetConfigInfo( key, validate);
 
             return Ok(response);
         }

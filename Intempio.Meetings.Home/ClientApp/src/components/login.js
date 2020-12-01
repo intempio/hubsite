@@ -37,6 +37,52 @@ export class Login extends Component {
         return finalresult;
     }
 
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+            this.setState({ loading: false });
+
+
+            if (item) {
+
+                this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
+                if (item && item.value[0].fields.Colour) {
+                    document
+                        .documentElement.style.setProperty("--color-surface", item.intempioSettings.colour);
+                    return true;
+
+                } else {
+                    return false;
+                }
+
+            } else {
+
+                this.setState({ invalidKey: true, load: true });
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
+
+
     async getUserInfo() {
         this.setState({ loading: true });
         const query = new URLSearchParams(this.props.location.search);
@@ -212,7 +258,7 @@ export class Login extends Component {
     }
     
     componentDidMount() {
-        this.getSettings();
+        this.getSettingsv2();
     }
 
     render() {

@@ -974,10 +974,14 @@ namespace Intempio.Meetings.Home.Services
         }
 
 
-        public static  JsonResult GetConfigInfo(string key)
+        public static  JsonResult GetConfigInfo(string key , string validate)
 
         {
             AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+            if (validate == "0")
+            {
+                key = config.Security;
+            }
             if (key == config.Security)
             {
                 config.SQLConnectionString = "######";
