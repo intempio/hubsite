@@ -37,6 +37,42 @@ export default class FileUpload extends Component {
     }
 
 
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+
+
+            if (item) {
+
+                this.setState({ loading: false, uploadfolder: item.intempioSettings.uploadFolder });
+
+
+            } else {
+
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
+
     async upload(e) {
         let token = localStorage.getItem('userToken')
         let email = '';
@@ -70,7 +106,7 @@ export default class FileUpload extends Component {
 
     componentDidMount() {
 
-        this.getSettings();
+        this.getSettingsv2();
     }
     render() {
 

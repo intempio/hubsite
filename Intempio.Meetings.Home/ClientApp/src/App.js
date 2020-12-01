@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-
 import { Login } from './components/login';
 import RequireAuth from './hoc/require_auth';
 
@@ -38,10 +36,9 @@ export default class App extends Component {
                         <Route exact path='/' component={RequireAuth(Home)} />
                         <Route exact path='/Logout' component={RequireAuth(Logout)} />
                         <Route exact path='/file' component={RequireAuth(FileUpload)} />
-                  
-                        <Route path='/settings' component={Settings} />
-                        <Route path='/source' component={ViewSettings} />
-                        <Route path='/video' component={PlayVideo} />
+                        <Route path='/settings' component={RequireAuth(Settings)} />
+                        <Route path='/source' component={RequireAuth(ViewSettings)} />
+                        <Route path='/video' component={RequireAuth(PlayVideo)} />
                     </Layout>
                   
 

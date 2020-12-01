@@ -40,6 +40,44 @@ export default class Video extends Component {
         return finalresult;
     }
 
+
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+            this.setState({ loading: false });
+
+
+            if (item) {
+                this.setState({ videourl: item.intempioSettings.video, yammer: (item.intempioSettings.yammer.toLowerCase() === 'true') });
+      
+
+            } else {
+
+                this.setState({ invalidKey: true, load: true });
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
+
     async getYammerFeed() {
         this.setState({ loading: true });
         const response = await fetch('Meeting/GetAllYammer', {
