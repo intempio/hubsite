@@ -145,7 +145,8 @@ main .presenters-container {
 }
 
 .buttonposter {
-    margin: 46px 40px 44px 0;
+    /* margin: 46px 40px 44px 0; */
+    margin: 40px 40px 40px 40px;
     width: 210px;
     height: 56px;
     color: #025581;
