@@ -52,8 +52,48 @@ export class Home extends Component {
         return finalresult;
     }
 
+
+
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+            this.setState({ loading: false });
+
+
+            if (item) {
+
+                this.setState({ sections: item.intempioSettings.sections.split(","), loading: false, allEvents: (item.intempioSettings.allEvents.toLowerCase() === 'true'), isSQL: (item.intempioSettings.sql.toLowerCase() === 'true'), loadfrequency: item.intempioSettings.loadingFrequency });
+          
+
+            } else {
+
+                this.setState({ invalidKey: true, load: true });
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
+
     componentDidMount() {
-        this.getSettings();
+        this.getSettingsv2();
 
         //window.location.hash = window.decodeURIComponent(window.location.hash);
         //const scrollToAnchor = () => {
