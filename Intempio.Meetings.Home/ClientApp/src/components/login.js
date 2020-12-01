@@ -60,9 +60,9 @@ export class Login extends Component {
             if (item) {
 
                 this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
-                if (item && item.value[0].fields.Colour) {
+                if (item && item.intempioSettings.colour) {
                     document
-                        .documentElement.style.setProperty("--color-surface", item.intempioSettings.colour);
+                        .documentElement.style.setProperty("--color-surface", '#' + item.intempioSettings.colour);
                     return true;
 
                 } else {

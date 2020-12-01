@@ -540,7 +540,7 @@ export default class Settings extends Component {
 
                         <div class="recent-info">
                             <h4>Colour</h4>
-                                <p> <input id='comment' type="text" placeholder="Hex value" class="textbox" value={this.state.Colour} onChange={e => this.setState({ Colour: e.target.value })} /></p>
+                                <p> <input id='comment' type="text" placeholder="Hex value (without '#')" class="textbox" value={this.state.Colour} onChange={e => this.setState({ Colour: e.target.value })} /></p>
                         </div>
                     </div>
                     <div class="settings-item">
