@@ -60,9 +60,54 @@ export class Layout extends Component {
         return finalresult;
     }
 
+
+
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+            this.setState({ loading: false });
+
+
+            if (item) {
+
+                this.setState({ loading: false, generalMsgKey: item.intempioSettings.generalChatName, helpMsgKey: item.intempioSettings.helpChatName, currentChatKey: item.intempioSettings.generalChatName});
+                var cnames = [];
+                cnames.push(item.intempioSettings.generalChatName);
+                cnames.push(item.intempioSettings.helpChatName);
+
+                this.initiateChat(cnames);
+                this.pubnubHelpInitiate([item.intempioSettings.helpChatName]);
+
+            } else {
+
+
+                return false;
+            }
+
+        }).catch((error) => {
+            return false;
+            this.setState({ loading: false });
+        });
+        return finalresult;
+    }
+
     componentDidMount() {
 
-        this.getSettings();
+        this.getSettingsv2();
 
         let token = localStorage.getItem('userToken')
         token = JSON.parse(token);
