@@ -6,7 +6,7 @@ export default class Poster extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { posterSessions: [], loading: false, showModal: false};
+        this.state = { posterSessions: [], loading: false, showModal: false };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -57,27 +57,32 @@ export default class Poster extends Component {
         this.setState({ showModal: false });
     }
 
- 
+
     render() {
 
         return (
             <div id={this.props.category} class="recent">
                 <h3>{this.props.cname}</h3>
-                <div class="recent-container">
+                <div class="recent-container poster-container">
                     {this.state.loading && <div class="sessions-item">loading...</div>}
 
-                    {this.state.posterSessions && this.state.posterSessions.length == 0 && !this.state.loading &&  <div class="sessions-item"> There are no poster events to display</div>}
+                    {this.state.posterSessions && this.state.posterSessions.length == 0 && !this.state.loading && <div class="sessions-item"> There are no poster events to display</div>}
                     {
 
 
                         this.state.posterSessions && this.state.posterSessions.map((item, i) => {
-                            return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL?item.fields.Document_x0020_URL.Url:'#')}>
+
+                            var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
+                            var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
+
+                            return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
                                 <div class="image-wrapper">
-                                    <img src={item.fields.Image_x0020_Url?item.fields.Image_x0020_Url.Url:'#'} alt="recent_1" class="recent-image" />
+                                    <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                 </div>
                                 {
                                     item.fields.RemoveButton == false ? <div class="recent-info">
-                                        <p>{item.fields.ButtonTitle != item.fields.Title ?  item.fields.Title:''}</p>
+                                        <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
+                                        {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
                                         <div className="poster-item">
                                             <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
                                     </div> : <div> </div>}
@@ -98,15 +103,20 @@ export default class Poster extends Component {
 
 
                             this.state.posterSessions && this.state.posterSessions.map((item, i) => {
+                                var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
+                                var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
+
+
                                 return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
                                     <div class="image-wrapper">
                                         <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                     </div>
                                     {
                                         item.fields.RemoveButton == false ? < div class="recent-info">
-                                            <p>{item.fields.ButtonTitle != item.fields.Title ? item.fields.Title : ''}</p>
+                                            <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
+                                            {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
                                             <div className="poster-item" >
-                                                <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle == item.fields.Title ? item.fields.Title : ''}</button> </div>
+                                                <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
                                         </div> : <div> </div>}
 
 
@@ -115,8 +125,8 @@ export default class Poster extends Component {
 
                             })
                         }
-                        
-                       
+
+
 
                     </div>
                     <div class="swiper-pagination"></div>

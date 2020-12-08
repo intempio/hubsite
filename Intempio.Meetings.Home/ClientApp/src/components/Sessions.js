@@ -177,6 +177,7 @@ export default class Session extends Component {
                             if (token) {
                                 var fname = token.firstName;
                                 var lname = token.lastName;
+                                var email = token.email;
                                 if (!token.firstName) {
                                     fname = token.inputFirstName;
                                 }
@@ -188,6 +189,8 @@ export default class Session extends Component {
                             var eventurl = item.fields.EventURL ? item.fields.EventURL.Url : '#';
                             if (item.fields.EventURL && item.fields.EventURL.Url.indexOf('adobeconnect') > 0) {
                                 eventurl = eventurl + '?guestName=' + fname + '  ' + lname + '&proto=true'
+                            } else if (item.fields.EventURL && item.fields.EventURL.Url.indexOf('zoom.intemp.io') > 0) {
+                                eventurl = eventurl + '&name=' + fname + '  ' + lname + '&userEmail=' + email
                             }
                             var a = item;
                             // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');

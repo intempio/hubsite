@@ -134,7 +134,10 @@ namespace Intempio.Meetings.Home.Util
             public string GeneralChatName { get; set; }
             public string HelpChatName { get; set; }
 
+            public string CustomChatGroups { get; set; }
 
+
+            
 
         }
         public string SharedDocumentLibItems { get; set; }

@@ -29,7 +29,8 @@ export default class ViewSettings extends Component {
             HelpChatName: "",
             invalidKey: false,
             key: '',
-            load:true
+            load: true,
+            CustomChatGroups:''
         };
     }
 
@@ -76,7 +77,8 @@ export default class ViewSettings extends Component {
                     LoadingFrequency: item.intempioSettings.loadingFrequency,
                     SQLLogin: item.intempioSettings.sqlLogin,
                     GeneralChatName: item.intempioSettings.generalChatName,
-                    HelpChatName: item.intempioSettings.helpChatName
+                    HelpChatName: item.intempioSettings.helpChatName,
+                    CustomChatGroups: item.intempioSettings.customChatGroups
                 });
                 this.setState({ invalidKey: false, load: false });
                 return true;
@@ -408,6 +410,14 @@ export default class ViewSettings extends Component {
                                 <h4>{this.state.HelpChatName}</h4>
                             </div>
                         </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Help Chat Name</p>
+                                <h4>{this.state.CustomChatGroups}</h4>
+                            </div>
+                        </div>
+                        
                        </>
                     }
                     

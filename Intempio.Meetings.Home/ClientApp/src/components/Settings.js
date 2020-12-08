@@ -28,7 +28,8 @@ export default class Settings extends Component {
             GeneralChatName: "",
             HelpChatName: "",
             invalidKey: false,
-            load: true
+            load: true,
+            CustomChatGroups:''
         };
     }
 
@@ -126,7 +127,10 @@ export default class Settings extends Component {
                     LoadingFrequency: item.intempioSettings.loadingFrequency,
                     SQLLogin: item.intempioSettings.sqlLogin,
                     GeneralChatName: item.intempioSettings.generalChatName,
-                    HelpChatName: item.intempioSettings.helpChatName });
+                    HelpChatName: item.intempioSettings.helpChatName,
+                    CustomChatGroups: item.intempioSettings.customChatGroups
+
+                });
                 this.getGetSiteInfo();
                 this.setState({ invalidKey: false, load :false });
                 return true;
@@ -395,7 +399,9 @@ export default class Settings extends Component {
             + "LoadingFrequency#" + this.state.LoadingFrequency + "|"
             + "SQLLogin#" + this.state.SQLLogin + "|"
             + "GeneralChatName#" + this.state.GeneralChatName + "|"
-            + "HelpChatName#" + this.state.HelpChatName;
+            + "HelpChatName#" + this.state.HelpChatName + "|"
+            + "CustomChatGroups#" + this.state.CustomChatGroups;
+
         return newconfig;
 
     }
@@ -585,7 +591,13 @@ export default class Settings extends Component {
                                 <p> <input id='comment' type="text" placeholder="300000" class="textbox" value={this.state.LoadingFrequency} onChange={e => this.setState({ LoadingFrequency: e.target.value })} /></p>
                             </div>
                         </div>
-                        
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Loading Frequency</h4>
+                                <p> <textarea id='comment' type="text" placeholder="Group1>Group one>user1@intempio.com;user2@intempio.com,Group2>Group two>user1@intempio.com;user4@intempio.com" class="textbox" value={this.state.CustomChatGroups} onChange={e => this.setState({ CustomChatGroups: e.target.value })} /></p>
+                            </div>
+                        </div>
                     <div class="settings-item">
 
                         <div class="recent-info">

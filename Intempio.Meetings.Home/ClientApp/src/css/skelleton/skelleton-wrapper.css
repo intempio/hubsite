@@ -1,0 +1,7 @@
+.skelleton-wrapper {
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.5s; }
+
+/*# sourceMappingURL=skelleton-skelleton-wrapper.css.map */

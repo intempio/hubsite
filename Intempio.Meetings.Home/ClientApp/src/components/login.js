@@ -37,6 +37,19 @@ export class Login extends Component {
         return finalresult;
     }
 
+    async addMeetingUserActivity() {
+        const activityResponse = await fetch('Meeting/AddMeetingUserActivity?email=' + this.state.emailinput, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        await activityResponse.json().then(() => {
+            console.log("Added");
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     async getSettingsv2() {
 
 
@@ -197,6 +210,7 @@ export class Login extends Component {
                 var userObj = { firstName: null, lastName: null, email: this.state.emailinput, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: true };
                 if (this.state.emailinput && this.state.emailinput != '') {
                     localStorage.setItem("userToken", JSON.stringify(userObj));
+                    this.addMeetingUserActivity();
                     history.push('/');
                 }
 
@@ -265,7 +279,7 @@ export class Login extends Component {
         return (
             <>
 
-                <div id="wrapper" class="wrapper">
+                <div id="wrapper" class="wrapper wrapper-login">
 
                     <main>
                         <div>

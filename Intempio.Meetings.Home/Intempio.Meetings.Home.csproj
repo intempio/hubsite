@@ -44,6 +44,7 @@
     <Folder Include="ClientApp\src\css\main\" />
     <Folder Include="ClientApp\src\css\media-queries\" />
     <Folder Include="ClientApp\src\css\navbar\" />
+    <Folder Include="ClientApp\src\css\NewFolder\" />
     <Folder Include="ClientApp\src\css\wrapper\" />
   </ItemGroup>
 

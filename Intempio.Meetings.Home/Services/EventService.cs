@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
 using System.Data;
+using Intempio.Meetings.Home.Models;
 
 namespace Intempio.Meetings.Home.Services
 {
@@ -1253,6 +1254,30 @@ namespace Intempio.Meetings.Home.Services
             }
             return dataTable;
             //return returnString;
+        }
+
+
+        public static async Task AddMeetingUserActivity(string email)
+        {
+            try
+            {
+                AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+                using (var db = new Models.NibrContext())
+                {
+                    TblMeetingUserActivity activity = new TblMeetingUserActivity();
+                    activity.Activity = "Login";
+                    activity.Email = email;
+                    activity.SiteId = config.intempioSettings.SiteID;
+                    activity.Date = DateTime.UtcNow;
+
+                    db.TblMeetingUserActivities.Add(activity);
+                    await db.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

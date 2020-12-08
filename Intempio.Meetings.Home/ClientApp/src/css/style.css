@@ -8,4 +8,30 @@
 @import url(media-queries/queries.css);
 @import url(login-page/login-page.css);
 
+@import url(skelleton/skelleton-navbar.css);
+
+@import url(skelleton/skelleton-header.css);
+
+@import url(skelleton/skelleton-media-queries.css);
+@import url(skelleton/skelleton-loader.css);
+
+/*@import url(skelleton/skelleton-header.css);
+@import url(skelleton/skelleton-navbar.css);
+@import url(skelleton/skelleton-loader.css);
+@import url(skelleton/skelleton-login-page.css);
+@import url(skelleton/skelleton-media-queries.css);
+@import url(skelleton/skelleton-wrapper.css);*/
+
+/*@import url(skelleton/skelleton-footer.css);
+@import url(skelleton/skelleton-header.css);
+@import url(skelleton/skelleton-loader.css);
+@import url(skelleton/skelleton-login-page.css);
+@import url(skelleton/skelleton-main.css);
+@import url(skelleton/skelleton-media-queries.css);
+@import url(skelleton/skelleton-navbar.css);
+@import url(skelleton/skelleton-presenters-page.css);
+@import url(skelleton/skelleton-wrapper.css);
+*/
 /*# sourceMappingURL=style.css.map */
+
+

@@ -198,8 +198,15 @@ namespace Intempio.Meetings.Home.Services
                         opt.HelpChatName = value;
                     });
                     break;
+
+                case "CustomChatGroups":
+                    _writableLocations.Update(opt => {
+                        opt.CustomChatGroups = value;
+                    });
+                    break;
+
             }
-           
+
         }
     }
 }

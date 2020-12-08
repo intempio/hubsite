@@ -1,0 +1,145 @@
+.presenters-page {
+  margin: 30px;
+  padding: 100px 100px 0 100px;
+  background: #EFF0F5;
+  border-radius: 2px;
+  height: 100%;
+  display: flex;
+  position: relative; }
+  .presenters-page-left {
+    position: relative;
+    max-width: 530px;
+    width: 100%;
+    flex-shrink: 1; }
+    .presenters-page-left .name {
+      margin-left: 30px;
+      max-width: 470px;
+      width: 100%;
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 80px;
+      line-height: 85px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 1.2px;
+      color: #5E5E5E;
+      word-wrap: break-word;
+      position: relative;
+      z-index: 1; }
+    .presenters-page-left .avatar-skelleton-wrapper {
+      flex-shrink: 1;
+      flex-grow: 0;
+      z-index: 0;
+      position: absolute;
+      top: 128px; }
+      .presenters-page-left .avatar-skelleton-wrapper > img {
+        display: block;
+        max-width: 100%;
+        height: auto; }
+      .presenters-page-left .avatar-skelleton-wrapper span {
+        position: absolute;
+        top: 80px;
+        left: 30px;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: #353535; }
+  .presenters-page-right {
+    padding-left: 80px;
+    position: relative;
+    flex-shrink: 2; }
+    .presenters-page-right .head {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 47px;
+      display: flex;
+      align-items: center;
+      color: #5E5E5E; }
+    .presenters-page-right > .info {
+      padding: 60px 0 60px 70px; }
+      .presenters-page-right > .info > p {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: 0.7px;
+        color: #353535; }
+      .presenters-page-right > .info .more {
+        width: 100px;
+        border-bottom: 1px solid rgba(103, 177, 226, 0.5);
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.7px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #67B1E2; }
+        .presenters-page-right > .info .more:hover {
+          color: #61AF2D;
+          text-decoration: none; }
+          .presenters-page-right > .info .more:hover > svg > path {
+            fill: #61AF2D; }
+    .presenters-page-right .education {
+      position: absolute;
+      transform: translateY(-9px); }
+      .presenters-page-right .education .skelleton-header {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: #5E5E5E; }
+      .presenters-page-right .education-item {
+        padding-top: 60px;
+        font-family: Roboto, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        .presenters-page-right .education-item > .info {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 40px;
+          line-height: 47px;
+          display: flex;
+          align-items: center;
+          color: #5E5E5E; }
+        .presenters-page-right .education-item .date {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 19px;
+          display: flex;
+          align-items: center;
+          text-align: right;
+          text-transform: uppercase;
+          color: #A6A6A6;
+          white-space: nowrap; }
+      .presenters-page-right .education > .skelleton-footer {
+        padding-top: 75px;
+        padding-bottom: 50px;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: 0.7px;
+        color: #353535; }
+
+/*# sourceMappingURL=skelleton-presenters-page.css.map */

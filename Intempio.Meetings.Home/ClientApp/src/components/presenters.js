@@ -135,8 +135,8 @@ export default class Presenters extends Component {
                                     {item.fields.Picture && <div class="presenter-image" >
                                         <img src={pic} alt="man-icon" />
                                     </div>}
-                                    <div class="position" onClick={() => this.openInNewTabv2(item.fields.OtherUrl ? item.fields.OtherUrl.Url : '#', item.fields.Title)} >{item.fields.Description}   </div>
-                                    <div class="name" onClick={() => this.openInNewTabv2(item.fields.OtherUrl ? item.fields.OtherUrl.Url : '#', item.fields.Title)}>{item.fields.Title}</div>
+                                    <div class="position bold" onClick={() => this.openInNewTabv2(item.fields.OtherUrl ? item.fields.OtherUrl.Url : '#', item.fields.Title)} >{item.fields.Description}   </div>
+                                    <div class="name italic" onClick={() => this.openInNewTabv2(item.fields.OtherUrl ? item.fields.OtherUrl.Url : '#', item.fields.Title)}>{item.fields.Title}</div>
                                     {item.fields.ProfileTitle && <div class="socials">
                                         {!item.fields.fb && !item.fields.twitter && !item.fields.linkedin && <div class="profiletitle" onClick={() => this.openInNewTabv2(item.fields.Profile ? item.fields.Profile.Url : '#', item.fields.Title)}>{item.fields.ProfileTitle} </div>}
                                         {item.fields.fb && <a href={item.fields.fb}>

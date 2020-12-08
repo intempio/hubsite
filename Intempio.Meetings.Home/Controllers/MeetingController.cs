@@ -267,6 +267,14 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
+        [HttpPost("AddMeetingUserActivity")]
+        public async Task<IActionResult> AddMeetingUserActivity(string email)
+        {
+        
+            await EventService.AddMeetingUserActivity(email);
+            return Ok();
+        }
+
 
         [HttpGet("GetUserEventsByEmailSQL")]
         public async Task<IActionResult> GetUserEventsByEmailSQL(string email)

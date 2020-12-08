@@ -1,0 +1,970 @@
+@media screen and (max-width: 1700px) {
+  .skelleton-main .events-time .date {
+    margin-left: 16px; }
+  .skelleton-main .date:first-child {
+    margin: 0; }
+  .skelleton-main .tables-container .table {
+    padding: 20px 10px;
+    max-width: 260px;
+    width: 100%; }
+  .skelleton-main .fun-stuff-container .stuff {
+    max-width: 390px;
+    width: 100%; }
+    .skelleton-main .fun-stuff-container .stuff-info {
+      max-width: 345px;
+      width: 100%; }
+      .skelleton-main .fun-stuff-container .stuff-info h4 {
+        font-size: 18px; }
+      .skelleton-main .fun-stuff-container .stuff-info p {
+        font-size: 12px; }
+
+  skelleton-footer .stream {
+    margin: -100px 0 36px; }
+
+  .presenters-page {
+    padding-top: 49px;
+    padding-right: 30px;
+    padding-left: 30px; }
+    .presenters-page-left {
+      max-width: 410px; }
+    .presenters-page-right {
+      padding-left: 40px; }
+      .presenters-page-right > .info {
+        padding: 30px 0 60px 35px; }
+      .presenters-page-right .education-item {
+        padding-top: 30px; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper {
+    padding: 4% 13%;
+    max-width: 1080px; } }
+@media screen and (max-width: 1280px) {
+  .skelleton-main .events h3 {
+    margin-top: 40px;
+    margin-left: 30px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 1.5px; }
+  .skelleton-main .events h1 {
+    margin-top: 25px;
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 59px; }
+  .skelleton-main .events-time .date svg {
+    width: 80px;
+    height: 80px; }
+  .skelleton-main .events-skelleton-footer {
+    margin: 38px 0 55px 30px;
+    display: flex;
+    justify-content: space-between; }
+    .skelleton-main .events-skelleton-footer button {
+      margin-left: 18px;
+      margin-right: 30px; }
+  .skelleton-main .sessions-skelleton-header h3 {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 37px; }
+  .skelleton-main .sessions-skelleton-header .sessions-selector .dropdown {
+    top: 543px; }
+  .skelleton-main .sessions-time {
+    max-width: 185px; }
+  .skelleton-main .sessions-information h3 {
+    font-size: 21px; }
+  .skelleton-main .sessions-information p {
+    font-weight: 300;
+    font-size: 14px; }
+  .skelleton-main .tables-container .table {
+    max-width: 260px;
+    width: 100%;
+    padding: 20px 0; }
+    .skelleton-main .tables-container .table .title {
+      font-size: 14px; }
+    .skelleton-main .tables-container .table .circle svg {
+      width: 73px;
+      height: 73px; }
+  .skelleton-main .presenters-container .presenter {
+    margin-left: 10px;
+    max-width: 240px; }
+  .skelleton-main .fun-stuff-container .stuff {
+    max-width: 517px;
+    width: 100%;
+    height: 430px;
+    margin-left: 12px; }
+    .skelleton-main .fun-stuff-container .stuff-info {
+      max-width: 260px;
+      width: 100%; }
+      .skelleton-main .fun-stuff-container .stuff-info h4 {
+        font-size: 16px; }
+      .skelleton-main .fun-stuff-container .stuff-info p {
+        font-size: 10px; }
+  .skelleton-main .tables-container-mobile {
+    display: none; }
+
+  skelleton-footer .stream {
+    margin: -130px 0 36px; }
+
+  .presenters-page-left {
+    max-width: 410px; }
+    .presenters-page-left .name {
+      font-size: 60px;
+      line-height: 65px;
+      letter-spacing: 1px; }
+    .presenters-page-left .avatar-skelleton-wrapper {
+      top: 98px; }
+      .presenters-page-left .avatar-skelleton-wrapper span {
+        top: 50px;
+        font-size: 22px;
+        line-height: 30px;
+        letter-spacing: -1px; }
+  .presenters-page-right {
+    padding-left: 20px;
+    padding-bottom: 5px; }
+    .presenters-page-right .head {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px; }
+    .presenters-page-right > .info {
+      padding: 30px 0 50px 0;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.7px; }
+    .presenters-page-right .education .skelleton-header {
+      font-size: 22px;
+      line-height: 30px;
+      letter-spacing: -1px; }
+    .presenters-page-right .education-item {
+      padding-top: 30px;
+      flex-direction: column;
+      align-items: flex-start; }
+      .presenters-page-right .education-item .info {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px; }
+      .presenters-page-right .education-item .date {
+        padding-top: 20px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 1.25px; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper {
+    padding: 4% 10%;
+    max-width: 900px; } }
+@media screen and (max-width: 1024px) {
+  .skelleton-main {
+    margin-bottom: 50px; }
+    .skelleton-main .recent {
+      display: none; }
+    .skelleton-main .tables {
+      display: none; }
+    .skelleton-main .presenters {
+      display: none; }
+    .skelleton-main .fun-stuff {
+      display: none; }
+
+  .submenu {
+    display: none; }
+
+  .skelleton-wrapper {
+    overflow: auto;
+    margin-left: 0 !important; }
+    .skelleton-wrapper .skelleton-main .sessions-skelleton-header h3 {
+      border-radius: 0;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px; }
+    .skelleton-wrapper .skelleton-main .sessions-selector {
+      display: none; }
+    .skelleton-wrapper .skelleton-main .sessions-time {
+      max-width: 185px; }
+    .skelleton-wrapper .skelleton-main .sessions-information h3 {
+      font-weight: 500;
+      font-size: 21px;
+      line-height: 25px;
+      letter-spacing: 1.3px; }
+    .skelleton-wrapper .skelleton-main .sessions-information p {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.7px; }
+    .skelleton-wrapper .skelleton-main .video h3 {
+      border-radius: 0;
+      font-size: 32px; }
+    .skelleton-wrapper .skelleton-main .video .posts {
+      max-width: 700px; }
+      .skelleton-wrapper .skelleton-main .video .posts-creator {
+        max-width: 700px;
+        width: 100%;
+        padding: 17px 0; }
+        .skelleton-wrapper .skelleton-main .video .posts-creator img {
+          margin-left: 10px; }
+        .skelleton-wrapper .skelleton-main .video .posts-creator input {
+          max-width: 527px; }
+      .skelleton-wrapper .skelleton-main .video .posts-item {
+        max-width: 700px; }
+        .skelleton-wrapper .skelleton-main .video .posts-item-image {
+          display: flex;
+          justify-content: center; }
+        .skelleton-wrapper .skelleton-main .video .posts-item .skelleton-header {
+          display: flex; }
+          .skelleton-wrapper .skelleton-main .video .posts-item .skelleton-header-avatar svg {
+            margin: 20px 10px 10px; }
+      .skelleton-wrapper .skelleton-main .video .posts .skelleton-footer input {
+        max-width: 527px; }
+    .skelleton-wrapper .skelleton-main .recent {
+      margin-bottom: 40px; }
+      .skelleton-wrapper .skelleton-main .recent h3 {
+        border-radius: 0;
+        font-size: 32px; }
+    .skelleton-wrapper .skelleton-main .tables h3 {
+      font-size: 32px; }
+    .skelleton-wrapper .skelleton-main .tables-container .table {
+      max-width: 260px;
+      width: 100%;
+      padding: 20px 0; }
+      .skelleton-wrapper .skelleton-main .tables-container .table .title {
+        font-size: 14px; }
+      .skelleton-wrapper .skelleton-main .tables-container .table .circle svg {
+        width: 73px;
+        height: 73px; }
+    .skelleton-wrapper .skelleton-main .presenters h3 {
+      border-radius: 0;
+      font-size: 32px; }
+    .skelleton-wrapper .skelleton-main .presenters .presenters-container .presenter-image {
+      margin: 20px 21px; }
+    .skelleton-wrapper .skelleton-main .presenters .presenters-container .presenter .position {
+      font-size: 14px; }
+    .skelleton-wrapper .skelleton-main .presenters .presenters-container .presenter .name {
+      font-size: 18px; }
+    .skelleton-wrapper .skelleton-main .presenters .presenters-container .presenter .socials {
+      padding: 6px; }
+    .skelleton-wrapper .fun-stuff {
+      margin-top: 80px;
+      padding-bottom: 0; }
+    .skelleton-wrapper .stream {
+      margin-top: 120px; }
+
+  .skelleton-nav {
+    max-width: 1180px;
+    width: 100% !important;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07); }
+    .skelleton-nav .menu {
+      display: none; }
+    .skelleton-nav .popover-menu {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      left: 0;
+      position: fixed;
+      top: 0;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      background: rgba(53, 53, 53, 0.8); }
+    .skelleton-nav .hide {
+      display: none;
+      height: 0; }
+    .skelleton-nav .popover-menu-window {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding-bottom: 28px;
+      padding-top: 28px;
+      opacity: 1;
+      max-width: 318px;
+      width: 100%;
+      height: 100%;
+      background: #EAEAEA;
+      border-bottom-left-radius: 24px;
+      border-top-left-radius: 24px;
+      box-shadow: -30px 0px 44px rgba(0, 0, 0, 0.4); }
+      .skelleton-nav .popover-menu-window-skelleton-wrapper > svg {
+        margin: 0 30px 20px 30px; }
+      .skelleton-nav .popover-menu-window .close {
+        position: relative;
+        top: 20px;
+        left: 250px;
+        width: 24px;
+        height: 24px;
+        background: #CFCFCF;
+        border-radius: 50%; }
+      .skelleton-nav .popover-menu-window .popover-skelleton-header {
+        margin-top: 88px;
+        margin-left: 40px;
+        margin-bottom: 40px; }
+      .skelleton-nav .popover-menu-window .popover-skelleton-header-auth {
+        margin-top: 60px;
+        margin-left: 40px;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center; }
+        .skelleton-nav .popover-menu-window .popover-skelleton-header-auth .skel-img {
+          background: #FFFFFF;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%; }
+        .skelleton-nav .popover-menu-window .popover-skelleton-header-auth .info {
+          margin-left: 8px;
+          display: flex;
+          flex-direction: column; }
+          .skelleton-nav .popover-menu-window .popover-skelleton-header-auth .info-name {
+            width: max-content;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: #C2C2C2;
+            background: #C2C2C2; }
+          .skelleton-nav .popover-menu-window .popover-skelleton-header-auth .info-position {
+            width: max-content;
+            margin-top: 7px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            color: #CFCFCF;
+            background: #CFCFCF; }
+      .skelleton-nav .popover-menu-window .popover-window-menu {
+        margin-bottom: 40px; }
+        .skelleton-nav .popover-menu-window .popover-window-menu-item {
+          padding: 10px 30px;
+          cursor: pointer;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          width: 100%;
+          height: 44px;
+          background: transparent;
+          color: #F4FFED;
+          display: flex;
+          align-items: center; }
+          .skelleton-nav .popover-menu-window .popover-window-menu-item .skel-img {
+            width: 20px;
+            height: 20px;
+            background: #CFCFCF;
+            border-radius: 400px; }
+          .skelleton-nav .popover-menu-window .popover-window-menu-item .skel-img:first-child {
+            width: 24px;
+            height: 20px; }
+          .skelleton-nav .popover-menu-window .popover-window-menu-item span {
+            width: max-content;
+            background: #CFCFCF;
+            color: #CFCFCF;
+            margin-left: 15px; }
+      .skelleton-nav .popover-menu-window .buy-tickets {
+        margin: 10px 30px;
+        width: 258px;
+        height: 36px;
+        background: #A6A6A6;
+        border-radius: 2px;
+        box-sizing: border-box;
+        border: none; }
+      .skelleton-nav .popover-menu-window .log-in {
+        margin: 10px 30px 50px 30px;
+        width: 258px;
+        height: 36px;
+        background: #A6A6A6;
+        border-radius: 2px;
+        box-sizing: border-box;
+        border: none; }
+    .skelleton-nav .popover-submenu {
+      padding-left: 20px;
+      display: block;
+      width: 527px;
+      height: 100%;
+      background: #FFFFFF;
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      margin-left: 800px;
+      transition: margin-left 0.5s; }
+      .skelleton-nav .popover-submenu-list {
+        width: 203px;
+        position: relative;
+        top: 50px;
+        display: flex;
+        flex-direction: column; }
+        .skelleton-nav .popover-submenu-list-item {
+          width: 203px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 15px 0;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+          color: #A6A6A6;
+          cursor: pointer;
+          border-bottom: 1px solid rgba(207, 207, 207, 0.3); }
+          .skelleton-nav .popover-submenu-list-item > div > span {
+            padding-left: 10px; }
+          .skelleton-nav .popover-submenu-list-item .messages {
+            width: 21px;
+            height: 13px;
+            padding: 2px 3px;
+            background: #FFFFFF;
+            border: 1px solid #A6A6A6;
+            box-sizing: border-box;
+            border-radius: 2px;
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #5E5E5E; }
+        .skelleton-nav .popover-submenu-list > svg {
+          margin-left: 20px; }
+        .skelleton-nav .popover-submenu-list-submenu {
+          width: 203px;
+          display: flex;
+          flex-direction: column; }
+          .skelleton-nav .popover-submenu-list-submenu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            color: #A6A6A6;
+            border-left: 2px solid #EAEAEA;
+            cursor: pointer; }
+            .skelleton-nav .popover-submenu-list-submenu-item span {
+              padding: 10px; }
+
+  .skelleton-nav-skelleton-header {
+    padding: 0 !important;
+    margin: 20px 0 20px 50px;
+    border-bottom: none; }
+    .skelleton-nav-skelleton-header svg {
+      width: 100px !important;
+      height: 60px !important; }
+
+  .overlay-menu {
+    display: flex;
+    margin-right: 30px;
+    cursor: pointer;
+    align-items: center; }
+    .overlay-menu .msgs {
+      position: relative;
+      cursor: pointer;
+      margin: 43px 0; }
+      .overlay-menu .msgs-container {
+        padding: 15px 24px 24px 24px;
+        position: absolute;
+        top: 120px;
+        right: 30px;
+        width: 400px;
+        height: 298px;
+        background: #FFFFFF;
+        box-shadow: 0 11px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 4px; }
+        .overlay-menu .msgs-container > .skelleton-header {
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          color: #5E5E5E; }
+        .overlay-menu .msgs-container .search-bar {
+          margin-top: 10px;
+          padding-left: 31px;
+          width: 352px;
+          height: 26px;
+          border: 1px solid #EEEEEE;
+          box-sizing: border-box;
+          border-radius: 2px;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 14px;
+          color: #C2C2C2; }
+          .overlay-menu .msgs-container .search-bar::placeholder {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            color: #C2C2C2; }
+        .overlay-menu .msgs-container label {
+          position: relative;
+          z-index: 0; }
+            .overlay-menu .msgs-container label:before {
+                cursor: pointer;
+                content: "";
+                position: absolute;
+                right: -27px;
+                top: 3.5px;
+                bottom: 0;
+                z-index: 0;
+                width: 16px;
+                height: 16px;
+                background: url("./../../assets/img/search-picture.svg") center/contain no-repeat;
+            }
+      .overlay-menu .msgs-skelleton-wrapper {
+        height: 200px;
+        margin-top: 13px;
+        overflow: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none; }
+        .overlay-menu .msgs-skelleton-wrapper::-webkit-scrollbar {
+          display: none; }
+        .overlay-menu .msgs-skelleton-wrapper .conversation {
+          cursor: pointer;
+          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between; }
+          .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper {
+            display: flex;
+            align-items: center; }
+            .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images {
+              width: 32px;
+              height: 32px; }
+              .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .firstImg {
+                position: relative;
+                right: -8px; }
+              .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .secondImg {
+                position: relative;
+                top: -20px; }
+          .overlay-menu .msgs-skelleton-wrapper .conversation-name {
+            padding-left: 6px;
+            display: flex;
+            flex-direction: column; }
+            .overlay-menu .msgs-skelleton-wrapper .conversation-name > .name {
+              font-family: Roboto, sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 14px;
+              line-height: 16px;
+              color: #5E5E5E; }
+            .overlay-menu .msgs-skelleton-wrapper .conversation-name > .users-number {
+              font-family: Roboto, sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 14px;
+              color: #D1D0D0; }
+          .overlay-menu .msgs-skelleton-wrapper .conversation-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #EEEEEE;
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #C2C2C2; }
+        .overlay-menu .msgs-skelleton-wrapper .line {
+          width: 100%;
+          height: 1px;
+          background: rgba(234, 236, 242, 0.8); }
+    .overlay-menu .vertical-line {
+      margin: 34px 40px 40px;
+      width: 1px;
+      height: 32px;
+      background: #EAEAEA; }
+    .overlay-menu .skel-menu {
+      width: 30px;
+      height: 30px;
+      background: #EAEAEA;
+      border-radius: 2px; }
+
+    .skelleton-menu-title {
+        display: none;
+    }
+
+    .skelleton-menu {
+        display: none;
+    }
+
+    .skelleton-menu-item-arrow {
+        margin: 0 0 0 40px;
+    }
+
+  .skelleton-nav-arrow {
+    display: none; }
+
+  .skelleton-footer {
+    margin: 0 !important; }
+    .skelleton-footer .stream {
+      margin: 0 0 36px; }
+
+  .presenters-page-right .education .skelleton-footer {
+    position: absolute;
+    left: -100%; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper {
+    padding: 4% 7%;
+    max-width: 746px;
+    height: 666px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper h1 {
+      font-size: 60px;
+      line-height: 85px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper p {
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 26px;
+      letter-spacing: 0.7px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper button {
+      font-size: 19px;
+      line-height: 23px;
+      letter-spacing: 0.5px; } }
+@media screen and (max-width: 880px) {
+  .skelleton-wrapper .skelleton-main .video-content {
+    flex-direction: column;
+    align-items: inherit; }
+    .skelleton-wrapper .skelleton-main .video-content .posts {
+      margin: 25px 0 0 0; }
+
+  .presenters-page-right .education .skelleton-footer {
+    position: absolute;
+    left: -140%; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper {
+    padding: 4% 3%;
+    max-width: 646px;
+    height: 666px; } }
+@media screen and (max-width: 720px) {
+  .skelleton-header {
+    height: 69px; }
+    .skelleton-header .msgs-container {
+      top: 90px;
+      right: 10px; }
+      .skelleton-header .msgs-container .search-bar {
+        width: 302px; }
+    .skelleton-header .chat {
+      right: 16px; }
+
+  .skelleton-nav {
+    height: 69px;
+    padding: 0 16px; }
+    .skelleton-nav .popover-menu-window {
+      padding: 50px 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      max-width: 297px;
+      height: 100vh; }
+      .skelleton-nav .popover-menu-window-skelleton-wrapper {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto; }
+      .skelleton-nav .popover-menu-window .close {
+        position: relative;
+        top: -20px;
+        left: 250px; }
+      .skelleton-nav .popover-menu-window .popover-skelleton-header {
+        margin-top: 80px;
+        margin-left: 40px;
+        margin-bottom: 20px; }
+        .skelleton-nav .popover-menu-window .popover-skelleton-header-auth {
+          margin-top: 30px;
+          margin-left: 40px;
+          margin-bottom: 20px; }
+      .skelleton-nav .popover-menu-window .buy-tickets {
+        margin: 10px 20px; }
+      .skelleton-nav .popover-menu-window > svg {
+        margin: 0 30px 20px 40px; }
+      .skelleton-nav .popover-menu-window .popover-window-menu {
+        margin-bottom: 20px; }
+    .skelleton-nav .popover-submenu {
+      display: none; }
+    .skelleton-nav .item-submenu {
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      padding: 0 40px; }
+      .skelleton-nav .item-submenu-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px; }
+        .skelleton-nav .item-submenu-item span {
+          padding: 10px; }
+        .skelleton-nav .item-submenu-item .messages {
+          width: 21px;
+          height: 13px;
+          padding: 2px 3px;
+          box-sizing: border-box;
+          border-radius: 2px;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center; }
+      .skelleton-nav .item-submenu-submenu {
+        display: flex;
+        flex-direction: column; }
+        .skelleton-nav .item-submenu-submenu-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 16px;
+          cursor: pointer; }
+          .skelleton-nav .item-submenu-submenu-item span {
+            padding: 10px; }
+    .skelleton-nav .skelleton-nav-skelleton-header {
+      margin: 0; }
+      .skelleton-nav .skelleton-nav-skelleton-header svg {
+        width: 66px !important;
+        height: 40px !important; }
+    .skelleton-nav .overlay-menu {
+      margin: 0; }
+      .skelleton-nav .overlay-menu svg {
+        width: 35px;
+        height: 22px; }
+    .skelleton-nav .overlay-menu .vertical-line {
+      margin: 34px 25px 40px; }
+    .skelleton-nav .hide {
+      display: none; }
+
+  .skelleton-wrapper .skelleton-main {
+    padding: 10px 16px;
+    margin-bottom: 10px; }
+    .skelleton-wrapper .skelleton-main .events {
+      margin: -10px -16px 0 -16px; }
+      .skelleton-wrapper .skelleton-main .events h3 {
+        margin-top: 20px;
+        margin-left: 16px;
+        font-size: 10px; }
+      .skelleton-wrapper .skelleton-main .events h1 {
+        margin-top: 15px;
+        margin-left: 16px;
+        font-size: 18px; }
+      .skelleton-wrapper .skelleton-main .events-skelleton-footer {
+        margin-top: 15px;
+        margin-left: 16px;
+        margin-bottom: 22px;
+        flex-direction: column;
+        align-items: flex-start; }
+        .skelleton-wrapper .skelleton-main .events-skelleton-footer button {
+          margin-top: 20px;
+          margin-left: 0; }
+      .skelleton-wrapper .skelleton-main .events-time .date {
+        margin-left: 13px;
+        width: 66px;
+        height: 66px; }
+        .skelleton-wrapper .skelleton-main .events-time .date:first-child {
+          margin-left: 0; }
+    .skelleton-wrapper .skelleton-main .sessions-skelleton-header h3 {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px; }
+    .skelleton-wrapper .skelleton-main .sessions-item {
+      padding: 0 16px;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none; }
+      .skelleton-wrapper .skelleton-main .sessions-item button {
+        max-width: 311px;
+        width: 100%;
+        margin: 24px 10px 24px 0; }
+      .skelleton-wrapper .skelleton-main .sessions-item .skel-skelleton-wrapper {
+        background: inherit;
+        flex-direction: column; }
+    .skelleton-wrapper .skelleton-main .sessions-time {
+      margin: 0;
+      max-width: 100%;
+      min-height: 126px;
+      border: none;
+      border-bottom: 1px solid #CFCFCF;
+      background: #EAEAEA; }
+      .skelleton-wrapper .skelleton-main .sessions-time .skel-con {
+        background: #FFFFFF;
+        color: #FFFFFF; }
+      .skelleton-wrapper .skelleton-main .sessions-time .time {
+        background: #FFFFFF;
+        color: #FFFFFF; }
+    .skelleton-wrapper .skelleton-main .sessions-information {
+      padding: 30px 8px 27px 8px;
+      width: 100%;
+      border-bottom: 1px solid #CFCFCF;
+      display: flex;
+      align-items: center; }
+      .skelleton-wrapper .skelleton-main .sessions-information h3 {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 1px; }
+      .skelleton-wrapper .skelleton-main .sessions-information p {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: center;
+        letter-spacing: 0.7px; }
+    .skelleton-wrapper .skelleton-main .video h3 {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px; }
+    .skelleton-wrapper .skelleton-main .video-content .posts-creator {
+      padding: 17px 15px; }
+    .skelleton-wrapper .skelleton-main .video-content .posts-creator label {
+      display: none; }
+    .skelleton-wrapper .skelleton-main .video-content .posts-creator input {
+      padding: 0 6px;
+      min-width: 0; }
+    .skelleton-wrapper .skelleton-main .video-content .posts-item .skelleton-footer label {
+      display: none; }
+    .skelleton-wrapper .skelleton-main .video-content .posts-item .skelleton-footer input {
+      padding: 0 6px;
+      min-width: 0; }
+
+  skelleton-footer {
+    display: none; }
+
+  .menu-item-arrow {
+    transform: rotate(90deg); }
+
+  .presenters-page {
+    margin: 16px;
+    flex-direction: column;
+    align-items: center; }
+    .presenters-page-left {
+      max-width: 343px; }
+      .presenters-page-left .avatar-skelleton-wrapper {
+        position: relative;
+        top: -35px; }
+    .presenters-page-right {
+      padding: 0; }
+      .presenters-page-right .education {
+        transform: translateY(-14px); }
+        .presenters-page-right .education .skelleton-footer {
+          position: inherit;
+          left: inherit; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper {
+    padding: 4%;
+    max-width: 343px;
+    height: 551px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper h1 {
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 47px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper p {
+      font-size: 14px;
+      line-height: 16px; }
+    .skelleton-login .skelleton-login-skelleton-wrapper label:before {
+      right: 127px; } }
+@media screen and (max-width: 590px) {
+  .skelleton-header .chat-skelleton-footer-skelleton-wrapper > form > .chatButton {
+    margin-left: 10px; }
+  .skelleton-header .chat {
+    width: calc(100% - 32px);
+    left: 16px; } }
+@media screen and (max-width: 502px) {
+  .skelleton-header .chat-skelleton-footer {
+    margin: 0 10px; }
+
+  .skelleton-header .chat-message-guest > .message-skelleton-wrapper .message {
+    width: 100%;
+    max-width: 400px;
+    font-size: 10px; } }
+@media screen and (max-width: 376px) {
+  .skelleton-header .msgs-container {
+    padding: 15px;
+    left: 16px;
+    right: 16px; }
+    .skelleton-header .msgs-container > .skelleton-header {
+      padding: 0 15px; }
+    .skelleton-header .msgs-container .search-bar {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 260px; }
+    .skelleton-header .msgs-container label:before {
+      left: 8.5px; }
+  .skelleton-header .chat-message-owner > .message-skelleton-wrapper {
+    margin-left: 50px; }
+    .skelleton-header .chat-message-owner > .message-skelleton-wrapper > .message {
+      padding: 10px; }
+  .skelleton-header .chat-message-guest > .acts {
+    margin-left: 10px; }
+    .skelleton-header .chat-message-guest > .acts svg:first-child {
+      margin-right: 10px; }
+  .skelleton-header .chat-message-guest > .message-skelleton-wrapper > .message {
+    padding: 10px; }
+  .skelleton-header .chat-container {
+    margin-right: 0;
+    padding: 27px 10px 20px 10px; }
+  .skelleton-header .msgs-skelleton-wrapper .conversation {
+    padding: 10px 15px; }
+  .skelleton-header .chat-skelleton-footer-skelleton-wrapper .upload-buttons .chatFile {
+    margin-right: 10px; }
+  .skelleton-header .chat-skelleton-footer-skelleton-wrapper .upload-buttons {
+    margin-right: 10px; }
+
+  .skelleton-wrapper .skelleton-main .events {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .skelleton-wrapper .skelleton-main .events h1 {
+      margin-left: 0;
+      font-size: 36px; }
+    .skelleton-wrapper .skelleton-main .events-skelleton-footer {
+      margin-left: 0;
+      align-items: center; }
+      .skelleton-wrapper .skelleton-main .events-skelleton-footer button {
+        margin-right: 0; }
+    .skelleton-wrapper .skelleton-main .events-time {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .skelleton-wrapper .skelleton-main .events-time .date {
+        margin-left: 4px; }
+  .skelleton-wrapper .skelleton-main .video-content .posts-creator {
+    padding: 17px 0; }
+
+  .skelleton-login .skelleton-login-skelleton-wrapper label:before {
+    right: 135px; } }
+@media screen and (max-height: 720px) {
+  .skelleton-header .chat {
+    bottom: 10px;
+    max-height: 540px; }
+    .skelleton-header .chat-container {
+      max-height: 390px; } }
+@media screen and (max-height: 630px) {
+  .skelleton-header .chat {
+    max-height: 80vh; }
+    .skelleton-header .chat-container {
+      max-height: 350px; } }
+
+/*# sourceMappingURL=skelleton-media-queries.css.map */
