@@ -69,7 +69,7 @@
             z-index: 0;
             width: 10px;
             height: 10px;
-            background: url("./../../assets/img/login-imagess/star.svg") center/contain no-repeat;
+            background: url("./../../assets/img/login-images/star.svg") center/contain no-repeat;
         }
     .skelleton-login-skelleton-wrapper button {
       margin-top: 30px;

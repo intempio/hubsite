@@ -142,11 +142,11 @@
     align-items: center;
     justify-content: space-between;
 }
-.skelleton-menu-item-skelleton-wrapper {
+.menu-item-skelleton-wrapper {
     display: flex;
     align-items: center;
 }
-.skelleton-menu-item-skelleton-wrapper .skel-con {
+.menu-item-skelleton-wrapper .skel-con {
     width: 20px;
     height: 20px;
     background: #CFCFCF;
@@ -183,3 +183,30 @@
   display: none; }
 
 /*# sourceMappingURL=skelleton-skelleton-navbar.css.map */
+.skelleton-menu-item a:hover {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.skelleton-msgs-svg {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #EAEAEA;
+}
+
+
+.skelleton-msgs-number {
+    z-index: 1;
+    position: absolute;
+    top: -5px;
+    left: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #C2C2C2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

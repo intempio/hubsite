@@ -368,3 +368,8 @@ main .video-content {
             margin-left: 20px !important;
             min-width: 360px;
         }
+
+a.skelleton-menu-item {
+    color: inherit !important;
+    text-decoration: none !important;
+}

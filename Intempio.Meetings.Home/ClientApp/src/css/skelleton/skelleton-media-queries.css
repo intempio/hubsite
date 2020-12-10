@@ -164,8 +164,9 @@
     .skelleton-main .fun-stuff {
       display: none; }
 
-  .submenu {
-    display: none; }
+    .skelleton-submenu {
+        display: none;
+    }
 
   .skelleton-wrapper {
     overflow: auto;
@@ -257,35 +258,37 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07); }
     .skelleton-nav .menu {
       display: none; }
-    .skelleton-nav .popover-menu {
-      height: 100vh;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      left: 0;
-      position: fixed;
-      top: 0;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      background: rgba(53, 53, 53, 0.8); }
+    .skelleton-nav .skelleton-popover-menu {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        left: 0;
+        position: fixed;
+        top: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: rgba(53, 53, 53, 0.8);
+    }
     .skelleton-nav .hide {
       display: none;
       height: 0; }
-    .skelleton-nav .popover-menu-window {
-      position: fixed;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      padding-bottom: 28px;
-      padding-top: 28px;
-      opacity: 1;
-      max-width: 318px;
-      width: 100%;
-      height: 100%;
-      background: #EAEAEA;
-      border-bottom-left-radius: 24px;
-      border-top-left-radius: 24px;
-      box-shadow: -30px 0px 44px rgba(0, 0, 0, 0.4); }
+    .skelleton-nav .skelleton-popover-menu-window {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding-bottom: 28px;
+        padding-top: 28px;
+        opacity: 1;
+        max-width: 318px;
+        width: 100%;
+        height: 100%;
+        background: #EAEAEA;
+        border-bottom-left-radius: 24px;
+        border-top-left-radius: 24px;
+        box-shadow: -30px 0px 44px rgba(0, 0, 0, 0.4);
+    }
       .skelleton-nav .popover-menu-window-skelleton-wrapper > svg {
         margin: 0 30px 20px 30px; }
       .skelleton-nav .popover-menu-window .close {
@@ -457,16 +460,17 @@
       width: 100px !important;
       height: 60px !important; }
 
-  .overlay-menu {
+  .skelleton-overlay-menu {
     display: flex;
     margin-right: 30px;
     cursor: pointer;
     align-items: center; }
-    .overlay-menu .msgs {
-      position: relative;
-      cursor: pointer;
-      margin: 43px 0; }
-      .overlay-menu .msgs-container {
+    .skelleton-overlay-menu .msgs {
+        position: relative;
+        cursor: pointer;
+        margin: 43px 0;
+    }
+    .skelleton-overlay-menu .msgs-container {
         padding: 15px 24px 24px 24px;
         position: absolute;
         top: 120px;
@@ -475,41 +479,46 @@
         height: 298px;
         background: #FFFFFF;
         box-shadow: 0 11px 20px rgba(0, 0, 0, 0.2);
-        border-radius: 4px; }
-        .overlay-menu .msgs-container > .skelleton-header {
-          font-family: Roboto, sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 19px;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
-          color: #5E5E5E; }
-        .overlay-menu .msgs-container .search-bar {
-          margin-top: 10px;
-          padding-left: 31px;
-          width: 352px;
-          height: 26px;
-          border: 1px solid #EEEEEE;
-          box-sizing: border-box;
-          border-radius: 2px;
-          font-family: Roboto, sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 14px;
-          color: #C2C2C2; }
-          .overlay-menu .msgs-container .search-bar::placeholder {
+        border-radius: 4px;
+    }
+        .skelleton-overlay-menu .msgs-container > .skelleton-header {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #5E5E5E;
+        }
+        .skelleton-overlay-menu .msgs-container .search-bar {
+            margin-top: 10px;
+            padding-left: 31px;
+            width: 352px;
+            height: 26px;
+            border: 1px solid #EEEEEE;
+            box-sizing: border-box;
+            border-radius: 2px;
             font-family: Roboto, sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 14px;
-            color: #C2C2C2; }
-        .overlay-menu .msgs-container label {
-          position: relative;
-          z-index: 0; }
-            .overlay-menu .msgs-container label:before {
+            color: #C2C2C2;
+        }
+            .skelleton-overlay-menu .msgs-container .search-bar::placeholder {
+                font-family: Roboto, sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 14px;
+                color: #C2C2C2;
+            }
+        .skelleton-overlay-menu .msgs-container label {
+            position: relative;
+            z-index: 0;
+        }
+            .skelleton-overlay-menu .msgs-container label:before {
                 cursor: pointer;
                 content: "";
                 position: absolute;
@@ -521,51 +530,61 @@
                 height: 16px;
                 background: url("./../../assets/img/search-picture.svg") center/contain no-repeat;
             }
-      .overlay-menu .msgs-skelleton-wrapper {
+    .skelleton-overlay-menu .msgs-skelleton-wrapper {
         height: 200px;
         margin-top: 13px;
         overflow: auto;
         -ms-overflow-style: none;
-        scrollbar-width: none; }
-        .overlay-menu .msgs-skelleton-wrapper::-webkit-scrollbar {
-          display: none; }
-        .overlay-menu .msgs-skelleton-wrapper .conversation {
-          cursor: pointer;
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between; }
-          .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper {
+        scrollbar-width: none;
+    }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation {
+            cursor: pointer;
+            padding: 10px 0;
             display: flex;
-            align-items: center; }
-            .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images {
-              width: 32px;
-              height: 32px; }
-              .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .firstImg {
-                position: relative;
-                right: -8px; }
-              .overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .secondImg {
-                position: relative;
-                top: -20px; }
-          .overlay-menu .msgs-skelleton-wrapper .conversation-name {
+            align-items: center;
+            justify-content: space-between;
+        }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper {
+            display: flex;
+            align-items: center;
+        }
+            .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images {
+                width: 32px;
+                height: 32px;
+            }
+                .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .firstImg {
+                    position: relative;
+                    right: -8px;
+                }
+                .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-skelleton-wrapper .images .secondImg {
+                    position: relative;
+                    top: -20px;
+                }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-name {
             padding-left: 6px;
             display: flex;
-            flex-direction: column; }
-            .overlay-menu .msgs-skelleton-wrapper .conversation-name > .name {
-              font-family: Roboto, sans-serif;
-              font-style: normal;
-              font-weight: normal;
-              font-size: 14px;
-              line-height: 16px;
-              color: #5E5E5E; }
-            .overlay-menu .msgs-skelleton-wrapper .conversation-name > .users-number {
-              font-family: Roboto, sans-serif;
-              font-style: normal;
-              font-weight: normal;
-              font-size: 12px;
-              line-height: 14px;
-              color: #D1D0D0; }
-          .overlay-menu .msgs-skelleton-wrapper .conversation-number {
+            flex-direction: column;
+        }
+            .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-name > .name {
+                font-family: Roboto, sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 16px;
+                color: #5E5E5E;
+            }
+            .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-name > .users-number {
+                font-family: Roboto, sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 14px;
+                color: #D1D0D0;
+            }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper .conversation-number {
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -579,21 +598,25 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #C2C2C2; }
-        .overlay-menu .msgs-skelleton-wrapper .line {
-          width: 100%;
-          height: 1px;
-          background: rgba(234, 236, 242, 0.8); }
-    .overlay-menu .vertical-line {
-      margin: 34px 40px 40px;
-      width: 1px;
-      height: 32px;
-      background: #EAEAEA; }
-    .overlay-menu .skel-menu {
-      width: 30px;
-      height: 30px;
-      background: #EAEAEA;
-      border-radius: 2px; }
+            color: #C2C2C2;
+        }
+        .skelleton-overlay-menu .msgs-skelleton-wrapper .line {
+            width: 100%;
+            height: 1px;
+            background: rgba(234, 236, 242, 0.8);
+        }
+    .skelleton-overlay-menu .vertical-line {
+        margin: 34px 40px 40px;
+        width: 1px;
+        height: 32px;
+        background: #EAEAEA;
+    }
+    .skelleton-overlay-menu .skel-menu {
+        width: 30px;
+        height: 30px;
+        background: #EAEAEA;
+        border-radius: 2px;
+    }
 
     .skelleton-menu-title {
         display: none;
@@ -747,13 +770,16 @@
       .skelleton-nav .skelleton-nav-skelleton-header svg {
         width: 66px !important;
         height: 40px !important; }
-    .skelleton-nav .overlay-menu {
-      margin: 0; }
-      .skelleton-nav .overlay-menu svg {
+    .skelleton-nav .skelleton-overlay-menu {
+        margin: 0;
+    }
+    .skelleton-nav .skelleton-overlay-menu svg {
         width: 35px;
-        height: 22px; }
-    .skelleton-nav .overlay-menu .vertical-line {
-      margin: 34px 25px 40px; }
+        height: 22px;
+    }
+    .skelleton-nav .skelleton-overlay-menu .vertical-line {
+        margin: 34px 25px 40px;
+    }
     .skelleton-nav .hide {
       display: none; }
 

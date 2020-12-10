@@ -14,13 +14,15 @@
 
 @import url(skelleton/skelleton-media-queries.css);
 @import url(skelleton/skelleton-loader.css);
+@import url(skelleton/skelleton-wrapper.css);
+@import url(skelleton/skelleton-login-page.css);
 
 /*@import url(skelleton/skelleton-header.css);
 @import url(skelleton/skelleton-navbar.css);
 @import url(skelleton/skelleton-loader.css);
 @import url(skelleton/skelleton-login-page.css);
 @import url(skelleton/skelleton-media-queries.css);
-@import url(skelleton/skelleton-wrapper.css);*/
+;*/
 
 /*@import url(skelleton/skelleton-footer.css);
 @import url(skelleton/skelleton-header.css);

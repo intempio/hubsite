@@ -1,21 +1,21 @@
-skelleton-main {
+.skelleton-main {
   overflow: hidden;
   padding: 32px;
   display: flex;
   flex-direction: column; }
-  skelleton-main .events {
+  .skelleton-main .events {
     background-color: #CFCFCF;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border-radius: 2px; }
-    skelleton-main .events h3 {
+    .skelleton-main .events h3 {
       max-width: 280px;
       width: 80vw;
       height: 15px;
       margin-top: 50px;
       margin-left: 140px;
       background: #EAEAEA; }
-    skelleton-main .events h1 {
+    .skelleton-main .events h1 {
       max-width: 620px;
       width: 80vw;
       height: 72px;
@@ -23,11 +23,11 @@ skelleton-main {
       margin-top: 35px;
       margin-left: 140px;
       position: relative; }
-    skelleton-main .events-skelleton-footer {
+    .skelleton-main .events-skelleton-footer {
       margin: 60px 0 60px 140px;
       display: flex;
       align-items: center; }
-      skelleton-main .events-skelleton-footer button {
+      .skelleton-main .events-skelleton-footer button {
         margin-left: 58px;
         padding: 22px 35px 24px;
         width: 260px;
@@ -37,33 +37,33 @@ skelleton-main {
         border-radius: 2px;
         border: none;
         cursor: pointer; }
-    skelleton-main .events-time {
+    .skelleton-main .events-time {
       display: flex; }
-      skelleton-main .events-time .date {
+      .skelleton-main .events-time .date {
         position: relative;
         margin-left: 36px;
         width: 95px;
         height: 95px;
         background: #C2C2C2;
         border-radius: 50%; }
-      skelleton-main .events-time .date:first-child {
+      .skelleton-main .events-time .date:first-child {
         margin: 0; }
-  skelleton-main .sessions {
+  .skelleton-main .sessions {
     margin-top: 40px;
     margin-bottom: 40px;
     display: flex;
     flex-direction: column; }
-    skelleton-main .sessions .sessions-skelleton-header {
+    .skelleton-main .sessions .sessions-skelleton-header {
       display: flex;
       justify-content: space-between;
       margin-bottom: 30px; }
-      skelleton-main .sessions .sessions-skelleton-header h3 {
+      .skelleton-main .sessions .sessions-skelleton-header h3 {
         font-style: normal;
         font-weight: 500;
         font-size: 30px;
         color: #CFCFCF;
         background: #CFCFCF; }
-    skelleton-main .sessions .sessions-selector {
+    .skelleton-main .sessions .sessions-selector {
       width: 330px;
       height: 42px;
       background: #A6A6A6;
@@ -77,10 +77,10 @@ skelleton-main {
       align-items: center;
       color: #A6A6A6;
       cursor: pointer; }
-      skelleton-main .sessions .sessions-selector .selector {
+      .skelleton-main .sessions .sessions-selector .selector {
         display: flex;
         align-items: center; }
-      skelleton-main .sessions .sessions-selector .dropdown {
+      .skelleton-main .sessions .sessions-selector .dropdown {
         width: 330px;
         height: 144px;
         background: #FFFFFF;
@@ -91,18 +91,18 @@ skelleton-main {
         top: 665px;
         display: flex;
         flex-direction: column; }
-        skelleton-main .sessions .sessions-selector .dropdown.hide {
+        .skelleton-main .sessions .sessions-selector .dropdown.hide {
           display: none; }
-        skelleton-main .sessions .sessions-selector .dropdown-item {
+        .skelleton-main .sessions .sessions-selector .dropdown-item {
           padding: 10px;
           display: flex;
           align-items: center; }
-          skelleton-main .sessions .sessions-selector .dropdown-item:hover {
+          .skelleton-main .sessions .sessions-selector .dropdown-item:hover {
             background: #F4FFED;
             border-radius: 2px; }
-          skelleton-main .sessions .sessions-selector .dropdown-item .accept, skelleton-main .sessions .sessions-selector .dropdown-item span {
+          .skelleton-main .sessions .sessions-selector .dropdown-item .accept, skelleton-main .sessions .sessions-selector .dropdown-item span {
             margin-left: 12px; }
-    skelleton-main .sessions .sessions-item {
+    .skelleton-main .sessions .sessions-item {
       margin-bottom: 20px;
       background: #EAEAEA;
       border-radius: 2px;

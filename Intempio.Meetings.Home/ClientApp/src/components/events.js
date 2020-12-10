@@ -105,6 +105,8 @@ export default class Event extends Component {
         this.setState({ buttonStatus: this.props.buttonStatus == "false" });
         this.getSettingsv2();
     }
+
+ 
     render() {
     
         return (

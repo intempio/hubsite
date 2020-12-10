@@ -18,6 +18,18 @@ export default class SessionsSQL extends Component {
 
             this.setState({ modalIsOpen: true, videourl: url, videoTitle: description });
             //   history.push('/video?vurl=' + url + '&name=' + description);
+        } else if (url && url.includes("anchor")) {
+            var tempUrl = '#';
+            if (url.indexOf('>') > 0) {
+
+                if (url.split('>').length > 0) {
+                    tempUrl = '#' + url.split('>')[1]
+                }
+                const section = document.querySelector(tempUrl);
+                section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+
         } else {
             const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
             if (newWindow) newWindow.opener = null

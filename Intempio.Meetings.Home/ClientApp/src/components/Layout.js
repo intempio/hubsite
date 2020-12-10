@@ -355,8 +355,8 @@ export class Layout extends Component {
         return (
             <>
                 {this.state.loading ? <header class="skelleton-header">
-                  
-    <div id="messages" class="msgs">
+
+                    <div id="messages" class="msgs">
                         <div class="msgs-number">
                         </div>
                         <div class="skelleton-loading msgs-svg"></div>
@@ -372,7 +372,7 @@ export class Layout extends Component {
                     <div class="skelleton-loading user-name"></div>
                     <div class="skelleton-loading user-avatar">
                     </div>
-                  
+
 
 
 
