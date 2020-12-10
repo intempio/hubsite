@@ -3,19 +3,26 @@
   padding: 32px;
   display: flex;
   flex-direction: column; }
-  .skelleton-main .events {
+
+
+
+  .skelleton-main-events {
     background-color: #CFCFCF;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border-radius: 2px; }
-    .skelleton-main .events h3 {
+
+
+    .skelleton-main-events h3 {
       max-width: 280px;
       width: 80vw;
       height: 15px;
       margin-top: 50px;
       margin-left: 140px;
       background: #EAEAEA; }
-    .skelleton-main .events h1 {
+
+
+    .skelleton-main-events h1 {
       max-width: 620px;
       width: 80vw;
       height: 72px;
@@ -23,11 +30,12 @@
       margin-top: 35px;
       margin-left: 140px;
       position: relative; }
-    .skelleton-main .events-skelleton-footer {
+
+    .skelleton-main-events-skelleton-footer {
       margin: 60px 0 60px 140px;
       display: flex;
       align-items: center; }
-      .skelleton-main .events-skelleton-footer button {
+      .skelleton-main-events-skelleton-footer button {
         margin-left: 58px;
         padding: 22px 35px 24px;
         width: 260px;
@@ -37,17 +45,24 @@
         border-radius: 2px;
         border: none;
         cursor: pointer; }
-    .skelleton-main .events-time {
+    .skelleton-main-events-time {
       display: flex; }
-      .skelleton-main .events-time .date {
-        position: relative;
-        margin-left: 36px;
-        width: 95px;
-        height: 95px;
-        background: #C2C2C2;
-        border-radius: 50%; }
-      .skelleton-main .events-time .date:first-child {
-        margin: 0; }
+.skelleton-main-events-date {
+    position: relative;
+    margin-left: 36px;
+    width: 95px;
+    height: 95px;
+    background: #C2C2C2;
+    border-radius: 50%;
+}
+.skelleton-main-events-time:first-child {
+    margin: 0;
+}
+
+
+
+
+
   .skelleton-main .sessions {
     margin-top: 40px;
     margin-bottom: 40px;
