@@ -116,7 +116,7 @@ export class Home extends Component {
 
         return (
             <>
-                {this.state.loading && <div class="sessions-item">loading...</div>}
+          
                 {
                     this.state.sections && this.state.sections.map((item, i) => {
 

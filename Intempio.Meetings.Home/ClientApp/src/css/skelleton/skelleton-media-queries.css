@@ -963,6 +963,15 @@
     .skelleton-login .skelleton-login-skelleton-wrapper label:before {
       right: 127px; } }
 @media screen and (max-width: 590px) {
+
+    .skeleton-presenters .skeleton-presenters-container .presenter {
+        display: none;
+    }
+
+
+        .skeleton-presenters .skeleton-presenters-container .presenter:first-child {
+            display: block;
+        }
     .skelleton-main-events {
         height: 125px !important;
     }
@@ -972,6 +981,7 @@
     width: calc(100% - 32px);
     left: 16px; } }
 @media screen and (max-width: 502px) {
+ 
 
     .skelleton-main-events {
         height: 125px !important;

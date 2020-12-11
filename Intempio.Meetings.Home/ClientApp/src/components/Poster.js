@@ -61,41 +61,52 @@ export default class Poster extends Component {
     render() {
 
         return (
-            <div id={this.props.category} class="recent">
-                <h3>{this.props.cname}</h3>
-                <div class="recent-container poster-container">
-                    {this.state.loading && <div class="sessions-item">loading...</div>}
 
-                    {this.state.posterSessions && this.state.posterSessions.length == 0 && !this.state.loading && <div class="sessions-item"> There are no poster events to display</div>}
-                    {
-
-
-                        this.state.posterSessions && this.state.posterSessions.map((item, i) => {
-
-                            var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
-                            var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
-
-                            return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
-                                <div class="image-wrapper">
-                                    <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
+            <>
+                <div class="skeleton-presenters" style={{ display: this.state.loading ? "" : "none" }}>
+                    <h3 class="skelleton-loading ">Presenters</h3>
+                    <div class="skeleton-presenters-container">
+                        <div class="presenter">
+                            <div class="skelleton-loading presenter-wrapper">
+                                <div class="presenter-image">
                                 </div>
-                                {
-                                    item.fields.RemoveButton == false ? <div class="recent-info">
-                                        <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
-                                        {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
-                                        <div className="poster-item">
-                                            <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
-                                    </div> : <div> </div>}
-                            </div>);
-
-                        })
-                    }
-
+                                <div class="position">SVP of Marketing Stance</div>
+                                <div class="name">Nicole Bates</div>
+                            </div>
+                          
+                        </div>
+                        <div class="presenter">
+                            <div class="skelleton-loading presenter-wrapper">
+                                <div class="presenter-image">
+                                </div>
+                                <div class="position">SVP of Marketing Stance</div>
+                                <div class="name">Nicole Bates</div>
+                            </div>
+                          
+                        </div>
+                        <div class="presenter">
+                            <div class="skelleton-loading presenter-wrapper">
+                                <div class="presenter-image">
+                                </div>
+                                <div class="position">SVP of Marketing Stance</div>
+                                <div class="name">Nicole Bates</div>
+                            </div>
+                           
+                        </div>
+                        <div class="presenter">
+                            <div class="skelleton-loading presenter-wrapper">
+                                <div class="presenter-image">
+                                </div>
+                                <div class="position">SVP of Marketing Stance</div>
+                                <div class="name">Nicole Bates</div>
+                            </div>
+                     
+                        </div>
+                    </div>
                 </div>
-                <div class="recent-container-swiper">
-
-                    <div class="swiper-wrapper">
-
+                <div id={this.props.category} class="recent" style={{ display: !this.state.loading ? "" : "none" }}>
+                    <h3>{this.props.cname}</h3>
+                    <div class="recent-container poster-container">
                         {this.state.loading && <div class="sessions-item">loading...</div>}
 
                         {this.state.posterSessions && this.state.posterSessions.length == 0 && !this.state.loading && <div class="sessions-item"> There are no poster events to display</div>}
@@ -103,36 +114,68 @@ export default class Poster extends Component {
 
 
                             this.state.posterSessions && this.state.posterSessions.map((item, i) => {
+
                                 var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
                                 var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
-
 
                                 return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
                                     <div class="image-wrapper">
                                         <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                     </div>
                                     {
-                                        item.fields.RemoveButton == false ? < div class="recent-info">
+                                        item.fields.RemoveButton == false ? <div class="recent-info">
                                             <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
                                             {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
-                                            <div className="poster-item" >
+                                            <div className="poster-item">
                                                 <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
                                         </div> : <div> </div>}
-
-
-
                                 </div>);
 
                             })
                         }
 
-
-
                     </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
+                    <div class="recent-container-swiper">
 
+                        <div class="swiper-wrapper">
+
+                            {this.state.loading && <div class="sessions-item">loading...</div>}
+
+                            {this.state.posterSessions && this.state.posterSessions.length == 0 && !this.state.loading && <div class="sessions-item"> There are no poster events to display</div>}
+                            {
+
+
+                                this.state.posterSessions && this.state.posterSessions.map((item, i) => {
+                                    var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
+                                    var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
+
+
+                                    return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
+                                        <div class="image-wrapper">
+                                            <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
+                                        </div>
+                                        {
+                                            item.fields.RemoveButton == false ? < div class="recent-info">
+                                                <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
+                                                {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
+                                                <div className="poster-item" >
+                                                    <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
+                                            </div> : <div> </div>}
+
+
+
+                                    </div>);
+
+                                })
+                            }
+
+
+
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </>
         )
     }
 }

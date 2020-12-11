@@ -496,25 +496,31 @@
           height: 18vw;
           max-height: 343px;
           background: #CFCFCF; }
-  skelleton-main .presenters {
+
+
+.skeleton-presenters {
     margin-top: 40px;
     display: flex;
-    flex-direction: column; }
-    skelleton-main .presenters h3 {
-      width: max-content;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 30px;
-      color: #CFCFCF;
-      background: #CFCFCF; }
-    skelleton-main .presenters-container {
-      padding-top: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-      skelleton-main .presenters-container-swiper {
-        display: none; }
-      skelleton-main .presenters-container .presenter {
+    flex-direction: column;
+}
+    .skeleton-presenters h3 {
+        width: max-content;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        color: #CFCFCF;
+        background: #CFCFCF;
+    }
+    .skeleton-presenters .skeleton-presenters-container {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .skeleton-presenters .skeleton-presenters-container-swiper {
+        display: none;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter {
         max-width: 390px;
         width: 100%;
         height: 28vw;
@@ -523,59 +529,65 @@
         background: #EAEAEA;
         border-radius: 2px;
         box-sizing: border-box;
-        position: relative; }
-        skelleton-main .presenters-container .presenter-skelleton-wrapper {
-          padding-bottom: 59px;
-          max-width: 390px;
-          width: 100%;
-          height: 28vw;
-          max-height: 400px;
-          background: #EAEAEA;
-          border-radius: 2px;
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-          cursor: pointer;
-          position: relative; }
-        skelleton-main .presenters-container .presenter:first-child {
-          margin: 0; }
-        skelleton-main .presenters-container .presenter .position {
-          margin-top: 15px;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 10px;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          background: #F4F9FD;
-          color: #F4F9FD;
-          border-radius: 2px; }
-        skelleton-main .presenters-container .presenter .name {
-          margin-top: 15px;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 20px;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          text-transform: uppercase;
-          background: #F4F9FD;
-          border-radius: 2px;
-          color: #F4F9FD; }
-        skelleton-main .presenters-container .presenter .socials {
-          padding: 16px;
-          max-width: 260px;
-          height: 46px;
-          background: #CFCFCF;
-          border-radius: 2px;
-          box-sizing: border-box;
-          position: absolute;
-          bottom: -25px;
-          left: 15px;
-          right: 15px;
-          cursor: default; }
+        position: relative;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter-wrapper {
+        padding-bottom: 59px;
+        max-width: 390px;
+        width: 100%;
+        height: 28vw;
+        max-height: 400px;
+        background: #EAEAEA;
+        border-radius: 2px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter:first-child {
+        margin: 0;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter .position {
+        margin-top: 15px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background: #F4F9FD;
+        color: #F4F9FD;
+        border-radius: 2px;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter .name {
+        margin-top: 15px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-transform: uppercase;
+        background: #F4F9FD;
+        border-radius: 2px;
+        color: #F4F9FD;
+    }
+    .skeleton-presenters .skeleton-presenters-container .presenter .socials {
+        padding: 16px;
+        max-width: 260px;
+        height: 46px;
+        background: #CFCFCF;
+        border-radius: 2px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: -25px;
+        left: 65px;
+        right: 15px;
+        cursor: default;
+    }
   skelleton-main .fun-stuff {
     padding-bottom: 150px;
     margin-top: 100px;
