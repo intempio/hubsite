@@ -218,189 +218,220 @@
     color: #CFCFCF;
     background: #CFCFCF;
 }
-  skelleton-main .video {
-    width: 100%; }
-    skelleton-main .video h3 {
-      width: max-content;
-      margin-bottom: 20px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 30px;
-      color: #CFCFCF;
-      background: #CFCFCF; }
-    skelleton-main .video-content {
-      display: flex; }
-    skelleton-main .video-last-skelleton-wrapper {
-      flex-basis: 60%; }
-    skelleton-main .video-last {
-      background: #CFCFCF;
-      display: block;
-      max-width: 1100px;
-      width: 100%;
-      height: 619px; }
-    skelleton-main .video .posts {
-      flex-basis: 40%;
-      height: auto;
-      margin-left: 19px;
-      display: flex;
-      flex-direction: column; }
-      skelleton-main .video .posts .posts-creator {
-        padding: 15px 0;
-        background: #EAEAEA;
-        border-radius: 4px;
-        box-sizing: border-box;
-        display: flex; }
-        skelleton-main .video .posts .posts-creator .skel-img {
-          margin-left: 15px;
-          margin-right: 15px;
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: #FFFFFF; }
-        skelleton-main .video .posts .posts-creator .skel-input {
-          flex-basis: 60%;
-          height: 36px;
-          background: #FFFFFF;
-          opacity: 0.5;
-          border-radius: 2px; }
-        skelleton-main .video .posts .posts-creator .skel-button {
-          flex-basis: 30%;
-          padding: 10px 20px;
-          margin: 0 15px;
-          width: 126px;
-          height: 36px;
-          background: #A6A6A6;
-          border-radius: 2px; }
-      skelleton-main .video .posts .posts-item {
-        margin-top: 16px;
+.skeleton-video {
+    width: 100%;
+}
+    .skeleton-video h3 {
+        width: max-content;
+        margin-bottom: 20px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        color: #CFCFCF;
+        background: #CFCFCF;
+    }
+    .skeleton-video .skeleton-video-content {
+        display: flex;
+    }
+    .skeleton-video .skeleton-video-last-wrapper {
+        flex-basis: 60%;
+    }
+    .skeleton-video .video-last {
+        background: #CFCFCF;
+        display: block;
+        max-width: 1100px;
         width: 100%;
+        height: 619px;
+    }
+    .skeleton-video .posts {
+        flex-basis: 40%;
         height: auto;
-        background: #EAEAEA;
-        border-radius: 2px;
-        box-sizing: border-box; }
-        skelleton-main .video .posts .posts-item-image {
-          padding: 15px 10px;
-          flex-shrink: 1;
-          flex-grow: 2; }
-          skelleton-main .video .posts .posts-item-image .skel-img {
-            background: #CFCFCF;
-            display: block;
-            max-width: 510px;
+        margin-left: 19px;
+        display: flex;
+        flex-direction: column;
+    }
+        .skeleton-video .posts .posts-creator {
+            padding: 15px 0;
+            background: #EAEAEA;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: flex;
+        }
+            .skeleton-video .posts .posts-creator .skel-img {
+                margin-left: 15px;
+                margin-right: 15px;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: #FFFFFF;
+            }
+            .skeleton-video .posts .posts-creator .skel-input {
+                flex-basis: 60%;
+                height: 36px;
+                background: #FFFFFF;
+                opacity: 0.5;
+                border-radius: 2px;
+            }
+            .skeleton-video .posts .posts-creator .skel-button {
+                flex-basis: 30%;
+                padding: 10px 20px;
+                margin: 0 15px;
+                width: 126px;
+                height: 36px;
+                background: #A6A6A6;
+                border-radius: 2px;
+            }
+        .skeleton-video .posts .posts-item {
+            margin-top: 16px;
             width: 100%;
-            height: 288px; }
-        skelleton-main .video .posts .posts-item .skelleton-header {
-          display: flex;
-          justify-content: space-between; }
-          skelleton-main .video .posts .posts-item .skelleton-header-content {
-            display: flex; }
-          skelleton-main .video .posts .posts-item .skelleton-header-avatar .skel-con {
+            height: auto;
+            background: #EAEAEA;
+            border-radius: 2px;
+            box-sizing: border-box;
+        }
+        .skeleton-video .posts .posts-item-image {
+            padding: 15px 10px;
+            flex-shrink: 1;
+            flex-grow: 2;
+        }
+            .skeleton-video .posts .posts-item-image .skel-img {
+                background: #CFCFCF;
+                display: block;
+                max-width: 510px;
+                width: 100%;
+                height: 288px;
+            }
+        .skeleton-video  .posts .posts-item .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .skeleton-video .posts .posts-item .header-content {
+            display: flex;
+        }
+        .skeleton-video .posts .posts-item .header-avatar .skel-con {
             margin: 20px 15px 10px;
             background: #FFFFFF;
             width: 40px;
             height: 40px;
-            border-radius: 50%; }
-          skelleton-main .video .posts .posts-item .skelleton-header-info {
+            border-radius: 50%;
+        }
+        .skeleton-video   .posts .posts-item .header-info {
             margin-top: 23px;
             display: flex;
-            flex-direction: column; }
-            skelleton-main .video .posts .posts-item .skelleton-header-info .user-name {
-              width: max-content;
-              font-style: normal;
-              font-weight: 500;
-              font-size: 12px;
-              color: #C2C2C2;
-              background: #C2C2C2;
-              border-radius: 2px; }
-            skelleton-main .video .posts .posts-item .skelleton-header-info .date {
-              display: flex;
-              align-items: center; }
-              skelleton-main .video .posts .posts-item .skelleton-header-info .date span {
+            flex-direction: column;
+        }
+            .skeleton-video .posts .posts-item .header-info .user-name {
                 width: max-content;
-                margin-top: 10px;
                 font-style: normal;
-                font-weight: normal;
-                font-size: 10px;
-                color: #CFCFCF;
-                background: #CFCFCF; }
-          skelleton-main .video .posts .posts-item .skelleton-header-more {
+                font-weight: 500;
+                font-size: 12px;
+                color: #C2C2C2;
+                background: #C2C2C2;
+                border-radius: 2px;
+            }
+            .skeleton-video  .posts .posts-item .header-info .date {
+                display: flex;
+                align-items: center;
+            }
+                .skeleton-video  .posts .posts-item .header-info .date span {
+                    width: max-content;
+                    margin-top: 10px;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 10px;
+                    color: #CFCFCF;
+                    background: #CFCFCF;
+                }
+        .skeleton-video .posts .posts-item .header-more {
             width: 13px;
             height: 13px;
             border-radius: 50%;
             background: #CFCFCF;
             margin-top: 32px;
-            margin-right: 15px; }
-        skelleton-main .video .posts .posts-item .information {
-          width: max-content;
-          margin-left: 15px;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 10px;
-          display: flex;
-          align-items: center;
-          color: #C2C2C2;
-          background: #C2C2C2;
-          border-radius: 2px; }
-        skelleton-main .video .posts .posts-item > img {
-          margin: 15px; }
-        skelleton-main .video .posts .posts-item .popularity {
-          padding: 7px 0;
-          margin: 0 15px;
-          border-top: 1px solid #F4F9FD;
-          border-bottom: 1px solid #F4F9FD;
-          display: flex;
-          justify-content: flex-end; }
-          skelleton-main .video .posts .posts-item .popularity .vertical-line {
-            margin-left: 8px;
-            margin-right: 8px;
-            width: 2px;
-            background: #F4F9FD; }
-          skelleton-main .video .posts .posts-item .popularity-item {
-            background: #CFCFCF;
-            border-radius: 2px;
-            width: 30px;
-            height: 8px; }
-        skelleton-main .video .posts .posts-item .skelleton-footer {
-          padding: 10px 15px;
-          display: flex; }
-          skelleton-main .video .posts .posts-item .skelleton-footer .skel-img {
-            margin-right: 10px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #FFFFFF; }
-          skelleton-main .video .posts .posts-item .skelleton-footer .skel-input {
-            flex-basis: 60%;
-            height: 36px;
-            background: #FFFFFF;
-            opacity: 0.5;
-            border-radius: 2px; }
-          skelleton-main .video .posts .posts-item .skelleton-footer .skel-button {
-            flex-basis: 30%;
-            padding: 10px 20px;
-            margin: 0 15px;
-            width: 126px;
-            height: 36px;
-            background: #A6A6A6;
-            border-radius: 2px; }
-          skelleton-main .video .posts .posts-item .skelleton-footer button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            width: 126px;
-            height: 36px;
-            white-space: nowrap;
+            margin-right: 15px;
+        }
+        .skeleton-video  .posts .posts-item .information {
+            width: max-content;
+            margin-left: 15px;
             font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            letter-spacing: 1.25px;
-            text-transform: uppercase;
-            color: #FFFFFF;
-            background: #74BD43;
-            border: none;
+            font-weight: normal;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            color: #C2C2C2;
+            background: #C2C2C2;
             border-radius: 2px;
-            text-shadow: none;
-            cursor: pointer; }
+        }
+.skeleton-videon .posts .posts-item > img {
+    margin: 15px;
+}
+.skeleton-video  .posts .posts-item .popularity {
+    padding: 7px 0;
+    margin: 0 15px;
+    border-top: 1px solid #F4F9FD;
+    border-bottom: 1px solid #F4F9FD;
+    display: flex;
+    justify-content: flex-end;
+}
+    .skeleton-video  .posts .posts-item .popularity .vertical-line {
+        margin-left: 8px;
+        margin-right: 8px;
+        width: 2px;
+        background: #F4F9FD;
+    }
+.skeleton-video  .posts .posts-item .popularity-item {
+    background: #CFCFCF;
+    border-radius: 2px;
+    width: 30px;
+    height: 8px;
+}
+.skeleton-video  .posts .posts-item .footer {
+    padding: 10px 15px;
+    display: flex;
+}
+.skeleton-video .posts .posts-item .footer .skel-img {
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFFFFF;
+}
+.skeleton-video .posts .posts-item .footer .skel-input {
+    flex-basis: 60%;
+    height: 36px;
+    background: #FFFFFF;
+    opacity: 0.5;
+    border-radius: 2px;
+}
+.skeleton-video .posts .posts-item .footer .skel-button {
+    flex-basis: 30%;
+    padding: 10px 20px;
+    margin: 0 15px;
+    width: 126px;
+    height: 36px;
+    background: #A6A6A6;
+    border-radius: 2px;
+}
+.skeleton-video .posts .posts-item .footer button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    width: 126px;
+    height: 36px;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: #74BD43;
+    border: none;
+    border-radius: 2px;
+    text-shadow: none;
+    cursor: pointer;
+}
   skelleton-main .recent {
     padding: 20px 0;
     margin-top: 40px;

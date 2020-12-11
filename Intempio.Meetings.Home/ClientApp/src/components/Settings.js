@@ -594,7 +594,7 @@ export default class Settings extends Component {
                         <div class="settings-item">
 
                             <div class="recent-info">
-                                <h4>Loading Frequency</h4>
+                                <h4>Custom Chat Groups</h4>
                                 <p> <textarea id='comment' type="text" placeholder="Group1>Group one>user1@intempio.com;user2@intempio.com,Group2>Group two>user1@intempio.com;user4@intempio.com" class="textbox" value={this.state.CustomChatGroups} onChange={e => this.setState({ CustomChatGroups: e.target.value })} /></p>
                             </div>
                         </div>
