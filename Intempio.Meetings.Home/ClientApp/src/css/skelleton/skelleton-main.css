@@ -67,35 +67,39 @@
 
 
 
-  .skelleton-main .sessions {
+.skeleton-sessions {
     margin-top: 40px;
     margin-bottom: 40px;
     display: flex;
-    flex-direction: column; }
-    .skelleton-main .sessions .sessions-skelleton-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px; }
-      .skelleton-main .sessions .sessions-skelleton-header h3 {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 30px;
-        color: #CFCFCF;
-        background: #CFCFCF; }
-    .skelleton-main .sessions .sessions-selector {
-      width: 330px;
-      height: 42px;
-      background: #A6A6A6;
-      border-radius: 2px;
-      box-sizing: border-box;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
-      display: flex;
-      align-items: center;
-      color: #A6A6A6;
-      cursor: pointer; }
+    flex-direction: column;
+}
+    .skeleton-sessions .skelleton-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+        .skeleton-sessions .skelleton-header h3 {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 30px;
+            color: #CFCFCF;
+            background: #CFCFCF;
+        }
+.skeleton-sessions .skeleton-sessions-selector {
+    width: 330px;
+    height: 42px;
+    background: #A6A6A6;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #A6A6A6;
+    cursor: pointer;
+}
       .skelleton-main .sessions .sessions-selector .selector {
         display: flex;
         align-items: center; }
@@ -121,15 +125,16 @@
             border-radius: 2px; }
           .skelleton-main .sessions .sessions-selector .dropdown-item .accept, skelleton-main .sessions .sessions-selector .dropdown-item span {
             margin-left: 12px; }
-    .skelleton-main .sessions .sessions-item {
-      margin-bottom: 20px;
-      background: #EAEAEA;
-      border-radius: 2px;
-      box-sizing: border-box;
-      display: flex;
-      cursor: default;
-      justify-content: space-between; }
-      skelleton-main .sessions .sessions-item button {
+.skeleton-sessions .skeleton-sessions-item {
+    margin-bottom: 20px;
+    background: #EAEAEA;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    cursor: default;
+    justify-content: space-between;
+}
+    .skeleton-sessions .skeleton-sessions-item button {
         padding: 17px 35px;
         margin: 46px 40px 44px 0;
         width: 210px;
@@ -149,31 +154,35 @@
         border-radius: 2px;
         text-shadow: none;
         cursor: pointer;
-        align-self: center; }
-      skelleton-main .sessions .sessions-item .skel-skelleton-wrapper {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between; }
-    skelleton-main .sessions .sessions-time {
-      margin: -1px;
-      max-width: 260px;
-      width: 100%;
-      min-height: 146px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #CFCFCF;
-      box-sizing: border-box;
-      border-radius: 2px; }
-      skelleton-main .sessions .sessions-time .skel-con {
+        align-self: center;
+    }
+.skeleton-sessions .skeleton-sessions-item .skel-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.skeleton-sessions .skeleton-sessions-time {
+    margin: -1px;
+    max-width: 260px;
+    width: 100%;
+    min-height: 146px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #CFCFCF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+    .skeleton-sessions .skeleton-sessions-time .skel-con {
         margin: 0 110px 20px;
         background: #EAEAEA;
         width: 44px;
         height: 44px;
-        border-radius: 50%; }
-      skelleton-main .sessions .sessions-time .time {
+        border-radius: 50%;
+    }
+    .skeleton-sessions .skeleton-sessions-time .time {
         width: max-content;
         background: #EAEAEA;
         font-style: normal;
@@ -182,29 +191,33 @@
         text-align: center;
         letter-spacing: -1px;
         text-transform: uppercase;
-        color: #EAEAEA; }
-    skelleton-main .sessions .sessions-information {
-      display: flex;
-      flex-direction: column;
-      padding: 30px 68px 27px 40px; }
-      skelleton-main .sessions .sessions-information h3 {
-        width: max-content;
-        background: #C2C2C2;
-        border-radius: 2px;
-        margin-bottom: 6px;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        text-transform: uppercase;
-        color: #C2C2C2; }
-      skelleton-main .sessions .sessions-information span {
-        width: max-content;
-        margin-bottom: 13px;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 8px;
-        color: #CFCFCF;
-        background: #CFCFCF; }
+        color: #EAEAEA;
+    }
+.skeleton-sessions-information {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 68px 27px 40px;
+}
+.skeleton-sessions-information h3 {
+    width: max-content;
+    background: #C2C2C2;
+    border-radius: 2px;
+    margin-bottom: 6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #C2C2C2;
+}
+.skeleton-sessions-information span {
+    width: max-content;
+    margin-bottom: 13px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 8px;
+    color: #CFCFCF;
+    background: #CFCFCF;
+}
   skelleton-main .video {
     width: 100%; }
     skelleton-main .video h3 {

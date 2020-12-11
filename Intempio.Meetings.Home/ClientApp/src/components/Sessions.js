@@ -144,7 +144,87 @@ export default class Session extends Component {
 
         return (
             <>
-                <div class="sessions">
+                <div class="skeleton-sessions" style={{ display: this.state.loading ? "" : "none" }}>
+                    <div class="skelleton-header">
+                        <h3 class="skelleton-loading">Upcoming Events</h3>
+                        <div class="skelleton-loading skeleton-sessions-selector">
+                            <div id="selector" class="selector">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="skeleton-sessions-item">
+                        <div class="skelleton-loading skeleton-sessions-time">
+                            <div class="skelleton-loading skel-con"></div>
+                            <span class=" skelleton-loading time">2:10 AM -2:35 AM</span>
+                        </div>
+                        <div class="skelleton-loading skel-wrapper">
+                            <div class="skeleton-sessions-information">
+                                <h3>General Sessesion</h3>
+                                <span>Neque porro quisquam est, qui quaerat voluptatem.</span>
+                                <span>Neque porro quisquam est, qui</span>
+                            </div>
+                            <button>Join Session</button>
+                        </div>
+                    </div>
+                    <div class="skeleton-sessions-item">
+                        <div class="skelleton-loading skeleton-sessions-time">
+                            <div class="skelleton-loading skel-con"></div>
+                            <span class=" skelleton-loading time">2:10 AM -2:35 AM</span>
+                        </div>
+                        <div class="skelleton-loading skel-wrapper">
+                            <div class="skeleton-sessions-information">
+                                <h3>General Sessesion</h3>
+                                <span>Neque porro quisquam est, qui quaerat voluptatem.</span>
+                                <span>Neque porro quisquam est, qui</span>
+                            </div>
+                            <button>Join Session</button>
+                        </div>
+                    </div>
+                    <div class="skeleton-sessions-item">
+                        <div class="skelleton-loading skeleton-sessions-time">
+                            <div class="skelleton-loading skel-con"></div>
+                            <span class=" skelleton-loading time">2:10 AM -2:35 AM</span>
+                        </div>
+                        <div class="skelleton-loading skel-wrapper">
+                            <div class="skeleton-sessions-information">
+                                <h3>General Sessesion</h3>
+                                <span>Neque porro quisquam est, qui quaerat voluptatem.</span>
+                                <span>Neque porro quisquam est, qui</span>
+                            </div>
+                            <button>Join Session</button>
+                        </div>
+                    </div>
+                    <div class="skeleton-sessions-item">
+                        <div class="skelleton-loading skeleton-sessions-time">
+                            <div class="skelleton-loading skel-con"></div>
+                            <span class=" skelleton-loading time">2:10 AM -2:35 AM</span>
+                        </div>
+                        <div class="skelleton-loading skel-wrapper">
+                            <div class="skeleton-sessions-information">
+                                <h3>General Sessesion</h3>
+                                <span>Neque porro quisquam est, qui quaerat voluptatem.</span>
+                                <span>Neque porro quisquam est, qui</span>
+                            </div>
+                            <button>Join Session</button>
+                        </div>
+                    </div>
+                    <div class="skeleton-sessions-item">
+                        <div class="skelleton-loading skeleton-sessions-time">
+                            <div class="skelleton-loading skel-con"></div>
+                            <span class=" skelleton-loading time">2:10 AM -2:35 AM</span>
+                        </div>
+                        <div class="skelleton-loading skel-wrapper">
+                            <div class="skeleton-sessions-information">
+                                <h3>General Sessesion</h3>
+                                <span>Neque porro quisquam est, qui quaerat voluptatem.</span>
+                                <span>Neque porro quisquam est, qui</span>
+                            </div>
+                            <button>Join Session</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sessions" style={{ display: !this.state.loading ? "" : "none" }}>
                     <div class="sessions-header">
                         <h3>{this.props.cname}</h3>
                         <div class="sessions-selector">

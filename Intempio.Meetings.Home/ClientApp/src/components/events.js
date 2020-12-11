@@ -111,13 +111,13 @@ export default class Event extends Component {
 
         return (
             <>
-                <div class="skelleton-main-events skelleton-loading" style={{ display: this.state.loading ? "" : "" }}>
+                <div class="skelleton-main-events skelleton-loading" style={{ display: this.state.loading ? "" : "none" }}>
               
               
          
                 </div>
 
-                <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px", display: !this.state.loading ? "none" : "none" }}   >
+                <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px", display: !this.state.loading ? "" : "none" }}   >
 
                     {this.state.Banner && <img src={this.state.Banner} class="banner-img" />}
                     <h3>{this.state.sdate} {this.state.location}  </h3>

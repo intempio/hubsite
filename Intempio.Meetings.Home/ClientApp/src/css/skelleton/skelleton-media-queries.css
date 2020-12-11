@@ -862,25 +862,31 @@
       .skelleton-wrapper .skelleton-main .sessions-time .time {
         background: #FFFFFF;
         color: #FFFFFF; }
-    .skelleton-wrapper .skelleton-main .sessions-information {
-      padding: 30px 8px 27px 8px;
-      width: 100%;
-      border-bottom: 1px solid #CFCFCF;
-      display: flex;
-      align-items: center; }
-      .skelleton-wrapper .skelleton-main .sessions-information h3 {
+    .skeleton-sessions .sessions-information {
+        padding: 30px 8px 27px 8px;
+        width: 100%;
+        border-bottom: 1px solid #CFCFCF;
+        display: flex;
+        align-items: center;
+    }
+    .skeleton-sessions .skelleton-header h3 {
         font-weight: 500;
         font-size: 18px;
         line-height: 21px;
-        letter-spacing: 1px; }
-      .skelleton-wrapper .skelleton-main .sessions-information p {
+        letter-spacing: 1px;
+    }
+    .skeleton-sessions .skeleton-sessions-information p {
         font-style: normal;
         font-weight: 300;
         font-size: 14px;
         line-height: 22px;
         text-align: center;
-        letter-spacing: 0.7px; }
-    .skelleton-wrapper .skelleton-main .video h3 {
+        letter-spacing: 0.7px;
+    }
+    .skeleton-sessions .skeleton-sessions-selector {
+        width :170px !important;
+    }
+        .skelleton-wrapper .skelleton-main .video h3 {
       font-weight: 500;
       font-size: 32px;
       line-height: 37px; }
