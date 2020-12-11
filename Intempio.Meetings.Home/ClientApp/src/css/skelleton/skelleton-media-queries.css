@@ -1,12 +1,15 @@
 @media screen and (max-width: 1700px) {
-  .skelleton-main .events-time .date {
-    margin-left: 16px; }
-  .skelleton-main .date:first-child {
-    margin: 0; }
-  .skelleton-main .tables-container .table {
-    padding: 20px 10px;
-    max-width: 260px;
-    width: 100%; }
+    .skelleton-main-events-date  {
+        margin-left: 16px;
+    }
+        .skelleton-main-events-date:first-child {
+            margin: 0;
+        }
+    skelleton-main-events .tables-container .table {
+        padding: 20px 10px;
+        max-width: 260px;
+        width: 100%;
+    }
   .skelleton-main .fun-stuff-container .stuff {
     max-width: 390px;
     width: 100%; }
@@ -38,29 +41,34 @@
     padding: 4% 13%;
     max-width: 1080px; } }
 @media screen and (max-width: 1280px) {
-  .skelleton-main .events h3 {
-    margin-top: 40px;
-    margin-left: 30px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 1.5px; }
-  .skelleton-main .events h1 {
-    margin-top: 25px;
-    margin-left: 30px;
-    font-weight: bold;
-    font-size: 50px;
-    line-height: 59px; }
-  .skelleton-main .events-time .date svg {
-    width: 80px;
-    height: 80px; }
-  .skelleton-main .events-skelleton-footer {
-    margin: 38px 0 55px 30px;
-    display: flex;
-    justify-content: space-between; }
-    .skelleton-main .events-skelleton-footer button {
-      margin-left: 18px;
-      margin-right: 30px; }
+    .skelleton-main-events h3 {
+        margin-top: 40px;
+        margin-left: 30px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 1.5px;
+    }
+    .skelleton-main-events h1 {
+        margin-top: 25px;
+        margin-left: 30px;
+        font-weight: bold;
+        font-size: 50px;
+        line-height: 59px;
+    }
+    .skelleton-main-events-date svg {
+        width: 80px;
+        height: 80px;
+    }
+    skelleton-main-events-skelleton-footer {
+        margin: 38px 0 55px 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .skelleton-main-events-skelleton-footer button {
+        margin-left: 18px;
+        margin-right: 30px;
+    }
   .skelleton-main .sessions-skelleton-header h3 {
     font-weight: 500;
     font-size: 32px;
@@ -166,6 +174,11 @@
 
     .skelleton-submenu {
         display: none;
+    }
+
+    .skelleton-main-events {
+       
+        height: 310px !important;
     }
 
   .skelleton-wrapper {
@@ -783,38 +796,47 @@
     .skelleton-nav .hide {
       display: none; }
 
-  .skelleton-wrapper .skelleton-main {
-    padding: 10px 16px;
-    margin-bottom: 10px; }
-    .skelleton-wrapper .skelleton-main .events {
-      margin: -10px -16px 0 -16px; }
-      .skelleton-wrapper .skelleton-main .events h3 {
-        margin-top: 20px;
-        margin-left: 16px;
-        font-size: 10px; }
-      .skelleton-wrapper .skelleton-main .events h1 {
-        margin-top: 15px;
-        margin-left: 16px;
-        font-size: 18px; }
-      .skelleton-wrapper .skelleton-main .events-skelleton-footer {
+    .skelleton-wrapper .skelleton-main-events {
+        padding: 10px 16px;
+        margin-bottom: 10px;
+    }
+    .skelleton-wrapper .skelleton-main-events {
+        margin: -10px -16px 0 -16px;
+    }
+        .skelleton-wrapper .skelleton-main-events h3 {
+            margin-top: 20px;
+            margin-left: 16px;
+            font-size: 10px;
+        }
+        .skelleton-wrapper .skelleton-main-events h1 {
+            margin-top: 15px;
+            margin-left: 16px;
+            font-size: 18px;
+        }
+    .skelleton-wrapper .skelleton-main-events-skelleton-footer {
         margin-top: 15px;
         margin-left: 16px;
         margin-bottom: 22px;
         flex-direction: column;
-        align-items: flex-start; }
-        .skelleton-wrapper .skelleton-main .events-skelleton-footer button {
-          margin-top: 20px;
-          margin-left: 0; }
-      .skelleton-wrapper .skelleton-main .events-time .date {
+        align-items: flex-start;
+    }
+        .skelleton-wrapper .skelleton-main-events-skelleton-footer button {
+            margin-top: 20px;
+            margin-left: 0;
+        }
+    .skelleton-wrapper .skelleton-loading skelleton-main-events-date {
         margin-left: 13px;
         width: 66px;
-        height: 66px; }
-        .skelleton-wrapper .skelleton-main .events-time .date:first-child {
-          margin-left: 0; }
-    .skelleton-wrapper .skelleton-main .sessions-skelleton-header h3 {
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 37px; }
+        height: 66px;
+    }
+        .skelleton-wrapper .skelleton-loading skelleton-main-events-date:first-child {
+            margin-left: 0;
+        }
+    .skelleton-wrapper .skelleton-loading skelleton-main-events-date h3 {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+    }
     .skelleton-wrapper .skelleton-main .sessions-item {
       padding: 0 16px;
       flex-direction: column;
@@ -912,12 +934,19 @@
     .skelleton-login .skelleton-login-skelleton-wrapper label:before {
       right: 127px; } }
 @media screen and (max-width: 590px) {
+    .skelleton-main-events {
+        height: 125px !important;
+    }
   .skelleton-header .chat-skelleton-footer-skelleton-wrapper > form > .chatButton {
     margin-left: 10px; }
   .skelleton-header .chat {
     width: calc(100% - 32px);
     left: 16px; } }
 @media screen and (max-width: 502px) {
+
+    .skelleton-main-events {
+        height: 125px !important;
+    }
   .skelleton-header .chat-skelleton-footer {
     margin: 0 10px; }
 
@@ -958,24 +987,30 @@
   .skelleton-header .chat-skelleton-footer-skelleton-wrapper .upload-buttons {
     margin-right: 10px; }
 
-  .skelleton-wrapper .skelleton-main .events {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    .skelleton-wrapper .skelleton-main .events h1 {
-      margin-left: 0;
-      font-size: 36px; }
-    .skelleton-wrapper .skelleton-main .events-skelleton-footer {
-      margin-left: 0;
-      align-items: center; }
-      .skelleton-wrapper .skelleton-main .events-skelleton-footer button {
-        margin-right: 0; }
-    .skelleton-wrapper .skelleton-main .events-time {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-      .skelleton-wrapper .skelleton-main .events-time .date {
-        margin-left: 4px; }
+    .skelleton-wrapper .skelleton-main-events {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+        .skelleton-wrapper .skelleton-main-events h1 {
+            margin-left: 0;
+            font-size: 36px;
+        }
+    .skelleton-wrapper .skelleton-main-events-skelleton-footer {
+        margin-left: 0;
+        align-items: center;
+    }
+        .skelleton-wrapper .skelleton-main-events-skelleton-footer button {
+            margin-right: 0;
+        }
+    .skelleton-wrapper .skelleton-main-events-time {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .skelleton-wrapper .skelleton-loading skelleton-main-events-date {
+        margin-left: 4px;
+    }
   .skelleton-wrapper .skelleton-main .video-content .posts-creator {
     padding: 17px 0; }
 

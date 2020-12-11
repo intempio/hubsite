@@ -111,25 +111,13 @@ export default class Event extends Component {
 
         return (
             <>
-                <div class="skelleton-main-events" style={{ display: this.state.loading ? "" : "none" }}>
-                    <h3 class="skelleton-main-events h3 skelleton-loading"></h3>
-                    <h1 class="skelleton-main-events h1 skelleton-loading"></h1>
-                    <div class="skelleton-main-events-skelleton-footer">
-                        <div class="skelleton-main-events-time">
-                            <div class="skelleton-loading skelleton-main-events-date">
-                            </div>
-                            <div class="skelleton-loading skelleton-main-events-date">
-                            </div>
-                            <div class="skelleton-loading skelleton-main-events-date">
-                            </div>
-                            <div class="skelleton-loading skelleton-main-events-date">
-                            </div>
-                        </div>
-                        <button class="skelleton-loading"></button>
-                    </div>
+                <div class="skelleton-main-events skelleton-loading" style={{ display: this.state.loading ? "" : "" }}>
+              
+              
+         
                 </div>
 
-                <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px", display: !this.state.loading ? "" : "none" }}   >
+                <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px", display: !this.state.loading ? "none" : "none" }}   >
 
                     {this.state.Banner && <img src={this.state.Banner} class="banner-img" />}
                     <h3>{this.state.sdate} {this.state.location}  </h3>
