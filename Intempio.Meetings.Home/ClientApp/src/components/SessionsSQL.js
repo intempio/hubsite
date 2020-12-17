@@ -3,6 +3,7 @@
 import moment from 'moment-timezone';
 import history from './history';
 import Modal from 'react-modal';
+import { ActivityLog } from './ActivityLog';
 export default class SessionsSQL extends Component {
 
     constructor(props) {
@@ -13,7 +14,7 @@ export default class SessionsSQL extends Component {
     }
 
     openInNewTab = (url, description) => {
-
+        ActivityLog.getStringValue(this.state.email, "Clicked", url);
         if (url.includes("streaming")) {
 
             this.setState({ modalIsOpen: true, videourl: url, videoTitle: description });
@@ -88,6 +89,7 @@ export default class SessionsSQL extends Component {
             email = token.email;
         }
 
+        this.setState({ email: email })
         var url = 'Meeting/GetSuperUser?email=' + email;
 
         //   url = 'Meeting/GetMeetings';

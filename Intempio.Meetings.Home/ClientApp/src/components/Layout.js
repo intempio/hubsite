@@ -6,6 +6,7 @@ import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 
 import _, { forEach } from 'lodash';
+import { ActivityLog } from './ActivityLog';
 
 export class Layout extends Component {
     static displayName = Layout.name;
@@ -144,10 +145,10 @@ export class Layout extends Component {
             messagesContainer.classList.add('hide');
             messagesIcon.style.fill = '#D7D7D7';
             chat.classList.remove('hide');
-
+        
             this.setState({ unseenmsgCount: 0, currentChatKey: this.state.generalMsgKey, chatName: 'General' });
 
-
+            ActivityLog.getStringValue(this.state.email, "ChatClicked", channelNames[0]);
         })
 
         const chatGeneralClose = document.getElementById('chat-general-close');
@@ -160,7 +161,7 @@ export class Layout extends Component {
         helpSession.addEventListener('click', () => {
 
             this.sendHelpMsg("msg");
-
+   
 
         })
         this.pubnubInitiate(channelNames);
@@ -288,6 +289,8 @@ export class Layout extends Component {
         messagesContainer.classList.add('hide');
         messagesIcon.style.fill = '#D7D7D7';
         chat.classList.remove('hide');
+
+        ActivityLog.getStringValue(this.state.email, "ChatClicked", channelNames[0]);
     }
 
 
@@ -505,7 +508,7 @@ export class Layout extends Component {
 
 
 
-                        <NavMenu msgCount={this.state.unseenmsgCount} />
+                        <NavMenu msgCount={this.state.unseenmsgCount} email={this.state.email} />
 
                         {this.state.currentChatKey != '' && this.state.currentChatKey != undefined && <ChatContent openChat={this.state.openchat} chatKey={this.state.currentChatKey} publishKey={this.state.publishKey} subscribeKey={this.state.subscribeKey} chatName={this.state.chatName} />}
 

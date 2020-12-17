@@ -3,6 +3,8 @@
 import moment from 'moment-timezone';
 import history from './history';
 import Modal from 'react-modal';
+import { ActivityLog } from './ActivityLog';
+
 export default class Session extends Component {
 
     constructor(props) {
@@ -13,7 +15,7 @@ export default class Session extends Component {
     }
 
     openInNewTab = (url, description) => {
-
+        ActivityLog.getStringValue(this.state.email, "Clicked", url);
         if (url && url.includes("streaming")) {
             this.setState({ modalIsOpen: true, videourl: url, videoTitle: description });
             //   history.push('/video?vurl=' + url + '&name=' + description);

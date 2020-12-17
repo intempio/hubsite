@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { ActivityLog } from './ActivityLog';
 //import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -10,7 +11,7 @@ export class NavMenu extends Component {
 
         super(props);
         this.state = {
-            firstName: '', lastName: '', email: 'aa', loading: false, menus: [], subMenu: false, submenus: [], colour: '#FFFFFF', menufolder: 'menu'
+            firstName: '', lastName: '', email: props.email, loading: false, menus: [], subMenu: false, submenus: [], colour: '#FFFFFF', menufolder: 'menu'
         };
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
@@ -19,7 +20,21 @@ export class NavMenu extends Component {
     }
 
 
+    moveToSection(url) {
+        var tag = '#' + url;
+        const section = document.querySelector(tag);
+        section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        ActivityLog.getStringValue(this.props.email, "Clicked", url);
+    }
+
+
+    onlyLog(url) {
+  
+        ActivityLog.getStringValue(this.props.email, "Clicked", url);
+    }
+
     openInNewTab = (url) => {
+        ActivityLog.getStringValue(this.props.email, "Clicked", url);
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
     }
@@ -996,7 +1011,7 @@ export class NavMenu extends Component {
                                             </svg>
                                         </a>
                                     case "people":
-                                        return <a href={url} class="menu-item">
+                                        return <a onClick={() => this.openInNewTab(url)} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1007,7 +1022,7 @@ export class NavMenu extends Component {
                                             </div>
                                         </a>
                                     case "favorites":
-                                        return <a href={url} class="menu-item">
+                                        return <a onClick={() => this.openInNewTab(url)} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1019,7 +1034,7 @@ export class NavMenu extends Component {
                                         </a>
 
                                     case "social":
-                                        return <a href={url} class="menu-item">
+                                        return <a onClick={() => this.openInNewTab(url)} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1030,7 +1045,7 @@ export class NavMenu extends Component {
                                             </div>
                                         </a>
                                     case "custom":
-                                        return <a href={url} target="_blank" class="menu-item">
+                                        return <a onClick={() => this.openInNewTab(url)}  class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1041,11 +1056,7 @@ export class NavMenu extends Component {
                                             </div>
                                         </a>
                                     case "anchor":
-                                        return <a onClick={() => {
-                                            var tag = '#' + url;
-                                            const section = document.querySelector(tag);
-                                            section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }} class="menu-item">
+                                        return <a onClick={() => this.moveToSection(url)} class="menu-item">
                                             <div class="menu-item-wrapper">  {x == 0 ?
                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1065,7 +1076,7 @@ export class NavMenu extends Component {
                                                 <span class="menu-button">{menuText}</span>  </div>
                                         </a>
                                     case "help":
-                                        return <a href="https://support.intemp.io" target="_blank" class="menu-item">
+                                        return <a onClick={() => this.openInNewTab("https://support.intemp.io")}  class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1098,7 +1109,7 @@ export class NavMenu extends Component {
                                         </a>
 
                                     case "logout":
-                                        return <a href="/logout" class="menu-item">
+                                        return <a href="/logout" onClick={() => this.onlyLog("logout")} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -1110,7 +1121,7 @@ export class NavMenu extends Component {
                                         </a>
 
                                     case "upload":
-                                        return <a href="/file" class="menu-item">
+                                        return <a href="/file" onClick={() => this.onlyLog("upload")} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -1387,7 +1398,7 @@ export class NavMenu extends Component {
                                                     </>
 
                                                 case "people":
-                                                    return <a href={url} class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab(url)} class="popover-window-menu-item">
                                                         <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M17.0857 8.65714C18.8206 8.65714 20.216 7.24914 20.216 5.51429C20.216 3.77943 18.8206 2.37143 17.0857 2.37143C15.3509 2.37143 13.9429 3.77943 13.9429 5.51429C13.9429 7.24914 15.3509 8.65714 17.0857 8.65714ZM8.8 7.54286C10.8869 7.54286 12.5589 5.85829 12.5589 3.77143C12.5589 1.68457 10.8869 0 8.8 0C6.71314 0 5.02857 1.68457 5.02857 3.77143C5.02857 5.85829 6.71314 7.54286 8.8 7.54286ZM17.0857 10.1714C14.7851 10.1714 10.1714 11.328 10.1714 13.6286V17.6H24V13.6286C24 11.328 19.3863 10.1714 17.0857 10.1714ZM8.8 10.0571C5.87086 10.0571 0 11.528 0 14.4571V17.6H8.8V14.7714C8.8 13.7029 8.57143 12 11.7794 10.4091C10.6857 10.1829 9.62972 10.0571 8.8 10.0571Z"
@@ -1397,7 +1408,7 @@ export class NavMenu extends Component {
                                                     </a>
 
                                                 case "favorites":
-                                                    return <a href={url} class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab(url)} class="popover-window-menu-item">
                                                         <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M18.4526 1.48943C20.3489 3.55237 19.7112 7.71515 17.5618 10.0534C16.2077 11.5265 16.2077 11.5265 14.2835 13.6197L10.4351 17.8063C10.1977 18.0646 9.79014 18.0646 9.55273 17.8063L5.70431 13.6197L2.42603 10.0534C0.276637 7.71515 -0.361124 3.55237 1.53519 1.48943C3.67625 -0.839754 7.90629 -0.418343 9.9939 2.62162C12.0815 -0.418343 16.3116 -0.839754 18.4526 1.48943Z"
@@ -1407,7 +1418,7 @@ export class NavMenu extends Component {
                                                     </a>
 
                                                 case "social":
-                                                    return <a href={url} class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab(url)} class="popover-window-menu-item">
                                                         <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M16.5147 0C15.7722 7.96019e-06 15.0601 0.295015 14.535 0.820051C14.01 1.34509 13.715 2.05717 13.715 2.79968C13.7164 3.00714 13.7409 3.21377 13.788 3.41582L8.25428 7.5788C7.42388 6.90336 6.38651 6.53401 5.3161 6.53259C4.07858 6.53259 2.89175 7.02429 2.01669 7.89934C1.14164 8.7744 0.65003 9.96122 0.650024 11.1987C0.65003 12.4362 1.14164 13.6231 2.01669 14.4981C2.89175 15.3732 4.07858 15.8647 5.3161 15.8647C6.49789 15.8636 7.63525 15.4142 8.49852 14.6071L13.788 18.5878C13.7438 18.7853 13.715 18.9896 13.715 19.2003C13.7151 20.7466 14.9685 22 16.5147 22C18.0609 22 19.3143 20.7466 19.3143 19.2003C19.3143 17.6542 18.0609 16.4006 16.5147 16.4006C15.8615 16.4006 15.2703 16.6345 14.7941 17.0095L9.58119 13.0834C9.84454 12.4899 9.98112 11.848 9.98219 11.1987C9.9819 10.4402 9.79672 9.69327 9.44267 9.02248L14.7868 5.00164C15.2796 5.38866 15.8881 5.5991 16.5147 5.59937C17.2572 5.59936 17.9693 5.30435 18.4943 4.77931C19.0194 4.25428 19.3143 3.54219 19.3143 2.79968C19.3143 2.05717 19.0194 1.34509 18.4943 0.820051C17.9693 0.295015 17.2572 7.96019e-06 16.5147 0H16.5147Z"
@@ -1417,7 +1428,7 @@ export class NavMenu extends Component {
                                                     </a>
 
                                                 case "custom":
-                                                    return <a href={url} target="_blank" class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab(url)}  class="popover-window-menu-item">
                                                         <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M16.5147 0C15.7722 7.96019e-06 15.0601 0.295015 14.535 0.820051C14.01 1.34509 13.715 2.05717 13.715 2.79968C13.7164 3.00714 13.7409 3.21377 13.788 3.41582L8.25428 7.5788C7.42388 6.90336 6.38651 6.53401 5.3161 6.53259C4.07858 6.53259 2.89175 7.02429 2.01669 7.89934C1.14164 8.7744 0.65003 9.96122 0.650024 11.1987C0.65003 12.4362 1.14164 13.6231 2.01669 14.4981C2.89175 15.3732 4.07858 15.8647 5.3161 15.8647C6.49789 15.8636 7.63525 15.4142 8.49852 14.6071L13.788 18.5878C13.7438 18.7853 13.715 18.9896 13.715 19.2003C13.7151 20.7466 14.9685 22 16.5147 22C18.0609 22 19.3143 20.7466 19.3143 19.2003C19.3143 17.6542 18.0609 16.4006 16.5147 16.4006C15.8615 16.4006 15.2703 16.6345 14.7941 17.0095L9.58119 13.0834C9.84454 12.4899 9.98112 11.848 9.98219 11.1987C9.9819 10.4402 9.79672 9.69327 9.44267 9.02248L14.7868 5.00164C15.2796 5.38866 15.8881 5.5991 16.5147 5.59937C17.2572 5.59936 17.9693 5.30435 18.4943 4.77931C19.0194 4.25428 19.3143 3.54219 19.3143 2.79968C19.3143 2.05717 19.0194 1.34509 18.4943 0.820051C17.9693 0.295015 17.2572 7.96019e-06 16.5147 0H16.5147Z"
@@ -1426,11 +1437,7 @@ export class NavMenu extends Component {
                                                         <span>{menuText} </span>
                                                     </a>
                                                 case "anchor":
-                                                    return <a onClick={() => {
-                                                        var tag = '#' + url;
-                                                        const section = document.querySelector(tag);
-                                                        section && section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                                    }} class="menu-item">
+                                                    return <a onClick={() => this.moveToSection(url)} class="menu-item">
                                                         <div class="menu-item-wrapper">  {x == 0 ?
                                                             <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -1450,7 +1457,7 @@ export class NavMenu extends Component {
                                                             <span class="menu-button">{menuText}</span>  </div>
                                                     </a>
                                                 case "help":
-                                                    return <a href="https://support.intemp.io" class="popover-window-menu-item">
+                                                    return <a  onClick={() => this.openInNewTab("https://support.intemp.io")}  class="popover-window-menu-item">
                                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M22.0006 11.0074C22.0006 11.6111 21.953 12.2147 21.8577 12.8024H17.2511C17.2511 12.7865 17.2669 12.7707 17.2669 12.7548C17.2987 12.6436 17.3305 12.5324 17.3464 12.4212C17.3464 12.3894 17.3622 12.3576 17.3622 12.31C17.394 12.1829 17.4099 12.0558 17.4258 11.9129C17.4258 11.897 17.4258 11.8811 17.4258 11.8652C17.4417 11.7381 17.4576 11.6269 17.4576 11.4999C17.4576 11.4681 17.4576 11.4204 17.4576 11.3887C17.4734 11.2457 17.4734 11.1186 17.4734 10.9757C17.4734 10.8327 17.4734 10.7056 17.4576 10.5627C17.4576 10.5309 17.4576 10.4832 17.4576 10.4515C17.4417 10.3244 17.4417 10.2132 17.4258 10.0861C17.4258 10.0702 17.4258 10.0543 17.4258 10.0543C17.4099 9.92727 17.3781 9.7843 17.3622 9.65722C17.3622 9.62545 17.3464 9.59369 17.3464 9.56192C17.3146 9.45072 17.2987 9.32364 17.2511 9.21245C17.2511 9.19656 17.2511 9.18068 17.2352 9.16479H21.8418C21.953 9.80019 22.0006 10.4038 22.0006 11.0074Z"
@@ -1481,7 +1488,7 @@ export class NavMenu extends Component {
                                                     </a>
 
                                                 case "logout":
-                                                    return <a href="/logout" class="popover-window-menu-item">
+                                                    return <a href="/logout" onClick={() => this.onlyLog("logouto")} class="popover-window-menu-item">
                                                         <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                                 d="M0.769434 3.91343L8.27432 0.317395C8.81609 -0.00676043 9.52334 0.37945 9.52334 1.02663V2.10677H15.106C15.5622 2.10677 15.9317 2.47655 15.9317 2.93246V6.3735C15.9317 7.45959 14.2803 7.45959 14.2803 6.3735V3.75815H9.52334V16.2347H14.2803V13.6194C14.2803 12.5336 15.9317 12.5336 15.9317 13.6194V17.0604C15.9317 17.5166 15.5622 17.8861 15.106 17.8861H9.52334L9.52023 18.9666C9.52079 19.5636 8.89317 19.9716 8.34289 19.7084L0.838005 16.1123C0.522917 15.9959 0.298218 15.6927 0.298218 15.3377L0.301618 4.65553C0.301901 4.34866 0.474463 4.05454 0.769434 3.91343ZM12.0273 8.95031C10.6531 8.95031 10.6531 11.04 12.0273 11.04H18.1254L16.9418 12.2233C15.9705 13.1947 17.4476 14.6721 18.4192 13.7007L21.38 10.7397C21.7789 10.3407 21.8124 9.68306 21.38 9.25066L18.4192 6.28963C17.4476 5.31829 15.9705 6.79569 16.9418 7.76703L18.1254 8.95031H12.0273Z"
