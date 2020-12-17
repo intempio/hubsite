@@ -1256,6 +1256,29 @@ namespace Intempio.Meetings.Home.Services
             //return returnString;
         }
 
+        public static async Task AddMeetingUserActivity(string email ,string userActivity, string url)
+        {
+            try
+            {
+                AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+                using (var db = new Models.NibrContext())
+                {
+                    TblMeetingUserActivity activity = new TblMeetingUserActivity();
+                    activity.Activity = userActivity;
+                    activity.Email = email;
+                    activity.Url = url;
+                    activity.SiteId = config.intempioSettings.SiteID;
+                    activity.Date = DateTime.UtcNow;
+
+                    db.TblMeetingUserActivities.Add(activity);
+                    await db.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 
         public static async Task AddMeetingUserActivity(string email)
         {

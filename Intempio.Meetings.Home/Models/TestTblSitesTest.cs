@@ -8,16 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intempio.Meetings.Home.Models
 {
-    [Table("tbl_meeting_user_load")]
-    public partial class TblMeetingUserLoad
+    [Table("test_tbl_sites_test")]
+    public partial class TestTblSitesTest
     {
         [Key]
         [Column("ID")]
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string MeetingCode { get; set; }
         public string SiteId { get; set; }
-        public byte[] Created { get; set; }
+        public string SiteName { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? Created { get; set; }
+        public byte[] Updated { get; set; }
         public string LoadName { get; set; }
     }
 }

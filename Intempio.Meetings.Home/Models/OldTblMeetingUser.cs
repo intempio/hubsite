@@ -8,8 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intempio.Meetings.Home.Models
 {
-    [Table("tbl_meeting_user_load")]
-    public partial class TblMeetingUserLoad
+    [Table("old_tbl_meeting_user")]
+    [Index(nameof(SiteId), nameof(Email), Name = "tbl_meeting_user_siteid_email")]
+    public partial class OldTblMeetingUser
     {
         [Key]
         [Column("ID")]
@@ -18,6 +19,5 @@ namespace Intempio.Meetings.Home.Models
         public string MeetingCode { get; set; }
         public string SiteId { get; set; }
         public byte[] Created { get; set; }
-        public string LoadName { get; set; }
     }
 }

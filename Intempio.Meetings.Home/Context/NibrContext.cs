@@ -11,9 +11,6 @@ namespace Intempio.Meetings.Home.Models
     {
 
         AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
-
-        // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
-   
         public NibrContext()
         {
         }
@@ -30,9 +27,19 @@ namespace Intempio.Meetings.Home.Models
         public virtual DbSet<BotMeetingMessageJson> BotMeetingMessageJsons { get; set; }
         public virtual DbSet<BotMeetingPartcipant> BotMeetingPartcipants { get; set; }
         public virtual DbSet<BotMeetingsViewForPa> BotMeetingsViewForPas { get; set; }
+        public virtual DbSet<DataLoadUserMeetingsFinalByLoadName> DataLoadUserMeetingsFinalByLoadNames { get; set; }
         public virtual DbSet<EntTblMeetingUser> EntTblMeetingUsers { get; set; }
+        public virtual DbSet<EventMeetingsView> EventMeetingsViews { get; set; }
+        public virtual DbSet<FinalDistinctEventsView> FinalDistinctEventsViews { get; set; }
+        public virtual DbSet<FinalDistinctEventsView1> FinalDistinctEventsView1s { get; set; }
         public virtual DbSet<LiveStatusView> LiveStatusViews { get; set; }
+        public virtual DbSet<MeetingParticipantsActivitiesView> MeetingParticipantsActivitiesViews { get; set; }
+        public virtual DbSet<MeetingParticipantsView> MeetingParticipantsViews { get; set; }
         public virtual DbSet<MeetingView> MeetingViews { get; set; }
+        public virtual DbSet<OldTblMeeting> OldTblMeetings { get; set; }
+        public virtual DbSet<OldTblMeetingUser> OldTblMeetingUsers { get; set; }
+        public virtual DbSet<OldTblMeetingUserLoad> OldTblMeetingUserLoads { get; set; }
+        public virtual DbSet<OldTblSite> OldTblSites { get; set; }
         public virtual DbSet<Sharepoint> Sharepoints { get; set; }
         public virtual DbSet<SharepointActivity> SharepointActivities { get; set; }
         public virtual DbSet<SpoEventMaster> SpoEventMasters { get; set; }
@@ -44,17 +51,19 @@ namespace Intempio.Meetings.Home.Models
         public virtual DbSet<St2hTblMeetingUser> St2hTblMeetingUsers { get; set; }
         public virtual DbSet<TblCribsEvent> TblCribsEvents { get; set; }
         public virtual DbSet<TblLoadHistory> TblLoadHistories { get; set; }
-        public virtual DbSet<TblMeeting> TblMeetings { get; set; }
-        public virtual DbSet<TblMeetingUser> TblMeetingUsers { get; set; }
         public virtual DbSet<TblMeetingUserActivity> TblMeetingUserActivities { get; set; }
+        public virtual DbSet<TblMeetingUserFinal> TblMeetingUserFinals { get; set; }
         public virtual DbSet<TblMeetingUserLoad> TblMeetingUserLoads { get; set; }
+        public virtual DbSet<TblMeetingsFinal> TblMeetingsFinals { get; set; }
+        public virtual DbSet<TblMeetingsLoad> TblMeetingsLoads { get; set; }
         public virtual DbSet<TblSite> TblSites { get; set; }
         public virtual DbSet<TblUserActivity> TblUserActivities { get; set; }
+        public virtual DbSet<TestTblLoadHistoryTest> TestTblLoadHistoryTests { get; set; }
         public virtual DbSet<TestTblMeetingUserFinalTest> TestTblMeetingUserFinalTests { get; set; }
         public virtual DbSet<TestTblMeetingUserLoadTest> TestTblMeetingUserLoadTests { get; set; }
-        public virtual DbSet<TestTblMeetingsFinal> TestTblMeetingsFinals { get; set; }
-        public virtual DbSet<TestTblMeetingsLoad> TestTblMeetingsLoads { get; set; }
-        public virtual DbSet<TestTblSite> TestTblSites { get; set; }
+        public virtual DbSet<TestTblMeetingsFinalTest> TestTblMeetingsFinalTests { get; set; }
+        public virtual DbSet<TestTblMeetingsLoadTest> TestTblMeetingsLoadTests { get; set; }
+        public virtual DbSet<TestTblSitesTest> TestTblSitesTests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -113,6 +122,8 @@ namespace Intempio.Meetings.Home.Models
                 entity.Property(e => e.HelpNotificationFlowStatus).HasDefaultValueSql("(N'NotRunning')");
 
                 entity.Property(e => e.JoinUrl).HasColumnName("JoinURL");
+
+                entity.Property(e => e.NumberOfActiveParticipants).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.NumberOfParticipants).HasDefaultValueSql("((0))");
 
@@ -205,6 +216,11 @@ namespace Intempio.Meetings.Home.Models
                 entity.Property(e => e.UpdateTime).HasAnnotation("Relational:ColumnType", "datetime");
             });
 
+            modelBuilder.Entity<DataLoadUserMeetingsFinalByLoadName>(entity =>
+            {
+                entity.ToView("dataLoadUserMeetingsFinalByLoadName");
+            });
+
             modelBuilder.Entity<EntTblMeetingUser>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
@@ -214,11 +230,62 @@ namespace Intempio.Meetings.Home.Models
                 entity.Property(e => e.SpitemId).HasColumnName("SPItemId");
             });
 
+            modelBuilder.Entity<EventMeetingsView>(entity =>
+            {
+                entity.ToView("EventMeetingsView");
+
+                entity.Property(e => e.BackupUrl).HasColumnName("BackupURL");
+
+                entity.Property(e => e.Created).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EndTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EventUrl).HasColumnName("EventURL");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.StartTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.ThreadId).HasColumnName("ThreadID");
+
+                entity.Property(e => e.Updated)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<FinalDistinctEventsView>(entity =>
+            {
+                entity.ToView("FinalDistinctEventsView");
+            });
+
+            modelBuilder.Entity<FinalDistinctEventsView1>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+            });
+
             modelBuilder.Entity<LiveStatusView>(entity =>
             {
                 entity.ToView("LiveStatusView");
 
                 entity.Property(e => e.MeetingStartingTime).HasAnnotation("Relational:ColumnType", "datetime");
+            });
+
+            modelBuilder.Entity<MeetingParticipantsActivitiesView>(entity =>
+            {
+                entity.ToView("MeetingParticipantsActivitiesView");
+
+                entity.Property(e => e.CreatedTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.ThreadId).HasColumnName("ThreadID");
+            });
+
+            modelBuilder.Entity<MeetingParticipantsView>(entity =>
+            {
+                entity.ToView("MeetingParticipantsView");
+
+                entity.Property(e => e.ThreadId).HasColumnName("ThreadID");
             });
 
             modelBuilder.Entity<MeetingView>(entity =>
@@ -234,6 +301,64 @@ namespace Intempio.Meetings.Home.Models
                 entity.Property(e => e.StartTime)
                     .HasColumnName("Start Time")
                     .HasAnnotation("Relational:ColumnType", "datetime");
+            });
+
+            modelBuilder.Entity<OldTblMeeting>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .HasDefaultValueSql("(getdate())")
+                    .HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EndTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EventUrl).HasColumnName("EventURL");
+
+                entity.Property(e => e.StartTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.Updated)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<OldTblMeetingUser>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<OldTblMeetingUserLoad>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<OldTblSite>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .HasDefaultValueSql("(getdate())")
+                    .HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.Updated)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Sharepoint>(entity =>
@@ -437,14 +562,51 @@ namespace Intempio.Meetings.Home.Models
 
                 entity.Property(e => e.Params).HasColumnName("params");
 
+                entity.Property(e => e.Reason).HasColumnName("reason");
+
                 entity.Property(e => e.Siteurl).HasColumnName("siteurl");
+
+                entity.Property(e => e.Status).HasColumnName("status");
             });
 
-            modelBuilder.Entity<TblMeeting>(entity =>
+            modelBuilder.Entity<TblMeetingUserActivity>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.SiteId).HasColumnName("SiteID");
+            });
+
+            modelBuilder.Entity<TblMeetingUserFinal>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
 
                 entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<TblMeetingUserLoad>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Created)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<TblMeetingsFinal>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BackupUrl).HasColumnName("BackupURL");
 
                 entity.Property(e => e.Created)
                     .HasDefaultValueSql("(getdate())")
@@ -461,33 +623,25 @@ namespace Intempio.Meetings.Home.Models
                     .IsConcurrencyToken();
             });
 
-            modelBuilder.Entity<TblMeetingUser>(entity =>
+            modelBuilder.Entity<TblMeetingsLoad>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Created)
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
-            });
-
-            modelBuilder.Entity<TblMeetingUserActivity>(entity =>
-            {
-                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.SiteId).HasColumnName("SiteID");
-            });
-
-            modelBuilder.Entity<TblMeetingUserLoad>(entity =>
-            {
-                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
-
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.BackupUrl).HasColumnName("BackupURL");
 
                 entity.Property(e => e.Created)
+                    .HasDefaultValueSql("(getdate())")
+                    .HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EndTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.EventUrl).HasColumnName("EventURL");
+
+                entity.Property(e => e.StartTime).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.Updated)
                     .IsRowVersion()
                     .IsConcurrencyToken();
             });
@@ -520,6 +674,31 @@ namespace Intempio.Meetings.Home.Models
                     .HasColumnName("Activity_type");
             });
 
+            modelBuilder.Entity<TestTblLoadHistoryTest>(entity =>
+            {
+                entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
+
+                entity.Property(e => e.CreatedDate).HasAnnotation("Relational:ColumnType", "datetime");
+
+                entity.Property(e => e.Eventname).HasColumnName("eventname");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Loadname).HasColumnName("loadname");
+
+                entity.Property(e => e.Ops).HasColumnName("ops");
+
+                entity.Property(e => e.Params).HasColumnName("params");
+
+                entity.Property(e => e.Reason).HasColumnName("reason");
+
+                entity.Property(e => e.Siteurl).HasColumnName("siteurl");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+            });
+
             modelBuilder.Entity<TestTblMeetingUserFinalTest>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
@@ -542,7 +721,7 @@ namespace Intempio.Meetings.Home.Models
                     .IsConcurrencyToken();
             });
 
-            modelBuilder.Entity<TestTblMeetingsFinal>(entity =>
+            modelBuilder.Entity<TestTblMeetingsFinalTest>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
 
@@ -563,11 +742,13 @@ namespace Intempio.Meetings.Home.Models
                     .IsConcurrencyToken();
             });
 
-            modelBuilder.Entity<TestTblMeetingsLoad>(entity =>
+            modelBuilder.Entity<TestTblMeetingsLoadTest>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
 
                 entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BackupUrl).HasColumnName("BackupURL");
 
                 entity.Property(e => e.Created)
                     .HasDefaultValueSql("(getdate())")
@@ -584,7 +765,7 @@ namespace Intempio.Meetings.Home.Models
                     .IsConcurrencyToken();
             });
 
-            modelBuilder.Entity<TestTblSite>(entity =>
+            modelBuilder.Entity<TestTblSitesTest>(entity =>
             {
                 entity.HasAnnotation("Relational:IsTableExcludedFromMigrations", false);
 

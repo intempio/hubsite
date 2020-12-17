@@ -37,6 +37,7 @@ namespace Intempio.Meetings.Home.Models
         [Column(TypeName = "datetime")]
         public DateTime? UpdateTime { get; set; }
         public int? NumberOfParticipants { get; set; }
+        public int? NumberOfActiveParticipants { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? FirstJoinTime { get; set; }
         public string HelpNotificationFlowStatus { get; set; }

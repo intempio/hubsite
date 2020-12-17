@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Intempio.Meetings.Home.Util;
+using Intempio.Meetings.Home.Models;
 
 namespace Intempio.Meetings.Home.Controllers
 {
@@ -22,17 +23,17 @@ namespace Intempio.Meetings.Home.Controllers
         private readonly Services.OptionsService os;
 
 
-        public MeetingController(IConfiguration configuration , IWritableOptions<IntempioSettings> l)
+        public MeetingController(IConfiguration configuration, IWritableOptions<IntempioSettings> l)
         {
-                bs = new BlobStorageService(configuration);
+            bs = new BlobStorageService(configuration);
             os = new OptionsService(l);
         }
 
 
         [HttpGet("GetConfigInfo")]
-        public  IActionResult GetConfigInfo(string key ,string validate)
+        public IActionResult GetConfigInfo(string key, string validate)
         {
-            var response =  EventService.GetConfigInfo( key, validate);
+            var response = EventService.GetConfigInfo(key, validate);
 
             return Ok(response);
         }
@@ -78,7 +79,7 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
-        
+
         [HttpGet("GetExcelUserByEmail")]
         public async Task<IActionResult> GetExcelUserByEmail(string email)
         {
@@ -113,12 +114,12 @@ namespace Intempio.Meetings.Home.Controllers
         [HttpGet("GetSharedDocumentItem")]
         public async Task<IActionResult> GetSharedDocumentItem(string filename, string siteID)
         {
-            var response = await EventService.GraphApiGetSharedDocumentItem(filename,  siteID);
+            var response = await EventService.GraphApiGetSharedDocumentItem(filename, siteID);
 
             return Ok(response);
         }
         [HttpPost("UpdateSiteConfig")]
-        public  IActionResult UpdateSiteConfig([FromForm(Name = "formFile")] string formFile)
+        public IActionResult UpdateSiteConfig([FromForm(Name = "formFile")] string formFile)
         {
             os.ChangeALL(formFile);
             return Ok("{}");
@@ -157,7 +158,7 @@ namespace Intempio.Meetings.Home.Controllers
                     url = config.intempioSettings.SuperUsersURL.Split("items")[0];
                     break;
                 case "SiteID":
-                    url =string.Format("/sites/{0}", config.intempioSettings.SiteID);
+                    url = string.Format("/sites/{0}", config.intempioSettings.SiteID);
                     break;
             }
             var response = await EventService.GraphApiGetInfo(url);
@@ -180,22 +181,22 @@ namespace Intempio.Meetings.Home.Controllers
         public async Task<IActionResult> GetPresenters()
         {
 
-    
+
             var response = await EventService.GraphApiGetPresentersSharePointList();
 
             return Ok(response);
         }
 
         [HttpPost("UploadVideo")]
-        public async Task<IActionResult> UploadVideo([FromForm(Name = "formFile")] IFormFile formFile,string email , string blobcontainer)
+        public async Task<IActionResult> UploadVideo([FromForm(Name = "formFile")] IFormFile formFile, string email, string blobcontainer)
         {
             var emailId = email;
             var memoryStream = new MemoryStream();
             formFile.CopyTo(memoryStream);
             var fileBytes = memoryStream.ToArray();
             string container = blobcontainer;
-            var fileUrl = await bs.UploadFileToBlobAsync(formFile.FileName,email, fileBytes, formFile.ContentType, container);
-            return Ok(JsonConvert.SerializeObject( fileUrl));
+            var fileUrl = await bs.UploadFileToBlobAsync(formFile.FileName, email, fileBytes, formFile.ContentType, container);
+            return Ok(JsonConvert.SerializeObject(fileUrl));
         }
 
         [HttpGet("GetAllFilesFoldersOfPreWork")]
@@ -236,10 +237,10 @@ namespace Intempio.Meetings.Home.Controllers
 
 
         [HttpGet("GetMenuItems")]
-        public  IActionResult GetMenu(string container, string levels)
+        public IActionResult GetMenu(string container, string levels)
         {
 
-            List<string> response= new List<string>();
+            List<string> response = new List<string>();
             if (levels == "1")
             {
                 response = bs.ListFirstLevelFiles(container);
@@ -267,14 +268,24 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
-        [HttpPost("AddMeetingUserActivity")]
-        public async Task<IActionResult> AddMeetingUserActivity(string email)
+        [HttpPost("AddMeetingUserActivitydetail")]
+        public async Task<IActionResult> AddMeetingUserActivitydetail([FromForm(Name = "formFile")] string mactivity)
         {
-        
-            await EventService.AddMeetingUserActivity(email);
+            var item = mactivity.Split('|');
+            var email = "";
+            if (item.Length > 2)
+                await EventService.AddMeetingUserActivity(item[0], item[1], item[2]);
             return Ok();
         }
 
+
+        [HttpPost("AddMeetingUserActivity")]
+        public async Task<IActionResult> AddMeetingUserActivity(string email)
+        {
+
+            await EventService.AddMeetingUserActivity(email);
+            return Ok();
+        }
 
         [HttpGet("GetUserEventsByEmailSQL")]
         public async Task<IActionResult> GetUserEventsByEmailSQL(string email)

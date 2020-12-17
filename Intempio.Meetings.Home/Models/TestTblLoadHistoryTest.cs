@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace Intempio.Meetings.Home.Models
 {
     [Keyless]
-    [Table("tbl_load_history")]
-    public partial class TblLoadHistory
+    [Table("test_tbl_load_history_test")]
+    public partial class TestTblLoadHistoryTest
     {
         [Column("ID")]
         public int Id { get; set; }

@@ -206,12 +206,13 @@ export class Login extends Component {
         });
     }
     doLogin = () => {
+        ActivityLog.getStringValue(this.state.emailinput, "login","In progress");
         if (this.validateInput()) {
             if (this.state.unrecognizedLogin == true) {
                 var userObj = { firstName: null, lastName: null, email: this.state.emailinput, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: true };
                 if (this.state.emailinput && this.state.emailinput != '') {
                     localStorage.setItem("userToken", JSON.stringify(userObj));
-                    this.addMeetingUserActivity();
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
                     history.push('/');
                 }
 
@@ -229,6 +230,9 @@ export class Login extends Component {
 
                 }
             }
+        } else {
+
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Failed");
         }
 
     }
