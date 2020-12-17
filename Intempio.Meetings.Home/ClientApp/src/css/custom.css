@@ -130,9 +130,8 @@ main .presenters-container .presenter .position {
 }
 
 main .presenters-container {
-    width: 1660px !important;
     display: block !important;
-   
+    display: flex !important;
 }
 
 .popup-close {
@@ -252,7 +251,7 @@ main .presenters-container {
     }
 
     .wrapper main .recent-container-swiper > .swiper-wrapper {
-        display: inline-block !important;
+        display: none !important;
     }
 }
 

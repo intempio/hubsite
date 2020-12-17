@@ -10,7 +10,7 @@ export default class Event extends Component {
     }
 
 
-
+ 
 
     async getEvents() {
         this.setState({ loading: true });

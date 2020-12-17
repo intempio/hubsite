@@ -2,6 +2,7 @@
 import history from './history';
 import Events from './events';
 import moment from 'moment';
+import { ActivityLog } from './ActivityLog';
 export class Login extends Component {
 
     constructor(props) {
