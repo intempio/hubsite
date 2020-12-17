@@ -15,7 +15,7 @@ export default class Session extends Component {
     }
 
     openInNewTab = (url, description) => {
-        ActivityLog.getStringValue(this.state.email, "Clicked", url);
+        ActivityLog.getStringValue(this.state.email, "Session-Clicked", url);
         if (url && url.includes("streaming")) {
             this.setState({ modalIsOpen: true, videourl: url, videoTitle: description });
             //   history.push('/video?vurl=' + url + '&name=' + description);

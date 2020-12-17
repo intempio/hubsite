@@ -2,16 +2,18 @@
 import history from './history';
 import ReactDOM from 'react-dom';
 import ReactModal from 'react-modal';
+import { ActivityLog } from './ActivityLog';
 export default class Poster extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { posterSessions: [], loading: false, showModal: false };
+        this.state = { posterSessions: [], loading: false, showModal: false, email:'' };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     openInNewTab = (url) => {
+        ActivityLog.getStringValue(this.state.email, "Poster-Clicked", url);
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
     }
@@ -45,6 +47,14 @@ export default class Poster extends Component {
         return finalresult;
     }
     componentDidMount() {
+
+        let token = localStorage.getItem('userToken')
+        let email = '';
+        token = JSON.parse(token);
+        if (token) {
+            email = token.email;
+        }
+        this.setState({ email: email })
 
         this.getGetPosterSessions();
     }
