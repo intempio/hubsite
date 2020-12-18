@@ -517,7 +517,7 @@ export class Layout extends Component {
 
 
 
-                        <NavMenu msgCount={this.state.unseenmsgCount} email={this.state.email} />
+                        <NavMenu msgCount={this.state.unseenmsgCount} email={this.state.email} hasChat={this.state.chatFeature} />
 
                         {this.state.currentChatKey != '' && this.state.currentChatKey != undefined && <ChatContent openChat={this.state.openchat} chatKey={this.state.currentChatKey} publishKey={this.state.publishKey} subscribeKey={this.state.subscribeKey} chatName={this.state.chatName} />}
 
