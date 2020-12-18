@@ -55,6 +55,7 @@ namespace Intempio.Meetings.Home.Util
             GeneralChatName = "sys";
             HelpChatName = "sys";
             CustomChatGroups = "sys";
+            SiteIcon = "sys";
 
         }
         public string EventMasterURL { get; set; }
@@ -94,10 +95,7 @@ namespace Intempio.Meetings.Home.Util
         public string GeneralChatName { get; set; }
         public string HelpChatName { get; set; }
         public string CustomChatGroups { get; set; }
-
-
-        
-
+        public string SiteIcon { get; set; }
 
     }
 }

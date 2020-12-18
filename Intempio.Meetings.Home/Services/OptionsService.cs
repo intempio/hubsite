@@ -204,6 +204,11 @@ namespace Intempio.Meetings.Home.Services
                         opt.CustomChatGroups = value;
                     });
                     break;
+                case "SiteIcon":
+                    _writableLocations.Update(opt => {
+                        opt.SiteIcon = value;
+                    });
+                    break;
 
             }
 

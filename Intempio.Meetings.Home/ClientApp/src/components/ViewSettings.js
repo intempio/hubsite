@@ -30,7 +30,8 @@ export default class ViewSettings extends Component {
             invalidKey: false,
             key: '',
             load: true,
-            CustomChatGroups:''
+            CustomChatGroups: '',
+            SiteIcon: ''
         };
     }
 
@@ -78,7 +79,8 @@ export default class ViewSettings extends Component {
                     SQLLogin: item.intempioSettings.sqlLogin,
                     GeneralChatName: item.intempioSettings.generalChatName,
                     HelpChatName: item.intempioSettings.helpChatName,
-                    CustomChatGroups: item.intempioSettings.customChatGroups
+                    CustomChatGroups: item.intempioSettings.customChatGroups,
+                    SiteIcon: item.intempioSettings.siteIcon
                 });
                 this.setState({ invalidKey: false, load: false });
                 return true;
@@ -417,7 +419,13 @@ export default class ViewSettings extends Component {
                                 <h4>{this.state.CustomChatGroups}</h4>
                             </div>
                         </div>
-                        
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Site Icon</p>
+                                <h4>{this.state.SiteIcon}</h4>
+                            </div>
+                        </div>
                        </>
                     }
                     

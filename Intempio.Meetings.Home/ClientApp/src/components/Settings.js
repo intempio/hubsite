@@ -29,7 +29,8 @@ export default class Settings extends Component {
             HelpChatName: "",
             invalidKey: false,
             load: true,
-            CustomChatGroups:''
+            CustomChatGroups: '',
+            SiteIcon:''
         };
     }
 
@@ -128,8 +129,8 @@ export default class Settings extends Component {
                     SQLLogin: item.intempioSettings.sqlLogin,
                     GeneralChatName: item.intempioSettings.generalChatName,
                     HelpChatName: item.intempioSettings.helpChatName,
-                    CustomChatGroups: item.intempioSettings.customChatGroups
-
+                    CustomChatGroups: item.intempioSettings.customChatGroups,
+                    SiteIcon: item.intempioSettings.siteIcon
                 });
                 this.getGetSiteInfo();
                 this.setState({ invalidKey: false, load :false });
@@ -400,6 +401,7 @@ export default class Settings extends Component {
             + "SQLLogin#" + this.state.SQLLogin + "|"
             + "GeneralChatName#" + this.state.GeneralChatName + "|"
             + "HelpChatName#" + this.state.HelpChatName + "|"
+            + "SiteIcon#" + this.state.SiteIcon + "|"
             + "CustomChatGroups#" + this.state.CustomChatGroups;
 
         return newconfig;
@@ -589,6 +591,13 @@ export default class Settings extends Component {
                             <div class="recent-info">
                                 <h4>Loading Frequency</h4>
                                 <p> <input id='comment' type="text" placeholder="300000" class="textbox" value={this.state.LoadingFrequency} onChange={e => this.setState({ LoadingFrequency: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Site Icon</h4>
+                                <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.SiteIcon} onChange={e => this.setState({ SiteIcon: e.target.value })} /></p>
                             </div>
                         </div>
                         <div class="settings-item">

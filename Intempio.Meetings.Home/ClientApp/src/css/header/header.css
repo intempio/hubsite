@@ -431,7 +431,7 @@ header {
             display: flex;
             align-items: center;
             letter-spacing: 0.15px;
-            color: #979696;
+            color: #0e1111;
         }
 
         header .chat-message-owner > .message-wrapper {
@@ -453,7 +453,7 @@ header {
                 line-height: 21px;
                 display: flex;
                 align-items: center;
-                color: #C2C2C2;
+                color: #353839;
             }
 
             header .chat-message-owner > .message-wrapper > .message {
@@ -469,7 +469,7 @@ header {
                 line-height: 18px;
                 display: flex;
                 align-items: flex-end;
-                color: #979696;
+                color: #0e1111;
             }
 
                 header .chat-message-owner > .message-wrapper > .message > span {
@@ -746,7 +746,7 @@ header {
                 line-height: 21px;
                 display: flex;
                 align-items: center;
-                color: #C2C2C2;
+                color: #353839;
             }
 
             header .chat-message-guest > .message-wrapper .message {
@@ -763,7 +763,7 @@ header {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                color: #979696;
+                color: #0e1111;
             }
 
             header .chat-message-guest > .message-wrapper .message-forward {
@@ -960,7 +960,7 @@ header {
         font-size: 12px;
         line-height: 14px;
         letter-spacing: 0.15px;
-        color: #C2C2C2;
+        color: #353839;
         display: flex;
         flex-direction: column;
     }
