@@ -342,6 +342,12 @@ export default class SessionsSQL extends Component {
                                 eventurl = eventurl + '&name=' + fname + '  ' + lname + '&userEmail=' + email
                             }
 
+                            var buttonTitle = "Join Session"
+                            var description = item.description;
+                            if (item.description.indexOf('#') > -1) {
+                                description = item.description.split('#')[0];
+                                buttonTitle = item.description.split('#')[1];
+                            }
 
                             var a = item;
                             // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
@@ -365,10 +371,10 @@ export default class SessionsSQL extends Component {
                                 </div>
                                 <div class="sessions-information">
                                     <h3>{item.channel}</h3>
-                                    <p>{item.description}</p>
+                                    <p>{description}</p>
                                 </div>
                                 <div className="sessions-item-button">
-                                    <button onClick={() => this.openInNewTab(eventurl, item.channel)}>Join Session</button></div>
+                                    <button onClick={() => this.openInNewTab(eventurl, item.channel)}>{buttonTitle}</button></div>
                             </div>);
 
                         })}

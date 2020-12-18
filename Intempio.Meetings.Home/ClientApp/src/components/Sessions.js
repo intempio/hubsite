@@ -286,6 +286,13 @@ export default class Session extends Component {
                             } else if (item.fields.EventURL && item.fields.EventURL.Url.indexOf('zoom.intemp.io') > 0) {
                                 eventurl = eventurl + '&name=' + fname + '  ' + lname + '&userEmail=' + email
                             }
+
+                            var buttonTitle = "Join Session"
+                            var description = item.description;
+                            if (item.fields.Description.indexOf('#') > -1) {
+                                description = item.fields.Description.split('#')[0];
+                                buttonTitle = item.fields.Description.split('#')[1];
+                            }
                             var a = item;
                             // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
                             var momentObj = moment.utc(item.fields.StartTime);
@@ -308,10 +315,10 @@ export default class Session extends Component {
                                 </div>
                                 <div class="sessions-information">
                                     <h3>{item.fields.Channel}</h3>
-                                    <p>{item.fields.Description}</p>
+                                    <p>{description}</p>
                                 </div>
                                 <div className="sessions-item-button">
-                                    <button onClick={() => this.openInNewTab(eventurl, item.fields.Channel)}>Join Session</button></div>
+                                    <button onClick={() => this.openInNewTab(eventurl, item.fields.Channel)}>{buttonTitle}</button></div>
                             </div>);
 
                         })}
