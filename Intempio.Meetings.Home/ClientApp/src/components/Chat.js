@@ -60,7 +60,8 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
     const messagesRef = React.useRef(null);
     const scrollToBottom = () => {
-        messagesRef.current.scrollIntoView({
+        
+        messagesRef.current &&   messagesRef.current.scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "start"
