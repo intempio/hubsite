@@ -16,8 +16,8 @@ export default class Support extends Component {
 
         super(props);
         this.state = {
-            generalMsgKey: '', helpMsgKey: '', messages: [], messagesNew:[], chatUsers: [], channels: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384',
-            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', email: '', currentChatKey: ''
+            generalMsgKey: '', helpMsgKey: '', messages: [], messagesNew:[], chatUsers: [], channels: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-9a56e351-93a8-4ead-aa4d-68ce24544fbf',
+            subscribeKey: 'sub-c-bcc2ede2-482f-11eb-ae10-b69578166507', unseenmsgCount: 0, chatName: 'General', email: '', currentChatKey: ''
         };
 
 

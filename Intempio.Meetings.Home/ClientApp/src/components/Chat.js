@@ -234,14 +234,26 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                     var i = messageIndex % 2;
                     userMe = (fname + ' ' + lname == hmsg.entry.user)
 
+                 
 
+                    var currentMsg = hmsg.entry.msg;
+                    var reply = currentMsg;
+                    var replyCount = currentMsg.indexOf(';');
+                    var replies = currentMsg.split(';');
+                    var hasReplay = replyCount > 0;
+                    if (hasReplay) {
+                        replyCount = currentMsg.split(';').length;
+                        reply = replies[replyCount - 1];
+                    }
+
+                    var oldReplies = replies.slice(0, replies.length - 1)
 
                     return (
 
                         <>
                             {
-
-                                !userMe ? <div class="chat-message-guest" key={`message-old-${messageIndex}`} >
+                                !hasReplay ?
+                               ( !userMe ? <div class="chat-message-guest" key={`message-old-${messageIndex}`} >
                                     <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
@@ -295,7 +307,49 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                                 d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
                                                 fill="#D7D7D7" />
                                         </svg>
-                                    </div>
+                                        </div>) : userMe ?
+
+                                        <div class="chat-message-owner" key={`message-old-${messageIndex}`}>
+                                        <div class="message-wrapper">
+                                            <span class="name">{reply.split('|')[0]}</span>
+                                            <div class="message fix">
+                                                {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
+
+                                                    return (
+
+
+                                                        <div class="message-forward">
+                                                            <span class="name">{hmsg.split('|')[0]}</span>
+                                                            <span class="text">{hmsg.split('|')[1]}</span>
+                                                        </div>)
+                                                })}
+                                                <span>
+                                                    {reply.split('|')[1]}
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                        </div> : <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
+                                            <div class="message-wrapper">
+                                                <span class="name">{reply.split('|')[0]}</span>
+                                                <div class="message">
+                                                    {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
+
+                                                        return (
+
+
+                                                            <div class="message-forward">
+                                                                <span class="name">{hmsg.split('|')[0]}</span>
+                                                                <span class="text">{hmsg.split('|')[1]}</span>
+                                                            </div>)
+                                                    })}
+                                                    <span>
+                                                        {reply.split('|')[1]}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div> 
 
                             }
                         </>
@@ -313,11 +367,11 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
                         var currentMsg = message.msg;
                         var reply = currentMsg;
-                        var replyCount = currentMsg.split(';').length;
+                        var replyCount = currentMsg.indexOf(';');
                         var replies = currentMsg.split(';');
                         var hasReplay = replyCount > 0;
                         if (hasReplay) {
-
+                            replyCount = currentMsg.split(';').length;
                             reply = replies[replyCount - 1];
                         }
 
@@ -381,47 +435,49 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                                     d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
                                                     fill="#D7D7D7" />
                                             </svg>
-                                        </div>) :
+                                        </div>) : userMe ?
+
+                                    <div class="chat-message-owner" key={`message-old-${messageIndex}`}>
+                                        <div class="message-wrapper">
+                                            <span class="name">{reply.split('|')[0]}</span>
+                                            <div class="message fix">
+                                                {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
+
+                                                    return (
 
 
-                                    <div class="message-wrapper">
-                                        <span class="name">reply.split('|')[0]</span>
-                                        <div class="message">
-                                            {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
+                                                        <div class="message-forward">
+                                                            <span class="name">{hmsg.split('|')[0]}</span>
+                                                            <span class="text">{hmsg.split('|')[1]}</span>
+                                                        </div>)
+                                                })}
+                                                <span>
+                                                    {reply.split('|')[1]}
+                                                </span>
 
-                                                return (
-
-
-                                                    <div class="message-forward">
-                                                        <span class="name">oldReplies.split('|')[0]</span>
-                                                        <span class="text">oldReplies.split('|')[1]</span>
-                                                    </div>)
-                                            })}
-                                            <span>
-                                                reply.split('|')[1]
-                                            </span>
-                                            <div class="buttons">
-                                                <div class="buttons-item">
-                                                    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M0 12H2.4V4.8H0V12ZM13.2 5.4C13.2 4.74 12.66 4.2 12 4.2H8.214L8.784 1.458L8.802 1.266C8.802 1.02 8.7 0.792 8.538 0.63L7.902 0L3.954 3.954C3.732 4.17 3.6 4.47 3.6 4.8V10.8C3.6 11.46 4.14 12 4.8 12H10.2C10.698 12 11.124 11.7 11.304 11.268L13.116 7.038C13.17 6.9 13.2 6.756 13.2 6.6V5.4Z"
-                                                            fill="#C2C2C2" />
-                                                    </svg>
-                                                    <span>9</span>
-                                                </div>
-                                                <div class="vertical-line"></div>
-                                                <div class="buttons-item">
-                                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M12.6 0H1.4C0.63 0 0.00699999 0.63 0.00699999 1.4L0 14L2.8 11.2H12.6C13.37 11.2 14 10.57 14 9.8V1.4C14 0.63 13.37 0 12.6 0ZM11.2 8.4H2.8V7H11.2V8.4ZM11.2 6.3H2.8V4.9H11.2V6.3ZM11.2 4.2H2.8V2.8H11.2V4.2Z"
-                                                            fill="#C2C2C2" />
-                                                    </svg>
-                                                    <span>3</span>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        </div> : <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
+                                            <div class="message-wrapper">
+                                                <span class="name">{reply.split('|')[0]}</span>
+                                                <div class="message">
+                                                    {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
 
+                                                        return (
+
+
+                                                            <div class="message-forward">
+                                                                <span class="name">{hmsg.split('|')[0]}</span>
+                                                                <span class="text">{hmsg.split('|')[1]}</span>
+                                                            </div>)
+                                                    })}
+                                                    <span>
+                                                        {reply.split('|')[1]}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div> 
                                 }
                             </>
 
@@ -446,10 +502,13 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                         </label>
                     </div>
                     <form>
-                        <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: replyMsg == '' ? e.target.value : fname + ' ' + lname + '|' + e.target.value + ';' + replyMsg, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
+                        <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
                         <button class="chatButton" id="chatButton" onClick={e => {
                             e.preventDefault();
                             if (input.msg != '') {
+                                if (replyMsg != '') {
+                                    input.msg = replyMsg + ';' + fname + ' ' + lname + '|' + input.msg;
+                                }
                                 sendMessage(input);
                                 setReplyMsg('');
                             }

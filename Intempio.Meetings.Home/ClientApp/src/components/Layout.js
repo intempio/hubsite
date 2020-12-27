@@ -20,8 +20,8 @@ export class Layout extends Component {
 
         super(props);
         this.state = {
-            generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-85a423af-7715-4ec1-b8e2-17c496843384', loading: true,
-            subscribeKey: 'sub-c-f9bb468c-0666-11eb-8c73-de77696b0464', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false, subscribeList: [], subscribeList2: [], customChatRooms: [], chatFeature: false
+            generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-9a56e351-93a8-4ead-aa4d-68ce24544fbf', loading: true,
+            subscribeKey: 'sub-c-bcc2ede2-482f-11eb-ae10-b69578166507', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false, subscribeList: [], subscribeList2: [], customChatRooms: [], chatFeature: false
         };
 
 
@@ -506,11 +506,11 @@ export class Layout extends Component {
                                         })}
 
                                     </div>
-                            </div>
-                            <div class="vertical-line"></div>
+                                </div>
+                                <div class="vertical-line"></div>
                             </>
                         }
-                     
+
 
                         <div class="user-name">{this.state.firstName} {this.state.lastName}</div>
                         <div class="user-avatar">
