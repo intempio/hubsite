@@ -372,3 +372,76 @@ a.skelleton-menu-item {
     color: inherit !important;
     text-decoration: none !important;
 }
+
+
+header .chat-message-owner > .message-wrapper .message-forward {
+    padding: 2px 5px;
+    align-self: baseline;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #C4C4C4;
+}
+
+    header .chat-message-owner > .message-wrapper .message-forward span {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.15px;
+        color: #353839;
+        margin-top: 5px;
+    }
+
+header .chat-message-guest > .message-wrapper > .message > span {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.15px;
+    color: #353839;
+    margin-top: 5px;
+}
+
+header .chat-message-owner > .message-wrapper > .fix {
+    display: inline-table !important;
+}
+
+header .chat-message-owner > .message-wrapper .message-forward span.name {
+    color: black !important;
+    font-weight: 400 !important;
+}
+
+header .chat-message-owner > .message-wrapper .message-forward span.name {
+    color: black !important;
+    font-weight: 400 !important;
+}
+
+header .chat-message-owner > .message-wrapper > .message > span {
+      font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.15px;
+    color: #353839;
+    margin-top: 5px;
+
+}
+
+header .chat-message-guest > .message-wrapper .message.fix2 {
+    align-items: baseline !important;
+}
+
+header .chat-message-owner > .message-wrapper > .message > span {
+    padding-bottom: 5px !important;
+    flex-direction: row-reverse;
+    padding-right: 5px;
+}

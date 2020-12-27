@@ -704,32 +704,7 @@ header {
 
 
 
-        header .chat-message-owner > .message-wrapper .message-forward {
-            padding: 2px 5px;
-            align-self: baseline;
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid #C4C4C4;
-        }
 
-            header .chat-message-owner > .message-wrapper .message-forward span {
-                font-family: Roboto, sans-serif;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 12px;
-                line-height: 14px;
-                display: flex;
-                align-items: center;
-                letter-spacing: 0.15px;
-                color: #C2C2C2;
-            }
-
-
-        header .chat-message-owner > .message-wrapper > .fix {
-        
-            display: inline-table !important ;
-          
-        }
 
     header .chat-message-guest {
         margin-top: 20px;
@@ -812,7 +787,7 @@ header {
                     display: flex;
                     align-items: center;
                     letter-spacing: 0.15px;
-                    color: #C2C2C2;
+                    color: #353839;
                 }
 
             header .chat-message-guest > .message-wrapper .message .buttons {

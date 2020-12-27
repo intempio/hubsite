@@ -272,11 +272,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                         </div>
                                     </div>
                                     <div class="acts">
-                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path id="chat-like"
-                                                d="M0 12.5635H2.4V5.36348H0V12.5635ZM13.2 5.96348C13.2 5.30348 12.66 4.76348 12 4.76348H8.214L8.784 2.02148L8.802 1.82948C8.802 1.58348 8.7 1.35548 8.538 1.19348L7.902 0.563477L3.954 4.51748C3.732 4.73348 3.6 5.03348 3.6 5.36348V11.3635C3.6 12.0235 4.14 12.5635 4.8 12.5635H10.2C10.698 12.5635 11.124 12.2635 11.304 11.8315L13.116 7.60148C13.17 7.46348 13.2 7.31948 13.2 7.16348V5.96348Z"
-                                                fill="#D1D0D0" />
-                                        </svg>
+                                     
                                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(hmsg.entry.user + '|' + hmsg.entry.msg))}>
                                             <path
                                                 d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
@@ -306,8 +302,9 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                             <path
                                                 d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
                                                 fill="#D7D7D7" />
-                                        </svg>
-                                        </div>) : userMe ?
+                                            </svg>
+                                      
+                                        </div> ) : userMe ?
 
                                         <div class="chat-message-owner" key={`message-old-${messageIndex}`}>
                                         <div class="message-wrapper">
@@ -332,7 +329,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                         </div> : <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
                                             <div class="message-wrapper">
                                                 <span class="name">{reply.split('|')[0]}</span>
-                                                <div class="message">
+                                                <div class="message fix2">
                                                     {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
 
                                                         return (
@@ -348,6 +345,14 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                                     </span>
 
                                                 </div>
+                                            </div>
+                                            <div class="acts">
+                                             
+                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg))}>
+                                                    <path
+                                                        d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
+                                                        fill="#D1D0D0" />
+                                                </svg>
                                             </div>
                                         </div> 
 
@@ -400,11 +405,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                             </div>
                                         </div>
                                         <div class="acts">
-                                            <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path id="chat-like"
-                                                    d="M0 12.5635H2.4V5.36348H0V12.5635ZM13.2 5.96348C13.2 5.30348 12.66 4.76348 12 4.76348H8.214L8.784 2.02148L8.802 1.82948C8.802 1.58348 8.7 1.35548 8.538 1.19348L7.902 0.563477L3.954 4.51748C3.732 4.73348 3.6 5.03348 3.6 5.36348V11.3635C3.6 12.0235 4.14 12.5635 4.8 12.5635H10.2C10.698 12.5635 11.124 12.2635 11.304 11.8315L13.116 7.60148C13.17 7.46348 13.2 7.31948 13.2 7.16348V5.96348Z"
-                                                    fill="#D1D0D0" />
-                                            </svg>
+                                         
                                             <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(message.user + '|' + message.msg))}>
                                                 <path
                                                     d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
@@ -460,7 +461,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                         </div> : <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
                                             <div class="message-wrapper">
                                                 <span class="name">{reply.split('|')[0]}</span>
-                                                <div class="message">
+                                                <div class="message fix2">
                                                     {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
 
                                                         return (
@@ -477,6 +478,14 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
                                                 </div>
                                             </div>
+                                            <div class="acts">
+                                          
+                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg))}>
+                                                    <path
+                                                        d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
+                                                        fill="#D1D0D0" />
+                                                </svg>
+                                            </div>
                                         </div> 
                                 }
                             </>
@@ -491,7 +500,10 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
             </div>
             <div class="chat-footer" >
-
+                {replyMsg !='' && <div class="chat-replay">
+                    <span class="reply-for">Replay for:</span>
+                    <span class="reply-text">{replyMsg.split('|')[0]}</span>
+                </div>}
                 <div class="chat-footer-wrapper">
                     <div class="upload-buttons">
                         <label class="chatFile" for="chatGeneralFile">
