@@ -51,6 +51,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
     }
     const pubnub = usePubNub();
     const [messages, setMessages] = useState([]);
+    const [replyMsg, setReplyMsg] = useState('');
     const [msgHistory, setMgsHistory] = useState(null);
     const [input, setInput] = useState({});
     const [users, setUsers] = useState([]);
@@ -60,8 +61,8 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
     const messagesRef = React.useRef(null);
     const scrollToBottom = () => {
-        
-        messagesRef.current &&   messagesRef.current.scrollIntoView({
+
+        messagesRef.current && messagesRef.current.scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "start"
@@ -102,7 +103,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
                 pubnub.addListener({
                     message: messageEvent => {
-                       
+
                         if (messageEvent.channel === channels[0]) {
                             setMessages(messages => [...messages, messageEvent.message]);
                             scrollToBottom();
@@ -115,29 +116,29 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                 //pubnub.unsubscribeAll();
                 //pubnub.unsubscribe({ channel: channels[0] });
                 //pubnub.subscribe({ channels });
-              
-                    var s = [];
-                    var t = subscribeList  ;
-                    channels.forEach(i => {
 
-                        if (!_.includes(t, i)) {
-                            s.push(i);
-                            t.push(i);
-                        }
-                    });
+                var s = [];
+                var t = subscribeList;
+                channels.forEach(i => {
+
+                    if (!_.includes(t, i)) {
+                        s.push(i);
+                        t.push(i);
+                    }
+                });
 
                 setSubscribeList([...t]);
-                    if (s.length > 0) {
-                        pubnub.subscribe({ channels: s });
-                    }
+                if (s.length > 0) {
+                    pubnub.subscribe({ channels: s });
                 }
-                if (oldChatKey != undefined && oldChatKey != '') {
-               
+            }
+            if (oldChatKey != undefined && oldChatKey != '') {
 
-                }
 
-            
-          
+            }
+
+
+
         }
     }, [channels[0]]);
 
@@ -157,7 +158,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
     }, [msgHistory && msgHistory.messages]);
 
     useEffect(() => {
-    
+
 
         window.addEventListener("beforeunload", pubnub.unsubscribeAll);
 
@@ -171,8 +172,8 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                 message_id: msgid,
                 channel: channels[0],
                 message, original_timetoken: Date.now() / 1000,
-                user: "jasdeep",
-                status: "Writing up design patterns...",
+                user: fname,
+                status: "...",
                 deleted: false,
                 is_update: false
             });
@@ -263,8 +264,8 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                             <path id="chat-like"
                                                 d="M0 12.5635H2.4V5.36348H0V12.5635ZM13.2 5.96348C13.2 5.30348 12.66 4.76348 12 4.76348H8.214L8.784 2.02148L8.802 1.82948C8.802 1.58348 8.7 1.35548 8.538 1.19348L7.902 0.563477L3.954 4.51748C3.732 4.73348 3.6 5.03348 3.6 5.36348V11.3635C3.6 12.0235 4.14 12.5635 4.8 12.5635H10.2C10.698 12.5635 11.124 12.2635 11.304 11.8315L13.116 7.60148C13.17 7.46348 13.2 7.31948 13.2 7.16348V5.96348Z"
                                                 fill="#D1D0D0" />
-                                    </svg>
-                                        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (console.log(hmsg.entry.msg))}>
+                                        </svg>
+                                        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(hmsg.entry.user + '|' + hmsg.entry.msg))}>
                                             <path
                                                 d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
                                                 fill="#D1D0D0" />
@@ -310,11 +311,23 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
                         userMe = (fname + ' ' + lname == message.user)
 
+                        var currentMsg = message.msg;
+                        var reply = currentMsg;
+                        var replyCount = currentMsg.split(';').length;
+                        var replies = currentMsg.split(';');
+                        var hasReplay = replyCount > 0;
+                        if (hasReplay) {
+
+                            reply = replies[replyCount - 1];
+                        }
+
+                        var oldReplies = replies.slice(0, replies.length - 1)
+
                         return (
                             <>
-                                {
+                                {!hasReplay ?
 
-                                    !userMe ? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
+                                    (!userMe ? <div class="chat-message-guest" key={`message-old-${messageIndex}`}>
                                         <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
@@ -368,7 +381,46 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                                     d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
                                                     fill="#D7D7D7" />
                                             </svg>
+                                        </div>) :
+
+
+                                    <div class="message-wrapper">
+                                        <span class="name">reply.split('|')[0]</span>
+                                        <div class="message">
+                                            {oldReplies && oldReplies && oldReplies.map((hmsg, messageIndex) => {
+
+                                                return (
+
+
+                                                    <div class="message-forward">
+                                                        <span class="name">oldReplies.split('|')[0]</span>
+                                                        <span class="text">oldReplies.split('|')[1]</span>
+                                                    </div>)
+                                            })}
+                                            <span>
+                                                reply.split('|')[1]
+                                            </span>
+                                            <div class="buttons">
+                                                <div class="buttons-item">
+                                                    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M0 12H2.4V4.8H0V12ZM13.2 5.4C13.2 4.74 12.66 4.2 12 4.2H8.214L8.784 1.458L8.802 1.266C8.802 1.02 8.7 0.792 8.538 0.63L7.902 0L3.954 3.954C3.732 4.17 3.6 4.47 3.6 4.8V10.8C3.6 11.46 4.14 12 4.8 12H10.2C10.698 12 11.124 11.7 11.304 11.268L13.116 7.038C13.17 6.9 13.2 6.756 13.2 6.6V5.4Z"
+                                                            fill="#C2C2C2" />
+                                                    </svg>
+                                                    <span>9</span>
+                                                </div>
+                                                <div class="vertical-line"></div>
+                                                <div class="buttons-item">
+                                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M12.6 0H1.4C0.63 0 0.00699999 0.63 0.00699999 1.4L0 14L2.8 11.2H12.6C13.37 11.2 14 10.57 14 9.8V1.4C14 0.63 13.37 0 12.6 0ZM11.2 8.4H2.8V7H11.2V8.4ZM11.2 6.3H2.8V4.9H11.2V6.3ZM11.2 4.2H2.8V2.8H11.2V4.2Z"
+                                                            fill="#C2C2C2" />
+                                                    </svg>
+                                                    <span>3</span>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
 
                                 }
                             </>
@@ -394,11 +446,12 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                         </label>
                     </div>
                     <form>
-                        <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
+                        <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: replyMsg == '' ? e.target.value : fname + ' ' + lname + '|' + e.target.value + ';' + replyMsg, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
                         <button class="chatButton" id="chatButton" onClick={e => {
                             e.preventDefault();
                             if (input.msg != '') {
                                 sendMessage(input);
+                                setReplyMsg('');
                             }
 
                         }}>
