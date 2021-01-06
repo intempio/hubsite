@@ -398,6 +398,7 @@ export class Layout extends Component {
                                             d="M16.6534 14.915H9.58143C9.16009 15.3843 8.65609 15.9256 8.18676 16.4563C7.12276 17.659 4.62943 18.6483 4.26676 18.7443C3.90409 18.8403 2.93609 18.7923 3.51743 18.1176C4.09876 17.443 4.67743 15.7096 4.67743 14.915H3.00809C1.46676 14.915 0.202759 13.659 0.202759 12.1203V3.16297C0.202759 1.62697 1.46676 0.370972 3.00809 0.370972H16.6534C18.1974 0.370972 19.4614 1.62697 19.4614 3.16297V12.1203C19.4614 13.659 18.1974 14.915 16.6534 14.915ZM14.5734 6.14964C13.8268 6.14964 13.2188 6.75231 13.2188 7.49897C13.2188 8.24297 13.8268 8.84564 14.5734 8.84564C15.3228 8.84564 15.9281 8.24297 15.9281 7.49897C15.9281 6.75231 15.3228 6.14964 14.5734 6.14964ZM9.92809 6.29364C9.18143 6.29364 8.57343 6.89897 8.57343 7.64297C8.57343 8.38697 9.18143 8.99231 9.92809 8.99231C10.6774 8.99231 11.2828 8.38697 11.2828 7.64297C11.2828 6.89897 10.6774 6.29364 9.92809 6.29364ZM5.28276 6.43764C4.53609 6.43764 3.92809 7.04297 3.92809 7.78697C3.92809 8.53097 4.53609 9.13631 5.28276 9.13631C6.03209 9.13631 6.63743 8.53097 6.63743 7.78697C6.63743 7.04297 6.03209 6.43764 5.28276 6.43764ZM21.5894 5.04297H21.1921C21.2081 5.15231 21.2161 5.26431 21.2161 5.37897V13.9043C21.2161 15.3336 20.0401 16.5043 18.6028 16.5043H10.3628C9.82676 17.0856 8.92809 18.059 8.92809 18.059C8.92809 18.059 9.21609 18.7683 10.1228 18.7683H17.3548C17.6294 19.643 18.3654 20.3763 18.8561 20.755C19.3894 21.163 20.3201 21.7283 21.0934 21.7656C21.8668 21.8003 21.9521 21.5496 21.8188 21.379C21.6854 21.211 21.2988 20.2963 21.1414 19.8856C21.0401 19.6216 21.0508 19.1016 21.0694 18.7683H21.5894C23.0268 18.7683 24.2028 17.5976 24.2028 16.1656V7.64297C24.2028 6.21097 23.0268 5.04297 21.5894 5.04297Z"
                                             fill={this.state.unseenmsgCount > 0 ? "#EC9A1D" : "#D9D9D9"} />
                                     </svg>
+
                                 </div>
                                 <div id="messages-container" class="msgs-container hide">
                                     <h2 class="header">conversation</h2>
@@ -412,10 +413,12 @@ export class Layout extends Component {
 
                                         <div id="general-session" class="conversation">
                                             <div class="conversation-wrapper">
-                                                <div class="images">
-                                                    <img class="firstImg" src={require("../assets/img/associated_photo3.png")} alt="associated_photo" />
-                                                    <img class="secondImg" src={require("../assets/img/associated_photo2.png")} alt="associated_photo" />
-                                                </div>
+                                            <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
+                                                    fill="#D7D7D7" />
+                                            </svg>
+
                                                 <div class="conversation-name">
                                                     <span class="name">General</span>
                                                     <span class="users-number">{this.state.chatUsers.length} users</span>
@@ -426,10 +429,11 @@ export class Layout extends Component {
                                         <div class="line"></div>
                                         <div id="help-session" class="conversation">
                                             <div class="conversation-wrapper">
-                                                <div class="images">
-                                                    <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
-                                                    <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
-                                                </div>
+                                            <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
+                                                    fill="#D7D7D7" />
+                                            </svg>
                                                 <div class="conversation-name">
                                                     <span class="name">Help</span>
                                                     <span class="users-number">{this.state.helpRequests.length} users</span>
@@ -445,10 +449,11 @@ export class Layout extends Component {
                                                     <div class="line"></div>
                                                     <div class="conversation">
                                                         <div class="conversation-wrapper">
-                                                            <div class="images">
-                                                                <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
-                                                                <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
-                                                            </div>
+                                                            <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
+                                                                    fill="#D7D7D7" />
+                                                            </svg>
                                                             <div class="conversation-name" onClick={() => this.openChatChatandFixUI([m.msg], m.id)} id={m.id}>
                                                                 <span class="name">{m.user}</span>
                                                                 <span class="users-number">{m.msg}</span>
@@ -486,10 +491,11 @@ export class Layout extends Component {
                                                         <div class="line"></div>
                                                         <div class="conversation">
                                                             <div class="conversation-wrapper">
-                                                                <div class="images">
-                                                                    <img class="firstImg" src={require("../assets/img/associated_photo4.png")} alt="associated_photo" />
-                                                                    <img class="secondImg" src={require("../assets/img/associated_photo5.png")} alt="associated_photo" />
-                                                                </div>
+                                                                <svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M22 0C9.856 0 0 9.856 0 22C0 34.144 9.856 44 22 44C34.144 44 44 34.144 44 22C44 9.856 34.144 0 22 0ZM22 6.6C25.652 6.6 28.6 9.548 28.6 13.2C28.6 16.852 25.652 19.8 22 19.8C18.348 19.8 15.4 16.852 15.4 13.2C15.4 9.548 18.348 6.6 22 6.6ZM22 37.84C16.5 37.84 11.638 35.024 8.8 30.756C8.866 26.378 17.6 23.98 22 23.98C26.378 23.98 35.134 26.378 35.2 30.756C32.362 35.024 27.5 37.84 22 37.84Z"
+                                                                        fill="#D7D7D7" />
+                                                                </svg>
                                                                 <div class="conversation-name" onClick={() => this.openChatChatandSetGroup([chatKey], chatKey, chatText)} id={chatKey + messageIndex.toString()}>
                                                                     <span class="name">{chatText}</span>
                                                                     <span class="users-number">{users.split(';').length}</span>

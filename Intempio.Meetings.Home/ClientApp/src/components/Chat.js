@@ -505,16 +505,9 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                     <span class="reply-text">{replyMsg.split('|')[0]}</span>
                 </div>}
                 <div class="chat-footer-wrapper">
-                    <div class="upload-buttons">
-                        <label class="chatFile" for="chatGeneralFile">
-                            <input style={{ display: "none" }} type="file" id="chatGeneralFile" name="chatFile" multiple />
-                        </label>
-                        <label class="chatPicture" for="chatGeneralPicture">
-                            <input style={{ display: "none" }} type="file" id="chatGeneralPicture" name="chatPicture" multiple />
-                        </label>
-                    </div>
+            
                     <form>
-                        <label for="messageText"><input id="messageText" type="text" placeholder="Aa" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
+                        <label for="messageText"><input id="messageText" type="text" placeholder="Type your message" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
                         <button class="chatButton" id="chatButton" onClick={e => {
                             e.preventDefault();
                             if (input.msg != '') {
