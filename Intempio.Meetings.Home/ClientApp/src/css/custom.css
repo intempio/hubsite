@@ -114,14 +114,15 @@ code {
     .settings-item .recent-info {
         width: 100%;
     }
-    main .presenters-container .presenter .name {
-        height: 50px;
-    }
+main .presenters-container .presenter .name {
+    margin-top: 0px !important;
+    text-transform: none !important;
+}
 
 main .presenters-container .presenter .position {
     height: 32px;
     display:block!important;
-    min-height:100px;
+  
 }
 
 .profiletitle{
@@ -141,6 +142,13 @@ main .presenters-container {
 
 .wrapper main .recent-container {
     display: flex !important;
+}
+
+main .recent-item p {
+    font-size: 18px !important;
+    line-height: 20px !important;
+    min-height: 40px !important;
+    text-transform: none !important;
 }
 
 .buttonposter {
