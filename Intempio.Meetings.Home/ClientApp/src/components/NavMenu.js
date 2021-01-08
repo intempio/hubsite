@@ -956,7 +956,7 @@ export class NavMenu extends Component {
                                 let customIcon = 'Files';
                                 if (menuText.indexOf('>') > 0) {
 
-                                    if (menuText.split('>').length === 3) {
+                                    if (menuText.split('>').length >= 3) {
                                         url = menuText.split('>')[2]
                                     }
                                     let tempmenuText = menuText.split('>')[0];
@@ -1189,7 +1189,7 @@ export class NavMenu extends Component {
                                             let customIcon = 'Files';
                                             if (menuText.indexOf('>') > 0) {
 
-                                                if (menuText.split('>').length === 3) {
+                                                if (menuText.split('>').length >= 3) {
                                                     url = menuText.split('>')[2]
                                                 }
                                                 let tempmenuText = menuText.split('>')[0];
