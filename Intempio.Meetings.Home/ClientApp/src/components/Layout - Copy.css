@@ -1,8 +1,22 @@
-.wrapper {
-    margin-left: 200px;
+body {
+    height: 100%;
+    width: 100%;
+    background: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.5s;
+    justify-content: center;
 }
 
-/*# sourceMappingURL=wrapper.css.map */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/*# sourceMappingURL=base.css.map */
