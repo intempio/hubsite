@@ -34,8 +34,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\css\NewFolder\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\css\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\src\css\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\css\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -44,7 +48,6 @@
     <Folder Include="ClientApp\src\css\main\" />
     <Folder Include="ClientApp\src\css\media-queries\" />
     <Folder Include="ClientApp\src\css\navbar\" />
-    <Folder Include="ClientApp\src\css\NewFolder\" />
     <Folder Include="ClientApp\src\css\wrapper\" />
   </ItemGroup>
 

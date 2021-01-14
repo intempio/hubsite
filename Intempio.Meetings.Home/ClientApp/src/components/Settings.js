@@ -5,11 +5,11 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lists: [], loading: false, sitename: '#', siteID: 'N/A', configtext: 'N/A', configitemslist: null, usermeetingexcelID: '1111',key:'',
+            lists: [], loading: false, sitename: '#', siteID: 'N/A', configtext: 'N/A', configitemslist: null, usermeetingexcelID: '1111', key: '',
             Title: '', Description: "",
             StartDate: "",
             EndDate: "",
-            Location:'',
+            Location: '',
             Active: false,
             Menus: "",
             Sections: "",
@@ -30,7 +30,8 @@ export default class Settings extends Component {
             invalidKey: false,
             load: true,
             CustomChatGroups: '',
-            SiteIcon:''
+            SiteIcon: '',
+            LocalDate: ''
         };
     }
 
@@ -79,7 +80,7 @@ export default class Settings extends Component {
 
     async getGetSite(e) {
         e.preventDefault();
-     
+
 
         this.getGetConfigInfo();
     }
@@ -91,7 +92,7 @@ export default class Settings extends Component {
 
 
         this.setState({ loading: true });
-        const response = await fetch('Meeting/GetConfigInfo?validate=1&key=' + this.state.key,  {
+        const response = await fetch('Meeting/GetConfigInfo?validate=1&key=' + this.state.key, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
 
@@ -104,7 +105,7 @@ export default class Settings extends Component {
             var item = resonse.value;
             this.setState({ loading: false });
 
-        
+
             if (item) {
 
                 this.setState({
@@ -130,10 +131,11 @@ export default class Settings extends Component {
                     GeneralChatName: item.intempioSettings.generalChatName,
                     HelpChatName: item.intempioSettings.helpChatName,
                     CustomChatGroups: item.intempioSettings.customChatGroups,
-                    SiteIcon: item.intempioSettings.siteIcon
+                    SiteIcon: item.intempioSettings.siteIcon,
+                    LocalDate: item.intempioSettings.localDate
                 });
                 this.getGetSiteInfo();
-                this.setState({ invalidKey: false, load :false });
+                this.setState({ invalidKey: false, load: false });
                 return true;
 
             } else {
@@ -153,7 +155,7 @@ export default class Settings extends Component {
     async getGetListInfo() {
 
 
-     
+
 
         this.setState({ loading: true });
         const response = await fetch('Meeting/GetListInfo?sitename=' + this.state.siteID, {
@@ -165,7 +167,7 @@ export default class Settings extends Component {
 
 
         const finalresult = await response.json().then(async (resonse) => {
-    this.setState({ loading: false });
+            this.setState({ loading: false });
             var items = JSON.parse(resonse.value);
             this.setState({ loading: false });
             if (items) {
@@ -197,7 +199,7 @@ export default class Settings extends Component {
             this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
             this.setState({ loading: false });
-            if (item.value.length>0) {
+            if (item.value.length > 0) {
                 this.setState({ usermeetingexcelID: item.value[0].id });
 
                 this.getGetListInfo();
@@ -227,7 +229,7 @@ export default class Settings extends Component {
 
 
         const finalresult = await response.json().then(async (resonse) => {
-          this.setState({ loading: false });
+            this.setState({ loading: false });
             var items = JSON.parse(resonse.value);
             this.setState({ loading: false });
             if (items) {
@@ -235,7 +237,7 @@ export default class Settings extends Component {
 
                 this.getGetShareddocumentItem();
 
-               
+
                 return true;
 
             } else {
@@ -254,7 +256,7 @@ export default class Settings extends Component {
     }
     componentDidMount() {
 
-      
+
     }
 
 
@@ -285,11 +287,11 @@ export default class Settings extends Component {
             "\"SuperUsersURL\": \"/sites/####/lists/##SuperUsersURL##/items?expand=fields&$filter=fields/Title eq '{0}'\"," +
             //  "SiteID": "{SiteID}",
             "\"SiteID\": \"####\"," +
-             "\"MeetingUserExcel\": \"/sites/####/drive/items/##ExcelSheetID##/workbook/worksheets('Sheet1')/usedRange\","+
+            "\"MeetingUserExcel\": \"/sites/####/drive/items/##ExcelSheetID##/workbook/worksheets('Sheet1')/usedRange\"," +
             "\"SharedDocumentLib\": \"/sites/####/drive/root/children?$filter=name eq '{0}'\","
 
         var configitems = null;
- 
+
 
 
         items.forEach(item => {
@@ -299,14 +301,14 @@ export default class Settings extends Component {
                 case "BreakoutRooms":
                     config = config.replace("##MatchMakingURL##", item.id);
 
-                    configitems == null ? configitems = "MatchMakingURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|MatchMakingURL#" + "/sites/" + this.state.siteID+"/lists/" + item.id + "/items?$expand=fields"
-                 
+                    configitems == null ? configitems = "MatchMakingURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|MatchMakingURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
+
                     break;
 
                 case "EventMaster":
                     config = config.replace("##EventMasterURL##", item.id);
 
-                    configitems == null ? configitems = "EventMasterURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|EventMasterURL#" + "/sites/" + this.state.siteID +"/lists/" + item.id + "/items?$expand=fields"
+                    configitems == null ? configitems = "EventMasterURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|EventMasterURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
                     break;
                 case "EventInfo":
                     config = config.replace("##EventInfoURL##", item.id);
@@ -342,14 +344,14 @@ export default class Settings extends Component {
                     configitems == null ? configitems = "UsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'" : configitems = configitems + "|UsersURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?expand=fields&$filter=fields/Email eq '{0}'"
 
                     break;
-               
+
             }
 
         });
 
 
         configitems = configitems + "|" + "SiteID#" + this.state.siteID + "|" +
-       
+
 
             "MeetingUserExcel#/sites/" + this.state.siteID + "/drive/items/" + this.state.usermeetingexcelID + "/workbook/worksheets('Sheet1')/usedRange";
 
@@ -373,7 +375,7 @@ export default class Settings extends Component {
         this.setState({ configtext: config });
         this.setState({ configitemslist: configitems });
 
-      
+
     }
 
 
@@ -402,7 +404,8 @@ export default class Settings extends Component {
             + "GeneralChatName#" + this.state.GeneralChatName + "|"
             + "HelpChatName#" + this.state.HelpChatName + "|"
             + "SiteIcon#" + this.state.SiteIcon + "|"
-            + "CustomChatGroups#" + this.state.CustomChatGroups;
+            + "CustomChatGroups#" + this.state.CustomChatGroups + "|"
+            + "LocalDate#" + this.state.LocalDate;
 
         return newconfig;
 
@@ -418,11 +421,11 @@ export default class Settings extends Component {
                 <h3>Settings</h3>
                 <div class="recent-container settings" >
 
-         
+
                     <div class="settings-item " >
 
-                        <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.sitename} onChange={this.onchangeSiteID.bind(this)} 
-                        
+                        <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.sitename} onChange={this.onchangeSiteID.bind(this)}
+
                         />
 
                         <input id='comment' type="text" placeholder="security key" class="textbox" value={this.state.key} onChange={e => this.setState({ key: e.target.value })} />
@@ -432,159 +435,167 @@ export default class Settings extends Component {
                         {(this.state.invalidKey) && < div className="info-message">Invalid security key...   </div>}
                     </div>
                     {!this.state.load && <>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <p>SiteID</p>
-                            <h4>{this.state.siteID} </h4>
+                            <div class="recent-info">
+                                <p>SiteID</p>
+                                <h4>{this.state.siteID} </h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Title</h4>
-                            <p> <input id='comment' type="text" placeholder="Event name" class="textbox" value={this.state.Title} onChange={e => this.setState({ Title: e.target.value })} /></p>
+                            <div class="recent-info">
+                                <h4>Title</h4>
+                                <p> <input id='comment' type="text" placeholder="Event name" class="textbox" value={this.state.Title} onChange={e => this.setState({ Title: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Description</h4>
+                            <div class="recent-info">
+                                <h4>Description</h4>
                                 <p> <input id='comment' type="text" placeholder="Description" class="textbox" value={this.state.Description} onChange={e => this.setState({ Description: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Start Date (UTC)</h4>
+                            <div class="recent-info">
+                                <h4>Start Date (UTC)</h4>
                                 <p> <input id='comment' type="text" placeholder="MM/DD/YYYY" class="textbox" value={this.state.StartDate} onChange={e => this.setState({ StartDate: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>End Date (UTC)</h4>
+                            <div class="recent-info">
+                                <h4>End Date (UTC)</h4>
                                 <p> <input id='comment' type="text" placeholder="MM/DD/YYYY" class="textbox" value={this.state.EndDate} onChange={e => this.setState({ EndDate: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Active</h4>
+                            <div class="recent-info">
+                                <h4>Active</h4>
                                 <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Active} onChange={e => this.setState({ Active: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
+                            <div class="recent-info">
                                 <h4>Menus</h4>
                                 <p><textarea rows="5" id='comment' type="text" placeholder="events,session>Intempio Experience 2020,video>Watch Now" class="textbox" value={this.state.Menus} onChange={e => this.setState({ Menus: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Sections</h4>
+                            <div class="recent-info">
+                                <h4>Sections</h4>
                                 <p><textarea rows="5" id='comment' type="text" placeholder="home>Home,anchor>News>cat01,resources,custom>Agenda>https://intempioevetns." class="textbox" value={this.state.Sections} onChange={e => this.setState({ Sections: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>All Events</h4>
+                            <div class="recent-info">
+                                <h4>All Events</h4>
                                 <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.AllEvents} onChange={e => this.setState({ AllEvents: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>SQL Events</h4>
+                            <div class="recent-info">
+                                <h4>SQL Events</h4>
                                 <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.SQL} onChange={e => this.setState({ SQL: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Yammer</h4>
+                            <div class="recent-info">
+                                <h4>Yammer</h4>
                                 <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Yammer} onChange={e => this.setState({ Yammer: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Excel Login</h4>
+                            <div class="recent-info">
+                                <h4>Excel Login</h4>
                                 <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.Excellogin} onChange={e => this.setState({ Excellogin: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>SQL Login</h4>
+                            <div class="recent-info">
+                                <h4>SQL Login</h4>
                                 <p><input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.SQLLogin} onChange={e => this.setState({ SQLLogin: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>General Chat Name</h4>
+                            <div class="recent-info">
+                                <h4>General Chat Name</h4>
                                 <p><input id='comment' type="text" placeholder="Unique name for general chat" class="textbox" value={this.state.GeneralChatName} onChange={e => this.setState({ GeneralChatName: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Help Chat Name</h4>
+                            <div class="recent-info">
+                                <h4>Help Chat Name</h4>
                                 <p> <input id='comment' type="text" placeholder="Unique name for help chat" class="textbox" value={this.state.HelpChatName} onChange={e => this.setState({ HelpChatName: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Unrecognized Login</h4>
+                            <div class="recent-info">
+                                <h4>Unrecognized Login</h4>
                                 <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.UnrecognizedLogin} onChange={e => this.setState({ UnrecognizedLogin: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Colour</h4>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Convert date to Local </h4>
+                                <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.LocalDate} onChange={e => this.setState({ LocalDate: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Colour</h4>
                                 <p> <input id='comment' type="text" placeholder="Hex value (without '#')" class="textbox" value={this.state.Colour} onChange={e => this.setState({ Colour: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Menu Folder</h4>
+                            <div class="recent-info">
+                                <h4>Menu Folder</h4>
                                 <p> <input id='comment' type="text" placeholder="Blob container url" class="textbox" value={this.state.MenuFolder} onChange={e => this.setState({ MenuFolder: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Upload Folder</h4>
+                            <div class="recent-info">
+                                <h4>Upload Folder</h4>
                                 <p> <input id='comment' type="text" placeholder="Site url" class="textbox" value={this.state.UploadFolder} onChange={e => this.setState({ UploadFolder: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Video URL</h4>
+                            <div class="recent-info">
+                                <h4>Video URL</h4>
                                 <p><input id='comment' type="text" placeholder="Azure media services url" class="textbox" value={this.state.Video} onChange={e => this.setState({ Video: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Banner URL</h4>
+                            <div class="recent-info">
+                                <h4>Banner URL</h4>
                                 <p> <input id='comment' type="text" placeholder="Blob container url" class="textbox" value={this.state.Banner} onChange={e => this.setState({ Banner: e.target.value })} /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Location</h4>
+                            <div class="recent-info">
+                                <h4>Location</h4>
                                 <p> <input id='comment' type="text" placeholder="Boston" class="textbox" value={this.state.Location} onChange={e => this.setState({ Location: e.target.value })} /></p>
-                        </div>
+                            </div>
                         </div>
                         <div class="settings-item">
 
@@ -607,37 +618,37 @@ export default class Settings extends Component {
                                 <p> <textarea id='comment' type="text" placeholder="Group1>Group one>user1@intempio.com;user2@intempio.com,Group2>Group two>user1@intempio.com;user4@intempio.com" class="textbox" value={this.state.CustomChatGroups} onChange={e => this.setState({ CustomChatGroups: e.target.value })} /></p>
                             </div>
                         </div>
-                    <div class="settings-item">
+                        <div class="settings-item">
 
-                        <div class="recent-info">
-                            <h4>Config entry</h4>
-                            <p>{this.state.configtext}</p>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-
-                        <div class="recent-info">
-                            <p>MeetingUser.xlsx ID</p>
-                            <h4>{this.state.usermeetingexcelID}</h4>
-                        </div>
-                    </div>
-
-
-                    {this, this.state.lists.map(item => {
-
-                        return <div class="settings-item">
                             <div class="recent-info">
-                                <p>{item.displayName}</p>
-                                <h4>{item.id}</h4>
+                                <h4>Config entry</h4>
+                                <p>{this.state.configtext}</p>
                             </div>
                         </div>
-                    })
-                        
-                    }
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>MeetingUser.xlsx ID</p>
+                                <h4>{this.state.usermeetingexcelID}</h4>
+                            </div>
+                        </div>
+
+
+                        {this, this.state.lists.map(item => {
+
+                            return <div class="settings-item">
+                                <div class="recent-info">
+                                    <p>{item.displayName}</p>
+                                    <h4>{item.id}</h4>
+                                </div>
+                            </div>
+                        })
+
+                        }
                     </>
                     }
                 </div>
-             
+
             </div>
 
 

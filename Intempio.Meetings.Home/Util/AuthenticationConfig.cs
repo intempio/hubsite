@@ -136,8 +136,8 @@ namespace Intempio.Meetings.Home.Util
 
             public string CustomChatGroups { get; set; }
             public string SiteIcon { get; set; }
-            
 
+            public string LocalDate { get; set; }
 
         }
         public string SharedDocumentLibItems { get; set; }

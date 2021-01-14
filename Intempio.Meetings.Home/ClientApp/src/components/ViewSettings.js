@@ -31,7 +31,8 @@ export default class ViewSettings extends Component {
             key: '',
             load: true,
             CustomChatGroups: '',
-            SiteIcon: ''
+            SiteIcon: '',
+            LocalDate: ''
         };
     }
 
@@ -80,7 +81,9 @@ export default class ViewSettings extends Component {
                     GeneralChatName: item.intempioSettings.generalChatName,
                     HelpChatName: item.intempioSettings.helpChatName,
                     CustomChatGroups: item.intempioSettings.customChatGroups,
-                    SiteIcon: item.intempioSettings.siteIcon
+                    SiteIcon: item.intempioSettings.siteIcon,
+                    LocalDate: item.intempioSettings.localDate
+
                 });
                 this.setState({ invalidKey: false, load: false });
                 return true;
@@ -375,6 +378,13 @@ export default class ViewSettings extends Component {
                             <div class="recent-info">
                                 <p>Unrecognized Login</p>
                                 <h4>{this.state.UnrecognizedLogin}</h4>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Local date format</p>
+                                <h4>{this.state.LocalDate}</h4>
                             </div>
                         </div>
                         <div class="settings-item">

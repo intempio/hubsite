@@ -209,7 +209,11 @@ namespace Intempio.Meetings.Home.Services
                         opt.SiteIcon = value;
                     });
                     break;
-
+                case "LocalDate":
+                    _writableLocations.Update(opt => {
+                        opt.LocalDate = value;
+                    });
+                    break;
             }
 
         }
