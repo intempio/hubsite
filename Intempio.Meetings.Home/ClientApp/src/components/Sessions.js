@@ -150,7 +150,7 @@ export default class Session extends Component {
                     <div class="skelleton-header">
                         <h3 class="skelleton-loading">Upcoming Events</h3>
                         <div class="skelleton-loading skeleton-sessions-selector">
-                            <div id="selector" class="selector">
+                            <div  class="selector">
                             </div>
 
                         </div>

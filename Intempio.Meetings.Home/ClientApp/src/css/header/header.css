@@ -415,6 +415,7 @@ header {
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
+        flex: 0 0 auto;
     }
 
         header .chat-message-owner > .message {
@@ -710,6 +711,7 @@ header {
         margin-top: 20px;
         display: flex;
         align-items: flex-end;
+        flex: 0 0 auto;
     }
 
         header .chat-message-guest:hover .acts {
