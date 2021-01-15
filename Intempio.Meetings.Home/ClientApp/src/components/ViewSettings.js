@@ -383,7 +383,7 @@ export default class ViewSettings extends Component {
                         <div class="settings-item">
 
                             <div class="recent-info">
-                                <p>Local date format</p>
+                                <p>EST date format</p>
                                 <h4>{this.state.LocalDate}</h4>
                             </div>
                         </div>

@@ -551,7 +551,7 @@ export default class Settings extends Component {
                         <div class="settings-item">
 
                             <div class="recent-info">
-                                <h4>Convert date to Local </h4>
+                                <h4>Convert date to EST </h4>
                                 <p> <input id='comment' type="text" placeholder="True/False" class="textbox" value={this.state.LocalDate} onChange={e => this.setState({ LocalDate: e.target.value })} /></p>
                             </div>
                         </div>
