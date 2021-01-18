@@ -131,6 +131,7 @@ main .presenters-container .presenter .position {
 }
 
 main .presenters-container {
+    text-align:center;
     display: block !important;
   /*  display: flex !important;*/
 }
