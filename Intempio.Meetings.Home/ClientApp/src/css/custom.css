@@ -132,7 +132,7 @@ main .presenters-container .presenter .position {
 
 main .presenters-container {
     display: block !important;
-    display: flex !important;
+  /*  display: flex !important;*/
 }
 
 .popup-close {
@@ -452,4 +452,13 @@ header .chat-message-owner > .message-wrapper > .message > span {
     padding-bottom: 5px !important;
     flex-direction: row-reverse;
     padding-right: 5px;
+}
+
+
+main .presenters-container .presenter:first-child {
+    min-height: 400px;
+}
+
+main .presenters-container .presenter {
+    min-height: 400px;
 }
