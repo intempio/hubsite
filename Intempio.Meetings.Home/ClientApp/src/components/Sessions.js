@@ -296,21 +296,11 @@ export default class Session extends Component {
                             var a = item;
                             // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
                             var momentObj = moment.utc(item.fields.StartTime);
-
-
-                            if (this.props.localDate == 'true' || this.props.localDate == 'True') {
-
-                                momentObj = moment.utc(item.fields.StartTime).tz("America/New_York");
-                            }
                             ////Apply Moment.Js Formatter to your desire date format
                             var formattedStartTime = momentObj.local().format('hh:mm A');
                             var formattedDate = momentObj.local().format('DD MMM');
                             //  var momentObj = moment.tz(item.fields.FinishTime, 'America/New_York');
                             momentObj = moment.utc(item.fields.FinishTime);
-                            if (this.props.localDate == 'true' || this.props.localDate == 'True') {
-
-                                momentObj = moment.utc(item.fields.FinishTime).tz("America/New_York");
-                            }
                             var formattedEndTime = momentObj.local().format('hh:mm A');
 
                             return (<div class="sessions-item">

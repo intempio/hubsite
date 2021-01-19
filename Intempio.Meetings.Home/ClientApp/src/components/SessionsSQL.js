@@ -102,7 +102,7 @@ export default class SessionsSQL extends Component {
 
         const finalresult = await response.json().then(async (resonse) => {
 
-
+         
             var items = JSON.parse(resonse.value);
             if (items) {
                 this.setState({ IsSuperUser: items.value.length > 0 });
@@ -203,7 +203,7 @@ export default class SessionsSQL extends Component {
                     <div class="skelleton-header">
                         <h3 class="skelleton-loading">Upcoming Events</h3>
                         <div class="skelleton-loading skeleton-sessions-selector">
-                            <div class="selector">
+                            <div  class="selector">
                             </div>
 
                         </div>
@@ -349,6 +349,7 @@ export default class SessionsSQL extends Component {
                                 buttonTitle = item.description.split('#')[1];
                             }
 
+                            var a = item;
                             // var momentObj = moment.tz(item.fields.StartTime, 'America/New_York');
                             var momentObj = moment.utc(item.startTime);
                             ////Apply Moment.Js Formatter to your desire date format
@@ -357,19 +358,6 @@ export default class SessionsSQL extends Component {
                             //  var momentObj = moment.tz(item.fields.FinishTime, 'America/New_York');
                             momentObj = moment.utc(item.endTime);
                             var formattedEndTime = momentObj.local().format('hh:mm A');
-
-                            var newYork = moment.tz(item.startTime, "America/New_York");
-                            console.log(momentObj.local().format('hh:mm A'));
-                            console.log(newYork.format('hh:mm A'));
-
-                            if (this.props.localDate == 'true' || this.props.localDate == 'True') {
-
-                                momentObj = moment.utc(item.startTime).tz("America/New_York");
-                                formattedStartTime = momentObj.format('hh:mm A');
-                                formattedDate = momentObj.format('DD MMM');
-                                momentObj = moment.utc(item.endTime).tz( "America/New_York");
-                                formattedEndTime = momentObj.format('hh:mm A');
-                            }
 
                             return (<div class="sessions-item">
                                 <div class="sessions-time">

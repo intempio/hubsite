@@ -118,7 +118,7 @@ export default class Video extends Component {
     }
     componentDidMount() {
 
-        this.getSettingsv2();
+        this.getSettings();
         this.loadmsgFromYammer();
 
     }

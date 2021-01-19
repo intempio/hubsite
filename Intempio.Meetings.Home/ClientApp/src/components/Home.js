@@ -21,7 +21,7 @@ export class Home extends Component {
     static displayName = Home.name;
     constructor(props) {
         super(props);
-        this.state = { sections: [], allEvents: false, loading: false, isSQL: false, loadfrequency: 0 };
+        this.state = { sections: [], allEvents: false, loading: false, isSQL: false, loadfrequency:0 };
 
     }
     async getSettings() {
@@ -38,7 +38,7 @@ export class Home extends Component {
             this.setState({ loading: false });
             if (item && item.value[0].fields.Sections) {
 
-                this.setState({ sections: item.value[0].fields.Sections.split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql, loadfrequency: item.value[0].fields.LoadingFrequency });
+                this.setState({ sections: item.value[0].fields.Sections.split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql, loadfrequency: item.value[0].fields.LoadingFrequency});
                 return true;
 
             } else {
@@ -76,12 +76,8 @@ export class Home extends Component {
 
             if (item) {
 
-                this.setState({
-                    sections: item.intempioSettings.sections.split(","), loading: false, allEvents: (item.intempioSettings.allEvents.toLowerCase() === 'true'), isSQL: (item.intempioSettings.sql.toLowerCase() === 'true'), loadfrequency: item.intempioSettings.loadingFrequency,
-                    localDate: item.intempioSettings.localDate
-
-                });
-
+                this.setState({ sections: item.intempioSettings.sections.split(","), loading: false, allEvents: (item.intempioSettings.allEvents.toLowerCase() === 'true'), isSQL: (item.intempioSettings.sql.toLowerCase() === 'true'), loadfrequency: item.intempioSettings.loadingFrequency });
+          
 
             } else {
 
@@ -110,7 +106,7 @@ export class Home extends Component {
         //scrollToAnchor();
         //window.onhashchange = scrollToAnchor;
 
-
+      
     }
 
 
@@ -120,67 +116,67 @@ export class Home extends Component {
 
         return (
             <>
-
+          
                 {
                     this.state.sections && this.state.sections.map((item, i) => {
 
                         var itemvalue = item;
                         var name = item;
                         var anchor = 'default';
-
+                     
                         if (itemvalue.indexOf('>') > 0) {
                             if (itemvalue.split('>').length === 3) {
                                 anchor = itemvalue.split('>')[2]
                             }
                             name = itemvalue.split('>')[1]
-                            itemvalue = itemvalue.split('>')[0]
+                            itemvalue= itemvalue.split('>')[0]
                         }
-
+                        
                         itemvalue = itemvalue.toLowerCase();
 
                         switch (itemvalue) {
 
                             case "events":
-                                return <Events buttonStatus="false" />
+                                return <Events buttonStatus="false"/>
 
                             case "session":
 
                                 if (this.state.isSQL === true) {
-                                    return <SessionsSQL allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} localDate={this.state.localDate} />
+                                    return <SessionsSQL allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} />
                                 }
                                 else {
-                                    return <Session allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} localDate={this.state.localDate} />
+                                    return <Session allEvents={this.state.allEvents} cname={name} refreshRate={this.state.loadfrequency} />
                                 }
                             case "video":
                                 return <Video cname={name} />
                             case "mostrecent":
                                 return <MostRecent cname={name} />
                             case "poster":
-                                return <Poster cname={name} category={anchor} />
+                                return <Poster cname={name} category={anchor }/>
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":
-                                return <Presenters cname={name} category={anchor} />
-
+                                return <Presenters cname={name} category={anchor}/>
+                                
 
                         }
-
+                       
                     })
-
+               
                 }
 
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Events buttonStatus="false" />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <SessionsSQL allEvents={false} />}
-                {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Video />}
+                {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Video/> }
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <MostRecent />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Poster />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <ChatContent />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Presenters />}
-                {/* <div class="recent-container poster-container">
-                    <iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/f5f64189d0939668b08a93075b16f3f1/ad2350ef43bc' style={{ width: '600px', height: '600px' }}></iframe>
-                </div> */}
-            </>
 
+               
+               
+ </>
+           
         );
     }
 }

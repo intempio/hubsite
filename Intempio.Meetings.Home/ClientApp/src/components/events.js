@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import moment from 'moment-timezone';
+import moment from 'moment';
 export default class Event extends Component {
 
     constructor(props) {
@@ -71,7 +71,7 @@ export default class Event extends Component {
                 var formattedStartDate = momentObj.local().format('DD MMM YYYY');
                 this.countdown(item.intempioSettings.startDate);
 
-                this.setState({ title: item.intempioSettings.title, sdate: formattedStartDate, loading: false, location: item.intempioSettings.location, Banner: item.intempioSettings.banner, localDate: item.intempioSettings.localDate});
+                this.setState({ title: item.intempioSettings.title, sdate: formattedStartDate, loading: false, location: item.intempioSettings.location, Banner: item.intempioSettings.banner });
 
 
             } else {
@@ -92,12 +92,9 @@ export default class Event extends Component {
 
         setInterval(() => {
             var startM = moment.utc(Date.now());
-            var start = startM.local();
-
-            if (this.props.localDate == 'true' || this.props.localDate == 'True') { start = moment.utc(startM).tz("America/New_York"); }
+            var start = startM.local()
             var endM = moment.utc(startDate);
             var end = endM.local();
-            if (this.props.localDate == 'true' || this.props.localDate == 'True') { end = moment.utc(endM).tz("America/New_York"); }
             var duration = moment.duration(end.diff(start));
             var dc = duration.asDays().toString();
             this.setState({ dCount: dc.split(".")[0], hCount: duration.hours(), mCount: duration.minutes(), sCount: duration.seconds() });
