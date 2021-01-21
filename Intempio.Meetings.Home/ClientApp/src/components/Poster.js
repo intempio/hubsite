@@ -13,9 +13,12 @@ export default class Poster extends Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     openInNewTab = (url) => {
-        ActivityLog.getStringValue(this.state.email, "Poster-Clicked", url);
-        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
+
+        if (url != '#') {
+            ActivityLog.getStringValue(this.state.email, "Poster-Clicked", url);
+            const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+            if (newWindow) newWindow.opener = null
+        }
     }
 
     async getGetPosterSessions() {
@@ -123,7 +126,7 @@ export default class Poster extends Component {
                         {
 
 
-                            this.state.posterSessions && this.state.posterSessions.map((item, i) => {
+                            this.state.posterSessions && this.state.posterSessions.length && this.state.posterSessions.map((item, i) => {
 
                                 var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
                                 var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
@@ -155,7 +158,7 @@ export default class Poster extends Component {
                             {
 
 
-                                this.state.posterSessions && this.state.posterSessions.map((item, i) => {
+                                this.state.posterSessions && this.state.posterSessions.length > 0 && this.state.posterSessions.map((item, i) => {
                                     var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
                                     var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
 
