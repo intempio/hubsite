@@ -126,6 +126,7 @@ export class Login extends Component {
 
                 if (this.state.email && this.state.email != '') {
                     localStorage.setItem("userToken", JSON.stringify(userObj));
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
                     history.push('/');
                 }
             }
@@ -163,15 +164,21 @@ export class Login extends Component {
 
                 if (this.state.email && this.state.email != '') {
                     localStorage.setItem("userToken", JSON.stringify(userObj));
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
                     history.push('/');
                 }
             }
             else {
-                if (eventID) { this.setState({ status: 3 }) } else {
+                if (eventID) {
+                    this.setState({ status: 3 })
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "User redirection is under development");
+                } else {
                     this.setState({ status: 2 });
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:This email is not registered for this event");
                 }
             }
         }).catch((error) => {
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Error");
             this.setState({ status: 2 });
             this.setState({ loading: false });
         });
@@ -201,14 +208,16 @@ export class Login extends Component {
 
                 if (this.state.email && this.state.email != '') {
                     localStorage.setItem("userToken", JSON.stringify(userObj));
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
                     history.push('/');
                 }
             }
             else {
                 this.setState({ status: 2 });
-
+                ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:This email is not registered for this event");
             }
         }).catch((error) => {
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Error");
             this.setState({ status: 2 });
             this.setState({ loading: false });
         });
@@ -226,6 +235,7 @@ export class Login extends Component {
 
             } else {
                 if (this.state.excelLogin == true) {
+
                     this.getExcelUserUserInfo();
 
                 } else if (this.state.sqllogin == true) {
@@ -250,6 +260,7 @@ export class Login extends Component {
     onchangeEmail(e) {
         this.setState({ status: 0 });
         this.setState({ emailinput: e.target.value });
+
     }
 
     onchangeFname(e) {
@@ -273,16 +284,21 @@ export class Login extends Component {
    
         if (!this.validateEmail(this.state.emailinput)) {
             this.setState({ status: 1 });
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:Please enter valid email");
             return false;
         }
 
         if (this.state.inputFirstName === '') {
             this.setState({ status: 4 });
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:Please enter your first name");
+
             return false;
         }
 
         if (this.state.inputLastName === '') {
             this.setState({ status: 5 });
+            ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:Please enter your last name");
+
             return false;
         }
         return true;

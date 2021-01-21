@@ -40,7 +40,6 @@ export default class ViewSettings extends Component {
 
 
 
-
         this.setState({ loading: true });
         const response = await fetch('Meeting/GetConfigInfo?validate=1&key=' + this.state.key, {
             method: "GET",
