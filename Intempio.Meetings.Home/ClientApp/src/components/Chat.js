@@ -501,7 +501,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
             </div>
             <div class="chat-footer" >
                 {replyMsg !='' && <div class="chat-replay">
-                    <span class="reply-for">Replay for:</span>
+                    <span class="reply-for">Reply to:</span>
                     <span class="reply-text">{replyMsg.split('|')[0]}</span>
                 </div>}
                 <div class="chat-footer-wrapper">
