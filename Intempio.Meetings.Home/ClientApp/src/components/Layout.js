@@ -420,7 +420,7 @@ export class Layout extends Component {
                                             </svg>
 
                                                 <div class="conversation-name">
-                                                    <span class="name">General</span>
+                                                <span class="name">Everyone</span>
                                                     <span class="users-number">{this.state.chatUsers.length} users</span>
                                                 </div>
                                             </div>

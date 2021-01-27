@@ -21,6 +21,275 @@ export class NavMenu extends Component {
     }
 
 
+    overlayMenuSetings(hasSubMenu) {
+
+        /*Menu build starts ################################################################################################################################*/
+
+
+        const menuFunction = () => {
+            const elements = document.getElementsByClassName('menu-button');
+            const navbar = document.getElementById('navbar');
+            const logo = document.getElementById('logo');
+            const navHeader = document.getElementById('nav-header');
+            const menuTitle = document.getElementById('menu-title');
+            const arrowIcon = document.getElementById('arrow-icon');
+            const wrapper = document.getElementById('wrapper');
+            const footer = document.getElementById('footer');
+            const menuItems = document.getElementsByClassName('menu-item');
+            const navArrow = document.getElementById('nav-arrow');
+            const menuItemArrow = document.getElementById('menu-item-arrow');
+
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements.item(i);
+                if (element.classList.contains('hide')) {
+                    menuOverlayed = false;
+                    setTimeout(() => element.classList.remove('hide'), 150);
+                    navbar.style.width = '200px';
+                    menuTitle.style.margin = '54px 31px 25px 30px';
+                    navArrow.style.left = '145px'
+                    logo.style.width = '100px';
+                    logo.style.height = '60px';
+                    navHeader.style.padding = '18px 50px';
+                    arrowIcon.style.transform = 'rotate(0)';
+                    wrapper.style.marginLeft = '200px';
+                    footer.style.marginLeft = '200px';
+
+                    if (menuItemArrow) {
+                        setTimeout(() => (menuItemArrow.style.display = 'block'), 500);
+                    }
+                    for (let i = 0; i < menuItems.length; i++) {
+                        menuItems[i].style.width = '200px';
+                        menuItems[i].style.padding = '10px 0 10px 30px';
+                        menuItems[i].style.margin = '0';
+                        menuItems[i].style.justifyContent = 'space-between';
+                    }
+                } else {
+                    menuOverlayed = true;
+                    element.classList.add('hide');
+                    navbar.style.width = '84px';
+                    menuTitle.style.margin = '54px 18px 25px 18px';
+                    navArrow.style.left = '42px';
+                    logo.style.width = '66px';
+                    logo.style.height = '40px';
+                    navHeader.style.padding = '30px 9px 26px';
+                    arrowIcon.style.transform = 'rotate(180deg)';
+                    wrapper.style.marginLeft = '84px';
+                    footer.style.marginLeft = '84px';
+                    if (menuItemArrow) {
+                        menuItemArrow.style.display = 'none';
+                    }
+                    for (let i = 0; i < menuItems.length; i++) {
+                        menuItems[i].style.width = '64px';
+                        menuItems[i].style.padding = '0';
+                        menuItems[i].style.margin = '0 10px';
+                        menuItems[i].style.justifyContent = 'center';
+                    }
+                }
+            }
+        };
+        const navArrow = document.getElementById('nav-arrow');
+        const menu = document.getElementById('menu');
+        const menuTile = document.getElementById('menu-tile')
+
+        menu.addEventListener('click', menuFunction);
+        menuTile.addEventListener('click', menuFunction);
+
+        //const swiperStuff = new Swiper('.swiper-container', {
+        //    direction: 'horizontal',
+        //    slidesPerView: 'auto',
+        //    spaceBetween: 20,
+        //    centeredSlides: true,
+        //    loop: true,
+
+        //    pagination: {
+        //        el: '.swiper-pagination',
+        //        clickable: true,
+        //    },
+        //});
+
+        //swiperStuff.slideTo(1, false, false);
+
+
+
+        const popOverMenuFunction = () => {
+            if (popOverMenu.classList.contains('hide')) {
+                popOverMenu.classList.remove('hide');
+                body.style.overflowY = 'hidden';
+            } else {
+                popOverMenu.classList.add('hide');
+                body.style.overflowY = 'auto';
+            }
+        }
+
+        const body = document.getElementById('body');
+        const overlayMenu = document.getElementById('overlay-menu');
+        const popOverMenu = document.getElementById('popover-menu');
+        const close = document.getElementById('close');
+
+        overlayMenu.addEventListener('click', popOverMenuFunction);
+        close.addEventListener('click', popOverMenuFunction);
+
+        //const swiperPresenters = new Swiper('.presenters-container-swiper', {
+        //    direction: 'horizontal',
+        //    slidesPerView: 'auto',
+        //    spaceBetween: 16,
+        //    centeredSlides: true,
+        //    loop: true,
+
+        //    pagination: {
+        //        el: '.swiper-pagination',
+        //        clickable: true,
+        //    },
+        //});
+
+        //const swiperRecent = new Swiper('.recent-container-swiper', {
+        //    direction: 'horizontal',
+        //    slidesPerView: 'auto',
+        //    spaceBetween: 20,
+        //    centeredSlides: true,
+        //    loop: true,
+
+        //    pagination: {
+        //        el: '.swiper-pagination',
+        //        clickable: true,
+        //    },
+        //});
+
+        //swiperPresenters.slideTo(2, false, false);
+        //swiperRecent.slideTo(1, false, false);
+
+        //getBoundingClientRect()
+
+        if (hasSubMenu) {
+
+            const subMenu = document.getElementById('submenu');
+            const subMenuList = document.getElementById('submenu-list');
+            const subMenuWrapper = document.getElementById('submenu-wrapper');
+
+            const resourcesButtonDesktop = document.getElementById('resources-desktop');
+
+            let submenuDisabled = false;
+
+            resourcesButtonDesktop.addEventListener('click', () => {
+                const currentPosition = resourcesButtonDesktop.getBoundingClientRect().top;
+
+                subMenuList.style.top = `${(window.innerHeight - currentPosition) > 220
+                    ? currentPosition : (currentPosition - (220 - (window.innerHeight - currentPosition)))}px`;
+                if (!submenuDisabled) {
+                    if (!menuOverlayed) {
+                        subMenu.style.marginLeft = '200px';
+                    } else {
+                        subMenu.style.marginLeft = '84px';
+                    }
+                    subMenuWrapper.classList.remove('hide');
+                    navArrow.classList.add('hide');
+                    submenuDisabled = true;
+                    body.style.overflowY = 'hidden';
+                } else {
+                    subMenu.style.marginLeft = '-300px';
+                    subMenuWrapper.classList.add('hide');
+                    navArrow.classList.remove('hide');
+                    submenuDisabled = false;
+                    body.style.overflowY = 'auto';
+                }
+            });
+
+            subMenuWrapper.addEventListener('click', (e) => {
+                console.log(e.target.id);
+                if (e.target.id === 'submenu-wrapper') {
+                    subMenu.style.marginLeft = '-300px';
+                    subMenuWrapper.classList.add('hide');
+                    navArrow.classList.remove('hide');
+                    submenuDisabled = false;
+                    body.style.overflowY = 'auto';
+                }
+            });
+
+
+
+            const resourcesButtonTablet = document.getElementById('resources-tablet');
+            const popOverSubMenu = document.getElementById('popover-submenu');
+            const popOverSubMenuList = document.getElementById('popover-submenu-list');
+            const popOverMenuWindow = document.getElementById('popover-menu-window');
+            const subMenuMobile = document.getElementById('submenu-mobile');
+
+            resourcesButtonTablet.addEventListener('click', () => {
+                const currentPositionTop = resourcesButtonTablet.getBoundingClientRect().top;
+                const currentPositionLeft = resourcesButtonTablet.getBoundingClientRect().left;
+
+                popOverSubMenuList.style.top = `${(window.innerHeight - currentPositionTop) > 220
+                    ? currentPositionTop : (currentPositionTop - (220 - (window.innerHeight - currentPositionTop)))}px`;
+                hideSubMenu(currentPositionLeft);
+            });
+
+            popOverMenu.addEventListener('click', (e) => {
+                if (e.target.id === 'popover-menu') {
+                    popOverMenuFunction();
+                }
+            })
+
+            const menuArrowMobile = document.getElementById('menu-arrow-mobile');
+
+            const hideSubMenu = (currentPositionLeft) => {
+                if (window.innerWidth > 720) {
+                    if (!submenuTabletDisabled) {
+                        popOverSubMenu.style.marginLeft = `${currentPositionLeft - 240}px`;
+                        popOverMenuWindow.style.boxShadow = 'none';
+                        resourcesButtonTablet.style.background = '#FFFFFF';
+                        resourcesButtonTablet.style.color = this.state.colour;
+                        resourcesButtonTablet.children[0].children[0].style.fill = this.state.colour;
+                        submenuTabletDisabled = true;
+                    } else {
+                        popOverSubMenu.style.marginLeft = '800px';
+                        popOverMenuWindow.style.boxShadow = '-30px 0px 44px rgba(0, 0, 0, 0.4)';
+                        resourcesButtonTablet.style.background = 'transparent';
+                        resourcesButtonTablet.style.color = '#F4FFED';
+                        resourcesButtonTablet.children[0].children[0].style.fill = '#F4FFED';
+                        submenuTabletDisabled = false;
+                    }
+                } else {
+                    if (subMenuMobile.classList.contains('hide')) {
+                        subMenuMobile.classList.remove('hide');
+                        resourcesButtonTablet.style.background = '#FFFFFF';
+                        resourcesButtonTablet.style.color = this.state.colour;
+                        resourcesButtonTablet.children[0].children[0].style.fill = this.state.colour;
+                        menuArrowMobile.style.transform = 'rotate(-90deg)';
+                    } else {
+                        subMenuMobile.classList.add('hide');
+                        resourcesButtonTablet.style.background = 'transparent';
+                        resourcesButtonTablet.style.color = '#F4FFED';
+                        resourcesButtonTablet.children[0].children[0].style.fill = '#F4FFED';
+                        menuArrowMobile.style.transform = 'rotate(90deg)';
+                    }
+                }
+            }
+
+        }
+        let menuOverlayed = false;
+
+        let submenuTabletDisabled = false;
+
+        //const subMenuListResources = document.getElementById('submenu-list-resources');
+        //const subMenuListSubMenu = document.getElementById('submenu-list-submenu');
+
+        //subMenuListResources.addEventListener('click', () => {
+        //    if (subMenuListSubMenu.classList.contains('hide')) {
+        //        subMenuListSubMenu.classList.remove('hide');
+        //        subMenuListResources.style.borderBottom = 'none';
+        //    } else {
+        //        subMenuListSubMenu.classList.add('hide');
+        //        subMenuListResources.style.borderBottom = '1px solid rgba(207, 207, 207, 0.3)';
+        //    }
+
+        //})
+
+
+
+
+        /*Menu build Ends ################################################################################################################################*/
+    }
+
+
     moveToSection(url) {
         var tag = '#' + url;
         const section = document.querySelector(tag);
@@ -30,7 +299,7 @@ export class NavMenu extends Component {
 
 
     onlyLog(url) {
-  
+
         ActivityLog.getStringValue(this.props.email, "Clicked", url);
     }
 
@@ -521,249 +790,11 @@ export class NavMenu extends Component {
                             lname = token.lastName;
                         }
 
-                        this.setState({ firstName: fname, lastName: lname});
+                        this.setState({ firstName: fname, lastName: lname });
                     }
 
                     this.getSubLevelMenu("2");
-
-
-
-                    /*Menu build starts ################################################################################################################################*/
-
-
-                    const menuFunction = () => {
-                        const elements = document.getElementsByClassName('menu-button');
-                        const navbar = document.getElementById('navbar');
-                        const logo = document.getElementById('logo');
-                        const navHeader = document.getElementById('nav-header');
-                        const menuTitle = document.getElementById('menu-title');
-                        const arrowIcon = document.getElementById('arrow-icon');
-                        const wrapper = document.getElementById('wrapper');
-                        const footer = document.getElementById('footer');
-                        const menuItems = document.getElementsByClassName('menu-item');
-                        const navArrow = document.getElementById('nav-arrow');
-                        const menuItemArrow = document.getElementById('menu-item-arrow');
-
-                        for (let i = 0; i < elements.length; i++) {
-                            const element = elements.item(i);
-                            if (element.classList.contains('hide')) {
-                                menuOverlayed = false;
-                                setTimeout(() => element.classList.remove('hide'), 150);
-                                navbar.style.width = '200px';
-                                menuTitle.style.margin = '54px 31px 25px 30px';
-                                navArrow.style.left = '145px'
-                                logo.style.width = '100px';
-                                logo.style.height = '60px';
-                                navHeader.style.padding = '18px 50px';
-                                arrowIcon.style.transform = 'rotate(0)';
-                                wrapper.style.marginLeft = '200px';
-                                footer.style.marginLeft = '200px';
-                                setTimeout(() => menuItemArrow.style.display = 'block', 500);
-                                for (let i = 0; i < menuItems.length; i++) {
-                                    menuItems[i].style.width = '200px';
-                                    menuItems[i].style.padding = '10px 0 10px 30px';
-                                    menuItems[i].style.margin = '0';
-                                    menuItems[i].style.justifyContent = 'space-between';
-                                }
-                            } else {
-                                menuOverlayed = true;
-                                element.classList.add('hide');
-                                navbar.style.width = '84px';
-                                menuTitle.style.margin = '54px 18px 25px 18px';
-                                navArrow.style.left = '42px';
-                                logo.style.width = '66px';
-                                logo.style.height = '40px';
-                                navHeader.style.padding = '30px 9px 26px';
-                                arrowIcon.style.transform = 'rotate(180deg)';
-                                wrapper.style.marginLeft = '84px';
-                                footer.style.marginLeft = '84px';
-                                menuItemArrow.style.display = 'none';
-                                for (let i = 0; i < menuItems.length; i++) {
-                                    menuItems[i].style.width = '64px';
-                                    menuItems[i].style.padding = '0';
-                                    menuItems[i].style.margin = '0 10px';
-                                    menuItems[i].style.justifyContent = 'center';
-                                }
-                            }
-                        }
-                    };
-                    const navArrow = document.getElementById('nav-arrow');
-                    const menu = document.getElementById('menu');
-                    const menuTile = document.getElementById('menu-tile')
-
-                    menu.addEventListener('click', menuFunction);
-                    menuTile.addEventListener('click', menuFunction);
-
-                    //const swiperStuff = new Swiper('.swiper-container', {
-                    //    direction: 'horizontal',
-                    //    slidesPerView: 'auto',
-                    //    spaceBetween: 20,
-                    //    centeredSlides: true,
-                    //    loop: true,
-
-                    //    pagination: {
-                    //        el: '.swiper-pagination',
-                    //        clickable: true,
-                    //    },
-                    //});
-
-                    //swiperStuff.slideTo(1, false, false);
-
-
-
-                    const popOverMenuFunction = () => {
-                        if (popOverMenu.classList.contains('hide')) {
-                            popOverMenu.classList.remove('hide');
-                            body.style.overflowY = 'hidden';
-                        } else {
-                            popOverMenu.classList.add('hide');
-                            body.style.overflowY = 'auto';
-                        }
-                    }
-
-                    const body = document.getElementById('body');
-                    const overlayMenu = document.getElementById('overlay-menu');
-                    const popOverMenu = document.getElementById('popover-menu');
-                    const close = document.getElementById('close');
-
-                    overlayMenu.addEventListener('click', popOverMenuFunction);
-                    close.addEventListener('click', popOverMenuFunction);
-
-                    //const swiperPresenters = new Swiper('.presenters-container-swiper', {
-                    //    direction: 'horizontal',
-                    //    slidesPerView: 'auto',
-                    //    spaceBetween: 16,
-                    //    centeredSlides: true,
-                    //    loop: true,
-
-                    //    pagination: {
-                    //        el: '.swiper-pagination',
-                    //        clickable: true,
-                    //    },
-                    //});
-
-                    //const swiperRecent = new Swiper('.recent-container-swiper', {
-                    //    direction: 'horizontal',
-                    //    slidesPerView: 'auto',
-                    //    spaceBetween: 20,
-                    //    centeredSlides: true,
-                    //    loop: true,
-
-                    //    pagination: {
-                    //        el: '.swiper-pagination',
-                    //        clickable: true,
-                    //    },
-                    //});
-
-                    //swiperPresenters.slideTo(2, false, false);
-                    //swiperRecent.slideTo(1, false, false);
-
-                    //getBoundingClientRect()
-
-                    const subMenu = document.getElementById('submenu');
-                    const subMenuList = document.getElementById('submenu-list');
-                    const subMenuWrapper = document.getElementById('submenu-wrapper');
-
-                    const resourcesButtonDesktop = document.getElementById('resources-desktop');
-
-                    let submenuDisabled = false;
-
-                    resourcesButtonDesktop.addEventListener('click', () => {
-                        const currentPosition = resourcesButtonDesktop.getBoundingClientRect().top;
-
-                        subMenuList.style.top = `${(window.innerHeight - currentPosition) > 220
-                            ? currentPosition : (currentPosition - (220 - (window.innerHeight - currentPosition)))}px`;
-                        if (!submenuDisabled) {
-                            if (!menuOverlayed) {
-                                subMenu.style.marginLeft = '200px';
-                            } else {
-                                subMenu.style.marginLeft = '84px';
-                            }
-                            subMenuWrapper.classList.remove('hide');
-                            navArrow.classList.add('hide');
-                            submenuDisabled = true;
-                            body.style.overflowY = 'hidden';
-                        } else {
-                            subMenu.style.marginLeft = '-300px';
-                            subMenuWrapper.classList.add('hide');
-                            navArrow.classList.remove('hide');
-                            submenuDisabled = false;
-                            body.style.overflowY = 'auto';
-                        }
-                    });
-
-                    subMenuWrapper.addEventListener('click', (e) => {
-                        console.log(e.target.id);
-                        if (e.target.id === 'submenu-wrapper') {
-                            subMenu.style.marginLeft = '-300px';
-                            subMenuWrapper.classList.add('hide');
-                            navArrow.classList.remove('hide');
-                            submenuDisabled = false;
-                            body.style.overflowY = 'auto';
-                        }
-                    });
-
-                    let menuOverlayed = false;
-
-                    let submenuTabletDisabled = false;
-
-                    const resourcesButtonTablet = document.getElementById('resources-tablet');
-                    const popOverSubMenu = document.getElementById('popover-submenu');
-                    const popOverSubMenuList = document.getElementById('popover-submenu-list');
-                    const popOverMenuWindow = document.getElementById('popover-menu-window');
-                    const subMenuMobile = document.getElementById('submenu-mobile');
-
-                    resourcesButtonTablet.addEventListener('click', () => {
-                        const currentPositionTop = resourcesButtonTablet.getBoundingClientRect().top;
-                        const currentPositionLeft = resourcesButtonTablet.getBoundingClientRect().left;
-
-                        popOverSubMenuList.style.top = `${(window.innerHeight - currentPositionTop) > 220
-                            ? currentPositionTop : (currentPositionTop - (220 - (window.innerHeight - currentPositionTop)))}px`;
-                        hideSubMenu(currentPositionLeft);
-                    });
-
-                    popOverMenu.addEventListener('click', (e) => {
-                        if (e.target.id === 'popover-menu') {
-                            popOverMenuFunction();
-                        }
-                    })
-
-                    const menuArrowMobile = document.getElementById('menu-arrow-mobile');
-
-                    const hideSubMenu = (currentPositionLeft) => {
-                        if (window.innerWidth > 720) {
-                            if (!submenuTabletDisabled) {
-                                popOverSubMenu.style.marginLeft = `${currentPositionLeft - 240}px`;
-                                popOverMenuWindow.style.boxShadow = 'none';
-                                resourcesButtonTablet.style.background = '#FFFFFF';
-                                resourcesButtonTablet.style.color = this.state.colour;
-                                resourcesButtonTablet.children[0].children[0].style.fill = this.state.colour;
-                                submenuTabletDisabled = true;
-                            } else {
-                                popOverSubMenu.style.marginLeft = '800px';
-                                popOverMenuWindow.style.boxShadow = '-30px 0px 44px rgba(0, 0, 0, 0.4)';
-                                resourcesButtonTablet.style.background = 'transparent';
-                                resourcesButtonTablet.style.color = '#F4FFED';
-                                resourcesButtonTablet.children[0].children[0].style.fill = '#F4FFED';
-                                submenuTabletDisabled = false;
-                            }
-                        } else {
-                            if (subMenuMobile.classList.contains('hide')) {
-                                subMenuMobile.classList.remove('hide');
-                                resourcesButtonTablet.style.background = '#FFFFFF';
-                                resourcesButtonTablet.style.color = this.state.colour;
-                                resourcesButtonTablet.children[0].children[0].style.fill = this.state.colour;
-                                menuArrowMobile.style.transform = 'rotate(-90deg)';
-                            } else {
-                                subMenuMobile.classList.add('hide');
-                                resourcesButtonTablet.style.background = 'transparent';
-                                resourcesButtonTablet.style.color = '#F4FFED';
-                                resourcesButtonTablet.children[0].children[0].style.fill = '#F4FFED';
-                                menuArrowMobile.style.transform = 'rotate(90deg)';
-                            }
-                        }
-                    }
-
+                    this.overlayMenuSetings(item.intempioSettings.menus.includes('resources'));
 
                     const main = document.getElementById('main');
                     const footer = document.getElementById('footer');
@@ -777,26 +808,6 @@ export class NavMenu extends Component {
                             footer.style.display = 'none';
                         })
                     });
-
-
-                    //const subMenuListResources = document.getElementById('submenu-list-resources');
-                    //const subMenuListSubMenu = document.getElementById('submenu-list-submenu');
-
-                    //subMenuListResources.addEventListener('click', () => {
-                    //    if (subMenuListSubMenu.classList.contains('hide')) {
-                    //        subMenuListSubMenu.classList.remove('hide');
-                    //        subMenuListResources.style.borderBottom = 'none';
-                    //    } else {
-                    //        subMenuListSubMenu.classList.add('hide');
-                    //        subMenuListResources.style.borderBottom = '1px solid rgba(207, 207, 207, 0.3)';
-                    //    }
-
-                    //})
-
-
-
-
-                    /*Menu build Ends ################################################################################################################################*/
 
 
                     const messages = document.getElementById('messages');
@@ -861,14 +872,14 @@ export class NavMenu extends Component {
     helpclick() {
         const helpdiv = document.getElementById('help-session');
 
-        helpdiv &&  helpdiv.click();
+        helpdiv && helpdiv.click();
     }
     render() {
         return (
             <>
 
                 <nav class="skelleton-nav" style={{ display: this.state.loading ? "" : "none" }} >
-                    <div  class="skelleton-nav-skelleton-header">
+                    <div class="skelleton-nav-skelleton-header">
                         <div class="skelleton-loading skel-con">
                         </div>
                     </div>
@@ -898,13 +909,13 @@ export class NavMenu extends Component {
                                 <span class="skelleton-loading menu-button">Favorites</span>
                             </div>
                         </a>
-                    <a href="#" id="help-desktop" class="skelleton-menu-item">
+                        <a href="#" id="help-desktop" class="skelleton-menu-item">
                             <div class="menu-item-skelleton-wrapper">
                                 <div class="skelleton-loading skel-con"></div>
                                 <span class="skelleton-loading menu-button">Help</span>
                             </div>
                         </a>
-                    <a href="#" class="skelleton-menu-item">
+                        <a href="#" class="skelleton-menu-item">
                             <div class="menu-item-skelleton-wrapper">
                                 <div class="skelleton-loading skel-con"></div>
                                 <span class="skelleton-loading menu-button">Logout</span>
@@ -937,11 +948,11 @@ export class NavMenu extends Component {
                                 </defs>
                             </svg> : this.state.SiteIcon == '1' ? <svg id="logo" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="100" height="60" viewBox="0 0 100 60">
                                 <image y="5" width="99" height="50" xlinkHref="data:img/png;base64,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" />
-                                </svg> : <img src={this.state.SiteIcon} /> 
+                            </svg> : <img src={this.state.SiteIcon} />
 
-                                  
+
                         }
-                  
+
                     </div>
                     <div id="menu-title" class="menu-title">MENU</div>
                     <div class="menu">
@@ -974,7 +985,7 @@ export class NavMenu extends Component {
                                     case "home":
                                         return <a href="/" class="menu-item">
                                             <div class="menu-item-wrapper">
-                                                <IntempioIcons name={customIcon}/>
+                                                <IntempioIcons name={customIcon} />
                                                 <span class="menu-button">{menuText}</span>
                                             </div>
                                         </a>
@@ -1017,7 +1028,7 @@ export class NavMenu extends Component {
                                             </div>
                                         </a>
                                     case "custom":
-                                        return <a onClick={() => this.openInNewTab(url)}  class="menu-item">
+                                        return <a onClick={() => this.openInNewTab(url)} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <IntempioIcons name={customIcon} />
                                                 <span class="menu-button">{menuText}</span>
@@ -1029,7 +1040,7 @@ export class NavMenu extends Component {
                                                 <span class="menu-button">{menuText}</span>  </div>
                                         </a>
                                     case "help":
-                                        return <a onClick={() => this.openInNewTab("https://support.intemp.io")}  class="menu-item">
+                                        return <a onClick={() => this.openInNewTab("https://support.intemp.io")} class="menu-item">
                                             <div class="menu-item-wrapper">
                                                 <IntempioIcons name={customIcon} />
                                                 <span class="menu-button">{menuText}</span>
@@ -1055,7 +1066,7 @@ export class NavMenu extends Component {
 
                                     case "helpchat":
 
-                                        return    <a class="menu-item" onClick={() => this.helpclick()}>
+                                        return <a class="menu-item" onClick={() => this.helpclick()}>
                                             <div class="menu-item-wrapper" >
                                                 <IntempioIcons name={customIcon} />
                                                 <span class="menu-button">{menuText}</span>
@@ -1066,7 +1077,7 @@ export class NavMenu extends Component {
 
                             })}
 
-                       
+
 
                     </div>
                     <div id="nav-arrow" class="nav-arrow">
@@ -1097,7 +1108,7 @@ export class NavMenu extends Component {
                     </div>
                     <div class="overlay-menu">
                         {
-                           this.props.hasChat &&   <>
+                            this.props.hasChat && <>
                                 <div id="messagesMobile" class="msgs">
                                     <div class="msgs-number">
                                         {this.props.msgCount}
@@ -1308,18 +1319,18 @@ export class NavMenu extends Component {
                                                     </a>
 
                                                 case "custom":
-                                                    return <a onClick={() => this.openInNewTab(url)}  class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab(url)} class="popover-window-menu-item">
                                                         <IntempioIcons name={customIcon} />
                                                         <span>{menuText} </span>
                                                     </a>
                                                 case "anchor":
                                                     return <a onClick={() => this.moveToSection(url)} class="menu-item">
-                                                        <div class="menu-item-wrapper"> 
+                                                        <div class="menu-item-wrapper">
                                                             <IntempioIcons name={customIcon} />
                                                             <span class="menu-button">{menuText}</span>  </div>
                                                     </a>
                                                 case "help":
-                                                    return <a  onClick={() => this.openInNewTab("https://support.intemp.io")}  class="popover-window-menu-item">
+                                                    return <a onClick={() => this.openInNewTab("https://support.intemp.io")} class="popover-window-menu-item">
                                                         <IntempioIcons name={customIcon} />
                                                         <span>{menuText} </span>
                                                     </a>

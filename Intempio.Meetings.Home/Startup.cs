@@ -37,58 +37,58 @@ namespace Intempio.Meetings.Home
             services.AddControllersWithViews();
             services.ConfigureWritable<IntempioSettings>(Configuration.GetSection("IntempioSettings"));
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-         .AddJwtBearer(options =>
-         {
-             options.TokenValidationParameters = tokenValidationParameters;
-             options.Events = new JwtBearerEvents()
-             {
-                 OnAuthenticationFailed = context =>
-                 {
-                     if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                     {
-                         context.Response.Headers.Add("Token-Expired", "true");
-                     }
-                     return Task.CompletedTask;
-                 },
-                 OnMessageReceived = async (context) =>
-                 {
-                     var tokenService = context.HttpContext.RequestServices.GetService<ITokenService>();
+         //   services.AddAuthentication(options =>
+         //   {
+         //       options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+         //   })
+         //.AddJwtBearer(options =>
+         //{
+         //    options.TokenValidationParameters = tokenValidationParameters;
+         //    options.Events = new JwtBearerEvents()
+         //    {
+         //        OnAuthenticationFailed = context =>
+         //        {
+         //            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+         //            {
+         //                context.Response.Headers.Add("Token-Expired", "true");
+         //            }
+         //            return Task.CompletedTask;
+         //        },
+         //        OnMessageReceived = async (context) =>
+         //        {
+         //            var tokenService = context.HttpContext.RequestServices.GetService<ITokenService>();
 
-                     if (context.Request.Headers.ContainsKey("Authorization"))
-                     {
-                         var header = context.Request.Headers["Authorization"].FirstOrDefault();
-                         if (header.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
-                         {
-                             var token = header.Substring("Bearer".Length).Trim();
-                             context.Token = token;
-                         }
-                     }
-                     if (context.Token == null)
-                     {
-                         return;
-                     }
-                     else
-                     {
-                         int userId = tokenService.GetUserIdFromToken(context.Token);
-                         bool isValid = false;
+         //            if (context.Request.Headers.ContainsKey("Authorization"))
+         //            {
+         //                var header = context.Request.Headers["Authorization"].FirstOrDefault();
+         //                if (header.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
+         //                {
+         //                    var token = header.Substring("Bearer".Length).Trim();
+         //                    context.Token = token;
+         //                }
+         //            }
+         //            if (context.Token == null)
+         //            {
+         //                return;
+         //            }
+         //            else
+         //            {
+         //                int userId = tokenService.GetUserIdFromToken(context.Token);
+         //                bool isValid = false;
 
-                         if (user != null)
-                         {
-                             isValid = await tokenService.ValidateByToken(context.Token, 1, TokenType.ApplicationToken);
-                         }
-                         if (isValid == false)
-                         {
-                             context.Response.Headers.Add("Token-IsActive", "false");
-                             context.Fail("not a valid token");
-                         }
-                     }
-                 }
-             };
-         });
+         //                if (user != null)
+         //                {
+         //                    isValid = await tokenService.ValidateByToken(context.Token, 1, TokenType.ApplicationToken);
+         //                }
+         //                if (isValid == false)
+         //                {
+         //                    context.Response.Headers.Add("Token-IsActive", "false");
+         //                    context.Fail("not a valid token");
+         //                }
+         //            }
+         //        }
+         //    };
+         //});
 
 
             // In production, the React files will be served from this directory
