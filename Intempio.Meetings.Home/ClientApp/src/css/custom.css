@@ -264,9 +264,18 @@ main .recent-item p {
     .wrapper main .recent-container-swiper > .swiper-wrapper {
         display: none !important;
     }
+
+    .messages{
+
+        display:none;
+    }
 }
 
 @media screen and (max-width: 600px) {
+
+    .messages {
+        display: none;
+    }
     .wrapper main .recent-container {
         display: none !important;
     }
@@ -302,98 +311,119 @@ main .recent-item p {
     }
 }
 
+@media screen and (max-width: 720px) {
 
-.conversation-number-help-done {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #EEEEEE;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #C2C2C2;
-}
-
-.conversation-number-help {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #3D998A;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #C2C2C2;
+    #messages {
+        display: none !important;
+    }
 }
 
 
-.wrapper-login {
-    margin-left: 0px !important;
-}
 
-.bold {
-    font-weight: bold !important;
-    color: #5E5E5E !important;
-    font-size: 18px !important;
-}
+    .conversation-number-help-done {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #EEEEEE;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #C2C2C2;
+    }
 
-.italic {
-    font-style: italic !important;
-    font-weight: 400 !important;
-    color: #5E5E5E !important;
-    font-size: 18px !important;
-}
-
-main .video-content {
-    justify-content: center;
-    align-items: center;
-}
-
-.wrapper main .recent-container.poster-container {
-    display: block !important;
-    width: 100%;
-    text-align: center;
-}
-
-    .wrapper main .recent-container.poster-container .recent-item {
-        max-width: 23% !important;
-        display: inline-block !important;
-        margin-bottom: 20px;
-        min-width: 360px;
+    .conversation-number-help {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #3D998A;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #C2C2C2;
     }
 
 
-        .wrapper main .recent-container.poster-container .recent-item:first-child {
-            margin-left: 20px !important;
+    .wrapper-login {
+        margin-left: 0px !important;
+    }
+
+    .bold {
+        font-weight: bold !important;
+        color: #5E5E5E !important;
+        font-size: 18px !important;
+    }
+
+    .italic {
+        font-style: italic !important;
+        font-weight: 400 !important;
+        color: #5E5E5E !important;
+        font-size: 18px !important;
+    }
+
+    main .video-content {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wrapper main .recent-container.poster-container {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+    }
+
+        .wrapper main .recent-container.poster-container .recent-item {
+            max-width: 23% !important;
+            display: inline-block !important;
+            margin-bottom: 20px;
             min-width: 360px;
         }
 
-a.skelleton-menu-item {
-    color: inherit !important;
-    text-decoration: none !important;
-}
+
+            .wrapper main .recent-container.poster-container .recent-item:first-child {
+                margin-left: 20px !important;
+                min-width: 360px;
+            }
+
+    a.skelleton-menu-item {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
 
 
-header .chat-message-owner > .message-wrapper .message-forward {
-    padding: 2px 5px;
-    align-self: baseline;
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid #C4C4C4;
-}
+    header .chat-message-owner > .message-wrapper .message-forward {
+        padding: 2px 5px;
+        align-self: baseline;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid #C4C4C4;
+    }
 
-    header .chat-message-owner > .message-wrapper .message-forward span {
+        header .chat-message-owner > .message-wrapper .message-forward span {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.15px;
+            color: #353839;
+            margin-top: 5px;
+        }
+
+    header .chat-message-guest > .message-wrapper > .message > span {
         font-family: Roboto, sans-serif;
         font-style: normal;
         font-weight: normal;
@@ -406,62 +436,48 @@ header .chat-message-owner > .message-wrapper .message-forward {
         margin-top: 5px;
     }
 
-header .chat-message-guest > .message-wrapper > .message > span {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.15px;
-    color: #353839;
-    margin-top: 5px;
-}
+    header .chat-message-owner > .message-wrapper > .fix {
+        display: inline-table !important;
+    }
 
-header .chat-message-owner > .message-wrapper > .fix {
-    display: inline-table !important;
-}
+    header .chat-message-owner > .message-wrapper .message-forward span.name {
+        color: black !important;
+        font-weight: 400 !important;
+    }
 
-header .chat-message-owner > .message-wrapper .message-forward span.name {
-    color: black !important;
-    font-weight: 400 !important;
-}
+    header .chat-message-owner > .message-wrapper .message-forward span.name {
+        color: black !important;
+        font-weight: 400 !important;
+    }
 
-header .chat-message-owner > .message-wrapper .message-forward span.name {
-    color: black !important;
-    font-weight: 400 !important;
-}
+    header .chat-message-owner > .message-wrapper > .message > span {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.15px;
+        color: #353839;
+        margin-top: 5px;
+    }
 
-header .chat-message-owner > .message-wrapper > .message > span {
-      font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.15px;
-    color: #353839;
-    margin-top: 5px;
+    header .chat-message-guest > .message-wrapper .message.fix2 {
+        align-items: baseline !important;
+    }
 
-}
-
-header .chat-message-guest > .message-wrapper .message.fix2 {
-    align-items: baseline !important;
-}
-
-header .chat-message-owner > .message-wrapper > .message > span {
-    padding-bottom: 5px !important;
-    flex-direction: row-reverse;
-    padding-right: 5px;
-}
+    header .chat-message-owner > .message-wrapper > .message > span {
+        padding-bottom: 5px !important;
+        flex-direction: row-reverse;
+        padding-right: 5px;
+    }
 
 
-main .presenters-container .presenter:first-child {
-    min-height: 400px;
-}
+    main .presenters-container .presenter:first-child {
+        min-height: 400px;
+    }
 
-main .presenters-container .presenter {
-    min-height: 400px;
-}
+    main .presenters-container .presenter {
+        min-height: 400px;
+    }
