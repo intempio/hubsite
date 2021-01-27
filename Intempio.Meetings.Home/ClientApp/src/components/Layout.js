@@ -20,8 +20,8 @@ export class Layout extends Component {
 
         super(props);
         this.state = {
-            generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: 'pub-c-9a56e351-93a8-4ead-aa4d-68ce24544fbf', loading: true,
-            subscribeKey: 'sub-c-bcc2ede2-482f-11eb-ae10-b69578166507', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false, subscribeList: [], subscribeList2: [], customChatRooms: [], chatFeature: false, colour:"FFFFF"
+            generalMsgKey: '', helpMsgKey: '', messages: [], firstName: '', lastName: '', unrecognizedLogin: false, openchat: false, publishKey: '', loading: true,
+            subscribeKey: '', unseenmsgCount: 0, chatName: 'General', chatUsers: [], helpRequests: [], helpRequestsFiltered: [], currentChatKey: '', messagesHelp: [], messagesHelpNew: [], email: '', isSupport: false, subscribeList: [], subscribeList2: [], customChatRooms: [], chatFeature: false, colour:"FFFFF"
         };
 
 
@@ -86,7 +86,12 @@ export class Layout extends Component {
             if (item) {
 
                 var chat = item.intempioSettings.generalChatName != 'n/a' && item.intempioSettings.generalChatName != 'N/A' && item.intempioSettings.generalChatName != '';
-                this.setState({ loading: false, generalMsgKey: item.intempioSettings.generalChatName, helpMsgKey: item.intempioSettings.helpChatName, currentChatKey: item.intempioSettings.generalChatName, customChatRooms: item.intempioSettings.customChatGroups.split(','), chatFeature: chat, colour: item.intempioSettings.colour});
+                this.setState({
+                    loading: false, generalMsgKey: item.intempioSettings.generalChatName, helpMsgKey: item.intempioSettings.helpChatName, currentChatKey: item.intempioSettings.generalChatName, customChatRooms: item.intempioSettings.customChatGroups.split(','), chatFeature: chat, colour: item.intempioSettings.colour,
+                    publishKey: item.pubnubPublishKey,
+                    subscribeKey: item.pubnubSubscribeKey
+
+                });
 
                 if (chat) {
                     var cnames = [];

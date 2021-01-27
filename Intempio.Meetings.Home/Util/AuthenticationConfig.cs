@@ -145,6 +145,8 @@ namespace Intempio.Meetings.Home.Util
         public IntempioSettings intempioSettings { get; set; }
 
         public string SiteURL { get; set; }
+        public string PubnubPublishKey { get; set; }
+        public string PubnubSubscribeKey { get; set; }
 
 
 

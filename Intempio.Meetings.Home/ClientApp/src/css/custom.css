@@ -313,8 +313,9 @@ main .recent-item p {
 
 @media screen and (max-width: 720px) {
 
-    #messages {
-        display: none !important;
+    #messages svg {
+        width:20px;
+        height:20px;
     }
 }
 
