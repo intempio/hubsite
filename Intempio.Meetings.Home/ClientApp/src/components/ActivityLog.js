@@ -1,5 +1,7 @@
 ﻿export const ActivityLog = {
 
+    //test 
+
     getStringValue:  (email, action, url) => {
         try {
             let formData = new FormData();
@@ -25,3 +27,4 @@
         }
     }
 }
+
