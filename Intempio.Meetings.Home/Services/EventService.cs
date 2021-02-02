@@ -1,19 +1,19 @@
-﻿using Intempio.Meetings.Home.Util;
+﻿using Intempio.Meetings.Home.Models;
+using Intempio.Meetings.Home.Util;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Graph;
-using System.Data;
-using Intempio.Meetings.Home.Models;
 
 namespace Intempio.Meetings.Home.Services
 {
@@ -150,8 +150,8 @@ namespace Intempio.Meetings.Home.Services
                 var userEventsorg = usereventsObj["value"].ToString();
                 var evetns = await GraphApiGetEventSharePointList();
 
-           
-     
+
+
                 JArray allEvetns = (JArray)JsonConvert.DeserializeObject(evetns.Value.ToString());
                 JArray userevents = (JArray)JsonConvert.DeserializeObject(userEventsorg);
                 JArray filteredEvetns = new JArray();
@@ -436,7 +436,7 @@ namespace Intempio.Meetings.Home.Services
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
                 var urlfomat = config.SharedDocumentLibItems;
-                var siteDetails = string.Format(urlfomat,  siteID, filename);
+                var siteDetails = string.Format(urlfomat, siteID, filename);
 
                 var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{siteDetails}", result.AccessToken, Display);
                 return response;
@@ -446,7 +446,7 @@ namespace Intempio.Meetings.Home.Services
             return null;
 
         }
-      
+
 
         public static async Task<JsonResult> GraphApiGetInfo(string path)
 
@@ -770,7 +770,7 @@ namespace Intempio.Meetings.Home.Services
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
 
-                var endpointWithcat= string.Format(config.intempioSettings.PosterSessionsURL, category);
+                var endpointWithcat = string.Format(config.intempioSettings.PosterSessionsURL, category);
                 var response = await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/{endpointWithcat}", result.AccessToken, Display);
 
                 if (response == null)
@@ -975,7 +975,7 @@ namespace Intempio.Meetings.Home.Services
         }
 
 
-        public static  JsonResult GetConfigInfo(string key , string validate)
+        public static JsonResult GetConfigInfo(string key, string validate)
 
         {
             AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
@@ -995,7 +995,8 @@ namespace Intempio.Meetings.Home.Services
 
                 return new JsonResult(config);
             }
-            else {
+            else
+            {
                 return new JsonResult(null);
             }
 
@@ -1130,7 +1131,7 @@ namespace Intempio.Meetings.Home.Services
                 //return await db.St2hMeetingViews.FromSqlInterpolated($"SELECT * FROM dbo.st2h_meeting_view").Where(b => b.Email == email && b.StartTime < dtDateTill).ToListAsync<Models.St2hMeetingView>();
 
 
-                var result=  await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID && o.Email.ToLower() == email.ToLower()).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
+                var result = await db.MeetingViews.FromSqlInterpolated($"SELECT Distinct [Start Time] ,[End Time] ,[Channel] ,[Description] ,[Event URL],Email ,SiteId FROM [dbo].[meeting_view]").Where(o => o.SiteId == config.intempioSettings.SiteID && o.Email.ToLower() == email.ToLower()).OrderBy(o => o.StartTime).ToListAsync<Models.MeetingView>();
 
                 return result;
 
@@ -1145,7 +1146,7 @@ namespace Intempio.Meetings.Home.Services
             }
         }
 
-        public static async Task<JsonResult> GraphApiReadExcel (string path)
+        public static async Task<JsonResult> GraphApiReadExcel(string path)
 
         {
             AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
@@ -1256,7 +1257,7 @@ namespace Intempio.Meetings.Home.Services
             //return returnString;
         }
 
-        public static async Task AddMeetingUserActivity(string email ,string userActivity, string url)
+        public static async Task AddMeetingUserActivity(string email, string userActivity, string url)
         {
             try
             {

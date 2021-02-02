@@ -1,0 +1,1 @@
+﻿export var API_DOMAIN = `https://localhost:44399`

@@ -1,14 +1,12 @@
-﻿using Microsoft.Azure.Storage;
+﻿using Intempio.Meetings.Home.Util;
+using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Configuration;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using Intempio.Meetings.Home.Util;
+using System.Threading.Tasks;
 
 namespace Intempio.Meetings.Home.Services
 {
@@ -57,7 +55,7 @@ namespace Intempio.Meetings.Home.Services
                         {
                             string filenamepath = ((Microsoft.Azure.Storage.Blob.CloudBlob)file).Name;
 
-                         string fineurl=   ((Microsoft.Azure.Storage.Blob.CloudBlob)file).SnapshotQualifiedUri.AbsoluteUri;
+                            string fineurl = ((Microsoft.Azure.Storage.Blob.CloudBlob)file).SnapshotQualifiedUri.AbsoluteUri;
                             if (filenamepath.IndexOf(".") > 0)
                             {
                                 //fixing the multiple '.'
@@ -124,7 +122,7 @@ namespace Intempio.Meetings.Home.Services
             catch (Exception ex)
             {
                 //throw new Exception();
-             return  new List<string>();
+                return new List<string>();
             }
         }
         public List<string> ListFilesInBlobAsync(string container)

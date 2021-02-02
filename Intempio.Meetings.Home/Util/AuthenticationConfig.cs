@@ -23,10 +23,8 @@ SOFTWARE.
  */
 
 using Microsoft.Extensions.Configuration;
-using Microsoft.Graph;
 using System;
 using System.Globalization;
-using System.IO;
 
 namespace Intempio.Meetings.Home.Util
 {

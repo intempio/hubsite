@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Intempio.Meetings.Home.Models
+﻿namespace Intempio.Meetings.Home.Models
 {
     public class Event
     {
@@ -12,6 +7,6 @@ namespace Intempio.Meetings.Home.Models
         public int EventIDLookupId { get; set; }
 
 
-        
+
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Intempio.Meetings.Home.Models;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Intempio.Meetings.Home.Models;
 
 namespace Intempio.Meetings.Home.IServices
 {

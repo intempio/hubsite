@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Intempio.Meetings.Home.Util
 {
-   public class MSGraphAPI
+    public class MSGraphAPI
     {
         public static async Task<JsonResult> GraphApiCreateUser(string name, string email, string password)
         {
@@ -69,7 +66,7 @@ namespace Intempio.Meetings.Home.Util
                 var httpClient = new HttpClient();
                 var apiCaller = new APIHelper(httpClient);
 
-             
+
                 string content = JsonConvert.SerializeObject("");
 
 
@@ -274,7 +271,7 @@ namespace Intempio.Meetings.Home.Util
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
-            
+
             return null;
 
         }
@@ -402,7 +399,7 @@ namespace Intempio.Meetings.Home.Util
                 var apiCaller = new APIHelper(httpClient);
 
 
-                var response = await apiCaller.CallWebApiAndProcessResultASyncV2($"{config.ApiUrl}v1.0/{ string.Format(config.GroupsURL,userID)}", result.AccessToken, Display);
+                var response = await apiCaller.CallWebApiAndProcessResultASyncV2($"{config.ApiUrl}v1.0/{ string.Format(config.GroupsURL, userID)}", result.AccessToken, Display);
                 return response;
                 // await apiCaller.CallWebApiAndProcessResultASync($"{config.ApiUrl}v1.0/users", result.AccessToken, Display);
             }
@@ -536,6 +533,6 @@ namespace Intempio.Meetings.Home.Util
         }
 
 
-        
+
     }
 }

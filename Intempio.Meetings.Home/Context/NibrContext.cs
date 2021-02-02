@@ -1,7 +1,5 @@
-﻿using System;
-using Intempio.Meetings.Home.Util;
+﻿using Intempio.Meetings.Home.Util;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 

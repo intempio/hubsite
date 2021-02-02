@@ -13,6 +13,8 @@ import FileUpload from './components/FileUpload';
 import Settings from './components/Settings';
 import ViewSettings from './components/ViewSettings';
 import PlayVideo from './components/PlayVideo';
+import { API_DOMAIN } from './helpers/constant';
+import axios from "axios";
 
 
 
@@ -20,9 +22,14 @@ import PlayVideo from './components/PlayVideo';
 export default class App extends Component {
     static displayName = App.name;
 
+    constructor(props) {
+        super(props);
+        axios.defaults.baseURL = `${API_DOMAIN}/`
+    }
+ 
     componentWillMount() {
 
-       
+      
     }
 
     render() {

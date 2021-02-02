@@ -3,6 +3,8 @@ import history from './history';
 import Events from './events';
 import moment from 'moment';
 import { ActivityLog } from './ActivityLog';
+import { API_DOMAIN } from '../helpers/constant';
+import axios from "axios";
 //import ReCAPTCHA from 'react-google-recaptcha';
 
 
@@ -45,18 +47,42 @@ export class Login extends Component {
         return finalresult;
     }
 
-    async addMeetingUserActivity() {
-        const activityResponse = await fetch('Meeting/AddMeetingUserActivity?email=' + this.state.emailinput, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' }
-        });
 
-        await activityResponse.json().then(() => {
-            console.log("Added");
-        }).catch((err) => {
-            console.log(err);
-        });
+    // updated to use the interceptor
+    async getSettingsv3() {
+
+
+        this.setState({ loading: true });
+
+        axios.get(API_DOMAIN + `/Meeting/GetConfigInfo?validate=0&key=${this.state.key}`)
+            .then(data => {
+
+                this.setState({ loading: false });
+                var item = data.data.value;
+                this.setState({ loading: false });
+
+
+                if (item) {
+
+                    this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
+                    if (item && item.intempioSettings.colour) {
+                        document
+                            .documentElement.style.setProperty("--color-surface", '#' + item.intempioSettings.colour);
+                    }
+
+                } else {
+
+                    this.setState({ invalidKey: true, load: true });
+
+                }
+            }).catch(error => {
+                this.setState({ loading: false });
+            })
+
+
+
     }
+
 
     async getSettingsv2() {
 
@@ -64,6 +90,12 @@ export class Login extends Component {
 
 
         this.setState({ loading: true });
+
+
+
+
+
+
         const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
@@ -103,11 +135,153 @@ export class Login extends Component {
         return finalresult;
     }
 
+    async addMeetingUserActivity() {
+        const activityResponse = await fetch('Meeting/AddMeetingUserActivity?email=' + this.state.emailinput, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        await activityResponse.json().then(() => {
+            console.log("Added");
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+
+    async addMeetingUserActivityV1() {
+        this.setState({ loading: true });
+        const query = new URLSearchParams(this.props.location.search);
+        const eventID = query.get('eventid')
+
+        axios.get(API_DOMAIN + `/Meeting/GetUserByEmail?email=${this.state.emailinput}`)
+            .then(data => {
+
+                this.setState({ loading: false });
+                var items = JSON.parse(resonse.value).value;
+
+
+                if (item) {
+
+                    this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
+                    if (item && item.intempioSettings.colour) {
+                        document
+                            .documentElement.style.setProperty("--color-surface", '#' + item.intempioSettings.colour);
+                    }
+
+                } else {
+
+                    this.setState({ invalidKey: true, load: true });
+
+                }
+            }).catch(error => {
+                this.setState({ loading: false });
+            })
+
+
+        const response = await fetch('Meeting/GetUserByEmail?email=' + this.state.emailinput, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+        await response.json().then((resonse) => {
+            this.setState({ loading: false });
+
+            var items = JSON.parse(resonse.value).value;
+            if (items.length > 0) {
+                var userObj = { firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
+                this.setState({ firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email });
+
+
+
+                if (this.state.email && this.state.email != '') {
+                    localStorage.setItem("userToken", JSON.stringify(userObj));
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
+                    history.push('/');
+                }
+            }
+            else {
+                if (eventID) { this.setState({ status: 3 }) } else {
+                    this.setState({ status: 2 });
+                }
+            }
+        }).catch((error) => {
+            this.setState({ status: 2 });
+            this.setState({ loading: false });
+        });
+    }
+
+  
 
     async getUserInfo() {
         this.setState({ loading: true });
         const query = new URLSearchParams(this.props.location.search);
         const eventID = query.get('eventid')
+        const response = await fetch('Meeting/GetUserByEmail?email=' + this.state.emailinput, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+        await response.json().then((resonse) => {
+            this.setState({ loading: false });
+
+            var items = JSON.parse(resonse.value).value;
+            if (items.length > 0) {
+                var userObj = { firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email, inputFirstName: this.state.inputFirstName, inputLastName: this.state.inputLastName, exp: moment().add(7, 'days'), unrecognizedLogin: false };
+                this.setState({ firstName: items[0].fields.FirstName, lastName: items[0].fields.LastName, email: items[0].fields.Email });
+
+
+
+                if (this.state.email && this.state.email != '') {
+                    localStorage.setItem("userToken", JSON.stringify(userObj));
+                    ActivityLog.getStringValue(this.state.emailinput, "login", "Success");
+                    history.push('/');
+                }
+            }
+            else {
+                if (eventID) { this.setState({ status: 3 }) } else {
+                    this.setState({ status: 2 });
+                }
+            }
+        }).catch((error) => {
+            this.setState({ status: 2 });
+            this.setState({ loading: false });
+        });
+    }
+
+
+    async getUserInfoV1() {
+        this.setState({ loading: true });
+        const query = new URLSearchParams(this.props.location.search);
+        const eventID = query.get('eventid')
+
+        axios.get(API_DOMAIN + `/Meeting/GetUserByEmail?email=${this.state.emailinput}`)
+            .then(data => {
+
+                this.setState({ loading: false });
+                var items = JSON.parse(resonse.value).value;
+
+
+                if (item) {
+
+                    this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
+                    if (item && item.intempioSettings.colour) {
+                        document
+                            .documentElement.style.setProperty("--color-surface", '#' + item.intempioSettings.colour);
+                    }
+
+                } else {
+
+                    this.setState({ invalidKey: true, load: true });
+
+                }
+            }).catch(error => {
+                this.setState({ loading: false });
+            })
+
+
         const response = await fetch('Meeting/GetUserByEmail?email=' + this.state.emailinput, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
@@ -222,6 +396,9 @@ export class Login extends Component {
             this.setState({ loading: false });
         });
     }
+
+
+
     doLogin = () => {
         ActivityLog.getStringValue(this.state.emailinput, "login", "In progress");
         if (this.validateInput()) {
@@ -305,7 +482,7 @@ export class Login extends Component {
     }
 
     componentDidMount() {
-        this.getSettingsv2();
+        this.getSettingsv3();
     }
 
 

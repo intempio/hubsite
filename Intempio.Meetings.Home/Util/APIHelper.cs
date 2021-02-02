@@ -1,19 +1,15 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Net;
-using System.Collections.Specialized;
-using System.IO;
-using System.Globalization;
-using Microsoft.AspNetCore.Http;
 
 namespace Intempio.Meetings.Home.Util
 {
@@ -37,7 +33,7 @@ namespace Intempio.Meetings.Home.Util
         /// <param name="webApiUrl">Url of the Web API to call (supposed to return Json)</param>
         /// <param name="accessToken">Access token used as a bearer security token to call the Web API</param>
         /// <param name="processResult">Callback used to process the result of the call to the Web API</param>
-        public async Task<JsonResult> CallWebApiAndProcessResultASync(string webApiUrl, string accessToken, Action<JObject> processResult ,string email)
+        public async Task<JsonResult> CallWebApiAndProcessResultASync(string webApiUrl, string accessToken, Action<JObject> processResult, string email)
         {
             if (!string.IsNullOrEmpty(accessToken))
             {
@@ -92,7 +88,7 @@ namespace Intempio.Meetings.Home.Util
                     string json = await response.Content.ReadAsStringAsync();
                     JObject o = JObject.Parse(json);
 
-            
+
 
                     return o;
                 }
@@ -128,7 +124,7 @@ namespace Intempio.Meetings.Home.Util
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
-       
+
                     return new JsonResult(json);
                 }
                 else
@@ -237,7 +233,7 @@ namespace Intempio.Meetings.Home.Util
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, webApiUrl))
                 {
-                            string content = @"{
+                    string content = @"{
                         ""accountEnabled"": true,
                         ""displayName"": ""Sujeewa"",
                         ""mailNickname"": ""Sujeewa"",
@@ -248,7 +244,7 @@ namespace Intempio.Meetings.Home.Util
                         }
                         }";
 
-                   content = jsonContent;
+                    content = jsonContent;
 
                     using (var stringContent = new StringContent(content, Encoding.UTF8, "application/json"))
                     {
@@ -258,17 +254,17 @@ namespace Intempio.Meetings.Home.Util
                             .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                             .ConfigureAwait(false))
                         {
-                         response.EnsureSuccessStatusCode();
+                            response.EnsureSuccessStatusCode();
                             return new JsonResult(jsonContent);
                         }
                     }
                 }
 
-           
+
                 Console.ResetColor();
             }
 
-            return  new JsonResult(false);
+            return new JsonResult(false);
         }
     }
 }
