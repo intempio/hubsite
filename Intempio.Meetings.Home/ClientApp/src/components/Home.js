@@ -12,7 +12,9 @@ import MatchMaking from './MatchMaking';
 import Poster from './Poster';
 
 import SessionsSQL from './SessionsSQL';
-import ChatContent from './Chat'
+import ChatContent from './Chat';
+import VimeoVideo from './VimeoVideo';
+
 
 
 
@@ -123,9 +125,15 @@ export class Home extends Component {
                         var itemvalue = item;
                         var name = item;
                         var anchor = 'default';
+
+                        var vurl = '#';
                      
                         if (itemvalue.indexOf('>') > 0) {
                             if (itemvalue.split('>').length === 3) {
+                                anchor = itemvalue.split('>')[2]
+                            }
+                            if (itemvalue.split('>').length === 4) {
+                                vurl = itemvalue.split('>')[3]
                                 anchor = itemvalue.split('>')[2]
                             }
                             name = itemvalue.split('>')[1]
@@ -156,7 +164,9 @@ export class Home extends Component {
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":
-                                return <Presenters cname={name} category={anchor}/>
+                                return <Presenters cname={name} category={anchor} />
+                            case "vimeovideo":
+                                return <VimeoVideo vurl={vurl} cname={name} category={anchor}/>
                                 
 
                         }
@@ -172,7 +182,7 @@ export class Home extends Component {
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Poster />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <ChatContent />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Presenters />}
-
+        
                
                
  </>
