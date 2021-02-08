@@ -125,6 +125,7 @@ export class Home extends Component {
                         var itemvalue = item;
                         var name = item;
                         var anchor = 'default';
+                        var live = false;
 
                         var vurl = '#';
                      
@@ -133,6 +134,12 @@ export class Home extends Component {
                                 anchor = itemvalue.split('>')[2]
                             }
                             if (itemvalue.split('>').length === 4) {
+                                vurl = itemvalue.split('>')[3]
+                                anchor = itemvalue.split('>')[2]
+                            }
+
+                            if (itemvalue.split('>').length === 5) {
+                                live = itemvalue.split('>')[4]
                                 vurl = itemvalue.split('>')[3]
                                 anchor = itemvalue.split('>')[2]
                             }
@@ -166,7 +173,7 @@ export class Home extends Component {
                             case "presenters":
                                 return <Presenters cname={name} category={anchor} />
                             case "vimeovideo":
-                                return <VimeoVideo vurl={vurl} cname={name} category={anchor}/>
+                                return <VimeoVideo vurl={vurl} cname={name} category={anchor} live={live}/ >
                                 
 
                         }

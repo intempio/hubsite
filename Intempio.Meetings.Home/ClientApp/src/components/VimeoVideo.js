@@ -87,12 +87,22 @@ export default class VimeoVideo extends Component {
                     <div class="video-content">
                         {this.state.videourl == '#' ? < img src={require("../assets/img/video-icons/video-icon.jpg")} alt="video-last" class="video-last" /> :
                             this.state.videourl != '#' && <div class="video-content">
-                                <iframe src={'https://player.vimeo.com/video/' + this.state.videourl} width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                
+                                {this.props.live != '0' ? <iframe src={'https://player.vimeo.com/video/' + this.state.videourl} width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+                                    :
+                                    <iframe src={'https://vimeo.com/event/' + this.state.videourl + '/embed'} width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ></iframe>
+
+                                }
 
                             </div>
+
+                        
                         }
 
                     </div>
+
+
                 </div>
             </>
         )
