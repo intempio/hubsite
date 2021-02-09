@@ -1,4 +1,4 @@
-﻿import React, { Component, useCallback, useEffect, useState } from 'react';
+﻿import React, { useRef, useCallback, useEffect, useState } from 'react';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import moment from 'moment-timezone';
@@ -20,7 +20,7 @@ var currentUser = '';
 export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) => {
 
     channels = [chatKey];
-
+    var nameInput = useRef(null);
     moment.updateLocale('en', {
         longDateFormat: {
             LTY: 'MM/DD HH:mm',  // new format for token here
@@ -81,6 +81,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
 
     useEffect(() => {
+        setReplyMsg('');
         console.log(channels[0]);
         if (channels[0] != undefined && channels[0] != '') {
 
@@ -161,7 +162,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
 
         window.addEventListener("beforeunload", pubnub.unsubscribeAll);
-
+        setReplyMsg('');
     }, []);
 
     const sendMessage = useCallback(
@@ -348,7 +349,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                             </div>
                                             <div class="acts">
                                              
-                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg))}>
+                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg),nameInput.focus())}>
                                                     <path
                                                         d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
                                                         fill="#D1D0D0" />
@@ -480,7 +481,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
                                             </div>
                                             <div class="acts">
                                           
-                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg))}>
+                                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => (setReplyMsg(currentMsg), nameInput.focus())}>
                                                     <path
                                                         d="M7.89913 3.48496V1.17528C7.89913 0.667479 7.32581 0.389006 6.91629 0.683859L0.445906 5.46703C0.118292 5.71274 0.118292 6.20416 0.445906 6.44987L6.91629 11.233C7.32581 11.5279 7.89913 11.2494 7.89913 10.7416V8.39918C11.3063 8.72679 13.4358 9.98811 14.7463 12.2978C15.0411 12.8056 15.8438 12.5271 15.7619 11.9538C15.123 7.58014 13.0754 4.15657 7.89913 3.48496Z"
                                                         fill="#D1D0D0" />
@@ -500,14 +501,14 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
             </div>
             <div class="chat-footer" >
-                {replyMsg !='' && <div class="chat-replay">
-                    <span class="reply-for">Reply to:</span>
+                {replyMsg != '' && <div class="chat-replay" >
+                    <span class="reply-for">Reply to: <span class="chat-replay-cross" onClick={e => setReplyMsg('')}  > <svg width="10" height="10" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.7846 2.373L8.20635 7.9365L13.7846 13.5C14.4871 14.2005 13.2886 15.4114 12.5783 14.7031L7.00001 9.13964L1.42174 14.7031C0.719402 15.4036 -0.494719 14.2084 0.21541 13.5L5.79368 7.9365L0.21541 2.373C-0.486931 1.67251 0.711618 0.461608 1.42174 1.16986L7.00001 6.73336L12.5783 1.16986C13.2886 0.461611 14.4871 1.67251 13.7846 2.373Z" fill="#000000"></path></svg></span></span>
                     <span class="reply-text">{replyMsg.split('|')[0]}</span>
                 </div>}
                 <div class="chat-footer-wrapper">
             
                     <form>
-                        <label for="messageText"><input id="messageText" type="text" placeholder="Type your message" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
+                        <label for="messageText"><input ref={(input) => { nameInput = input; }}  id="messageText" type="text" placeholder="Type your message" onChange={e => setInput({ msg: e.target.value, date: Date.now(), user: fname + ' ' + lname })} value={input.msg} /></label>
                         <button class="chatButton" id="chatButton" onClick={e => {
                             e.preventDefault();
                             if (input.msg != '') {

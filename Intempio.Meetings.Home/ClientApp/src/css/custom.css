@@ -482,3 +482,10 @@ main .recent-item p {
     main .presenters-container .presenter {
         min-height: 400px;
     }
+
+header .chat-replay > span {
+    display: block !important;
+}
+.chat-replay-cross {
+    float: right;
+}
