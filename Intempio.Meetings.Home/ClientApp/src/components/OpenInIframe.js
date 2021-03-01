@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 
-export default class VimeoVideo extends Component {
+export default class OpenInIframe extends Component {
 
 
     constructor(props) {
@@ -16,7 +16,7 @@ export default class VimeoVideo extends Component {
         var vurl = url.searchParams.get("vurl");
         var vname = url.searchParams.get("name");
 
-        this.setState({ videourl: this.props.vurl, name: this.props.cname, loading: false });
+        this.setState({ url: this.props.url, name: this.props.cname, loading: false });
 
     }
 
@@ -85,25 +85,14 @@ export default class VimeoVideo extends Component {
                 <div class="video" id={this.props.category} >
                     <h3>{this.state.name}</h3>
                     <div class="video-content">
-                        {this.state.videourl == '#' ? < img src={require("../assets/img/video-icons/video-icon.jpg")} alt="video-last" class="video-last" /> :
-                            this.state.videourl != '#' && <div class="video-content">
+                        {this.state.url == '#' ? < img src={require("../assets/img/video-icons/video-icon.jpg")} alt="video-last" class="video-last" /> :
+                            this.state.url != '#' && <div class="video-content">
 
-                                {this.props.live == '1' ? <div class="video-vimeo-container">  <iframe src={'https://player.vimeo.com/video/' + this.state.videourl} class="video-vimeo" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-
-                                    :
-                                    this.props.live == '0' ? <div class="video-vimeo-container">  <iframe src={'https://vimeo.com/event/' + this.state.videourl + '/embed'} class="video-vimeo"   frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ></iframe>
-
-                                        <iframe src={'https://vimeo.com/event/' + this.state.videourl + '/chat/'} class="video-vimeo-chat"   frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ></iframe>
-                                    </div> :
-
-                                        <div class="video-vimeo-container"> <iframe src={'https://vimeo.com/event/' + this.state.videourl + '/chat/'} class="video-vimeo" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ></iframe></div>
-
-
-                                }
+                                <iframe src={this.state.url} class="custom-web" ></iframe>
 
                             </div>
 
-                        
+
                         }
 
                     </div>

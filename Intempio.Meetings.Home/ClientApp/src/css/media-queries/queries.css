@@ -67,6 +67,8 @@
         padding: 4% 13%;
         max-width: 1080px;
     }
+
+
 }
 
 @media screen and (max-width: 1280px) {
@@ -1161,6 +1163,11 @@
 }
 
 @media screen and (max-width: 880px) {
+
+    .custom-web {
+        width:500px;
+        height: 600px;
+    }
     .wrapper main .video-content {
         flex-direction: column;
         align-items: center;
@@ -1420,7 +1427,7 @@
             padding: 0 16px;
             flex-direction: column;
             align-items: center;
-            pointer-events: none;
+            
         }
 
             .wrapper main .sessions-item button {
@@ -1966,6 +1973,11 @@
 
     header .chat-container {
         max-height: 350px;
+    }
+
+    .custom-web {
+        width: 600px;
+        height: 600px;
     }
 }
 

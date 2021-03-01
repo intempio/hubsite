@@ -170,7 +170,7 @@ main {
                 box-sizing: border-box;
                 border-radius: 2px;
                 position: absolute;
-                top: 665px;
+           
                 display: flex;
                 flex-direction: column;
             }

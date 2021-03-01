@@ -218,7 +218,12 @@ main .recent-item p {
 }
 @media screen and (max-width: 3000px) {
 
-
+    .video-vimeo-container {
+        display: flex;
+        padding: 20px;
+        width: 1300px !important;
+        height: 600px !important;
+    }
 
 
     .video-frame {
@@ -229,6 +234,8 @@ main .recent-item p {
         width: 1200px !important;
         height: 600px !important;
     }
+
+
 }
 
 @media screen and (max-width: 1280px) {
@@ -249,6 +256,10 @@ main .recent-item p {
         width: 900px !important;
         height: 500px !important;
     }
+
+
+
+  
 }
 
 @media screen and (max-width: 1024px) {
@@ -269,10 +280,20 @@ main .recent-item p {
 
         display:none;
     }
+
+    .video-vimeo-container {
+        display: flex;
+        padding: 20px;
+        width: 1024px !important;
+        height: 454px !important;
+    }
+
+
 }
 
 @media screen and (max-width: 600px) {
 
+   
     .messages {
         display: none;
     }
@@ -309,6 +330,26 @@ main .recent-item p {
         right: 5px;
         height: 515px;
     }
+
+    .video-vimeo-container {
+        display: contents !important;
+        padding: 20px;
+        width: 600px !important;
+        height: 320px !important;
+    }
+
+    .video-vimeo {
+        flex: 75%;
+        width: 450px !important;
+        height: 276px !important;
+    }
+
+    .video-vimeo-chat {
+        flex: 25%;
+        width: 450px !important;
+        padding: 20px 0px !important;
+        height: 400px !important;
+    }
 }
 
 @media screen and (max-width: 720px) {
@@ -317,6 +358,8 @@ main .recent-item p {
         width:20px;
         height:20px;
     }
+
+  
 }
 
 
@@ -488,4 +531,27 @@ header .chat-replay > span {
 }
 .chat-replay-cross {
     float: right;
+}
+
+.video-vimeo {
+    flex: 75%;
+   
+}
+
+.video-vimeo-chat {
+    flex: 25%;
+}
+
+.video-vimeo-container{
+
+    display:flex;
+    padding:20px;
+
+
+}
+
+
+.custom-web {
+    width: 900px;
+    height: 600px;
 }

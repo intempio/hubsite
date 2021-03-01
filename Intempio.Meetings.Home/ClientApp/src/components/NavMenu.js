@@ -975,6 +975,7 @@ export class NavMenu extends Component {
                                     menuKey = tempmenuText;
 
                                     if (item.split('>').length === 4) {
+                                        url = item.split('>')[2]
                                         customIcon = item.split('>')[3]
                                     }
                                 }
@@ -1208,6 +1209,7 @@ export class NavMenu extends Component {
                                                 menuKey = tempmenuText;
 
                                                 if (item.split('>').length === 4) {
+                                                    url = item.split('>')[2]
                                                     customIcon = item.split('>')[3]
                                                 }
                                             }

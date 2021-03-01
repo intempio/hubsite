@@ -14,6 +14,11 @@ import Poster from './Poster';
 import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat';
 import VimeoVideo from './VimeoVideo';
+import OpenInIframe from './OpenInIframe';
+
+
+
+
 
 
 
@@ -173,7 +178,9 @@ export class Home extends Component {
                             case "presenters":
                                 return <Presenters cname={name} category={anchor} />
                             case "vimeovideo":
-                                return <VimeoVideo vurl={vurl} cname={name} category={anchor} live={live}/ >
+                                return <VimeoVideo vurl={vurl} cname={name} category={anchor} live={live} />
+                            case "web":
+                                return <OpenInIframe url={vurl} cname={name} category={anchor} />
                                 
 
                         }

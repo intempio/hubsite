@@ -107,7 +107,7 @@ export const Chat = ({ openChat, chatKey, publishKey, subscribeKey, chatName }) 
 
                         if (messageEvent.channel === channels[0]) {
                             setMessages(messages => [...messages, messageEvent.message]);
-                            scrollToBottom();
+                           scrollToBottom();
                         }
 
                         setoldChatKey(channels[0]);
