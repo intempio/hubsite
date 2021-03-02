@@ -13,6 +13,7 @@ import FileUpload from './components/FileUpload';
 import Settings from './components/Settings';
 import ViewSettings from './components/ViewSettings';
 import PlayVideo from './components/PlayVideo';
+import PDFViewer from './components/PDFViewer';
 
 
 
@@ -22,7 +23,6 @@ export default class App extends Component {
 
     componentWillMount() {
 
-       
     }
 
     render() {
@@ -39,6 +39,7 @@ export default class App extends Component {
                         <Route path='/settings' component={RequireAuth(Settings)} />
                         <Route path='/source' component={RequireAuth(ViewSettings)} />
                         <Route path='/video' component={RequireAuth(PlayVideo)} />
+                        <Route path='/pdf' component={RequireAuth(PDFViewer)} />
                     </Layout>
                   
 

@@ -15,6 +15,9 @@ import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat';
 import VimeoVideo from './VimeoVideo';
 import OpenInIframe from './OpenInIframe';
+import PDFViewer from './PDFViewer';
+
+
 
 
 
@@ -181,6 +184,9 @@ export class Home extends Component {
                                 return <VimeoVideo vurl={vurl} cname={name} category={anchor} live={live} />
                             case "web":
                                 return <OpenInIframe url={vurl} cname={name} category={anchor} />
+
+                            case "pdf":
+                                return <PDFViewer url={vurl} cname={name} category={anchor} />
                                 
 
                         }

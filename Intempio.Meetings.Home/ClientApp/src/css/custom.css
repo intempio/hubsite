@@ -555,3 +555,48 @@ header .chat-replay > span {
     width: 900px;
     height: 600px;
 }
+
+@media print {
+    .pdf-container {
+        display: none;
+    }
+}
+
+.pdf-main{
+
+
+}
+
+.pdf-container {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+
+.pdf-conent{
+
+}
+
+.pdf-pagination{
+
+
+}
+
+
+
+.react-pdf__Page {
+    margin-top: 10px;
+}
+
+.react-pdf__Page__textContent {
+   
+    border-radius: 5px;
+}
+
+.react-pdf__Page__annotations.annotationLayer {
+    padding: 20px;
+}
+
+.react-pdf__Page__canvas {
+    margin: 0 auto;
+}
