@@ -100,7 +100,7 @@ code {
 
 .settings-item {
     padding: 30px;
-    max-width: 540px;
+    max-width: 824px;
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #CFCFCF;
@@ -111,15 +111,19 @@ code {
     align-items: center;
     cursor: pointer;
 }
-
+    .settings-item .recent-info {
+        width: 100%;
+    }
 main .presenters-container .presenter .name {
-    height: 50px;
+    margin-top: 0px !important;
+    text-transform: none !important;
+    min-height :90px !important;
 }
 
 main .presenters-container .presenter .position {
     height: 32px;
     display:block!important;
-    min-height:100px;
+  
 }
 
 .profiletitle{
@@ -128,9 +132,9 @@ main .presenters-container .presenter .position {
 }
 
 main .presenters-container {
-    width: 1660px !important;
+    text-align:center;
     display: block !important;
-   
+  /*  display: flex !important;*/
 }
 
 .popup-close {
@@ -142,8 +146,16 @@ main .presenters-container {
     display: flex !important;
 }
 
+main .recent-item p {
+    font-size: 18px !important;
+    line-height: 20px !important;
+    min-height: 40px !important;
+    text-transform: none !important;
+}
+
 .buttonposter {
-    margin: 46px 40px 44px 0;
+    /* margin: 46px 40px 44px 0; */
+    margin: 40px 40px 40px 40px;
     width: 210px;
     height: 56px;
     color: #025581;
@@ -206,7 +218,12 @@ main .presenters-container {
 }
 @media screen and (max-width: 3000px) {
 
-
+    .video-vimeo-container {
+        display: flex;
+        padding: 20px;
+        width: 1300px !important;
+        height: 600px !important;
+    }
 
 
     .video-frame {
@@ -217,11 +234,14 @@ main .presenters-container {
         width: 1200px !important;
         height: 600px !important;
     }
+
+
 }
 
 @media screen and (max-width: 1280px) {
     main .presenters-container .presenter {
-        max-width: 440px !important
+        /*max-width: 440px !important*/
+        max-width: 380px !important
     }
 
         main .presenters-container .presenter .socials {
@@ -236,6 +256,10 @@ main .presenters-container {
         width: 900px !important;
         height: 500px !important;
     }
+
+
+
+  
 }
 
 @media screen and (max-width: 1024px) {
@@ -249,11 +273,30 @@ main .presenters-container {
     }
 
     .wrapper main .recent-container-swiper > .swiper-wrapper {
-        display: inline-block !important;
+        display: none !important;
     }
+
+    .messages{
+
+        display:none;
+    }
+
+    .video-vimeo-container {
+        display: flex;
+        padding: 20px;
+        width: 1024px !important;
+        height: 454px !important;
+    }
+
+
 }
 
 @media screen and (max-width: 600px) {
+
+   
+    .messages {
+        display: none;
+    }
     .wrapper main .recent-container {
         display: none !important;
     }
@@ -287,6 +330,278 @@ main .presenters-container {
         right: 5px;
         height: 515px;
     }
+
+    .video-vimeo-container {
+        display: contents !important;
+        padding: 20px;
+        width: 600px !important;
+        height: 320px !important;
+    }
+
+    .video-vimeo {
+        flex: 75%;
+        width: 450px !important;
+        height: 276px !important;
+    }
+
+    .video-vimeo-chat {
+        flex: 25%;
+        width: 450px !important;
+        padding: 20px 0px !important;
+        height: 400px !important;
+    }
+}
+
+@media screen and (max-width: 720px) {
+
+    #messages svg {
+        width:20px;
+        height:20px;
+    }
+
+  
 }
 
 
+
+    .conversation-number-help-done {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #EEEEEE;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #C2C2C2;
+    }
+
+    .conversation-number-help {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #3D998A;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #C2C2C2;
+    }
+
+
+    .wrapper-login {
+        margin-left: 0px !important;
+    }
+
+    .bold {
+        font-weight: bold !important;
+        color: #5E5E5E !important;
+        font-size: 18px !important;
+    }
+
+    .italic {
+        font-style: italic !important;
+        font-weight: 400 !important;
+        color: #5E5E5E !important;
+        font-size: 18px !important;
+    }
+
+    main .video-content {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wrapper main .recent-container.poster-container {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+    }
+
+        .wrapper main .recent-container.poster-container .recent-item {
+            max-width: 23% !important;
+            display: inline-block !important;
+            margin-bottom: 20px;
+            min-width: 360px;
+        }
+
+
+            .wrapper main .recent-container.poster-container .recent-item:first-child {
+                margin-left: 20px !important;
+                min-width: 360px;
+            }
+
+    a.skelleton-menu-item {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+
+    header .chat-message-owner > .message-wrapper .message-forward {
+        padding: 2px 5px;
+        align-self: baseline;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid #C4C4C4;
+    }
+
+        header .chat-message-owner > .message-wrapper .message-forward span {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.15px;
+            color: #353839;
+            margin-top: 5px;
+        }
+
+    header .chat-message-guest > .message-wrapper > .message > span {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.15px;
+        color: #353839;
+        margin-top: 5px;
+    }
+
+    header .chat-message-owner > .message-wrapper > .fix {
+        display: inline-table !important;
+    }
+
+    header .chat-message-owner > .message-wrapper .message-forward span.name {
+        color: black !important;
+        font-weight: 400 !important;
+    }
+
+    header .chat-message-owner > .message-wrapper .message-forward span.name {
+        color: black !important;
+        font-weight: 400 !important;
+    }
+
+    header .chat-message-owner > .message-wrapper > .message > span {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.15px;
+        color: #353839;
+        margin-top: 5px;
+    }
+
+    header .chat-message-guest > .message-wrapper .message.fix2 {
+        align-items: baseline !important;
+    }
+
+    header .chat-message-owner > .message-wrapper > .message > span {
+        padding-bottom: 5px !important;
+        flex-direction: row-reverse;
+        padding-right: 5px;
+    }
+
+
+    main .presenters-container .presenter:first-child {
+        min-height: 400px;
+    }
+
+    main .presenters-container .presenter {
+        min-height: 400px;
+    }
+
+header .chat-replay > span {
+    display: block !important;
+}
+.chat-replay-cross {
+    float: right;
+}
+
+.video-vimeo {
+    flex: 75%;
+   
+}
+
+.video-vimeo-chat {
+    flex: 25%;
+}
+
+.video-vimeo-container{
+
+    display:flex;
+    padding:20px;
+
+
+}
+
+
+.custom-web {
+    width: 900px;
+    height: 600px;
+}
+
+@media print {
+    .pdf-container {
+        display: none;
+    }
+}
+
+.pdf-main{
+
+
+}
+
+.pdf-container {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+
+.pdf-conent{
+
+}
+
+.pdf-pagination{
+
+
+}
+
+
+
+.react-pdf__Page {
+    margin-top: 10px;
+}
+
+.react-pdf__Page__textContent {
+   
+    border-radius: 5px;
+}
+
+.react-pdf__Page__annotations.annotationLayer {
+    padding: 20px;
+}
+
+.react-pdf__Page__canvas {
+    margin: 0 auto;
+}
+
+
+.recent-container-swiper{
+    display:none;
+}
