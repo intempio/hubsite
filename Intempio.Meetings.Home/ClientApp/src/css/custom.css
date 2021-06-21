@@ -465,3 +465,15 @@ main .presenters-container .presenter:first-child {
 main .presenters-container .presenter {
     min-height: 400px;
 }
+
+.submenu-list {
+    background-color:white;
+}
+
+nav .popover-submenu-list {
+    background-color: white;
+}
+
+nav .popover-submenu{
+    overflow:auto;
+}
