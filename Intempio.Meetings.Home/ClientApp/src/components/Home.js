@@ -13,7 +13,7 @@ import Poster from './Poster';
 
 import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat'
-
+import RankContent from './RankContent';
 
 
 
@@ -156,7 +156,9 @@ export class Home extends Component {
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":
-                                return <Presenters cname={name} category={anchor}/>
+                                return <Presenters cname={name} category={anchor} />
+                            case "review":
+                                return <RankContent cname={name} category={anchor} />
                                 
 
                         }

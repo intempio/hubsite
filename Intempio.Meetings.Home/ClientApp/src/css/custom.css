@@ -229,6 +229,13 @@ main .recent-item p {
         width: 1200px !important;
         height: 600px !important;
     }
+
+    .mySlides .azuremediaplayer {
+        width: 99% !important;
+       
+    }
+
+
 }
 
 @media screen and (max-width: 1280px) {
@@ -264,8 +271,15 @@ main .recent-item p {
     .wrapper main .recent-container-swiper > .swiper-wrapper {
         display: none !important;
     }
-}
 
+    .mySlides .azuremediaplayer {
+        width: 99% !important;
+    }
+
+    .questions .footer button {
+        width: 120px;
+    }
+}
 @media screen and (max-width: 600px) {
     .wrapper main .recent-container {
         display: none !important;
@@ -299,6 +313,10 @@ main .recent-item p {
         left: 5px;
         right: 5px;
         height: 515px;
+    }
+
+    .mySlides .azuremediaplayer {
+        width: 336px !important
     }
 }
 
@@ -477,3 +495,340 @@ nav .popover-submenu-list {
 nav .popover-submenu{
     overflow:auto;
 }
+
+
+
+
+
+/* Slideshow container */
+.slideshow-container {
+  
+    position: relative;
+    margin: auto;
+    width :100%;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px !important;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+   
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+    .active, .dot:hover {
+        background-color: #717171;
+    }
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {
+        font-size: 11px
+    }
+}
+.next {
+    padding-right: 30px !important;
+    margin-right:16px;
+}
+
+.collapsible {
+    /* background-color: #777; */
+    color: white;
+    cursor: pointer;
+    /* padding: 18px; */
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+span.fa.fa-star.checked {
+     color: orange; 
+}
+
+span.fa.fa-star {
+    color: #CFCFCF
+}
+
+    span.fa.fa-star :hover {
+        color: #c2c2c2;
+    }
+
+.questions {
+    max-width: 540px;
+    width: 100%;
+    height: auto;
+    margin-left: 19px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .questions .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: #5E5E5E;
+    }
+
+
+    .questions .posts-item {
+        margin-bottom: 20px;
+        background: #FFFFFF;
+        border-bottom: 1px solid #f3f3f3;
+        box-sizing: border-box;
+        border-radius: 2px;
+        display: flex;
+        cursor: default;
+    }
+
+
+    .questions .form-inline .form-group {
+        display: flex;
+        flex: 0 0 auto;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        margin-bottom: 0;
+        flex-direction: column;
+        max-width: -webkit-fill-available;
+    }
+
+main .video-content {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+    .questions .footer input {
+        max-width: 400px;
+        min-width: 0;
+        width: 66%;
+        height: 36px;
+     
+        padding: 0 15px;
+        opacity: 0.5;
+        border: 1px solid #D1D0D0;
+        box-sizing: border-box;
+        border-radius: 2px;
+    }
+
+.questions .footer button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    width: 126px;
+    height: 36px;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: var(--color-surface);
+    border: none;
+    border-radius: 2px;
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.questions-icon {
+    color: var(--color-surface);
+    font-size: 50px;
+}
+
+.questions-icon-no {
+    color: #CFCFCF;
+    font-size: 50px;
+}
+
+.bottom-dot{
+
+
+}
+
+
+main .sessions .sessions-item:hover .sessions-time {
+    background: var(--color-surface);
+    border-radius: 2px;
+}
+
+
+.video-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: #5E5E5E;
+}
+
+.sessions-time-ranking {
+    padding: 5px;
+ /*   background: #d8d8d86e;*/
+    margin-bottom : 5px;
+}
+
+
+main .sessions .ranking-star {
+
+    max-width: 260px;
+    width: 100%;
+    min-height: 146px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FFFFFF;
+  
+    box-sizing: border-box;
+    border-radius: 2px;
+    align-items: center;
+    flex-wrap: wrap;
+    /*background: url(../assets/img/image_720x25.png);
+    background-repeat: no-repeat;
+    background-size: cover;*/
+}
+
+main .sessions .ranking-star-thumbnail {
+    margin: 10px;
+    max-width: 260px;
+    width: 100%;
+    min-height: 146px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid #CFCFCF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: url(../assets/img/image_720x25.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.popularity span.fa.fa-star:hover {
+    color: orange;
+}
+
+
+.sessions-time-ranking-v2 {
+    padding: 5px;
+  
+    margin-bottom: 5px;
+}
+
+.video-content .fun-stuff-container .stuff {
+    height: 240px;
+}
+
+.fa .fa-times-circle {
+    
+}
+
+.close-button {
+    cursor: pointer;
+    color: var(--color-surface);
+}
+
+    .close-button:hover {
+        color: orange;
+    }
