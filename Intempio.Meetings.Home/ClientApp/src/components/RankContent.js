@@ -80,18 +80,33 @@ export default class RankContent extends Component {
     collapsAll = () => {
 
         var coll = document.getElementsByClassName("collapsible");
+        var rows = document.getElementsByClassName("content");
+
 
 
         for (var i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
+                for (var x = 0; x < rows.length; x++) {
+                    if (rows[x].style.display === "block") {
+                        rows[x].style.display = "none";
+                    }
+                }
+                for (var x = 0; x < rows.length; x++) {
+                    if (coll[x].style.display === "none") {
+                        coll[x].style.display = "block";
+                    }
+                }
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {
                     content.style.display = "none";
+                    this.style.display = "block";
                 } else {
                     content.style.display = "block";
                     this.style.display = "none";
                 }
+
+
             });
         }
     }
@@ -124,22 +139,23 @@ export default class RankContent extends Component {
 
         }
     }
-    plusSlides = (n) => {
+
+    plusSlides = (n, i) => {
         var curr = this.state.slideIndex - n;
         if (curr == 0) { curr = 1; }
         if (curr > 3) { curr = 3; }
         this.setState({ slideIndex: curr })
-        this.showSlides(curr);
+        this.showSlides(curr, i);
     }
-    currentSlide = (n) => {
+    currentSlide = (n, i) => {
 
 
         this.setState({ slideIndex: n })
-        this.showSlides(n)
+        this.showSlides(n, i)
     }
-    showSlides = (n) => {
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
+    showSlides = (n, i) => {
+        var slides = document.getElementsByClassName("mySlides" + i);
+        var dots = document.getElementsByClassName("dot" + i);
         if (n > slides.length) { this.setState({ slideIndex: 1 }) }
         if (n < 1) { this.state.slideIndex = slides.length }
         for (var i = 0; i < slides.length; i++) {
@@ -159,7 +175,15 @@ export default class RankContent extends Component {
         this.getSettings();
         this.collapsresetAll();
         this.collapsAll();
-        this.showSlides(this.state.slideIndex);
+        this.showSlides(this.state.slideIndex, 1);
+        this.showSlides(this.state.slideIndex, 2);
+        this.showSlides(this.state.slideIndex, 3);
+        this.showSlides(this.state.slideIndex, 4);
+        this.showSlides(this.state.slideIndex, 5);
+
+
+
+
 
     }
 
@@ -247,6 +271,8 @@ export default class RankContent extends Component {
                         </div>
                     </div>
                 </div>
+
+
                 <div id={this.props.category} class="sessions" style={{ display: !this.state.loading ? "" : "none" }}>
                     <div class="sessions-header">
                         <h3>{this.props.cname}</h3>
@@ -270,13 +296,12 @@ export default class RankContent extends Component {
                                     </div>
                                     <div class="sessions-information">
                                         <h3>Jill Jones</h3>
-                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                        voluptatem.
-                    </p>
+                                        <p>Role Play:HCP Pricing Objection </p>
                                     </div>
 
-                                    <div class="ranking-star-thumbnail">
+                                    <div class="ranking-star-thumbnail" style={{
+                                        background: "url( " + require('../assets/img/jill_thumbnail.png') + ")"
+                                    }}>
 
                                     </div>
 
@@ -284,65 +309,50 @@ export default class RankContent extends Component {
                             </div>
                             <div class="content" style={{ display: "none" }}>
                                 <div class="video">
-                                    <div class="video-header">Jill Jones</div>
+                                  
+                                    <div class="video-header">
+                                        <div class="video-header-first">Jill Jones </div>
+                                        <div class="fa fa-times-circle close-button"> </div>
+                                    </div>
+                                    <div class="video-header-second">HCP Pricing Objection</div>
                                     <div class="video-content">
 
                                         <div class="slideshow-container">
 
-                                            <div class="mySlides" id="1">
+                                            <div class="mySlides1 mySlides" id="1">
                                                 <div class="numbertext">1 / 3</div>
                                                 <Player
                                                     sourceVideo={{
-                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/6797dcd7-c807-41a0-a880-cce591dcaf70/DNA Animations.ism/manifest', "type": "application/vnd.ms-sstr+xml"
+                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/c937a863-d626-4f6f-af8e-aa4066558156/Interview Role Play - Excellent .ism/manifest', "type": "application/vnd.ms-sstr+xml"
                                                     }}
                                                 />
-                                                <div class="text">DNA Animations</div>
+
                                             </div>
 
-                                            <div class="mySlides ">
-                                                <div class="numbertext">2 / 3</div>
-                                                <Player
-                                                    sourceVideo={{
-                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/aa400373-2fc3-4b55-a797-be379fd6eec4/Molecular Motor Proteins.ism/manifest', "type": "application/vnd.ms-sstr+xml"
-                                                    }}
-                                                />
-                                                <div class="text">Molecular Motor Proteins</div>
-                                            </div>
 
-                                            <div class="mySlides ">
-                                                <div class="numbertext">3 / 3</div>
-                                                <Player
-                                                    sourceVideo={{
-                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/3055775f-175e-4653-a8e6-dcd01ead7947/Drew Berry - Animations of unsee.ism/manifest', "type": "application/vnd.ms-sstr+xml"
-                                                    }}
-                                                />
-                                                { /* <img src="./assets/img/video-icons/posts-photo.jpg" style={{ width: "100%" }}></img>*/}
-                                                <div class="text">Drew Berry - Animations of unsee</div>
-                                            </div>
 
-                                            <a class="prev" onClick={() => this.plusSlides(-1)}>&#10094;</a>
-                                            <a class="next" onClick={() => this.plusSlides(1)}>&#10095;</a>
+                                            <a class="prev" onClick={() => this.plusSlides(-1, 1)}>&#10094;</a>
+                                            <a class="next" onClick={() => this.plusSlides(1, 1)}>&#10095;</a>
                                             <div class="bottom-dots" style={{ textAlign: "center" }} >
-                                                <span class="dot" onClick={() => this.currentSlide(1)}></span>
-                                                <span class="dot" onClick={() => this.currentSlide(2)}></span>
-                                                <span class="dot" onClick={() => this.currentSlide(3)}></span>
+                                                <span class="dot1" onClick={() => this.currentSlide(1, 1)}></span>
+
                                             </div>
                                         </div>
 
                                         <div class="questions">
                                             <div class="header">
                                                 <div class="header-content">
-                                                    Rank following content
+                                                    Please rate Role Play on the following:
                                                 </div>
-                                                <div class="fa fa-times-circle close-button"> </div>
+                                              
 
                                             </div>
                                             <div class="posts-item">
 
-                                                <form class="form-inline" >
+                                                <form class="question-inline" >
 
-                                                    <div class="form-group">
-                                                        <div class="question" >01). modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem  dolore magnam aliquam quaerat voluptatem</div>
+                                                    <div class="question-group">
+                                                        <div class="question" >Ease of presentation </div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
@@ -357,17 +367,310 @@ export default class RankContent extends Component {
 
                                                 </form>
 
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Choice of reply approach</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Degree of probing</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+                                                <form class="question-inline" >
+                                                    <div class="question-group">
+                                                        <div class="question" >Accuracy of Information</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="footer">
+
+                                                <input id='footer-comment' type="text" placeholder="Write comment"></input>
+                                                <label for="footer-file"><input id="footer-file" type="file" style={{ display: "none" }}></input></label>
+                                                <button>Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <div class="collapsible" id="c01">
+                                    <div class="sessions-item">
+                                        <div class="ranking-star">
+                                            <div class="sessions-time-ranking">
+                                                <span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="sessions-information">
+                                            <h3>Tom Smith</h3>
+                                            <p>Role Play:HCP Pricing Objection </p>
+                                        </div>
+
+                                        <div class="ranking-star-thumbnail" style={{
+                                            background: "url( " + require('../assets/img/tom_thumbnail.png') + ")"
+                                        }}>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="content" style={{ display: "none" }}>
+                                    <div class="video">
+                                    
+                                        <div class="video-header">
+                                            <div class="video-header-first">Tom Smith </div>
+                                            <div class="fa fa-times-circle close-button"> </div>
+                                        </div>
+                                        <div class="video-header-second">HCP Pricing Objection</div>
+                                        <div class="video-content">
+
+                                            <div class="slideshow-container">
+
+                                                <div class="mySlides2 mySlides" id="2">
+                                                    <div class="numbertext">1 / 3</div>
+                                                    <Player
+                                                        sourceVideo={{
+                                                            "src": 'https://intempioms01-use2.streaming.media.azure.net/e5b2345a-7f10-45df-ba6c-1fd52c029432/Recruitment consultant role play.ism/manifest', "type": "application/vnd.ms-sstr+xml"
+                                                        }}
+                                                    />
+                                                </div>
 
 
 
+                                                <a class="prev" onClick={() => this.plusSlides(-1, 2)}>&#10094;</a>
+                                                <a class="next" onClick={() => this.plusSlides(1, 2)}>&#10095;</a>
+                                                <div class="bottom-dots" style={{ textAlign: "center" }} >
+                                                    <span class="dot2" onClick={() => this.currentSlide(1, 2)}></span>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="questions">
+                                                <div class="header">
+                                                    <div class="header-content">
+                                                        Please rate Role Play on the following:
+                                                </div>
+                                              
+
+                                                </div>
+                                                <div class="posts-item">
+
+                                                    <form class="question-inline" >
+
+                                                        <div class="question-group">
+                                                            <div class="question" >Ease of presentation </div>
+                                                            <div class="form-input-div">
+                                                                <div class="popularity">
+
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+                                                <div class="posts-item">
+
+
+                                                    <form class="question-inline" >
+
+                                                        <div class="question-group">
+                                                            <div class="question" >Choice of reply approach</div>
+                                                            <div class="form-input-div">
+                                                                <div class="popularity">
+
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div class="posts-item">
+
+
+                                                    <form class="question-inline" >
+
+                                                        <div class="question-group">
+                                                            <div class="question" >Degree of probing</div>
+                                                            <div class="form-input-div">
+                                                                <div class="popularity">
+
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="posts-item">
+                                                    <form class="question-inline" >
+                                                        <div class="question-group">
+                                                            <div class="question" >Accuracy of Information</div>
+                                                            <div class="form-input-div">
+                                                                <div class="popularity">
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="footer">
+
+                                                    <input id='footer-comment' type="text" placeholder="Write comment"></input>
+                                                    <label for="footer-file"><input id="footer-file" type="file" style={{ display: "none" }}></input></label>
+                                                    <button>Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="collapsible">
+                                <div class="sessions-item">
+                                    <div class="ranking-star" style={{/*
+                                        background: "url( " + require('../assets/img/dba_720x25.png') + ")" */
+                                    }}>
+                                        <div class="sessions-time-ranking" >
+
+                                            <span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="sessions-information">
+                                        <h3>Jane Doe</h3>
+                                        <p>Role Play:HCP Pricing Objection
+                    </p>
+                                    </div>
+                                    <div class="ranking-star-thumbnail" style={{
+                                        background: "url( " + require('../assets/img/Jane_thumbnail.png') + ")"
+                                    }}>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="content" style={{ display: "none" }}>
+                                <div class="video">
+                                    <div class="video-header">
+                                        <div class="video-header-first">Jane Doe </div>
+                                        <div class="fa fa-times-circle close-button"> </div>
+                                    </div>
+                                  
+                                    <div class="video-header-second">HCP Pricing Objection</div>
+                                    <div class="video-content">
+
+                                        <div class="slideshow-container">
+
+                                            <div class="mySlides3 mySlides" id="2">
+                                                <div class="numbertext">1 / 3</div>
+                                                <Player
+                                                    sourceVideo={{
+                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/9ec600d5-b3be-4ee8-bc2d-13da45b95d2b/Job Interview Role Play.ism/manifest', "type": "application/vnd.ms-sstr+xml"
+                                                    }}
+                                                />
+                                            </div>
+
+
+
+                                            <a class="prev" onClick={() => this.plusSlides(-1, 3)}>&#10094;</a>
+                                            <a class="next" onClick={() => this.plusSlides(1, 3)}>&#10095;</a>
+                                            <div class="bottom-dots" style={{ textAlign: "center" }} >
+                                                <span class="dot3" onClick={() => this.currentSlide(1, 3)}></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="questions">
+                                            <div class="header">
+                                                <div class="header-content">
+                                                    Please rate Role Play on the following:
+                                                </div>
+                                           
 
                                             </div>
                                             <div class="posts-item">
 
-                                                <form class="form-inline" >
+                                                <form class="question-inline" >
 
-                                                    <div class="form-group">
-                                                        <div class="question" >02). modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem  dolore magnam aliquam quaerat voluptatem</div>
+                                                    <div class="question-group">
+                                                        <div class="question" >Ease of presentation </div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
@@ -382,17 +685,151 @@ export default class RankContent extends Component {
 
                                                 </form>
 
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Choice of reply approach</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Degree of probing</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+                                                <form class="question-inline" >
+                                                    <div class="question-group">
+                                                        <div class="question" >Accuracy of Information</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="footer">
+
+                                                <input id='footer-comment' type="text" placeholder="Write comment"></input>
+                                                <label for="footer-file"><input id="footer-file" type="file" style={{ display: "none" }}></input></label>
+                                                <button>Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="collapsible">
+                                <div class="sessions-item">
+                                    <div class="ranking-star" style={{/*
+                                        background: "url( " + require('../assets/img/dba_720x25.png') + ")" */
+                                    }}>
+                                        <div class="sessions-time-ranking" >
+
+                                            <span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="sessions-information">
+                                        <h3>Mary Todd</h3>
+                                        <p>Role Play:HCP Pricing Objection
+                    </p>
+                                    </div>
+                                    <div class="ranking-star-thumbnail" style={{
+                                        background: "url( " + require('../assets/img/mary_thumbnail.png') + ")"
+                                    }}>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="content" style={{ display: "none" }}>
+                                <div class="video">
+                                    <div class="video-header">
+                                        <div class="video-header-first">Mary Todd </div>
+                                        <div class="fa fa-times-circle close-button"> </div>
+                                    </div>
+                                
+                                    <div class="video-header-second">HCP Pricing Objection</div>
+                                    <div class="video-content">
+
+                                        <div class="slideshow-container">
+
+                                            <div class="mySlides4 mySlides" id="2">
+                                                <div class="numbertext">1 / 3</div>
+                                                <Player
+                                                    sourceVideo={{
+                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/525c0754-5740-4b84-948a-ce907e8b9203/Mock Interview Preparation_ Comm.ism/manifest', "type": "application/vnd.ms-sstr+xml"
+                                                    }}
+                                                />
+
+                                            </div>
 
 
 
+                                            <a class="prev" onClick={() => this.plusSlides(-1, 4)}>&#10094;</a>
+                                            <a class="next" onClick={() => this.plusSlides(1, 4)}>&#10095;</a>
+                                            <div class="bottom-dots" style={{ textAlign: "center" }} >
+                                                <span class="dot4" onClick={() => this.currentSlide(1, 4)}></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="questions">
+                                            <div class="header">
+                                                <div class="header-content">
+                                                    Please rate Role Play on the following:
+                                                </div>
+                                            
 
                                             </div>
                                             <div class="posts-item">
 
-                                                <form class="form-inline" >
+                                                <form class="question-inline" >
 
-                                                    <div class="form-group">
-                                                        <div class="question" >03). modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem  dolore magnam aliquam quaerat voluptatem</div>
+                                                    <div class="question-group">
+                                                        <div class="question" >Ease of presentation </div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
@@ -407,17 +844,14 @@ export default class RankContent extends Component {
 
                                                 </form>
 
-
-
-
-
                                             </div>
                                             <div class="posts-item">
 
-                                                <form class="form-inline" >
 
-                                                    <div class="form-group">
-                                                        <div class="question" >04). modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem  dolore magnam aliquam quaerat voluptatem</div>
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Choice of reply approach</div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
@@ -431,11 +865,42 @@ export default class RankContent extends Component {
                                                     </div>
 
                                                 </form>
+                                            </div>
+                                            <div class="posts-item">
 
 
+                                                <form class="question-inline" >
 
+                                                    <div class="question-group">
+                                                        <div class="question" >Degree of probing</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
 
-
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+                                                <form class="question-inline" >
+                                                    <div class="question-group">
+                                                        <div class="question" >Accuracy of Information</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="footer">
 
@@ -467,14 +932,12 @@ export default class RankContent extends Component {
                                         </div>
                                     </div>
                                     <div class="sessions-information">
-                                        <h3>Tom Smith</h3>
-                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                        voluptatem.
+                                        <h3>Adam Davis</h3>
+                                        <p>Role Play:HCP Pricing Objection
                     </p>
                                     </div>
                                     <div class="ranking-star-thumbnail" style={{
-                                        background: "url( " + require('../assets/img/dba_720x25.png') + ")"
+                                        background: "url( " + require('../assets/img/Adam_thumbnail.png') + ")"
                                     }}>
 
                                     </div>
@@ -483,21 +946,132 @@ export default class RankContent extends Component {
                             </div>
                             <div class="content" style={{ display: "none" }}>
                                 <div class="video">
-                                    <h3>Tom Smith</h3>
-                                  coming soon!
-                                </div>
-                                <div class="questions">
-                                    <div class="header">
-                                        <div class="header-content">
-                                           
-                                                </div>
+                                    <div class="video-header">
+                                        <div class="video-header-first">Adam Davis </div>
                                         <div class="fa fa-times-circle close-button"> </div>
+                                    </div>
+                                    <div class="video-header-second">HCP Pricing Objection</div>
 
+                                    <div class="video-content">
+
+                                        <div class="slideshow-container">
+
+                                            <div class="mySlides5 mySlides" id="2">
+                                                <div class="numbertext">1 / 3</div>
+                                                <Player
+                                                    sourceVideo={{
+                                                        "src": 'https://intempioms01-use2.streaming.media.azure.net/501c2141-ddd8-45e9-918d-1fcf9cb8c9f8/Interview Simulation.ism/manifest', "type": "application/vnd.ms-sstr+xml"
+                                                    }}
+                                                />
+                                            </div>
+
+
+
+                                            <a class="prev" onClick={() => this.plusSlides(-1, 5)}>&#10094;</a>
+                                            <a class="next" onClick={() => this.plusSlides(1, 5)}>&#10095;</a>
+                                            <div class="bottom-dots" style={{ textAlign: "center" }} >
+                                                <span class="dot5" onClick={() => this.currentSlide(1, 5)}></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="questions">
+                                            <div class="header">
+                                                <div class="header-content">
+                                                    Please rate Role Play on the following:
+                                                </div>
+
+
+                                            </div>
+                                            <div class="posts-item">
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Ease of presentation </div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Choice of reply approach</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+
+
+                                                <form class="question-inline" >
+
+                                                    <div class="question-group">
+                                                        <div class="question" >Degree of probing</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="posts-item">
+                                                <form class="question-inline" >
+                                                    <div class="question-group">
+                                                        <div class="question" >Accuracy of Information</div>
+                                                        <div class="form-input-div">
+                                                            <div class="popularity">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="footer">
+
+                                                <input id='footer-comment' type="text" placeholder="Write comment"></input>
+                                                <label for="footer-file"><input id="footer-file" type="file" style={{ display: "none" }}></input></label>
+                                                <button>Save</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </>
