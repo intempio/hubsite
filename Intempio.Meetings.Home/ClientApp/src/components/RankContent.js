@@ -79,7 +79,7 @@ export default class RankContent extends Component {
 
     collapsAll = () => {
 
-        var coll = document.getElementsByClassName("collapsible");
+        var coll = document.getElementsByClassName("collapsibleRanking");
         var rows = document.getElementsByClassName("content");
 
 
@@ -120,7 +120,7 @@ export default class RankContent extends Component {
             closebtns[a].addEventListener("click", function () {
 
 
-                var coll = document.getElementsByClassName("collapsible");
+                var coll = document.getElementsByClassName("collapsibleRanking");
 
                 for (var i = 0; i < coll.length; i++) {
                     coll[i].classList.toggle("active");
@@ -168,7 +168,24 @@ export default class RankContent extends Component {
         dots[this.state.slideIndex - 1].className += " active";
     }
 
+    thubmnamil(l,e) {
 
+        var control = e.target.parentElement;
+
+        var childs = control.childNodes;
+
+        for (var i = 0; i < childs.length; i++) {
+
+            childs[i].classList.replace("activeC", "ac");
+        }
+
+        for (var i = 0; i < l; i++) {
+
+            childs[i].classList.replace("ac", "activeC");
+        }
+
+
+    }
 
     componentDidMount() {
 
@@ -280,7 +297,7 @@ export default class RankContent extends Component {
                     </div>
                     <div class="sessions-wrapper">
                         <div>
-                            <div class="collapsible" id="c01">
+                            <div class="collapsibleRanking" id="c01">
                                 <div class="sessions-item">
                                     <div class="ranking-star">
                                         <div class="sessions-time-ranking">
@@ -356,11 +373,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this,1) }></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind }></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this,3) }></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -378,11 +395,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -399,11 +416,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,11 +432,11 @@ export default class RankContent extends Component {
                                                         <div class="question" >Accuracy of Information</div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -439,7 +456,7 @@ export default class RankContent extends Component {
 
                         <div>
                             <div>
-                                <div class="collapsible" id="c01">
+                                <div class="collapsibleRanking" id="c01">
                                     <div class="sessions-item">
                                         <div class="ranking-star">
                                             <div class="sessions-time-ranking">
@@ -447,7 +464,7 @@ export default class RankContent extends Component {
                                                     <span class="fa fa-star checked"></span>
                                                     <span class="fa fa-star checked"></span>
                                                     <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star checked"></span>
                                                     <span class="fa fa-star"></span>
 
                                                 </span>
@@ -514,11 +531,11 @@ export default class RankContent extends Component {
                                                             <div class="form-input-div">
                                                                 <div class="popularity">
 
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                    <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                    <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                    <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                    <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -536,11 +553,11 @@ export default class RankContent extends Component {
                                                             <div class="form-input-div">
                                                                 <div class="popularity">
 
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -557,11 +574,11 @@ export default class RankContent extends Component {
                                                             <div class="form-input-div">
                                                                 <div class="popularity">
 
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                    <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -573,11 +590,11 @@ export default class RankContent extends Component {
                                                             <div class="question" >Accuracy of Information</div>
                                                             <div class="form-input-div">
                                                                 <div class="popularity">
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
-                                                                    <span class="fa fa-star"></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                    <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                    <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                    <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -597,7 +614,7 @@ export default class RankContent extends Component {
                         </div>
 
                         <div>
-                            <div class="collapsible">
+                            <div class="collapsibleRanking">
                                 <div class="sessions-item">
                                     <div class="ranking-star" style={{/*
                                         background: "url( " + require('../assets/img/dba_720x25.png') + ")" */
@@ -605,7 +622,7 @@ export default class RankContent extends Component {
                                         <div class="sessions-time-ranking" >
 
                                             <span>
-                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star checked"></span>
                                                 <span class="fa fa-star "></span>
                                                 <span class="fa fa-star "></span>
                                                 <span class="fa fa-star"></span>
@@ -674,11 +691,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star activeC" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -696,11 +713,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -717,11 +734,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -733,11 +750,11 @@ export default class RankContent extends Component {
                                                         <div class="question" >Accuracy of Information</div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -755,7 +772,7 @@ export default class RankContent extends Component {
                             </div>
                         </div>
                         <div>
-                            <div class="collapsible">
+                            <div class="collapsibleRanking">
                                 <div class="sessions-item">
                                     <div class="ranking-star" style={{/*
                                         background: "url( " + require('../assets/img/dba_720x25.png') + ")" */
@@ -833,11 +850,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -855,11 +872,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -876,11 +893,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -892,11 +909,11 @@ export default class RankContent extends Component {
                                                         <div class="question" >Accuracy of Information</div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -915,7 +932,7 @@ export default class RankContent extends Component {
                         </div>
 
                         <div>
-                            <div class="collapsible">
+                            <div class="collapsibleRanking">
                                 <div class="sessions-item">
                                     <div class="ranking-star" style={{/*
                                         background: "url( " + require('../assets/img/dba_720x25.png') + ")" */
@@ -992,11 +1009,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1014,11 +1031,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1035,11 +1052,11 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1051,11 +1068,11 @@ export default class RankContent extends Component {
                                                         <div class="question" >Accuracy of Information</div>
                                                         <div class="form-input-div">
                                                             <div class="popularity">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 2)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 3)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
+                                                                <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
                                                         </div>
                                                     </div>

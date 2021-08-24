@@ -14,6 +14,8 @@ import Poster from './Poster';
 import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat'
 import RankContent from './RankContent';
+import Leaderboard from './Leaderboard';
+
 
 
 
@@ -159,6 +161,8 @@ export class Home extends Component {
                                 return <Presenters cname={name} category={anchor} />
                             case "review":
                                 return <RankContent cname={name} category={anchor} />
+                            case "leaderboard":
+                                return <Leaderboard cname={name} category={anchor} />
                                 
 
                         }

@@ -1068,6 +1068,11 @@ export class NavMenu extends Component {
                                             <div class="menu-item-wrapper">              <IntempioIcons name={customIcon} />
                                                 <span class="menu-button">{menuText}</span>  </div>
                                         </a>
+                                    case "leaderboard":
+                                        return <a onClick={() => { this.moveToSection(url); this.onlyLog("leaderboard"); }} class="menu-item">
+                                            <div class="menu-item-wrapper">              <IntempioIcons name={customIcon} />
+                                                <span class="menu-button">{menuText}</span>  </div>
+                                        </a>
                                 }
 
                             })}
@@ -1348,6 +1353,11 @@ export class NavMenu extends Component {
 
                                                 case "review":
                                                     return <a onClick={() => { this.moveToSection(url); this.onlyLog("review"); }} class="menu-item">
+                                                        <div class="menu-item-wrapper">              <IntempioIcons name={customIcon} />
+                                                            <span class="menu-button">{menuText}</span>  </div>
+                                                    </a>
+                                                case "leaderboard":
+                                                    return <a onClick={() => { this.moveToSection(url); this.onlyLog("leaderboard"); }} class="menu-item">
                                                         <div class="menu-item-wrapper">              <IntempioIcons name={customIcon} />
                                                             <span class="menu-button">{menuText}</span>  </div>
                                                     </a>

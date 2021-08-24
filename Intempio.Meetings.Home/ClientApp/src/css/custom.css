@@ -667,6 +667,19 @@ main .recent-item p {
         margin-top: 20px;
     }
 
+.collapsibleRanking {
+    /* background-color: #777; */
+    color: white;
+    cursor: pointer;
+    /* padding: 18px; */
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
     span.fa.fa-star.checked {
         color: orange;
     }
@@ -866,6 +879,8 @@ main .recent-item p {
             color: orange;
         }
 
+ 
+
 
     .video-header-first {
         display: flex;
@@ -908,3 +923,44 @@ main .recent-item p {
 
     .content .video-header {
     }
+
+.activeC {
+    color: orange !important;
+}
+
+
+
+.amp-default-skin.amp-big-play-centered:hover .vjs-big-play-button, .amp-default-skin.amp-big-play-centered .vjs-big-play-button:focus {
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid transparent;
+    border-left: 100px solid var(--color-surface);
+   opacity:0.8;
+    border-bottom: 50px solid transparent;
+}
+
+.amp-default-skin.amp-big-play-centered:hover .vjs-big-play-button, .amp-default-skin.amp-big-play-centered .vjs-big-play-button {
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid transparent;
+    border-left: 100px solid var(--color-surface);
+
+    border-bottom: 50px solid transparent;
+    content:icon;
+}
+.amp-default-skin .vjs-big-play-button::before {
+    content:inherit;
+}
+
+
+.ranling-count {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 18px;
+    letter-spacing: 0.7px;
+    color: #c3c386;
+    text-align: center;
+    border-bottom: 2px solid #f3f3f3;
+    font: menu;
+}
