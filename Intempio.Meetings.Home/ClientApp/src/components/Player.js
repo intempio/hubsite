@@ -38,7 +38,7 @@ class Player extends Component {
 
         return video;
     }
-
+    //https://stackoverflow.com/questions/66423804/how-to-properly-setup-azure-media-player-in-react-js
     waitForAmp = () => {
         return new Promise((resolve, reject) => {
             let waited = 0;
@@ -70,6 +70,8 @@ class Player extends Component {
                     data-setup='{ "controls": true, "autoplay": false }'
                 >
                 </video>
+                <button className="btnPlay" style={{ display:"none" }} onClick={() => (this.videoPlayer.play())}> aa  </button>
+                <button className="btnPhase" style={{ display: "none" }} onClick={() => (this.videoPlayer.pause())}> aa  </button>
             </div>
         );
     }

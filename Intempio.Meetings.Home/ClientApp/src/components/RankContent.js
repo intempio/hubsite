@@ -86,6 +86,11 @@ export default class RankContent extends Component {
 
         for (var i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function () {
+                var btnPhases = document.getElementsByClassName("btnPhase");
+                for (var x = 0; x < btnPhases.length; x++) {
+                    btnPhases[x].click();
+                }
+
                 this.classList.toggle("active");
                 for (var x = 0; x < rows.length; x++) {
                     if (rows[x].style.display === "block") {
@@ -111,13 +116,19 @@ export default class RankContent extends Component {
         }
     }
 
+
+
     collapsresetAll = () => {
 
         var closebtns = document.getElementsByClassName("close-button");
-
+   
 
         for (var a = 0; a < closebtns.length; a++) {
             closebtns[a].addEventListener("click", function () {
+                var btnPhases = document.getElementsByClassName("btnPhase");
+                for (var x = 0; x < btnPhases.length; x++) {
+                    btnPhases[x].click();
+                }
 
 
                 var coll = document.getElementsByClassName("collapsibleRanking");
@@ -168,7 +179,7 @@ export default class RankContent extends Component {
         dots[this.state.slideIndex - 1].className += " active";
     }
 
-    thubmnamil(l,e) {
+    thubmnamil(l, e) {
 
         var control = e.target.parentElement;
 
@@ -326,7 +337,7 @@ export default class RankContent extends Component {
                             </div>
                             <div class="content" style={{ display: "none" }}>
                                 <div class="video">
-                                  
+
                                     <div class="video-header">
                                         <div class="video-header-first">Jill Jones </div>
                                         <div class="fa fa-times-circle close-button"> </div>
@@ -361,7 +372,7 @@ export default class RankContent extends Component {
                                                 <div class="header-content">
                                                     Please rate Role Play on the following:
                                                 </div>
-                                              
+
 
                                             </div>
                                             <div class="posts-item">
@@ -373,9 +384,9 @@ export default class RankContent extends Component {
                                                         <div class="form-input-div">
                                                             <div class="popularity">
 
-                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this,1) }></span>
-                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind }></span>
-                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this,3) }></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 1)}></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind}></span>
+                                                                <span class="fa fa-star  activeC" onClick={this.thubmnamil.bind(this, 3)}></span>
                                                                 <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 4)}></span>
                                                                 <span class="fa fa-star ac" onClick={this.thubmnamil.bind(this, 5)}></span>
                                                             </div>
@@ -485,7 +496,7 @@ export default class RankContent extends Component {
                                 </div>
                                 <div class="content" style={{ display: "none" }}>
                                     <div class="video">
-                                    
+
                                         <div class="video-header">
                                             <div class="video-header-first">Tom Smith </div>
                                             <div class="fa fa-times-circle close-button"> </div>
@@ -519,7 +530,7 @@ export default class RankContent extends Component {
                                                     <div class="header-content">
                                                         Please rate Role Play on the following:
                                                 </div>
-                                              
+
 
                                                 </div>
                                                 <div class="posts-item">
@@ -649,7 +660,7 @@ export default class RankContent extends Component {
                                         <div class="video-header-first">Jane Doe </div>
                                         <div class="fa fa-times-circle close-button"> </div>
                                     </div>
-                                  
+
                                     <div class="video-header-second">HCP Pricing Objection</div>
                                     <div class="video-content">
 
@@ -679,7 +690,7 @@ export default class RankContent extends Component {
                                                 <div class="header-content">
                                                     Please rate Role Play on the following:
                                                 </div>
-                                           
+
 
                                             </div>
                                             <div class="posts-item">
@@ -807,7 +818,7 @@ export default class RankContent extends Component {
                                         <div class="video-header-first">Mary Todd </div>
                                         <div class="fa fa-times-circle close-button"> </div>
                                     </div>
-                                
+
                                     <div class="video-header-second">HCP Pricing Objection</div>
                                     <div class="video-content">
 
@@ -838,7 +849,7 @@ export default class RankContent extends Component {
                                                 <div class="header-content">
                                                     Please rate Role Play on the following:
                                                 </div>
-                                            
+
 
                                             </div>
                                             <div class="posts-item">
