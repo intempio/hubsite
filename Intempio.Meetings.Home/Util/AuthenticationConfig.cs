@@ -138,12 +138,31 @@ namespace Intempio.Meetings.Home.Util
             public string SiteIcon { get; set; }
 
             public string LocalDate { get; set; }
+            public string LoginRequestSuccessMessage { get; set; }
+            public string LoginRequestMessage { get; set; }
+            public string CanLoginRequest { get; set; }
+
+
+
+
+        }
+
+        public class EmailConfig
+        {
+            public string EmailFrom { get; set; }
+            public string EmailTo { get; set; }
+
+            public string UserName { get; set; }
+            public string Pwd { get; set; }
+            public string Host { get; set; }
+            public string Port { get; set; }
+
 
         }
         public string SharedDocumentLibItems { get; set; }
 
         public IntempioSettings intempioSettings { get; set; }
-
+        public EmailConfig emailConfig { get; set; }
         public string SiteURL { get; set; }
 
 

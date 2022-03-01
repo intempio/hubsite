@@ -477,3 +477,83 @@ nav .popover-submenu-list {
 nav .popover-submenu{
     overflow:auto;
 }
+
+.info-message-b {
+    font-weight: 600;
+}
+
+.close1 {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+    .close1:hover {
+        opacity: 1;
+    }
+
+    .close1:before, .close1:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+    }
+
+    .close1:before {
+        transform: rotate(45deg);
+    }
+
+    .close1:after {
+        transform: rotate(-45deg);
+    }
+
+
+
+.login-frame1 {
+    display: inline-grid;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+    .login-frame1 input {
+        margin-top: 5px;
+        padding: 10px;
+        width: 250px;
+    }
+
+    .login-frame1 button {
+        margin-top: 10px;
+    }
+
+.banner-events {
+    padding: 50px;
+}
+
+.buttonsdiv {
+    display: flex;
+}
+
+    .buttonsdiv .loginButton {
+        width: 124px;
+        margin-right: 5px;
+    }
+
+.ReactModalPortal .events {
+    padding: 50px !important;
+}
+
+.info-message {
+    max-width: 340px;
+}

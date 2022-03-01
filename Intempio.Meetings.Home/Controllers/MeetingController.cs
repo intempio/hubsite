@@ -310,5 +310,23 @@ namespace Intempio.Meetings.Home.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("SendEmail")]
+        public IActionResult SendEmail([FromForm(Name = "formFile")] string formFile)
+        {
+            try
+            {
+                RegistrationInfo? registrationInfo =
+                 System.Text.Json.JsonSerializer.Deserialize<RegistrationInfo>(formFile);
+                EventService.SendEmail(registrationInfo);
+                return Ok("true"); ;
+            }
+            catch (Exception e)
+            {
+                return Ok("false"); ;
+
+
+            }
+        }
     }
 }

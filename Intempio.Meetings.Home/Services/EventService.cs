@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
 using System.Data;
 using Intempio.Meetings.Home.Models;
+using System.Net.Mail;
 
 namespace Intempio.Meetings.Home.Services
 {
@@ -1299,6 +1300,55 @@ namespace Intempio.Meetings.Home.Services
             }
             catch (Exception ex)
             {
+
+            }
+
+
+
+        }
+
+
+        public static bool SendEmail(RegistrationInfo r)
+        {
+            try
+            {
+                AuthenticationConfig config2 = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+                String userName = config2.emailConfig.UserName;
+                String password = config2.emailConfig.Pwd;
+                MailMessage msg = new MailMessage();
+                msg.To.Add(new MailAddress(config2.emailConfig.EmailTo));
+                msg.From = new MailAddress(config2.emailConfig.EmailFrom);
+                msg.Subject = string.Format("Event registration request {0} {1} - ", r.firstName, r.lastName);
+                msg.Body = string.Format("<table><tr> <td>First Name</td> <td>Last Name</td> <td>Email</td> <td>Country</td><td>Site</td><td>Phone Number</td><td>Role</td></tr><tr> <td>{0}</td> <td>{1}</td> <td>{2}</td> <td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr></table>",
+
+                   r.firstName, r.lastName, r.email, r.country, r.site, r.phoneNumber, r.role);
+                msg.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient();
+                client.Host = config2.emailConfig.Host;
+                client.Credentials = new System.Net.NetworkCredential(userName, password);
+                client.Port = int.Parse(config2.emailConfig.Port);
+                client.EnableSsl = true;
+                client.Send(msg);
+
+                return true;
+                //String userName = "automation@intempio.com";
+                //String password = "Auto@456^%$";
+                //MailMessage msg = new MailMessage();
+                //msg.To.Add(new MailAddress("sujeewa.ediriweera@gmail.com"));
+                //msg.From = new MailAddress("automation@intempio.com");
+                //msg.Subject = "Super man here";
+                //msg.Body = "Testing email using Office ";
+                //msg.IsBodyHtml = true;
+                //SmtpClient client = new SmtpClient();
+                //client.Host = "smtp.office365.com";
+                //client.Credentials = new System.Net.NetworkCredential(userName, password);
+                //client.Port = 587;
+                //client.EnableSsl = true;
+                //client.Send(msg);
+            }
+            catch (Exception e)
+            {
+                return false;
 
             }
         }

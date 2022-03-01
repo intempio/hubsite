@@ -3,16 +3,19 @@ import history from './history';
 import Events from './events';
 import moment from 'moment';
 import { ActivityLog } from './ActivityLog';
+import Modal from 'react-modal';
 //import ReCAPTCHA from 'react-google-recaptcha';
 
 
 //const recaptchaRef = React.createRef();
 //const SITE_KEY = "6LehCi8aAAAAACMZorVoHGEZpFdUHNqyKSSkz6tV";
+
+Modal.defaultStyles.overlay.backgroundColor = '#343a40a3';
 export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false, sqllogin: false };
+        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false, sqllogin: false, showModal: false, country: '', site: '', tp: 'n/a', role: '', btnLoading: false, canLoginRequest: false, loginRequestSuccessMessage: '', loginRequestMessage:'' };
 
         this.reCaptchaRef = React.createRef();
     }
@@ -80,7 +83,11 @@ export class Login extends Component {
 
             if (item) {
 
-                this.setState({ loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'), sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true') });
+                this.setState({
+                    loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'),
+                    sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true'), canLoginRequest: (item.intempioSettings.canLoginRequest.toLowerCase() === 'true'),
+                    loginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage, loginRequestMessage: item.intempioSettings.loginRequestMessage 
+                });
                 if (item && item.intempioSettings.colour) {
                     document
                         .documentElement.style.setProperty("--color-surface", '#' + item.intempioSettings.colour);
@@ -188,7 +195,7 @@ export class Login extends Component {
     async getSQLUserUserInfo() {
         this.setState({ loading: true });
 
-    
+
 
         const response = await fetch('Meeting/GetSQLUserByEmail?email=' + this.state.emailinput, {
             method: "GET",
@@ -223,6 +230,7 @@ export class Login extends Component {
         });
     }
     doLogin = () => {
+
         ActivityLog.getStringValue(this.state.emailinput, "login", "In progress");
         if (this.validateInput()) {
             if (this.state.unrecognizedLogin == true) {
@@ -255,6 +263,74 @@ export class Login extends Component {
 
     }
 
+    async sendEmail() {
+        this.setState({ btnLoading: true });
+        var RegistrationInfo = {
+            email: this.state.emailinput,
+            firstName: this.state.inputFirstName,
+            lastName: this.state.inputLastName,
+            country: this.state.country,
+            site: this.state.site,
+            phoneNumber: this.state.tp,
+            role: this.state.role
+
+
+        };
+
+        var jdata = new FormData();
+        var s = JSON.stringify(RegistrationInfo)
+        jdata.append("formFile", s);
+        /*       formData.append("formFile", this.updateConfigEntry(this.state.configitemslist));*/
+        const response = await fetch('Meeting/SendEmail', {
+            method: "POST",
+            body: jdata
+
+        });
+
+        const finalresult = await response.json().then((r) => {
+            this.setState({ btnLoading: false, status: 6 });
+            setTimeout(() => { this.setState({ status: 0 }) }, 3000)
+
+            this.setState({ emailinput: '' });
+
+            this.setState({ site: '' });
+
+            this.setState({ role: '' });
+
+            this.setState({ country: '' });
+
+            this.setState({ tp: '' });
+
+            this.setState({ inputFirstName: '' });
+
+            this.setState({ inputLastName: '' });
+            this.doClose();
+
+            return true;
+
+        }).catch((error) => {
+            return true;
+        });
+
+
+    }
+
+
+    doSend = () => {
+        if (this.validateInput2()) {
+            this.sendEmail();
+
+
+
+        }
+
+
+    }
+
+    doClose = () => {
+
+        this.handleCloseModal();
+    }
     reRef = () => React.createRef();
 
     onchangeEmail(e) {
@@ -262,7 +338,22 @@ export class Login extends Component {
         this.setState({ emailinput: e.target.value });
 
     }
+    onchangeSite(e) {
+        this.setState({ site: e.target.value });
 
+    }
+    onchangeRole(e) {
+        this.setState({ role: e.target.value });
+
+    }
+    onchangeCountry(e) {
+        this.setState({ country: e.target.value });
+
+    }
+    onchangeTp(e) {
+        this.setState({ tp: e.target.value });
+
+    }
     onchangeFname(e) {
         this.setState({ inputFirstName: e.target.value });
 
@@ -276,12 +367,22 @@ export class Login extends Component {
         return re.test(String(email).toLowerCase());
     }
 
+
+
+    handleOpenModal() {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal() {
+        this.setState({ showModal: false });
+    }
+
     validateInput() {
 
 
- 
 
-   
+
+
         if (!this.validateEmail(this.state.emailinput)) {
             this.setState({ status: 1 });
             ActivityLog.getStringValue(this.state.emailinput, "login", "Validation:Please enter valid email");
@@ -304,6 +405,34 @@ export class Login extends Component {
         return true;
     }
 
+    validateInput2() {
+
+
+        this.setState({ status: 0 });
+
+
+        if (this.state.country === '') {
+            this.setState({ status: 7 });
+            ActivityLog.getStringValue(this.state.country, "login", "Validation:Please enter your country");
+            return false;
+        }
+
+        if (this.state.site === '') {
+            this.setState({ status: 8 });
+            ActivityLog.getStringValue(this.state.site, "login", "Validation:Please enter your site");
+
+            return false;
+        }
+
+        if (this.state.role === '') {
+            this.setState({ status: 9 });
+            ActivityLog.getStringValue(this.state.role, "login", "Validation:Please enter your role");
+
+            return false;
+        }
+        return true;
+    }
+
     componentDidMount() {
         this.getSettingsv2();
     }
@@ -314,9 +443,28 @@ export class Login extends Component {
 
 
     render() {
-        return (
-            <>
 
+        let msg1 = '';
+        let msgclick = '';
+        let msg2 = '';
+
+
+        if (this.state.loginRequestMessage.indexOf('>') > 0) {
+
+            if (this.state.loginRequestMessage.split('>').length >= 2) {
+                msg1 = this.state.loginRequestMessage.split('>')[0];
+                msgclick = this.state.loginRequestMessage.split('>')[1];
+                msg2 = this.state.loginRequestMessage.split('>')[2];
+
+            }
+           
+        }
+
+        return (
+
+
+            <>
+                
                 <div id="wrapper" class="wrapper wrapper-login">
 
                     <main>
@@ -330,27 +478,65 @@ export class Login extends Component {
                                     placeholder="* FirstName" value={this.state.inputFirstName} onChange={this.onchangeFname.bind(this)} />
                                 <input id='footer-lname' type="text"
                                     placeholder="* LastName" value={this.state.inputLastName} onChange={this.onchangeLname.bind(this)} />
-                   
-                               
-                         
                                 <button onClick={this.doLogin} className="loginButton"> Login</button>
                                 {(this.state.status === 1) && < div className="info-message"> Please enter valid email </div>}
-                                {(this.state.status === 2) && < div className="info-message"> This email is not registered for this event </div>}
+
+                        
+                                {(this.state.status === 2 && !this.state.canLoginRequest) && < div className="info-message"> You are not approved for this event. </div>}
+
+                                {
+
+                                    (this.state.status === 2 && this.state.canLoginRequest) && < div className="info-message info-message-b"> {msg1} <a onClick={this.handleOpenModal.bind(this)}> <b>{msgclick} </b></a> {msg2}</div>}
                                 {(this.state.status === 3) && < div className="info-message"> User redirection is under development  </div>}
                                 {(this.state.status === 4) && < div className="info-message"> Please enter your first name  </div>}
                                 {(this.state.status === 5) && < div className="info-message"> Please enter your last name  </div>}
+                                {(this.state.status === 6) && < div className="info-message info-message-b"> {this.state.loginRequestSuccessMessage} </div>}
                                 {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
                             </div>
 
-                           
+
                         </div>
 
-                        
+                        <Modal isOpen={this.state.showModal}>
+                            <a onClick={this.doClose} class="close1" />
+                            <Events buttonStatus="false" className="banner-events" />
+                            <div className="login-frame1">
+                                <img src={this.state.Banner} class="banner-img" />
+                                <h1>Request</h1>
+                                <input id='footer-comment1' type="text"
+                                    placeholder="* Email" value={this.state.emailinput} onChange={this.onchangeEmail.bind(this)} />
+                                <input id='footer-fname1' type="text"
+                                    placeholder="* FirstName" value={this.state.inputFirstName} onChange={this.onchangeFname.bind(this)} />
+                                <input id='footer-lname1' type="text"
+                                    placeholder="* LastName" value={this.state.inputLastName} onChange={this.onchangeLname.bind(this)} />
+
+                                <input id='footer-lname' type="text"
+                                    placeholder="* Country" value={this.state.country} onChange={this.onchangeCountry.bind(this)} />
+
+                                <input id='footer-lname' type="text"
+                                    placeholder="* Site" value={this.state.site} onChange={this.onchangeSite.bind(this)} />
+
+                                <input id='footer-lname' type="text"
+                                    placeholder="* Role" value={this.state.role} onChange={this.onchangeRole.bind(this)} />
+
+                                <div className="buttonsdiv">
+                                    <button onClick={this.doSend} className="loginButton" disabled={this.state.btnLoading}> Submit </button>
+                                    <button onClick={this.doClose} className="loginButton"> Close </button> </div>
+                                {(this.state.status === 7) && < div className="info-message"> Please enter your city  </div>}
+                                {(this.state.status === 8) && < div className="info-message"> Please enter your site  </div>}
+                                {(this.state.status === 9) && < div className="info-message"> Please enter your role  </div>}
+
+                                {(this.state.btnLoading) && < div className="info-message"> Please wait...   </div>}
+
+                            </div>
+                        </Modal>
                     </main>
+
                 </div>
                 <footer id="footer">
 
                 </footer>
+
             </>
         );
     }
