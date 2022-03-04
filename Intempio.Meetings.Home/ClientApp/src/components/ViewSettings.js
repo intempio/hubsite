@@ -6,7 +6,7 @@ export default class ViewSettings extends Component {
         super(props);
         this.state = {
             lists: [], loading: false, sitename: '#', EventInfoURL: 'N/A', EventMasterURL: 'N/A', PosterSessionsURL: 'N/A', MatchMakingURL: 'N/A', PresentersURL: 'N/A', UserEventsURL: 'N/A', UsersURL: 'N/A', SuperUsersURL: 'N/A', SiteID: 'N/A',
-              Title: '', Description: "",
+            Title: '', Description: "",
             StartDate: "",
             EndDate: "",
             Location: '',
@@ -32,7 +32,10 @@ export default class ViewSettings extends Component {
             load: true,
             CustomChatGroups: '',
             SiteIcon: '',
-            LocalDate: ''
+            LocalDate: '',
+            CanLoginRequest: false,
+            LoginRequestSuccessMessage: '',
+            LoginRequestMessage: ''
         };
     }
 
@@ -81,7 +84,11 @@ export default class ViewSettings extends Component {
                     HelpChatName: item.intempioSettings.helpChatName,
                     CustomChatGroups: item.intempioSettings.customChatGroups,
                     SiteIcon: item.intempioSettings.siteIcon,
-                    LocalDate: item.intempioSettings.localDate
+                    LocalDate: item.intempioSettings.localDate,
+
+                    CanLoginRequest: item.intempioSettings.canLoginRequest,
+                    LoginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage,
+                    LoginRequestMessage: item.intempioSettings.loginRequestMessage
 
                 });
                 this.setState({ invalidKey: false, load: false });
@@ -113,7 +120,7 @@ export default class ViewSettings extends Component {
 
 
         const finalresult = await response.json().then(async (resonse) => {
-    this.setState({ loading: false });
+            this.setState({ loading: false });
             var item = JSON.parse(resonse.value);
             this.setState({ loading: false });
 
@@ -123,7 +130,7 @@ export default class ViewSettings extends Component {
 
                 switch (key) {
                     case "EventInfoURL":
-                        this.setState({ EventInfoURL: item.webUrl});
+                        this.setState({ EventInfoURL: item.webUrl });
                         break;
 
                     case "EventMasterURL":
@@ -134,7 +141,7 @@ export default class ViewSettings extends Component {
                         this.setState({ PosterSessionsURL: item.webUrl });
                         break;
                     case "MatchMakingURL":
-                        this.setState({ MatchMakingURL: item.webUrl});
+                        this.setState({ MatchMakingURL: item.webUrl });
 
                         break;
                     case "PresentersURL":
@@ -150,7 +157,7 @@ export default class ViewSettings extends Component {
 
                         break;
                     case "SuperUsersURL":
-                        this.setState({ SuperUsersURL: item.webUrl});
+                        this.setState({ SuperUsersURL: item.webUrl });
                         break;
                     case "SiteID":
                         this.setState({ SiteID: item.webUrl });
@@ -170,10 +177,10 @@ export default class ViewSettings extends Component {
     }
 
 
-    
+
     componentDidMount() {
 
-  
+
 
     }
 
@@ -209,7 +216,7 @@ export default class ViewSettings extends Component {
                         {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
                         {(this.state.invalidKey) && < div className="info-message">Invalid security key...   </div>}
                     </div>
-         
+
                     {!this.state.load && <><div class="settings-item">
 
                         <div class="recent-info">
@@ -435,11 +442,33 @@ export default class ViewSettings extends Component {
                                 <h4>{this.state.SiteIcon}</h4>
                             </div>
                         </div>
-                       </>
+
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>CanLoginRequest</p>
+                                <h4>{this.state.CanLoginRequest}</h4>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Login Request Success Message</p>
+                                <h4>{this.state.LoginRequestSuccessMessage}</h4>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Login Request Message</p>
+                                <h4>{this.state.LoginRequestMessage}</h4>
+                            </div>
+                        </div>
+                    </>
                     }
-                    
+
                 </div>
-             
+
             </div>
 
 

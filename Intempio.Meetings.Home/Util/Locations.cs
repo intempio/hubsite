@@ -57,6 +57,9 @@ namespace Intempio.Meetings.Home.Util
             CustomChatGroups = "sys";
             SiteIcon = "sys";
             LocalDate = "sys";
+            CanLoginRequest = "sys";
+            LoginRequestSuccessMessage = "sys";
+            LoginRequestMessage = "sys";
 
         }
         public string EventMasterURL { get; set; }
@@ -98,6 +101,9 @@ namespace Intempio.Meetings.Home.Util
         public string CustomChatGroups { get; set; }
         public string SiteIcon { get; set; }
         public string LocalDate { get; set; }
+        public string CanLoginRequest { get; set; }
+        public string LoginRequestSuccessMessage { get; set; }
+        public string LoginRequestMessage { get; set; }
 
     }
 }

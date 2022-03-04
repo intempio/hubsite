@@ -214,6 +214,21 @@ namespace Intempio.Meetings.Home.Services
                         opt.LocalDate = value;
                     });
                     break;
+                case "CanLoginRequest":
+                    _writableLocations.Update(opt => {
+                        opt.CanLoginRequest = value;
+                    });
+                    break;
+                case "LoginRequestSuccessMessage":
+                    _writableLocations.Update(opt => {
+                        opt.LoginRequestSuccessMessage = value;
+                    });
+                    break;
+                case "LoginRequestMessage":
+                    _writableLocations.Update(opt => {
+                        opt.LoginRequestMessage = value;
+                    });
+                    break;
             }
 
         }

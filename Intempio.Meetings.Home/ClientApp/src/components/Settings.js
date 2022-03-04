@@ -31,7 +31,10 @@ export default class Settings extends Component {
             load: true,
             CustomChatGroups: '',
             SiteIcon: '',
-            LocalDate: ''
+            LocalDate: '',
+            CanLoginRequest: false,
+            LoginRequestSuccessMessage: '',
+            LoginRequestMessage: ''
         };
     }
 
@@ -132,7 +135,10 @@ export default class Settings extends Component {
                     HelpChatName: item.intempioSettings.helpChatName,
                     CustomChatGroups: item.intempioSettings.customChatGroups,
                     SiteIcon: item.intempioSettings.siteIcon,
-                    LocalDate: item.intempioSettings.localDate
+                    LocalDate: item.intempioSettings.localDate,
+                    CanLoginRequest: item.intempioSettings.canLoginRequest,
+                    LoginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage,
+                    LoginRequestMessage: item.intempioSettings.loginRequestMessage
                 });
                 this.getGetSiteInfo();
                 this.setState({ invalidKey: false, load: false });
@@ -405,7 +411,11 @@ export default class Settings extends Component {
             + "HelpChatName#" + this.state.HelpChatName + "|"
             + "SiteIcon#" + this.state.SiteIcon + "|"
             + "CustomChatGroups#" + this.state.CustomChatGroups + "|"
-            + "LocalDate#" + this.state.LocalDate;
+            + "LocalDate#" + this.state.LocalDate + "|"
+            + "CanLoginRequest#" + this.state.CanLoginRequest + "|"
+            + "LoginRequestSuccessMessage#" + this.state.LoginRequestSuccessMessage + "|"
+            + "LoginRequestMessage#" + this.state.LoginRequestMessage;
+
 
         return newconfig;
 
@@ -609,6 +619,27 @@ export default class Settings extends Component {
                             <div class="recent-info">
                                 <h4>Site Icon</h4>
                                 <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.SiteIcon} onChange={e => this.setState({ SiteIcon: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Can Request Login?</h4>
+                                <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.CanLoginRequest} onChange={e => this.setState({ CanLoginRequest: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Login RequestS uccess Message</h4>
+                                <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.LoginRequestSuccessMessage} onChange={e => this.setState({ LoginRequestSuccessMessage: e.target.value })} /></p>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Login Request Message</h4>
+                                <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.LoginRequestMessage} onChange={e => this.setState({ LoginRequestMessage: e.target.value })} /></p>
                             </div>
                         </div>
                         <div class="settings-item">
