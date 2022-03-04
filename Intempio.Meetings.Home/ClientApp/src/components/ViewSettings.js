@@ -35,7 +35,8 @@ export default class ViewSettings extends Component {
             LocalDate: '',
             CanLoginRequest: false,
             LoginRequestSuccessMessage: '',
-            LoginRequestMessage: ''
+            LoginRequestMessage: '',
+            LoginFormCaption :''
         };
     }
 
@@ -88,7 +89,8 @@ export default class ViewSettings extends Component {
 
                     CanLoginRequest: item.intempioSettings.canLoginRequest,
                     LoginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage,
-                    LoginRequestMessage: item.intempioSettings.loginRequestMessage
+                    LoginRequestMessage: item.intempioSettings.loginRequestMessage,
+                    LoginFormCaption: item.intempioSettings.loginFormCaption
 
                 });
                 this.setState({ invalidKey: false, load: false });
@@ -464,6 +466,14 @@ export default class ViewSettings extends Component {
                                 <h4>{this.state.LoginRequestMessage}</h4>
                             </div>
                         </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>Login Request Message</p>
+                                <h4>{this.state.LoginFormCaption}</h4>
+                            </div>
+                        </div>
+                        
                     </>
                     }
 

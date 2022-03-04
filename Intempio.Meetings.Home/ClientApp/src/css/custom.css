@@ -45,14 +45,15 @@ code {
 
 .login-frame {
     display: inline-grid;
-    margin: 10px;
+
     float: right;
 }
 
 
     .login-frame input {
         margin-top: 10px;
-        padding: 10px;
+       
+        padding: 14px;
         width: 350px;
     }
 
@@ -516,20 +517,15 @@ nav .popover-submenu{
 
 .login-frame1 {
     display: inline-grid;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    justify-content: center;
+    margin: 0px auto;
+    width: 100%;
 }
 
 
     .login-frame1 input {
         margin-top: 5px;
-        padding: 10px;
+        padding: 8px;
         width: 250px;
     }
 
@@ -557,3 +553,29 @@ nav .popover-submenu{
 .info-message {
     max-width: 340px;
 }
+
+.login-frame-msg {
+    float: right;
+    padding-top: 24px;
+    padding-right: 30px;
+    text-align: center;
+}
+
+.login-here :hover{
+
+    color:red;
+    text-decoration-line:none;
+}
+
+.login-here {
+    color:brown;
+}
+
+    .login-here :active {
+        text-decoration-line: none;
+    }
+
+
+    .login-here :link {
+        text-decoration-line: none;
+    }

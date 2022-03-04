@@ -141,8 +141,7 @@ namespace Intempio.Meetings.Home.Util
             public string LoginRequestSuccessMessage { get; set; }
             public string LoginRequestMessage { get; set; }
             public string CanLoginRequest { get; set; }
-
-
+            public string LoginFormCaption { get; set; }
 
 
         }

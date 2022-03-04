@@ -34,7 +34,8 @@ export default class Settings extends Component {
             LocalDate: '',
             CanLoginRequest: false,
             LoginRequestSuccessMessage: '',
-            LoginRequestMessage: ''
+            LoginRequestMessage: '',
+            LoginFormCaption:''
         };
     }
 
@@ -138,7 +139,8 @@ export default class Settings extends Component {
                     LocalDate: item.intempioSettings.localDate,
                     CanLoginRequest: item.intempioSettings.canLoginRequest,
                     LoginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage,
-                    LoginRequestMessage: item.intempioSettings.loginRequestMessage
+                    LoginRequestMessage: item.intempioSettings.loginRequestMessage,
+                    LoginFormCaption: item.intempioSettings.loginFormCaption
                 });
                 this.getGetSiteInfo();
                 this.setState({ invalidKey: false, load: false });
@@ -414,7 +416,9 @@ export default class Settings extends Component {
             + "LocalDate#" + this.state.LocalDate + "|"
             + "CanLoginRequest#" + this.state.CanLoginRequest + "|"
             + "LoginRequestSuccessMessage#" + this.state.LoginRequestSuccessMessage + "|"
-            + "LoginRequestMessage#" + this.state.LoginRequestMessage;
+            + "LoginRequestMessage#" + this.state.LoginRequestMessage + "|"
+            + "LoginFormCaption#" + this.state.LoginFormCaption;
+
 
 
         return newconfig;
@@ -642,6 +646,14 @@ export default class Settings extends Component {
                                 <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.LoginRequestMessage} onChange={e => this.setState({ LoginRequestMessage: e.target.value })} /></p>
                             </div>
                         </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <h4>Login Form Caption</h4>
+                                <p> <textarea id='comment' type="text" placeholder="0 , 1 or public icon url" class="textbox" value={this.state.LoginFormCaption} onChange={e => this.setState({ LoginFormCaption: e.target.value })} /></p>
+                            </div>
+                        </div>
+
                         <div class="settings-item">
 
                             <div class="recent-info">

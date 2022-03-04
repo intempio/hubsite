@@ -15,7 +15,8 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false, sqllogin: false, showModal: false, country: '', site: '', tp: 'n/a', role: '', btnLoading: false, canLoginRequest: false, loginRequestSuccessMessage: '', loginRequestMessage:'' };
+                  
+        this.state = { firstName: '', lastName: '', email: '', loading: false, emailinput: '', inputFirstName: '', inputLastName: '', status: '', colour: '#FFFFFF', unrecognizedLogin: false, excelLogin: false, sqllogin: false, showModal: false, country: '', site: '', tp: 'n/a', role: '', btnLoading: false, canLoginRequest: false, loginRequestSuccessMessage: '', loginRequestMessage: '', loginFormCaption:'' };
 
         this.reCaptchaRef = React.createRef();
     }
@@ -86,7 +87,7 @@ export class Login extends Component {
                 this.setState({
                     loading: false, unrecognizedLogin: (item.intempioSettings.unrecognizedLogin.toLowerCase() === 'true'), excelLogin: (item.intempioSettings.excellogin.toLowerCase() === 'true'),
                     sqllogin: (item.intempioSettings.sqlLogin.toLowerCase() === 'true'), canLoginRequest: (item.intempioSettings.canLoginRequest.toLowerCase() === 'true'),
-                    loginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage, loginRequestMessage: item.intempioSettings.loginRequestMessage 
+                    loginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage, loginRequestMessage: item.intempioSettings.loginRequestMessage, loginFormCaption: item.intempioSettings.loginFormCaption
                 });
                 if (item && item.intempioSettings.colour) {
                     document
@@ -289,7 +290,7 @@ export class Login extends Component {
 
         const finalresult = await response.json().then((r) => {
             this.setState({ btnLoading: false, status: 6 });
-            setTimeout(() => { this.setState({ status: 0 }) }, 3000)
+            setTimeout(() => { this.setState({ status: 0 }) }, 10000)
 
             this.setState({ emailinput: '' });
 
@@ -469,9 +470,9 @@ export class Login extends Component {
 
                     <main>
                         <div>
-                            <Events buttonStatus="false" />
+                            <Events buttonStatus="false" noDisplayDate="true" />
                             <div className="login-frame">
-                                <h1>Login</h1>
+                                <h1>{this.state.loginFormCaption}</h1>
                                 <input id='footer-comment' type="text"
                                     placeholder="* Email" value={this.state.emailinput} onChange={this.onchangeEmail.bind(this)} />
                                 <input id='footer-fname' type="text"
@@ -479,14 +480,18 @@ export class Login extends Component {
                                 <input id='footer-lname' type="text"
                                     placeholder="* LastName" value={this.state.inputLastName} onChange={this.onchangeLname.bind(this)} />
                                 <button onClick={this.doLogin} className="loginButton"> Login</button>
+
+                            </div>
+                            <div className="login-frame-msg">
+
                                 {(this.state.status === 1) && < div className="info-message"> Please enter valid email </div>}
 
-                        
+
                                 {(this.state.status === 2 && !this.state.canLoginRequest) && < div className="info-message"> You are not approved for this event. </div>}
 
                                 {
 
-                                    (this.state.status === 2 && this.state.canLoginRequest) && < div className="info-message info-message-b"> {msg1} <a onClick={this.handleOpenModal.bind(this)}> <b>{msgclick} </b></a> {msg2}</div>}
+                                    (this.state.status === 2 && this.state.canLoginRequest) && < div className="info-message info-message-b"> {msg1} <br /> <a className="login-here" onClick={this.handleOpenModal.bind(this)}><b>{msgclick} </b></a><br /> {msg2 }</div>}
                                 {(this.state.status === 3) && < div className="info-message"> User redirection is under development  </div>}
                                 {(this.state.status === 4) && < div className="info-message"> Please enter your first name  </div>}
                                 {(this.state.status === 5) && < div className="info-message"> Please enter your last name  </div>}
@@ -494,14 +499,13 @@ export class Login extends Component {
                                 {(this.state.loading) && < div className="info-message"> Please wait...   </div>}
                             </div>
 
-
                         </div>
 
                         <Modal isOpen={this.state.showModal}>
                             <a onClick={this.doClose} class="close1" />
-                            <Events buttonStatus="false" className="banner-events" />
+                            <div className="login-poup">
+                            <Events buttonStatus="false" isDate="false" />
                             <div className="login-frame1">
-                                <img src={this.state.Banner} class="banner-img" />
                                 <h1>Request</h1>
                                 <input id='footer-comment1' type="text"
                                     placeholder="* Email" value={this.state.emailinput} onChange={this.onchangeEmail.bind(this)} />
@@ -527,7 +531,7 @@ export class Login extends Component {
                                 {(this.state.status === 9) && < div className="info-message"> Please enter your role  </div>}
 
                                 {(this.state.btnLoading) && < div className="info-message"> Please wait...   </div>}
-
+                                    </div>
                             </div>
                         </Modal>
                     </main>

@@ -60,6 +60,8 @@ namespace Intempio.Meetings.Home.Util
             CanLoginRequest = "sys";
             LoginRequestSuccessMessage = "sys";
             LoginRequestMessage = "sys";
+            LoginFormCaption = "sys";
+
 
         }
         public string EventMasterURL { get; set; }
@@ -104,6 +106,11 @@ namespace Intempio.Meetings.Home.Util
         public string CanLoginRequest { get; set; }
         public string LoginRequestSuccessMessage { get; set; }
         public string LoginRequestMessage { get; set; }
+
+        public string LoginFormCaption { get; set; }
+
+
+        
 
     }
 }

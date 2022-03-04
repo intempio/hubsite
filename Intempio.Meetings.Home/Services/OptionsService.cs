@@ -229,6 +229,13 @@ namespace Intempio.Meetings.Home.Services
                         opt.LoginRequestMessage = value;
                     });
                     break;
+
+                case "LoginFormCaption":
+                    _writableLocations.Update(opt => {
+                        opt.LoginFormCaption = value;
+                    });
+                    
+                    break;
             }
 
         }

@@ -4,7 +4,7 @@ export default class Event extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { sdate: '', location: '', title: '', loading: false, dCount: 0, hCount: 0, mCount: 0, sCount: 0, buttonStatus: false, Banner: null };
+        this.state = { sdate: '', location: '', title: '', loading: false, dCount: 0, hCount: 0, mCount: 0, sCount: 0, buttonStatus: false, Banner: null, isDate :false };
 
 
     }
@@ -102,7 +102,7 @@ export default class Event extends Component {
         }, interval);
     }
     componentDidMount() {
-        this.setState({ buttonStatus: this.props.buttonStatus == "false" });
+        this.setState({ buttonStatus: this.props.buttonStatus == "false",  isDate: this.props.isDate == "true"});
         this.getSettingsv2();
     }
 
@@ -112,16 +112,16 @@ export default class Event extends Component {
         return (
             <>
                 <div class="skelleton-main-events skelleton-loading" style={{ display: this.state.loading ? "" : "none" }}>
-              
-              
-         
+
+
+
                 </div>
 
                 <div class="events" style={{ padding: this.props.buttonStatus ? "20px" : "0px", display: !this.state.loading ? "" : "none" }}   >
 
                     {this.state.Banner && <img src={this.state.Banner} class="banner-img" />}
-                    <h3>{this.state.sdate} {this.state.location}  </h3>
-             
+                  { this.state.isDate  && <h3>{this.state.sdate} {this.state.location}  </h3>}
+
 
                     {
                         this.state.counter && <div class="events-footer">
@@ -248,10 +248,10 @@ export default class Event extends Component {
 
                     }
 
-                </div >
+                </div>
 
             </>
-        )
+        );
     }
 }
 
