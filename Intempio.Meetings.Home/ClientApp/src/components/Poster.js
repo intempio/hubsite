@@ -3,11 +3,13 @@ import history from './history';
 import ReactDOM from 'react-dom';
 import ReactModal from 'react-modal';
 import { ActivityLog } from './ActivityLog';
+import Modal from 'react-modal';
+import { isUndefined } from 'lodash';
 export default class Poster extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { posterSessions: [], loading: false, showModal: false, email:'' };
+        this.state = { posterSessions: [], loading: false, showModal: false, email:'' , popupDescription :'' };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -17,7 +19,23 @@ export default class Poster extends Component {
         if (url != '#') {
             ActivityLog.getStringValue(this.state.email, "Poster-Clicked", url);
             const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-            if (newWindow) newWindow.opener = null
+            if (newWindow) { newWindow.opener = null }
+        }
+    }
+
+    openInNewTabV1 = (des, url) => {
+
+        if (!isUndefined(des)) {
+
+            this.setState({ popupDescription: des });
+            this.handleOpenModal();
+        }
+        else {
+            if (url != '#') {
+                ActivityLog.getStringValue(this.state.email, "Poster-Clicked", url);
+                const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+                if (newWindow) { newWindow.opener = null }
+            }
         }
     }
 
@@ -131,7 +149,7 @@ export default class Poster extends Component {
                                 var name = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[0] : item.fields.Title;;
                                 var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
 
-                                return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
+                                return (<div class="recent-item" onClick={() => this.openInNewTabV1(item.fields.PopupDescription,item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
                                     <div class="image-wrapper">
                                         <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                     </div>
@@ -140,7 +158,7 @@ export default class Poster extends Component {
                                             <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
                                             {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
                                             <div className="poster-item">
-                                                <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
+                                                <button className="buttonposter" onClick={() => this.openInNewTabV1(item.fields.PopupDescription,item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
                                         </div> : <div> </div>}
                                 </div>);
 
@@ -163,7 +181,7 @@ export default class Poster extends Component {
                                     var title = item.fields.Title.indexOf('#') > -1 ? title = item.fields.Title.split('#')[1] : null;
 
 
-                                    return (<div class="recent-item" onClick={() => this.openInNewTab(item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
+                                    return (<div class="recent-item" onClick={() => this.openInNewTabV1(item.fields.PopupDescription,item.fields.Document_x0020_URL ? item.fields.Document_x0020_URL.Url : '#')}>
                                         <div class="image-wrapper">
                                             <img src={item.fields.Image_x0020_Url ? item.fields.Image_x0020_Url.Url : '#'} alt="recent_1" class="recent-image" />
                                         </div>
@@ -172,7 +190,7 @@ export default class Poster extends Component {
                                                 <p class="bold">{item.fields.ButtonTitle != item.fields.Title ? name : ''}</p>
                                                 {title && <p class="italic">{item.fields.ButtonTitle != item.fields.Title ? title : ''}</p>}
                                                 <div className="poster-item" >
-                                                    <button className="buttonposter" onClick={() => this.openInNewTab(item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
+                                                    <button className="buttonposter" onClick={() => this.openInNewTabV1(item.fields.PopupDescription,item.fields.Event_x0020_URL ? item.fields.Event_x0020_URL.Url : '#')}>{item.fields.ButtonTitle}</button></div>
                                             </div> : <div> </div>}
 
 
@@ -187,6 +205,13 @@ export default class Poster extends Component {
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
+                    <Modal isOpen={this.state.showModal} className="modalPoster">
+                        <a onClick={this.handleCloseModal} class="close1" />
+                        <div className="login-poup PosterPopup" dangerouslySetInnerHTML={{
+                            __html: this.state.popupDescription
+                        }}>
+                        </div>
+                    </Modal>
                 </div>
             </>
         )

@@ -579,3 +579,20 @@ nav .popover-submenu{
     .login-here :link {
         text-decoration-line: none;
     }
+
+.paragraph-container{
+    text-align:justify;
+}
+
+.modalPoster {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    position: absolute; 
+    inset: 40px; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255); overflow: auto; border-radius: 4px; outline: none; padding: 20px;
+}
+
+.PosterPopup {
+    margin-top: 50px;
+    text-align: justify;
+}

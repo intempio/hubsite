@@ -53,6 +53,11 @@ namespace Intempio.Meetings.Home.Services
                         opt.PosterSessionsURL = value;
                     });
                     break;
+                case "ParagraphsURL":
+                    _writableLocations.Update(opt => {
+                        opt.ParagraphsURL = value;
+                    });
+                    break;
                 case "MatchMakingURL":
                     _writableLocations.Update(opt => {
                         opt.MatchMakingURL = value;

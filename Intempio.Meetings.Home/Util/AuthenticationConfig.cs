@@ -101,6 +101,8 @@ namespace Intempio.Meetings.Home.Util
 
             public string PosterSessionsURL { get; set; }
 
+            public string ParagraphsURL { get; set; }
+
             public string PresentersURL { get; set; }
             public string MatchMakingURL { get; set; }
             public string UserEventsURL { get; set; }

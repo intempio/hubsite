@@ -10,6 +10,8 @@ import Stream from './Stream';
 import MostRecent from './MostRecent';
 import MatchMaking from './MatchMaking';
 import Poster from './Poster';
+import Paragraph from './Paragraph';
+
 
 import SessionsSQL from './SessionsSQL';
 import ChatContent from './Chat'
@@ -38,7 +40,7 @@ export class Home extends Component {
             this.setState({ loading: false });
             if (item && item.value[0].fields.Sections) {
 
-                this.setState({ sections: item.value[0].fields.Sections.split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql, loadfrequency: item.value[0].fields.LoadingFrequency});
+                this.setState({ sections: item.value[0].fields.Sections.replace(",,","###").split(","), allEvents: item.value[0].fields.AllEvents, isSQL: item.value[0].fields.sql, loadfrequency: item.value[0].fields.LoadingFrequency});
                 return true;
 
             } else {
@@ -75,8 +77,10 @@ export class Home extends Component {
 
 
             if (item) {
-
-                this.setState({ sections: item.intempioSettings.sections.split(","), loading: false, allEvents: (item.intempioSettings.allEvents.toLowerCase() === 'true'), isSQL: (item.intempioSettings.sql.toLowerCase() === 'true'), loadfrequency: item.intempioSettings.loadingFrequency });
+                const search = ',,';
+                const searchRegExp = new RegExp(search, 'g');
+                var sec = item.intempioSettings.sections.replace(searchRegExp, "###");
+                this.setState({ sections: sec.split(","), loading: false, allEvents: (item.intempioSettings.allEvents.toLowerCase() === 'true'), isSQL: (item.intempioSettings.sql.toLowerCase() === 'true'), loadfrequency: item.intempioSettings.loadingFrequency });
           
 
             } else {
@@ -120,18 +124,29 @@ export class Home extends Component {
                 {
                     this.state.sections && this.state.sections.map((item, i) => {
 
-                        var itemvalue = item;
+                        const search = '###';
+                        const searchRegExp = new RegExp(search, 'g');
+
+                        var itemvalue = item.replace(searchRegExp,",");
                         var name = item;
                         var anchor = 'default';
+                        var description = '';
                      
                         if (itemvalue.indexOf('>') > 0) {
                             if (itemvalue.split('>').length === 3) {
                                 anchor = itemvalue.split('>')[2]
                             }
+                            else if (itemvalue.split('>').length === 4) {
+                                anchor = itemvalue.split('>')[3]
+                                description = itemvalue.split('>')[2]
+                            }
                             name = itemvalue.split('>')[1]
                             itemvalue= itemvalue.split('>')[0]
                         }
-                        
+
+                        name == "." ? name = '' : name = name;
+                        description == "." ? description = '' : description = description;
+
                         itemvalue = itemvalue.toLowerCase();
 
                         switch (itemvalue) {
@@ -156,7 +171,9 @@ export class Home extends Component {
                             case "chat":
                                 return <ChatContent cname={name} />
                             case "presenters":
-                                return <Presenters cname={name} category={anchor}/>
+                                return <Presenters cname={name} category={anchor} />
+                            case "paragraph":
+                                return <Paragraph cname={name} desc={description} category={anchor} />
                                 
 
                         }
@@ -172,6 +189,7 @@ export class Home extends Component {
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Poster />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <ChatContent />}
                 {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Presenters />}
+                {(!this.state.sections || (this.state.sections && this.state.sections.length == 0)) && !this.state.loading && <Paragraph />}
 
                
                

@@ -54,6 +54,14 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetParagraphs")]
+        public async Task<IActionResult> GetParagraphs(string cetegory)
+        {
+            var response = await EventService.GetParagraphs(cetegory);
+
+            return Ok(response);
+        }
+
         [HttpGet("GetPosterSessions")]
         public async Task<IActionResult> GetPosterSessions(string cetegory)
         {
@@ -61,7 +69,6 @@ namespace Intempio.Meetings.Home.Controllers
 
             return Ok(response);
         }
-
 
         [HttpGet("GetMatchMakingTable")]
         public async Task<IActionResult> GetMatchMakingTable()
@@ -138,6 +145,9 @@ namespace Intempio.Meetings.Home.Controllers
 
                 case "EventMasterURL":
                     url = config.intempioSettings.EventMasterURL.Split("items")[0];
+                    break;
+                case "ParagraphsURL":
+                    url = config.intempioSettings.ParagraphsURL.Split("items")[0];
                     break;
                 case "PosterSessionsURL":
                     url = config.intempioSettings.PosterSessionsURL.Split("items")[0];

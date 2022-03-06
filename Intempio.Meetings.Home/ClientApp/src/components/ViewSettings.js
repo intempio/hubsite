@@ -5,7 +5,7 @@ export default class ViewSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lists: [], loading: false, sitename: '#', EventInfoURL: 'N/A', EventMasterURL: 'N/A', PosterSessionsURL: 'N/A', MatchMakingURL: 'N/A', PresentersURL: 'N/A', UserEventsURL: 'N/A', UsersURL: 'N/A', SuperUsersURL: 'N/A', SiteID: 'N/A',
+            lists: [], loading: false, sitename: '#', EventInfoURL: 'N/A', EventMasterURL: 'N/A', PosterSessionsURL: 'N/A', MatchMakingURL: 'N/A', PresentersURL: 'N/A', UserEventsURL: 'N/A', UsersURL: 'N/A', SuperUsersURL: 'N/A', ParagraphsURL:'N/A', SiteID: 'N/A',
             Title: '', Description: "",
             StartDate: "",
             EndDate: "",
@@ -90,7 +90,7 @@ export default class ViewSettings extends Component {
                     CanLoginRequest: item.intempioSettings.canLoginRequest,
                     LoginRequestSuccessMessage: item.intempioSettings.loginRequestSuccessMessage,
                     LoginRequestMessage: item.intempioSettings.loginRequestMessage,
-                    LoginFormCaption: item.intempioSettings.loginFormCaption
+                    LoginFormCaption: item.intempioSettings.loginFormCaption,
 
                 });
                 this.setState({ invalidKey: false, load: false });
@@ -134,7 +134,9 @@ export default class ViewSettings extends Component {
                     case "EventInfoURL":
                         this.setState({ EventInfoURL: item.webUrl });
                         break;
-
+                        
+                    case "ParagraphsURL":
+                        this.setState({ ParagraphsURL: item.webUrl });
                     case "EventMasterURL":
                         this.setState({ EventMasterURL: item.webUrl });
 
@@ -194,6 +196,7 @@ export default class ViewSettings extends Component {
         this.getGetConfigInfo();
         this.getGetListInfo("EventInfoURL");
         this.getGetListInfo("EventMasterURL");
+        this.getGetListInfo("ParagraphsURL");
         this.getGetListInfo("PosterSessionsURL");
         this.getGetListInfo("MatchMakingURL");
         this.getGetListInfo("PresentersURL");
@@ -238,6 +241,13 @@ export default class ViewSettings extends Component {
                             <div class="recent-info">
                                 <p>EventMasterURL</p>
                                 <h4>{this.state.EventMasterURL}</h4>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+
+                            <div class="recent-info">
+                                <p>ParagraphsURL</p>
+                                <h4>{this.state.ParagraphsURL}</h4>
                             </div>
                         </div>
                         <div class="settings-item">

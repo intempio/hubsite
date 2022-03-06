@@ -1841,6 +1841,11 @@
 }
 
 @media screen and (max-width: 502px) {
+    .modalPoster {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+    }
     header .chat-footer-wrapper > form label input {
         width: 100%;
     }
@@ -1851,6 +1856,11 @@
 }
 
 @media screen and (max-width: 376px) {
+    .modalPoster {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+    }
     header .msgs-container {
         padding: 15px;
         left: 16px;
@@ -1960,6 +1970,13 @@
 }
 
 @media screen and (max-height: 630px) {
+
+    .modalPoster {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+
+    }
     header .chat {
         max-height: 80vh;
     }

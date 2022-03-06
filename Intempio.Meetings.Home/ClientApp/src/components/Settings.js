@@ -279,6 +279,8 @@ export default class Settings extends Component {
             //EventMasterURL: /sites/{siteID}/lists/{EventInfo list ID}/items?$expand=fields
             "\"EventMasterURL\": \"sites/####/lists/##EventMasterURL##/items?$expand=fields\"," +
             //PosterSessionsURL: /sites/{siteID}/lists/{PosterSessions list ID}/items?$expand=fields
+            "\"ParagraphsURL\": \"sites/####/lists/##ParagraphsURL##/items?expand=fields\"," +
+            //PosterSessionsURL: /sites/{siteID}/lists/{PosterSessions list ID}/items?$expand=fields
             "\"PosterSessionsURL\": \"sites/####/lists/##PosterSessionsURL##/items?expand=fields&$filter=fields/Category eq '{0}'\"," +
             //"MatchMakingURL": "sites/{siteID}/lists/{BreakoutRooms list id}/items?$expand=fields",
             "\"MatchMakingURL\": \"/sites/####/lists/##MatchMakingURL##/items?$expand=fields\"," +
@@ -321,6 +323,11 @@ export default class Settings extends Component {
                 case "EventInfo":
                     config = config.replace("##EventInfoURL##", item.id);
                     configitems == null ? configitems = "EventInfoURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|EventInfoURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
+
+                    break;
+                case "Paragraphs":
+                    config = config.replace("##ParagraphsURL##", item.id);
+                    configitems == null ? configitems = "ParagraphsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields" : configitems = configitems + "|ParagraphsURL#" + "/sites/" + this.state.siteID + "/lists/" + item.id + "/items?$expand=fields"
 
                     break;
                 case "MeetingUserList":

@@ -27,6 +27,7 @@ namespace Intempio.Meetings.Home.Util
             PosterSessionsURL = "sys";
             PresentersURL = "sys";
             MatchMakingURL = "sys";
+            ParagraphsURL = "sys";
             UserEventsURL = "sys";
             UsersURL = "sys";
             SuperUsersURL = "sys";
@@ -68,7 +69,7 @@ namespace Intempio.Meetings.Home.Util
         public string EventInfoURL { get; set; }
 
         public string PosterSessionsURL { get; set; }
-
+        public string ParagraphsURL { get; set; }
         public string PresentersURL { get; set; }
         public string MatchMakingURL { get; set; }
         public string UserEventsURL { get; set; }
