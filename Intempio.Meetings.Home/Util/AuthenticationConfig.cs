@@ -160,6 +160,10 @@ namespace Intempio.Meetings.Home.Util
 
 
         }
+
+        public string MSAccountCheckURL { get; set; }
+
+
         public string SharedDocumentLibItems { get; set; }
 
         public IntempioSettings intempioSettings { get; set; }

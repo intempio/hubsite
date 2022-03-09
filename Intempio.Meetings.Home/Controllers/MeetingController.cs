@@ -185,14 +185,21 @@ namespace Intempio.Meetings.Home.Controllers
             return Ok(response);
         }
 
-
-
         [HttpGet("GetPresenters")]
         public async Task<IActionResult> GetPresenters()
         {
 
 
             var response = await EventService.GraphApiGetPresentersSharePointList();
+
+            return Ok(response);
+        }
+
+        [HttpGet("IsValidMSAccount")]
+        public async Task<IActionResult> IsValidMSAccount(string email)
+        {
+
+            var response = await EventService.IsValidMSAccount(email);
 
             return Ok(response);
         }
@@ -298,9 +305,16 @@ namespace Intempio.Meetings.Home.Controllers
         }
 
         [HttpGet("GetUserEventsByEmailSQL")]
-        public async Task<IActionResult> GetUserEventsByEmailSQL(string email)
+        public async Task<IActionResult> GetUserEventsByEmailSQL(string email, bool isMSTeamsUser)
         {
             var response = await EventService.GetUserEventsByEmailSQL(email);
+
+            for (int i = 0; i < response.Count; i++)
+            {
+                Task<string> a = EventService.getURlTeams(response[i].EventUrl);
+                if (!isMSTeamsUser)
+                    response[i].EventUrl = a.Result;
+            }
 
             return Ok(response);
         }
@@ -309,6 +323,14 @@ namespace Intempio.Meetings.Home.Controllers
         public async Task<IActionResult> GetAllEventSQL()
         {
             var response = await EventService.GetAllMeetingsSQL();
+
+            //for (int i = 0; i < response.Count; i++)
+            //{
+
+            //    Task<string> a = EventService.getURlTeams(response[i].EventUrl);
+
+            //    response[i].EventUrl = a.Result;
+            //}
 
             return Ok(response);
         }

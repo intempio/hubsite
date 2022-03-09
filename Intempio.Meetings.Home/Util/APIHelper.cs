@@ -148,7 +148,37 @@ namespace Intempio.Meetings.Home.Util
 
         }
 
+        public async Task<JsonResult> CallWebApiAndProcessResultASync(string webApiUrl, Action<JObject> processResult ,bool MozillaAent)
+        {
 
+            var defaultRequestHeaders = HttpClient.DefaultRequestHeaders;
+            if (defaultRequestHeaders.Accept == null || !defaultRequestHeaders.Accept.Any(m => m.MediaType == "application/json"))
+            {
+                HttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            }
+            if (MozillaAent)
+            HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
+            HttpResponseMessage response = await HttpClient.GetAsync(webApiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    return new JsonResult(json);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Failed to call the Web Api: {response.StatusCode}");
+                    string content = await response.Content.ReadAsStringAsync();
+
+                    // Note that if you got reponse.Code == 403 and reponse.content.code == "Authorization_RequestDenied"
+                    // this is because the tenant admin as not granted consent for the application to call the Web API
+                    Console.WriteLine($"Content: {content}");
+                }
+                return null;
+
+        }
 
         public async Task<JsonResult> CallYammerApiAndProcessResultASync(string webApiUrl, string accessToken, Action<JObject> processResult)
         {

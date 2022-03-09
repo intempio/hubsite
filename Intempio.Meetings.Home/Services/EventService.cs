@@ -16,6 +16,8 @@ using System.Data;
 using Intempio.Meetings.Home.Models;
 using System.Net.Mail;
 
+using System.Text.RegularExpressions;
+
 namespace Intempio.Meetings.Home.Services
 {
     public class EventService
@@ -1381,6 +1383,42 @@ namespace Intempio.Meetings.Home.Services
             }
 
 
+
+        }
+
+
+        public static async Task<JsonResult> IsValidMSAccount(string email)
+
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+
+            // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
+            bool isUsingClientSecret = AppUsesClientSecret(config);
+
+            var httpClient = new HttpClient();
+            var apiCaller = new APIHelper(httpClient);
+            var response = await apiCaller.CallWebApiAndProcessResultASync(string.Format(config.MSAccountCheckURL, email),  Display, true);
+            return response;
+
+        }
+
+        public static async Task<string> getURlTeams(string url)
+
+        {
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+
+            // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
+            bool isUsingClientSecret = AppUsesClientSecret(config);
+
+            var httpClient = new HttpClient();
+            var apiCaller = new APIHelper(httpClient);
+            var response = await httpClient.GetAsync(url);
+            var i = response.RequestMessage.RequestUri.ToString();
+            i = Regex.Replace(i, @"\/dl\/launcher\/launcher", "");
+            i = Regex.Replace(i, @"\.html\?url\=", "");
+            i = System.Web.HttpUtility.UrlDecode(i);
+            //i = Regex.Replace(i, @"\/dl\/launcher\/launcher.html?url=/_#", "CHANGED");
+            return i;
 
         }
 

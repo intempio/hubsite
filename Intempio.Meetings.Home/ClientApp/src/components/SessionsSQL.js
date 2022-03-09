@@ -8,9 +8,62 @@ export default class SessionsSQL extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false, videourl: '#', videoTitle: '' };
+        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false, videourl: '#', videoTitle: '', isMSTeamsUser:false};
 
 
+    }
+
+    async IsValidMSAccount() {
+        this.setState({ loading: true });
+        let token = localStorage.getItem('userToken')
+        let email = '';
+        token = JSON.parse(token);
+        if (token) {
+            email = token.email;
+        }
+
+        this.setState({ email: email })
+        var url = 'Meeting/IsValidMSAccount?email=' + email;
+
+        //   url = 'Meeting/GetMeetings';
+        const response = await fetch(url, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+
+            var istUser = false;
+            var items = JSON.parse(resonse.value);
+            if (items) {
+                if (items.Protocol && items.Protocol == 'Autodiscoverv1') {
+                    istUser = true;
+                }
+                else if (items.Protocol && items.Protocol == 'UserNotFound') {
+                    istUser = false;
+                }
+                else  {
+                    istUser = false;
+                }
+                this.setState({ isMSTeamsUser: istUser });
+                this.getModaratedEvetns(istUser);
+                return true;
+            } else {
+                istUser = false;
+                this.setState({ isMSTeamsUser: istUser });
+                this.getModaratedEvetns(istUser);
+
+                return false;
+            }
+
+        }).catch((error) => {
+            this.setState({ loading: false, isMSTeamsUser: false });
+            this.getModaratedEvetns(false);
+            return false;
+        });
+        return finalresult;
     }
 
     openInNewTab = (url, description) => {
@@ -37,7 +90,7 @@ export default class SessionsSQL extends Component {
         }
     }
 
-    async getEvents(isSuperUser) {
+    async getEvents(isSuperUser, isMSTeamsUser) {
         let token = localStorage.getItem('userToken')
         let email = '';
         token = JSON.parse(token);
@@ -47,7 +100,7 @@ export default class SessionsSQL extends Component {
 
         var url = 'Meeting/GetAllEventSQL';
         if (!isSuperUser && !this.props.allEvents == true) {
-            url = 'Meeting/GetUserEventsByEmailSQL?email=' + email;
+            url = 'Meeting/GetUserEventsByEmailSQL?email=' + email + '&isMSTeamsUser='+isMSTeamsUser;
 
         }
 
@@ -80,7 +133,7 @@ export default class SessionsSQL extends Component {
     }
 
 
-    async getModaratedEvetns() {
+    async getModaratedEvetns(isTeamsUser) {
         this.setState({ loading: true });
         let token = localStorage.getItem('userToken')
         let email = '';
@@ -109,9 +162,9 @@ export default class SessionsSQL extends Component {
 
                 if (items.value.length > 0) {
 
-                    this.getEvents(true);
+                    this.getEvents(true, isTeamsUser);
                 } else {
-                    this.getEvents(false);
+                    this.getEvents(false, isTeamsUser);
 
 
                 }
@@ -160,8 +213,8 @@ export default class SessionsSQL extends Component {
     }
     componentDidMount() {
 
-
-        this.getModaratedEvetns();
+        this.IsValidMSAccount();
+        //this.getModaratedEvetns();
         const dropdown = document.getElementById('dropdown');
         const selector = document.getElementById('selector');
 
@@ -334,12 +387,21 @@ export default class SessionsSQL extends Component {
                                     lname = token.inputLastName;
                                 }
                             }
-
+                 
                             var eventurl = item.eventUrl;
                             if (item.eventUrl && item.eventUrl.indexOf('adobeconnect') > 0) {
                                 eventurl = eventurl + '?guestName=' + fname + '  ' + lname + '&proto=true'
                             } else if (item.eventUrl && item.eventUrl.indexOf('zoom.intemp.io') > 0) {
                                 eventurl = eventurl + '&name=' + fname + '  ' + lname + '&userEmail=' + email
+                            } else if (item.eventUrl && item.eventUrl.indexOf('teams.microsoft') > 0) {
+
+                                let pattern = /com?.\//;
+                                if (this.state.isMSTeamsUser) {
+                                    eventurl = eventurl.replace('https','msteams')
+                                } else {
+                                    eventurl = eventurl;
+                                }
+                              
                             }
 
                             var buttonTitle = "Join Session"
