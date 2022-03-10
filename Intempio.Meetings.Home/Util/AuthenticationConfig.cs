@@ -163,6 +163,8 @@ namespace Intempio.Meetings.Home.Util
 
         public string MSAccountCheckURL { get; set; }
 
+        public string TeamsPassThrough { get; set; }
+
 
         public string SharedDocumentLibItems { get; set; }
 

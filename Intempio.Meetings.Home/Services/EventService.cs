@@ -1397,7 +1397,7 @@ namespace Intempio.Meetings.Home.Services
 
             var httpClient = new HttpClient();
             var apiCaller = new APIHelper(httpClient);
-            var response = await apiCaller.CallWebApiAndProcessResultASync(string.Format(config.MSAccountCheckURL, email),  Display, true);
+            var response = await apiCaller.CallWebApiAndProcessResultASync(string.Format(config.MSAccountCheckURL, email), Display, true);
             return response;
 
         }
@@ -1405,11 +1405,6 @@ namespace Intempio.Meetings.Home.Services
         public static async Task<string> getURlTeams(string url)
 
         {
-            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
-
-            // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
-            bool isUsingClientSecret = AppUsesClientSecret(config);
-
             var httpClient = new HttpClient();
             var apiCaller = new APIHelper(httpClient);
             var response = await httpClient.GetAsync(url);

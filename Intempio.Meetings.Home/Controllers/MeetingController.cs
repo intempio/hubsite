@@ -308,14 +308,17 @@ namespace Intempio.Meetings.Home.Controllers
         public async Task<IActionResult> GetUserEventsByEmailSQL(string email, bool isMSTeamsUser)
         {
             var response = await EventService.GetUserEventsByEmailSQL(email);
-
-            for (int i = 0; i < response.Count; i++)
+            AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+           
+            if (config.TeamsPassThrough.ToLower() == "true")
             {
-                Task<string> a = EventService.getURlTeams(response[i].EventUrl);
-                if (!isMSTeamsUser)
-                    response[i].EventUrl = a.Result;
+                for (int i = 0; i < response.Count; i++)
+                {
+                    Task<string> a = EventService.getURlTeams(response[i].EventUrl);
+                    if (!isMSTeamsUser)
+                        response[i].EventUrl = a.Result;
+                }
             }
-
             return Ok(response);
         }
 

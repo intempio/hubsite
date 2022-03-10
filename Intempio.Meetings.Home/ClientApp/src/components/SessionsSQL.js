@@ -8,12 +8,45 @@ export default class SessionsSQL extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false, videourl: '#', videoTitle: '', isMSTeamsUser:false};
+        this.state = { forecasts: [], loading: true, events: null, filteredevents: null, email: '', IsSuperUser: false, videourl: '#', videoTitle: '', isMSTeamsUser: false, teamsPassThrough:false};
 
 
     }
 
-    async IsValidMSAccount() {
+
+    async getSettingsv2() {
+
+
+
+
+        this.setState({ loading: true });
+        const response = await fetch('Meeting/GetConfigInfo?validate=0&key=' + this.state.key, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+
+        });
+
+
+
+        const finalresult = await response.json().then(async (resonse) => {
+            this.setState({ loading: false });
+            var item = resonse.value;
+
+            if (item) {
+
+                var isTeamsPassThrough = (item.teamsPassThrough.toLowerCase() === 'true');
+                this.IsValidMSAccount(isTeamsPassThrough);
+
+
+            }
+
+        }).catch((error) => {
+            return false;
+        });
+        return finalresult;
+    }
+
+    async IsValidMSAccount(isTeamsPassThrough) {
         this.setState({ loading: true });
         let token = localStorage.getItem('userToken')
         let email = '';
@@ -23,47 +56,54 @@ export default class SessionsSQL extends Component {
         }
 
         this.setState({ email: email })
-        var url = 'Meeting/IsValidMSAccount?email=' + email;
 
-        //   url = 'Meeting/GetMeetings';
-        const response = await fetch(url, {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' }
+        if (isTeamsPassThrough) {
+            var url = 'Meeting/IsValidMSAccount?email=' + email;
 
-        });
+            //   url = 'Meeting/GetMeetings';
+            const response = await fetch(url, {
+                method: "GET",
+                headers: { 'Content-Type': 'application/json' }
+
+            });
 
 
-        const finalresult = await response.json().then(async (resonse) => {
+            const finalresult = await response.json().then(async (resonse) => {
 
-            var istUser = false;
-            var items = JSON.parse(resonse.value);
-            if (items) {
-                if (items.Protocol && items.Protocol == 'Autodiscoverv1') {
-                    istUser = true;
-                }
-                else if (items.Protocol && items.Protocol == 'UserNotFound') {
+                var istUser = false;
+                var items = JSON.parse(resonse.value);
+                if (items) {
+                    if (items.Protocol && items.Protocol == 'Autodiscoverv1') {
+                        istUser = true;
+                    }
+                    else if (items.Protocol && items.Protocol == 'UserNotFound') {
+                        istUser = false;
+                    }
+                    else {
+                        istUser = false;
+                    }
+                    this.setState({ isMSTeamsUser: istUser });
+                    this.getModaratedEvetns(istUser);
+                    return true;
+                } else {
                     istUser = false;
-                }
-                else  {
-                    istUser = false;
-                }
-                this.setState({ isMSTeamsUser: istUser });
-                this.getModaratedEvetns(istUser);
-                return true;
-            } else {
-                istUser = false;
-                this.setState({ isMSTeamsUser: istUser });
-                this.getModaratedEvetns(istUser);
+                    this.setState({ isMSTeamsUser: istUser });
+                    this.getModaratedEvetns(istUser);
 
+                    return false;
+                }
+
+            }).catch((error) => {
+                this.setState({ loading: false, isMSTeamsUser: false });
+                this.getModaratedEvetns(false);
                 return false;
-            }
-
-        }).catch((error) => {
+            });
+            return finalresult;
+        } else {
             this.setState({ loading: false, isMSTeamsUser: false });
             this.getModaratedEvetns(false);
-            return false;
-        });
-        return finalresult;
+            return;
+        }
     }
 
     openInNewTab = (url, description) => {
@@ -213,7 +253,7 @@ export default class SessionsSQL extends Component {
     }
     componentDidMount() {
 
-        this.IsValidMSAccount();
+        this.getSettingsv2();
         //this.getModaratedEvetns();
         const dropdown = document.getElementById('dropdown');
         const selector = document.getElementById('selector');
